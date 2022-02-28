@@ -4,10 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/activity_main.xml" value="0.17239583333333333" />
-<<<<<<< Updated upstream
-=======
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_add.xml" value="0.202" />
->>>>>>> Stashed changes
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_emoji.xml" value="0.124" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_emoji_nothing.xml" value="0.124" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_emoji_sad.xml" value="0.124" />
@@ -15,11 +12,9 @@
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_emoji_very_sad.xml" value="0.124" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_emoticon_emotion_expression_feeling_happy_svgrepo_com.xml" value="0.124" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_more.xml" value="0.124" />
-<<<<<<< Updated upstream
-=======
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/layout/activity_main.xml" value="0.12552083333333333" />
+        <entry key="..\:/android projects/MoodinoProject/app/src/main/res/layout/emojies_item.xml" value="0.5" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/layout/entries_fragment.xml" value="0.25" />
->>>>>>> Stashed changes
       </map>
     </option>
   </component>

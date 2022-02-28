@@ -2,4 +2,9 @@
     <string name="app_name">Moodino</string>
     <string name="let_s_pick_up_where_you_left_off">Let\'s pick up where you left off.</string>
     <string name="how_are_you">How are you?</string>
+    <string name="rad">rad</string>
+    <string name="good">good</string>
+    <string name="meh">meh</string>
+    <string name="bad">bad</string>
+    <string name="awful">awful</string>
 </resources>
