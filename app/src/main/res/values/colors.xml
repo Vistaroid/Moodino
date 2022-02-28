@@ -4,7 +4,7 @@
     <color name="green">#9BB59A</color>
     <color name="orange">#FEB477</color>
     <color name="pink_light">#F4837D</color>
-    <color name="gray">#6A777D</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#F2F1F6</color>
 </resources>

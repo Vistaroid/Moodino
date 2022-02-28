@@ -3,7 +3,6 @@
     <style name="Theme.Moodino" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/pink</item>
-        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/pink</item>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Moodino</string>
+    <string name="let_s_pick_up_where_you_left_off">Let\'s pick up where you left off.</string>
+    <string name="how_are_you">How are you?</string>
 </resources>
