@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener {
             val views = listOf<Button>(view1, view2, view3)
+            model.rotateFab(it,this)
             model.animateFabViews(views)
         }
     }

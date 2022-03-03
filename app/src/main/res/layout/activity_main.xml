@@ -36,7 +36,7 @@
         android:layout_marginTop="10dp"
         android:contentDescription="@string/app_name"
         android:foreground="@drawable/custom_add_button_background"
-        android:src="@drawable/ic_add_mo_border"
+        android:src="@drawable/ic_add_round_corner"
         android:tint="@color/pink"
         app:backgroundTint="@color/white"
         app:fabCustomSize="70dp"

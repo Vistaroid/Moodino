@@ -1,14 +1,22 @@
 package com.iranmobiledev.moodino.viewmodel
 
 import android.animation.ObjectAnimator
+import android.app.Application
+import android.content.Context
 import android.util.Log
+import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.RotateAnimation
 import android.widget.Button
 import androidx.lifecycle.LiveData
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.iranmobiledev.moodino.MainActivity
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.TAG
 import com.iranmobiledev.moodino.base.BaseViewModel
+import kotlinx.coroutines.withContext
 
-class MainActivityViewModel : BaseViewModel() {
+class MainActivityViewModel() : BaseViewModel() {
 
     var extended = false
 
@@ -53,8 +61,30 @@ class MainActivityViewModel : BaseViewModel() {
         }
     }
 
+    fun rotateFab(view:View?,context: Context){
 
-    fun extendFab(view: Button, extended: Boolean, x: Float, y: Float) {
+
+
+        if (!extended){
+            val rotate_fab = AnimationUtils.loadAnimation(
+                context,
+                R.anim.rotate_fab_animation
+            )
+            rotate_fab.fillAfter = true
+            view?.startAnimation(rotate_fab)
+        }else{
+            val rotate_fab = AnimationUtils.loadAnimation(
+                context,
+                R.anim.unrotate_fab_animation
+            )
+            rotate_fab.fillAfter = true
+            view?.startAnimation(rotate_fab)
+        }
+
+    }
+
+
+    private fun extendFab(view: Button, extended: Boolean, x: Float, y: Float) {
         ObjectAnimator.ofFloat(view, "translationX", x).apply {
             duration = 220
             Log.d(TAG, "extendFab extend : $extended")
@@ -67,7 +97,7 @@ class MainActivityViewModel : BaseViewModel() {
         }
     }
 
-    fun closeFab(view: Button, extended: Boolean, x: Float, y: Float) {
+    private fun closeFab(view: Button, extended: Boolean, x: Float, y: Float) {
         ObjectAnimator.ofFloat(view, "translationX", x).apply {
             duration = 220
             Log.d(TAG, "extendFab close : $extended")
@@ -79,5 +109,4 @@ class MainActivityViewModel : BaseViewModel() {
             start()
         }
     }
-
 }
