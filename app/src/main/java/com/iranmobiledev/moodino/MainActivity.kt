@@ -7,9 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
@@ -45,10 +48,26 @@ class MainActivity : AppCompatActivity() {
         //fix nav background problem
         navView.background = null
 
-        fab.setOnClickListener {
-            val views = listOf<Button>(view1, view2, view3)
-            model.rotateFab(it,this)
+        fab.setOnClickListener { it ->
+            val views = listOf<LinearLayout>(view1, view2, view3)
+            model.rotateFab(it, this)
             model.animateFabViews(views)
+
+            if (model.extended) {
+                views.forEach {
+                    it.getChildAt(1).setVisibility(View.VISIBLE)
+                }
+            } else {
+                views.forEach {
+                    it.getChildAt(1).setVisibility(View.GONE)
+                }
+            }
+
+            activityMainBinding.root.children.forEach { child ->
+                if (child.elevation != 10f) {
+                    Log.d(TAG, "onCreate: no")
+                }
+            }
         }
     }
 }
