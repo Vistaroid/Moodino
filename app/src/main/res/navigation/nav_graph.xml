@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/entriesFragment2">
+
+    <fragment
+        android:id="@+id/entriesFragment2"
+        android:name="com.iranmobiledev.moodino.EntriesFragment"
+        android:label="fragment_entries"
+        tools:layout="@layout/fragment_entries" />
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.iranmobiledev.moodino.StatsFragment"
+        android:label="fragment_stats"
+        tools:layout="@layout/fragment_stats" />
+    <fragment
+        android:id="@+id/calenderFragment"
+        android:name="com.iranmobiledev.moodino.CalenderFragment"
+        android:label="fragment_calender"
+        tools:layout="@layout/fragment_calender" />
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.iranmobiledev.moodino.MoreFragment"
+        android:label="fragment_more"
+        tools:layout="@layout/fragment_more" />
+</navigation>
