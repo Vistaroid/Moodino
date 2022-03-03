@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="pink">#EB4961</color>
-    <color name="green">#9BB59A</color>
-    <color name="orange">#FEB477</color>
-    <color name="pink_light">#F4837D</color>
+    <color name="green">#90DD7A</color>
+    <color name="orange">#FF8B3E</color>
+    <color name="pink_light">#EC625B</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#F2F1F6</color>

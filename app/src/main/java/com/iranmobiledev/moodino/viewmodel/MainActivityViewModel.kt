@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-import androidx.core.view.children
 import com.iranmobiledev.moodino.MainActivity
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.TAG
@@ -75,8 +74,7 @@ class MainActivityViewModel() : BaseViewModel() {
         }
     }
 
-    fun rotateFab(view: View?, context: Context) {
-
+    private fun rotateFab(view: View?, context: Context) {
         if (!extended) {
             val rotateFab = AnimationUtils.loadAnimation(
                 context,
@@ -85,12 +83,12 @@ class MainActivityViewModel() : BaseViewModel() {
             rotateFab.fillAfter = true
             view?.startAnimation(rotateFab)
         } else {
-            val unrotateFab = AnimationUtils.loadAnimation(
+            val unRotateFab = AnimationUtils.loadAnimation(
                 context,
                 R.anim.unrotate_fab_animation
             )
-            unrotateFab.fillAfter = true
-            view?.startAnimation(unrotateFab)
+            unRotateFab.fillAfter = true
+            view?.startAnimation(unRotateFab)
         }
 
     }
