@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
+            android:translationZ="0dp"
             android:background="@android:color/transparent"
             android:elevation="0dp"
             app:itemIconTint="@color/bottom_navigation_item"
@@ -36,6 +37,7 @@
         android:layout_marginTop="10dp"
         android:contentDescription="@string/app_name"
         android:foreground="@drawable/custom_add_button_background"
+        app:elevation="10dp"
         android:src="@drawable/ic_add_round_corner"
         android:tint="@color/pink"
         app:backgroundTint="@color/white"
@@ -43,34 +45,91 @@
         app:layout_anchor="@id/bottomAppBar"
         app:maxImageSize="35dp" />
 
-    <Button
-        android:text="1"
+    <LinearLayout
         android:id="@+id/icon1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:elevation="10dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="36dp"
-        android:background="@drawable/custom_add_button_background" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:text="2"
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_circle_button"
+            android:backgroundTint="@color/green"
+            android:padding="8dp"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="yesterday"
+            android:textColor="#474747"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/icon2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/custom_add_button_background"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="36dp" />
-
-
-    <Button
-        android:text="3"
-        android:id="@+id/icon3"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/custom_add_button_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:elevation="10dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="36dp"
-        />
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_circle_button"
+            android:backgroundTint="@color/orange"
+            android:padding="8dp"
+            android:src="@drawable/ic_clock"
+            app:tint="@color/white" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="today"
+            android:textColor="#474747"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/icon3"
+        android:layout_width="wrap_content"
+        app:elevation="10dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="36dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_circle_button"
+            android:backgroundTint="@color/pink"
+            android:padding="8dp"
+            android:src="@drawable/ic_calender"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="other day"
+            android:textColor="#474747"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
