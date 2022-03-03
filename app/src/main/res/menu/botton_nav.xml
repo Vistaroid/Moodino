@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="entries"
+        android:id="@+id/entriesFragment"
+        android:icon="@drawable/ic_entries"/>
+    <item android:title="stats"
+        android:id="@+id/statsFragment"
+        android:icon="@drawable/ic_stats"/>
+
+    <item android:title=""
+        android:id="@+id/placeHolder" />
+
+    <item android:title="calender"
+        android:id="@+id/calenderFragment"
+        android:icon="@drawable/ic_calender"/>
+    <item android:title="more"
+        android:id="@+id/moreFragment"
+        android:icon="@drawable/ic_more"/>
+
+</menu>
