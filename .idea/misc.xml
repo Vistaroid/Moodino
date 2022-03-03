@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Moodino/app/src/main/res/drawable/custom_add_button_background.xml" value="0.236" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/ic_add.xml" value="0.1" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/ic_add_mo_border.xml" value="0.192" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/ic_add_round_corner.xml" value="0.192" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/ic_calendar.xml" value="0.136" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/ic_calender.xml" value="0.136" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/custom_nagation_bar_add_button.xml" value="0.24547101449275363" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/emojies_item.xml" value="0.24547101449275363" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.24547101449275363" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.24547101449275363" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.24547101449275363" />
+        <entry key="..\:/Moodino/app/src/main/res/menu/botton_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/activity_main.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.17239583333333333" />
@@ -20,7 +33,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
