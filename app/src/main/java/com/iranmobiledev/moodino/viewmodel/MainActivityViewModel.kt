@@ -5,29 +5,45 @@ import android.content.Context
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.ImageButton
 import android.widget.LinearLayout
+import androidx.core.view.children
+import com.iranmobiledev.moodino.MainActivity
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.TAG
 import com.iranmobiledev.moodino.base.BaseViewModel
 
 class MainActivityViewModel() : BaseViewModel() {
 
-    var extended = false
+    private var extended = false
 
-    fun animateFabViews(views: List<LinearLayout>) {
+    fun actionFab(views: List<LinearLayout>, view: View, context: MainActivity) {
+        rotateFab(view, context)
+        animateFabViews(views)
+
+        if (extended) {
+            views.forEach {
+                it.getChildAt(1).visibility = View.VISIBLE
+            }
+        } else {
+            views.forEach {
+                it.getChildAt(1).visibility = View.GONE
+            }
+        }
+    }
+
+    private fun animateFabViews(views: List<LinearLayout>) {
         extended = !extended
         views.forEach {
             when (extended) {
                 true -> {
-                    if (it.id == R.id.icon1) extendFab(it, extended, -200f, -210f)
-                    if (it.id == R.id.icon2) extendFab(it, extended, 0f, -310f)
-                    if (it.id == R.id.icon3) extendFab(it, extended, 200f, -210f)
+                    if (it.id == R.id.yesterday) extendFab(it, extended, -200f, -210f)
+                    if (it.id == R.id.today) extendFab(it, extended, 0f, -310f)
+                    if (it.id == R.id.other_days) extendFab(it, extended, 200f, -210f)
                 }
                 false -> {
-                    if (it.id == R.id.icon1) closeFab(it, extended, 0f, 0f)
-                    if (it.id == R.id.icon2) closeFab(it, extended, 0f, 0f)
-                    if (it.id == R.id.icon3) closeFab(it, extended, 0f, 0f)
+                    if (it.id == R.id.yesterday) closeFab(it, extended, 0f, 0f)
+                    if (it.id == R.id.today) closeFab(it, extended, 0f, 0f)
+                    if (it.id == R.id.other_days) closeFab(it, extended, 0f, 0f)
                 }
             }
         }

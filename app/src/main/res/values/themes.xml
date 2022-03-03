@@ -9,4 +9,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/pink</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.Moodino.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>
