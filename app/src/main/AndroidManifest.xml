@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moodino">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:theme="@style/Theme.Moodino.NoActionBar"
+            android:exported="true"
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

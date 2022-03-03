@@ -12,12 +12,16 @@
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_calendar.xml" value="0.136" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_calender.xml" value="0.136" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_clock.xml" value="0.192" />
-        <entry key="..\:/Moodino/app/src/main/res/layout/activity_main.xml" value="0.536" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Moodino/app/src/main/res/layout/custom_nagation_bar_add_button.xml" value="0.24547101449275363" />
         <entry key="..\:/Moodino/app/src/main/res/layout/emojies_item.xml" value="0.24547101449275363" />
         <entry key="..\:/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.24547101449275363" />
-        <entry key="..\:/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.24547101449275363" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.136" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.24547101449275363" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/fragment_calender.xml" value="0.10185185185185185" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.10185185185185185" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/fragment_more.xml" value="0.10185185185185185" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.10185185185185185" />
         <entry key="..\:/Moodino/app/src/main/res/menu/botton_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/activity_main.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.17239583333333333" />
