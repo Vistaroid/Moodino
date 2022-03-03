@@ -43,4 +43,34 @@
         app:layout_anchor="@id/bottomAppBar"
         app:maxImageSize="35dp" />
 
+    <Button
+        android:text="1"
+        android:id="@+id/icon1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/custom_add_button_background" />
+
+    <Button
+        android:text="2"
+        android:id="@+id/icon2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_add_button_background"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="36dp" />
+
+
+    <Button
+        android:text="3"
+        android:id="@+id/icon3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_add_button_background"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="36dp"
+        />
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
