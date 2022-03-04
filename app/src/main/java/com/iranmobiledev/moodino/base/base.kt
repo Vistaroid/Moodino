@@ -9,11 +9,10 @@ import androidx.lifecycle.ViewModel
 open class BaseFragment : Fragment(), BaseView{
 
 }
-
 /**
  * All View Models should extend this view model
  */
-open class BaseViewModel : ViewModel(), BaseView{
+open class BaseViewModel : ViewModel(){
 
 }
 

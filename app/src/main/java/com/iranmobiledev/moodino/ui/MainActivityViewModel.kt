@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.viewmodel
+package com.iranmobiledev.moodino.ui
 
 import android.animation.ObjectAnimator
 import android.content.Context
@@ -6,9 +6,7 @@ import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-import com.iranmobiledev.moodino.MainActivity
 import com.iranmobiledev.moodino.R
-import com.iranmobiledev.moodino.TAG
 import com.iranmobiledev.moodino.base.BaseViewModel
 
 class MainActivityViewModel() : BaseViewModel() {
@@ -51,7 +49,7 @@ class MainActivityViewModel() : BaseViewModel() {
     private fun extendFab(view: LinearLayout, extended: Boolean, x: Float, y: Float) {
         ObjectAnimator.ofFloat(view, "translationX", x).apply {
             duration = 220
-            Log.d(TAG, "extendFab extend : $extended")
+
             start()
         }
 
@@ -64,7 +62,6 @@ class MainActivityViewModel() : BaseViewModel() {
     private fun closeFab(view: LinearLayout, extended: Boolean, x: Float, y: Float) {
         ObjectAnimator.ofFloat(view, "translationX", x).apply {
             duration = 220
-            Log.d(TAG, "extendFab close : $extended")
             start()
         }
 
