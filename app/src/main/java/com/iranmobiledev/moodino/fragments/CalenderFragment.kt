@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.iranmobiledev.moodino.R
 
 
-class CalenderFragment : Fragment(R.layout.fragment_calender) {
+class CalenderFragment :  Fragment(R.layout.fragment_calender) {
 
 
 }
