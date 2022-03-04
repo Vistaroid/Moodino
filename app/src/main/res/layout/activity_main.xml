@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -24,8 +24,6 @@
             android:translationZ="0dp"
             android:background="@android:color/transparent"
             android:elevation="0dp"
-            app:itemIconTint="@color/bottom_navigation_item"
-            app:itemTextColor="@color/bottom_navigation_item"
             app:menu="@menu/botton_nav" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
@@ -139,5 +137,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph" />
+        app:navGraph="@navigation/nav_graph"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

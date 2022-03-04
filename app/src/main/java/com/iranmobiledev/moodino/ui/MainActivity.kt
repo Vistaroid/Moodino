@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino
+package com.iranmobiledev.moodino.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,11 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
-import com.iranmobiledev.moodino.viewmodel.MainActivityViewModel
-
-val TAG = "activitymaintag"
-private var extended = false
 
 class MainActivity : AppCompatActivity() {
 

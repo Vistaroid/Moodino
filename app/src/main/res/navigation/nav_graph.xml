@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/entriesFragment"
-        android:name="com.iranmobiledev.moodino.fragments.EntriesFragment"
+        android:name="com.iranmobiledev.moodino.ui.entries.EntriesFragment"
         android:label="fragment_entries"
         tools:layout="@layout/fragment_entries" />
     <fragment
         android:id="@+id/statsFragment"
-        android:name="com.iranmobiledev.moodino.fragments.StatsFragment"
+        android:name="com.iranmobiledev.moodino.ui.states.StatsFragment"
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" />
     <fragment
         android:id="@+id/calenderFragment"
-        android:name="com.iranmobiledev.moodino.fragments.CalenderFragment"
+        android:name="com.iranmobiledev.moodino.ui.calendar.CalendarFragment"
         android:label="fragment_calender"
-        tools:layout="@layout/fragment_calender" />
+        tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/moreFragment"
-        android:name="com.iranmobiledev.moodino.fragments.MoreFragment"
+        android:name="com.iranmobiledev.moodino.ui.more.MoreFragment"
         android:label="fragment_more"
-        tools:layout="@layout/fragment_more" />
+        tools:layout="@layout/fragment_more"/>
 </navigation>
