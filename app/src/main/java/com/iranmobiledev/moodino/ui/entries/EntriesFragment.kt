@@ -17,7 +17,7 @@ class EntriesFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEntriesBinding.inflate(inflater, container, false)
         return binding.root
     }
