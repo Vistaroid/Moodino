@@ -28,6 +28,24 @@ class MainActivityViewModel() : BaseViewModel() {
         }
     }
 
+    private fun rotateFab(view: View?, context: Context) {
+        if (!extended) {
+            val rotateFab = AnimationUtils.loadAnimation(
+                context,
+                R.anim.rotate_fab_animation
+            )
+            rotateFab.fillAfter = true
+            view?.startAnimation(rotateFab)
+        } else {
+            val unRotateFab = AnimationUtils.loadAnimation(
+                context,
+                R.anim.unrotate_fab_animation
+            )
+            unRotateFab.fillAfter = true
+            view?.startAnimation(unRotateFab)
+        }
+    }
+
     private fun animateFabViews(views: List<LinearLayout>) {
         extended = !extended
         views.forEach {
@@ -49,7 +67,6 @@ class MainActivityViewModel() : BaseViewModel() {
     private fun extendFab(view: LinearLayout, extended: Boolean, x: Float, y: Float) {
         ObjectAnimator.ofFloat(view, "translationX", x).apply {
             duration = 220
-
             start()
         }
 
@@ -69,24 +86,5 @@ class MainActivityViewModel() : BaseViewModel() {
             duration = 220
             start()
         }
-    }
-
-    private fun rotateFab(view: View?, context: Context) {
-        if (!extended) {
-            val rotateFab = AnimationUtils.loadAnimation(
-                context,
-                R.anim.rotate_fab_animation
-            )
-            rotateFab.fillAfter = true
-            view?.startAnimation(rotateFab)
-        } else {
-            val unRotateFab = AnimationUtils.loadAnimation(
-                context,
-                R.anim.unrotate_fab_animation
-            )
-            unRotateFab.fillAfter = true
-            view?.startAnimation(unRotateFab)
-        }
-
     }
 }
