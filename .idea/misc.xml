@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Moodino/app/src/main/res/drawable/chart_gradient.xml" value="0.1" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/circle_shape.xml" value="0.1" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/custom_add_button_background.xml" value="0.236" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/custom_circle_button.xml" value="0.1" />
@@ -10,10 +11,12 @@
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_add_mo_border.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_add_round_corner.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_back_arrow.xml" value="0.192" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/ic_bar_chart.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_calendar.xml" value="0.136" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_calender.xml" value="0.136" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_clock.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_cross.xml" value="0.192" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/ic_line_chart.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_more.xml" value="0.1" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_more_outlined.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_share.xml" value="0.1" />
@@ -33,6 +36,7 @@
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.4" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_more.xml" value="0.10185185185185185" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.264" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/mood_chart_card.xml" value="0.1" />
         <entry key="..\:/Moodino/app/src/main/res/menu/botton_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/activity_main.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.17239583333333333" />

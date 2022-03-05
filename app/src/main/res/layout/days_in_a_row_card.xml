@@ -29,7 +29,6 @@
 
         <ImageButton
             android:id="@+id/moreImageButton"
-            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/white"
@@ -58,7 +57,6 @@
 
         <FrameLayout
             android:id="@+id/frameLayout"
-            tools:layout_editor_absoluteX="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
@@ -278,7 +276,6 @@
 
         <View
             android:id="@+id/view2"
-            tools:layout_editor_absoluteX="0dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="20dp"
