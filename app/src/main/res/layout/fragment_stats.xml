@@ -3,12 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StatsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.states.StatsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="stats fragment" />
+
+   <com.google.android.material.card.MaterialCardView
+       android:id="@+id/daysInRowCard"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+      style="@style/CardViewStyle"
+       app:cardElevation="10dp"
+       >
+
+       <TextView
+           android:id="@+id/daysInRowHeader"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Days in a Row"
+           android:textAlignment="viewStart"
+           style="@style/cardHeaderTextStyle" />
+   </com.google.android.material.card.MaterialCardView>
 
 </FrameLayout>
