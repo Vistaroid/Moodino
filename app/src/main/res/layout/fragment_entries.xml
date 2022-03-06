@@ -27,6 +27,7 @@
                 android:text="@string/let_s_pick_up_where_you_left_off"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="?textAppearanceHeadline6"
+                android:textSize="18sp"
                 android:layout_marginStart="12dp"
                 android:textColor="?colorOnPrimary"/>
         </LinearLayout>
