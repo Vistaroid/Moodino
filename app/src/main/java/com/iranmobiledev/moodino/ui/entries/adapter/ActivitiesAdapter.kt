@@ -15,14 +15,13 @@ class ActivitiesAdapter(private val adapterItemCallback: AdapterItemCallback) : 
 
         private val expand : ImageView = itemView.findViewById(R.id.expandIv)
         private val expandLayout : ViewGroup = itemView.findViewById(R.id.expandLayout)
-        private val cardViewContent : TextView = itemView.findViewById(R.id.cardViewTv)
 
         fun bind(){
             expand.setOnClickListener{
-                adapterItemCallback.onExpandViewClicked(cardViewContent)
+                adapterItemCallback.onExpandViewClicked()
             }
             expandLayout.setOnClickListener{
-                adapterItemCallback.onExpandViewClicked(cardViewContent)
+                adapterItemCallback.onExpandViewClicked()
             }
         }
     }
@@ -39,6 +38,7 @@ class ActivitiesAdapter(private val adapterItemCallback: AdapterItemCallback) : 
     override fun getItemCount(): Int = 9
 
     interface AdapterItemCallback{
-        fun onExpandViewClicked(view : View)
+        //todo pass view to this function
+        fun onExpandViewClicked()
     }
 }

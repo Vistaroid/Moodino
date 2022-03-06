@@ -1,21 +1,23 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
   <path
-      android:pathData="M11.4933,12.4382C11.4933,12.4382 -0.4834,9.9606 3.6786,7.5581C7.1908,5.5308 19.2947,2.0452 20.9857,2.9458C21.8863,4.6368 18.4007,16.7408 16.3734,20.2529C13.9709,24.4149 11.4933,12.4382 11.4933,12.4382Z"
+      android:pathData="M12.0368,8.4627V15.6111"
       android:strokeLineJoin="round"
       android:strokeWidth="1.5"
       android:fillColor="#00000000"
-      android:fillType="evenOdd"
-      android:strokeColor="#130F26"
+      android:strokeColor="?colorOnPrimary"
       android:strokeLineCap="round"/>
   <path
-      android:pathData="M11.4933,12.4382L20.9857,2.9458"
+      android:pathData="M15.6148,12.0368H8.459"
       android:strokeLineJoin="round"
       android:strokeWidth="1.5"
       android:fillColor="#00000000"
-      android:strokeColor="#130F26"
-      android:strokeLineCap="round"/>
+      android:strokeColor="?colorOnPrimary"
+      android:strokeLineCap="round"
+      tools:ignore="VectorRaster" />
+
 </vector>

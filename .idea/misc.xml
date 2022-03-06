@@ -45,11 +45,54 @@
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/activity_main.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.17239583333333333" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/background_ovel.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/chart_gradient.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/circle_shape.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/custom_circle_button.xml" value="0.2775" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_add.xml" value="0.2335" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_add_no_border.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_arrow_bottom.xml" value="0.2335" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_calender.xml" value="0.2335" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_chart.xml" value="0.2335" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_circle.xml" value="0.2335" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_clock.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_export.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_gallery.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_goals.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_info.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_language.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_line_chart.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_lock.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_mode.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_more.xml" value="0.2775" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_more_outlined.xml" value="0.2335" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_note.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_nothing_outlined.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_search.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_share.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_stats.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_tick_with_out_bg.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/ic_widgets.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/primary_circle_shape.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/round_corner_rectangle.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/view_bg_stroke.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/drawable/view_circle_bg_stroke.xml" value="0.19" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/activity_main.xml" value="0.19067028985507245" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/add_entry_fragment.xml" value="0.5" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/days_in_a_row_card.xml" value="0.25" />
         <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/emojies_item.xml" value="0.25" />
         <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.25" />
-        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.19067028985507245" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/entry_detail_fragment.xml" value="0.25" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.25" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.25" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/fragment_more.xml" value="0.25" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.33" />
         <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/item_activity.xml" value="0.25" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/item_entry.xml" value="0.25" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/item_entry_container.xml" value="0.27291666666666664" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/mood_chart_card.xml" value="0.33" />
         <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/layout/view_more_item.xml" value="0.25" />
+        <entry key="..\:/android projects/MoodinoP/Moodino/app/src/main/res/menu/botton_nav.xml" value="0.12552083333333333" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_add.xml" value="0.202" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_emoji.xml" value="0.124" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_emoji_nothing.xml" value="0.124" />

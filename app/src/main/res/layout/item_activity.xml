@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@drawable/card_view_bg_with_stroke"
+            android:background="@drawable/view_bg_stroke"
             android:animateLayoutChanges="true">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/expandLayout"
@@ -49,7 +49,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_arrow_bottom"
                     app:tint="?colorPrimary"
-                    android:background="@drawable/circle_bg_with_stroke"/>
+                    android:background="@drawable/view_circle_bg_stroke"/>
 
                 <ImageView
                     android:id="@+id/addIv"
@@ -59,22 +59,11 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/expandIv"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_add"
+                    app:srcCompat="@drawable/ic_add_no_border"
                     app:tint="?colorPrimary"
-                    android:background="@drawable/circle_bg_with_stroke"
+                    android:background="@drawable/view_circle_bg_stroke"
                     android:layout_marginEnd="6dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/cardViewTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text1"
-                android:justificationMode="inter_word"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:visibility="gone"/>
 
         </LinearLayout>
 

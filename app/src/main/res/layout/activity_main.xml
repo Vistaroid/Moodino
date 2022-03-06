@@ -98,7 +98,7 @@
             android:background="@drawable/custom_circle_button"
             android:backgroundTint="@color/orange"
             android:padding="8dp"
-            android:src="@drawable/ic_clock"
+            android:src="@drawable/ic_time"
             app:tint="@color/white" />
 
         <TextView
@@ -125,9 +125,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/custom_circle_button"
-            android:backgroundTint="@color/pink"
             android:padding="8dp"
-            android:src="@drawable/ic_calender"
+            android:src="@drawable/ic_add_no_border"
             app:tint="@color/white" />
 
         <TextView
