@@ -53,3 +53,4 @@ fun Context.resolveColor(attribute: Int)= TypedValue().let {
     theme.resolveAttribute(attribute,it,true)
     ContextCompat.getColor(this,it.resourceId)
 }
+

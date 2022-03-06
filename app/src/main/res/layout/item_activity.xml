@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+
             android:background="@drawable/view_bg_stroke"
             android:animateLayoutChanges="true">
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,6 +50,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_arrow_bottom"
                     app:tint="?colorPrimary"
+
                     android:background="@drawable/view_circle_bg_stroke"/>
 
                 <ImageView
@@ -64,7 +66,6 @@
                     android:background="@drawable/view_circle_bg_stroke"
                     android:layout_marginEnd="6dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

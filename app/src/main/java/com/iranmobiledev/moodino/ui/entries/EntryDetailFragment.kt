@@ -44,8 +44,8 @@ class EntryDetailFragment : BaseFragment(), ActivitiesAdapter.AdapterItemCallbac
         activitiesRv = binding.activitiesRv
         save = binding.saveLayout
     }
-
     override fun onExpandViewClicked() {
+
         //val visibility = if(view.visibility == View.GONE) View.VISIBLE else View.GONE
         //view.visibility = visibility
     }

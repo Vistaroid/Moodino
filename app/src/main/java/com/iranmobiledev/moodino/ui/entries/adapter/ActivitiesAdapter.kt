@@ -40,5 +40,6 @@ class ActivitiesAdapter(private val adapterItemCallback: AdapterItemCallback) : 
     interface AdapterItemCallback{
         //todo pass view to this function
         fun onExpandViewClicked()
+
     }
 }
