@@ -3,19 +3,19 @@
 
     <item android:title="entries"
         android:id="@+id/entriesFragment"
-        android:icon="@drawable/ic_entries"/>
+        android:icon="@drawable/ic_note"/>
     <item android:title="stats"
         android:id="@+id/statsFragment"
-        android:icon="@drawable/ic_stats"/>
+        android:icon="@drawable/ic_chart"/>
 
     <item android:title=""
         android:id="@+id/placeHolder" />
 
     <item android:title="calender"
         android:id="@+id/calenderFragment"
-        android:icon="@drawable/ic_calender"/>
+        android:icon="@drawable/ic_calendar"/>
     <item android:title="more"
         android:id="@+id/moreFragment"
-        android:icon="@drawable/ic_more"/>
+        android:icon="@drawable/ic_more_with_border"/>
 
 </menu>

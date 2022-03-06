@@ -111,7 +111,8 @@
                         android:id="@+id/moreIv"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:background="@drawable/circle_bg_with_stroke"
+                        android:background="@drawable/circle_shape"
+
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -129,7 +130,7 @@
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:layout_marginTop="8dp"
-                    style="@style/editTextStyle"
+                    style="@style/EditTextStyle"
                     />
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -168,7 +169,8 @@
                     android:layout_marginEnd="12dp"
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="4dp"
-                    android:background="@drawable/card_view_bg_with_stroke">
+                    android:background="@drawable/view_bg_stroke">
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

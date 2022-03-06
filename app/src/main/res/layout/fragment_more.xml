@@ -5,11 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.more.MoreFragment"
     android:layout_marginBottom="@dimen/_50mdp">
 
-    
-
+  
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -115,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ItemMore_title="@string/start_week"
-                app:ItemMore_icon="@drawable/ic_calender"
+                app:ItemMore_icon="@drawable/ic_calendar"
                 android:clickable="true"/>
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore

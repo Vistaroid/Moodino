@@ -3,8 +3,7 @@ package com.iranmobiledev.moodino.ui.calendar.calendarpager
 import android.content.Context
 import android.graphics.Paint
 import com.iranmobiledev.moodino.R
-import com.iranmobiledev.moodino.utils.dp
-import com.iranmobiledev.moodino.utils.resolveColor
+import com.iranmobiledev.moodino.utlis.dp
 
 class SharedDayViewData(context: Context) {
 
