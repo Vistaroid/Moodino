@@ -59,35 +59,39 @@
                 android:layout_marginRight="15dp"
                 >
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="24dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_emoji_very_happy"/>
+                    android:src="@drawable/ic_very_happy_outlined"
+                    app:tint="@color/pink" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/gray"/>
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="22dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/ic_emoji_happy"/>
+                    android:src="@drawable/ic_happy_outlined"
+                    app:tint="@color/green" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/gray"/>
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="22dp"
                     android:layout_height="34dp"
-                    android:src="@drawable/ic_emoji_nothing"/>
+                    android:src="@drawable/ic_nothing_outlined"
+                    app:tint="@color/gray" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/gray"/>
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="22dp"
                     android:layout_height="34dp"
-                    android:src="@drawable/ic_emoji_sad"/>
+                    android:src="@drawable/ic_bad_outlined"
+                    app:tint="@color/orange" />
 
                 <View
                     android:layout_width="match_parent"
@@ -95,9 +99,10 @@
                     android:background="@color/gray"/>
 
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="22dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/ic_emoji_very_sad"/>
+                    android:src="@drawable/ic_very_bad_outlined"
+                    android:tint="@color/blue"/>
 
             </LinearLayout>
 
