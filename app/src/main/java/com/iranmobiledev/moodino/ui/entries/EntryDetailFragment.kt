@@ -1,16 +1,13 @@
 package com.iranmobiledev.moodino.ui.entries
 
 import android.os.Bundle
-import android.transition.AutoTransition
-import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.base.BaseFragment
-import com.iranmobiledev.moodino.common.implementSpringAnimationTrait
+import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.ui.entries.adapter.ActivitiesAdapter
 
