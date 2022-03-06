@@ -1,14 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MoreFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MoreFragment"
+    android:layout_marginBottom="@dimen/_50mdp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="more fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/goals"
+                app:ItemMore_icon="@drawable/ic_goals" />
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/weekly_report"
+                app:ItemMore_icon="@drawable/ic_chart"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/monthly_report"
+                app:ItemMore_icon="@drawable/ic_chart"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/photo_gallery"
+                app:ItemMore_icon="@drawable/ic_gallery"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/achiement"
+                app:ItemMore_icon="@drawable/ic_achievement"
+                android:clickable="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20mdp"
+                android:background="@color/background"/>
+
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/timer"
+                app:ItemMore_icon="@drawable/ic_timer"
+                android:clickable="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20mdp"
+                android:background="@color/background"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/edite_moods"
+                app:ItemMore_icon="@drawable/ic_emoji"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/edite_activity"
+                app:ItemMore_icon="@drawable/ic_activity"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/change_color"
+                app:ItemMore_icon="@drawable/ic_color"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/color_mode"
+                app:ItemMore_icon="@drawable/ic_mode"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/pin_lock"
+                app:ItemMore_icon="@drawable/ic_lock"
+                android:clickable="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20mdp"
+                android:background="@color/background"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/start_week"
+                app:ItemMore_icon="@drawable/ic_calender"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/language"
+                app:ItemMore_icon="@drawable/ic_language"
+                android:clickable="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20mdp"
+                android:background="@color/background"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/backup_restore"
+                app:ItemMore_icon="@drawable/ic_backup"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/export_entries"
+                app:ItemMore_icon="@drawable/ic_export"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/widgets"
+                app:ItemMore_icon="@drawable/ic_widgets"
+                android:clickable="true"/>
+
+            <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ItemMore_title="@string/about"
+                app:ItemMore_icon="@drawable/ic_info"
+                android:clickable="true"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
