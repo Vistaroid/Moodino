@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
+    android:clipToPadding="false"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="1.0"
@@ -25,7 +26,7 @@
             android:layout_height="wrap_content"
             android:text="Mood Chart"
             android:textAlignment="viewStart"
-            app:layout_constraintBottom_toTopOf="@+id/moodsLineChart"
+            app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,21 +37,80 @@
             android:layout_marginEnd="16dp"
             android:background="@color/white"
             android:src="@drawable/ic_share"
-            app:layout_constraintBottom_toTopOf="@+id/moodsLineChart"
+            app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.457"
             app:tint="@color/black" />
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/moodsLineChart"
+        <FrameLayout
+            android:id="@+id/moodsLineChartLayout"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#00FFFFFF"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/moodChartHeader"
-            tools:layout_editor_absoluteY="26dp" />
+            tools:layout_editor_absoluteY="26dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginRight="15dp"
+                >
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_emoji_very_happy"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_emoji_happy"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="34dp"
+                    android:src="@drawable/ic_emoji_nothing"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="34dp"
+                    android:src="@drawable/ic_emoji_sad"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_emoji_very_sad"/>
+
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/moodsLineChart"
+                android:layout_width="310dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="25dp"
+                android:background="#00FFFFFF"
+                 />
+
+        </FrameLayout>
+
 
         <LinearLayout
             android:layout_width="100dp"
@@ -60,7 +120,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
-            app:layout_constraintTop_toBottomOf="@+id/moodsLineChart">
+            app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout">
 
             <ImageButton
                 android:id="@+id/ineChartImageButton"

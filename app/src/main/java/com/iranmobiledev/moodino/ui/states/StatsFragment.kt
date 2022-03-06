@@ -2,24 +2,21 @@ package com.iranmobiledev.moodino.ui.states
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColorInt
-import androidx.core.view.iterator
-import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBindings
-import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
-import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
+
 
 class StatsFragment : BaseFragment() {
     private lateinit var binding: FragmentStatsBinding
@@ -30,9 +27,6 @@ class StatsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStatsBinding.inflate(inflater, container, false)
-
-
-
         return binding.root
     }
 
@@ -40,16 +34,23 @@ class StatsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //init charts
-        val lineChart = binding.moodsLineChart
+        val lineChart = binding.moodChartCardInclude.moodsLineChart
 
+        val icon = resources.getDrawable(R.drawable.ic_emoji_happy)
+//            Drawable.(R.drawable.ic_emoji_very_happy),
+//            R.drawable.ic_emoji_happy,
+//            R.drawable.ic_emoji_nothing,
+//            R.drawable.ic_emoji_sad,
+//            R.drawable.ic_emoji_very_sad,
+//        )
         val entries = arrayListOf<Entry>()
-        entries.add(Entry(0f, 1f))
-        entries.add(Entry(1f, 3f))
+        entries.add(Entry(1f, 1f))
         entries.add(Entry(2f, 2f))
-        entries.add(Entry(3f, 2f))
-        entries.add(Entry(5f, 4f))
-        entries.add(Entry(6f, 5f))
-        entries.add(Entry(8f, 3f))
+        entries.add(Entry(3f, 3f))
+        entries.add(Entry(4f, 4f))
+        entries.add(Entry(5f, 5f))
+        entries.add(Entry(6f, 4f))
+        entries.add(Entry(7f, 3f))
 
 
         var dataSet = LineDataSet(entries, "moods")
@@ -63,7 +64,6 @@ class StatsFragment : BaseFragment() {
             setCircleColor(Color.RED);
             valueTextColor = Color.WHITE
             valueTextSize = 0f
-
         }
 
         val xAxis = lineChart.xAxis
@@ -74,12 +74,20 @@ class StatsFragment : BaseFragment() {
             axisMinimum = 1f
         }
         val yAxis = lineChart.axisLeft
+        var yLabel = arrayListOf(
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+        )
         yAxis.apply {
-            gridColor = R.color.gray
+            gridColor = Color.WHITE
+            textColor = Color.WHITE
             axisLineColor = Color.WHITE
             granularity = 1f
-            textColor = Color.WHITE
-            setDrawZeroLine(false)
+            setAxisMaxValue(5f)
+
         }
 
         val lineData = LineData(dataSet)
@@ -89,6 +97,8 @@ class StatsFragment : BaseFragment() {
             description.isEnabled = false
             legend.isEnabled = false
             axisRight.isEnabled = false
+            setPinchZoom(false)
+            setTouchEnabled(false)
         }
     }
 }
