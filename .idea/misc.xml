@@ -56,6 +56,32 @@
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/layout/activity_main.xml" value="0.12552083333333333" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/layout/emojies_item.xml" value="0.5" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/layout/entries_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/background_ovel.xml" value="0.165" />
+        <entry key="app/src/main/res/drawable/ic_achievement.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_activity.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_backup.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_calender.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_chart.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_color.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_emoji.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_emoji_happy.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_emoji_nothing.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_export.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_gallery.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_info.xml" value="0.1845" />
+        <entry key="app/src/main/res/drawable/ic_language.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_lock.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_mode.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_tick.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_timer.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_widgets.xml" value="0.1915" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/emojies_item.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/view_item_more.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/view_more_item.xml" value="0.24427083333333333" />
       </map>
     </option>
   </component>

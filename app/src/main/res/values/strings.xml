@@ -7,6 +7,23 @@
     <string name="meh">meh</string>
     <string name="bad">bad</string>
     <string name="awful">awful</string>
+    <string name="goals">Goals</string>
+    <string name="weekly_report">Weekly Report</string>
+    <string name="monthly_report">Monthly Report</string>
+    <string name="photo_gallery">Photo Gallery</string>
+    <string name="achiement">Achiement</string>
+    <string name="timer">Timer</string>
+    <string name="edite_moods">Edite Moods</string>
+    <string name="edite_activity">Edite Activities</string>
+    <string name="change_color">Change Colors</string>
+    <string name="color_mode">Color Mode</string>
+    <string name="pin_lock">PIN Lock</string>
+    <string name="start_week">Start of the Week</string>
+    <string name="language">Language</string>
+    <string name="backup_restore">Backup and Restore</string>
+    <string name="export_entries">Export Entries</string>
+    <string name="widgets">Widgets</string>
+    <string name="about">About</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
