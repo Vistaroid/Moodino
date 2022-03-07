@@ -122,9 +122,9 @@
                 <ImageView
                     android:layout_gravity="center"
                     android:layout_height="60dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_width="60dp"
-                    android:src="@drawable/ic_camera" />
+                    android:src="@drawable/ic_camera_for_achievements" />
 
                 <LinearLayout
                     android:background="@color/white"
