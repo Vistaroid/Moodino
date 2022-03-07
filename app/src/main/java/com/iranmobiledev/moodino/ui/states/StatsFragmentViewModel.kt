@@ -18,20 +18,21 @@ class StatsFragmentViewModel : BaseViewModel() {
     fun initializeLineChart(lineChart: LineChart, context: Context) {
 
         //mocked entries for chart
-        setEntriesForLineChart(
-            arrayListOf(
-                Entry(1f, 1f),
-                Entry(2f, 2f),
-                Entry(3f, 3f),
-                Entry(4f, 4f),
-                Entry(5f, 5f),
-                Entry(6f, 4f),
-                Entry(7f, 3f)
+        if (lineChartEntries.isEmpty()) {
+            setEntriesForLineChart(
+                arrayListOf(
+                    Entry(1f, 1f),
+                    Entry(2f, 2f),
+                    Entry(3f, 3f),
+                    Entry(4f, 4f),
+                    Entry(5f, 5f),
+                    Entry(6f, 4f),
+                    Entry(7f, 3f)
+                )
             )
-        )
+        }
 
         val entries = getEntriesForLineChart()
-
         //create dataSet from entries and customizing it
         var dataSet = LineDataSet(entries, "moods")
         dataSet.apply {
