@@ -7,7 +7,7 @@
     android:padding="@dimen/_6mdp">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/EntryIcon"
         android:layout_width="@dimen/_60mdp"
         android:layout_height="@dimen/_60mdp"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,40 +17,41 @@
     <View
         android:layout_width="@dimen/_2mdp"
         android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="@+id/EntryIcon"
+        app:layout_constraintStart_toStartOf="@+id/EntryIcon"
+        app:layout_constraintTop_toBottomOf="@+id/EntryIcon"
         android:background="@color/silver"/>
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/entryTitle"
         style="@style/cardHeaderTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16mdp"
         android:text="@string/awful"
         android:textAppearance="?textAppearanceHeadline6"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+        app:layout_constraintStart_toEndOf="@+id/EntryIcon"
+        app:layout_constraintTop_toTopOf="@+id/EntryIcon" />
 
     <TextView
+        android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
         android:text="@string/time"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5"
-        android:layout_marginStart="@dimen/_6mdp"/>
+        app:layout_constraintBottom_toBottomOf="@+id/entryTitle"
+        app:layout_constraintStart_toEndOf="@+id/entryTitle"
+        app:layout_constraintTop_toTopOf="@+id/entryTitle" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toStartOf="@+id/entryTitle"
+        app:layout_constraintTop_toBottomOf="@+id/entryTitle" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/entryNote"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10mdp"
@@ -66,22 +67,26 @@
         android:layout_height="@dimen/_150mdp"
         app:cardCornerRadius="@dimen/_16mdp"
         app:cardElevation="0dp"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/entryNote"
+        app:layout_constraintTop_toBottomOf="@+id/entryNote"
         android:layout_marginTop="@dimen/_12mdp">
 
         <ImageView
+            android:id="@+id/entryImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:background="?colorPrimary"/>
     </com.google.android.material.card.MaterialCardView>
 
     <ImageView
+        android:id="@+id/moreIcon"
         android:layout_width="@dimen/_25mdp"
         android:layout_height="@dimen/_25mdp"
+        android:background="@drawable/circle_shape"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_more_outlined"
+        app:layout_constraintTop_toTopOf="@+id/textView7"
+        app:srcCompat="@drawable/ic_more"
         app:tint="@color/gray"
-        android:layout_margin="@dimen/_12mdp"/>
+        android:layout_marginEnd="@dimen/_12mdp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

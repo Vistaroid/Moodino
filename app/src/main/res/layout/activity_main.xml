@@ -50,7 +50,8 @@
         app:backgroundTint="@color/white"
         app:fabCustomSize="70dp"
         app:layout_anchor="@id/bottomAppBar"
-        app:maxImageSize="35dp" />
+        app:maxImageSize="35dp"
+        />
 
     <LinearLayout
         android:id="@+id/yesterday"
@@ -63,6 +64,7 @@
         android:orientation="vertical">
 
         <ImageButton
+            android:id="@+id/yesterdayImageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/custom_circle_button"
@@ -81,7 +83,6 @@
             android:visibility="gone" />
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/today"
         android:layout_width="wrap_content"
@@ -93,6 +94,7 @@
         android:orientation="vertical">
 
         <ImageButton
+            android:id="@+id/imageViewToday"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/custom_circle_button"
@@ -122,6 +124,7 @@
         android:orientation="vertical">
 
         <ImageButton
+            android:id="@+id/otherDayImageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/custom_circle_button"

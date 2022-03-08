@@ -45,7 +45,8 @@
                     android:id="@+id/saveIv"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/ic_tick" />
+                    app:srcCompat="@drawable/ic_tick"
+                    app:tint="?colorPrimary"/>
                 <TextView
                     android:id="@+id/saveTv"
                     android:layout_width="wrap_content"

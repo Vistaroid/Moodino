@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.ui.entries.adapter.EntryContainerAdapter
+import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 
 class EntriesFragment : BaseFragment() {
 
@@ -27,12 +29,24 @@ class EntriesFragment : BaseFragment() {
         initViews()
         entriesContainerRvImpl()
 
+        binding.addEntryCardView.setOnClickListener{
+
+        }
+
+        makeSpringAnimation(binding.addEntryCardView)
+
         return binding.root
     }
 
+    private fun makeSpringAnimation(view : View){
+        view.implementSpringAnimationTrait()
+    }
+
     private fun entriesContainerRvImpl(){
+        //TODO should receive from database
+        val entriesList = ArrayList<List<Entry>>()
         entriesContainerRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,false)
-        entriesContainerRv.adapter = EntryContainerAdapter()
+        entriesContainerRv.adapter = EntryContainerAdapter(requireContext(), entriesList)
     }
 
     private fun initViews(){

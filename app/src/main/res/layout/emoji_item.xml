@@ -10,6 +10,7 @@
         android:layout_gravity="center"
         android:orientation="horizontal">
         <LinearLayout
+            android:id="@+id/item_veryHappy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -27,6 +28,7 @@
                 android:text="@string/rad"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/item_happy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -43,6 +45,7 @@
                 android:text="@string/good"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/item_nothing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -59,6 +62,7 @@
                 android:text="@string/meh"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/item_sad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -75,6 +79,7 @@
                 android:text="@string/bad"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/item_verySad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">

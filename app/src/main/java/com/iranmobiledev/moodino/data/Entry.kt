@@ -9,5 +9,6 @@ data class Entry(
     val date : String,
     val activities : List<Activity>,
     val photo : String,
-    @LayoutRes val image : Int,
+    @LayoutRes val icon : Int,
+    val image : Int,
 )
