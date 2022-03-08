@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.Navigation
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
@@ -18,13 +19,18 @@ class AddEntryFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = AddEntryFragmentBinding.inflate(inflater, container, false)
-
-        binding.date.setOnClickListener{
-            val dialog = DatePickerDialog(requireContext(), { view, year, month, dayOfMonth ->
-
-                }, 1400, 12, 11)
-            dialog.show()
-        }
+        emojiItemClickHandler()
         return binding.root
+    }
+
+    private val emojiItemClickListener = View.OnClickListener {
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_addEntryFragment_to_entryDetailFragment)
+    }
+    private fun emojiItemClickHandler(){
+        binding.include.itemNothing.setOnClickListener(emojiItemClickListener)
+        binding.include.itemHappy.setOnClickListener(emojiItemClickListener)
+        binding.include.itemSad.setOnClickListener(emojiItemClickListener)
+        binding.include.itemVerySad.setOnClickListener(emojiItemClickListener)
+        binding.include.itemVeryHappy.setOnClickListener(emojiItemClickListener)
     }
 }

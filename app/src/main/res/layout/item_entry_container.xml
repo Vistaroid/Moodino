@@ -3,9 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:cardElevation="10dp"
-    app:cardCornerRadius="@dimen/_16mdp">
+    app:cardElevation="8dp"
+    app:cardCornerRadius="@dimen/_16mdp"
+    android:layout_marginTop="@dimen/_10mdp"
+    android:layout_marginBottom="@dimen/_10mdp"
+    android:layout_marginStart="@dimen/_12mdp"
+    android:layout_marginEnd="@dimen/_12mdp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,8 +20,8 @@
         app:layout_constraintTop_toTopOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30mdp"
-            tools:background="?colorPrimary">
+            android:layout_height="@dimen/_40mdp"
+            android:background="?colorPrimary">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -42,6 +46,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/entryRv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6mdp"/>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

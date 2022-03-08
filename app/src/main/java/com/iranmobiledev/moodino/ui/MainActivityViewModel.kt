@@ -15,7 +15,7 @@ import com.iranmobiledev.moodino.utlis.dp
 
 class MainActivityViewModel() : BaseViewModel() {
 
-    private var extended = false
+    var extended = false
 
     fun actionFab(menuFab: LinearLayout, view: View, context: MainActivity) {
         rotateFab(view, context)
