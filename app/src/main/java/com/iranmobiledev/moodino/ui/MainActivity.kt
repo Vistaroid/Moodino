@@ -56,6 +56,8 @@ class MainActivity : AppCompatActivity() {
             fab.visibility = View.GONE
             bottomAppBar.visibility = View.GONE
             navController.navigate(R.id.action_entriesFragment_to_addEntryFragment)
+
+
         }
 
     }

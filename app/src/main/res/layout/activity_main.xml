@@ -53,6 +53,7 @@
         app:maxImageSize="35dp"
         />
 
+
     <LinearLayout
         android:id="@+id/yesterday"
         android:layout_width="wrap_content"
@@ -141,5 +142,4 @@
             android:textStyle="bold"
             android:visibility="gone" />
     </LinearLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

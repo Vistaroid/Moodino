@@ -2,11 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/CardViewStyle"
     android:id="@+id/achievementsCard"
+    style="@style/CardViewStyle"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:layout_width="match_parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/moodChartCardInclude">
@@ -84,12 +84,12 @@
         <View
             android:id="@+id/dividerAchievement"
             android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/customViewAchievement"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
             android:layout_height="1dp"
+            android:layout_marginTop="10dp"
             android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/customViewAchievement"
             tools:layout_editor_absoluteX="1dp" />
 
         <TextView
