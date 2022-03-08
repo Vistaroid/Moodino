@@ -2,6 +2,8 @@ package com.iranmobiledev.moodino.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             val views = listOf(view1, view2, view3)
             model.actionFab(views,it,this)
         }
+
     }
 }
 
