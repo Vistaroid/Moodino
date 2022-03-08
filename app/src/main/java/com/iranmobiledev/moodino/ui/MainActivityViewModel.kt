@@ -1,31 +1,71 @@
 package com.iranmobiledev.moodino.ui
 
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
+import com.iranmobiledev.moodino.utlis.dp
+
 
 class MainActivityViewModel() : BaseViewModel() {
 
     private var extended = false
 
-    fun actionFab(views: List<LinearLayout>, view: View, context: MainActivity) {
+    fun actionFab(menuFab: LinearLayout, view: View, context: MainActivity) {
         rotateFab(view, context)
-        animateFabViews(views)
+//        showMenuFab(context, menuFab)
 
         if (extended) {
-            views.forEach {
-                it.getChildAt(1).visibility = View.VISIBLE
-            }
+            hideMenuFab(context, menuFab)
         } else {
-            views.forEach {
-                it.getChildAt(1).visibility = View.GONE
-            }
+            showMenuFab(context,menuFab)
         }
+
+    }
+
+    private fun showMenuFab(context: MainActivity, menuFab: LinearLayout) {
+
+        extendFab(menuFab, true, 40f, -200f)
+
+        //convert dp to pixel
+        val scale: Float = context.resources.displayMetrics.density
+        val widthToDp = (290f * scale + 0.5f)
+
+        //increase width animated
+        val anim = ValueAnimator.ofInt(menuFab.measuredWidth, widthToDp.toInt())
+        anim.addUpdateListener { valueAnimator ->
+            val value = valueAnimator.animatedValue as Int
+            val layoutParams: ViewGroup.LayoutParams = menuFab.layoutParams
+            layoutParams.width = value
+            menuFab.layoutParams = layoutParams
+        }
+        anim.duration = 500
+        anim.start()
+
+        extended = true
+    }
+
+    private fun hideMenuFab(context: MainActivity, menuFab: LinearLayout) {
+            closeFab(menuFab, true, 0f, 0f)
+
+            //increase width animated
+            val anim = ValueAnimator.ofInt(menuFab.measuredWidth, 0)
+            anim.addUpdateListener { valueAnimator ->
+                val value = valueAnimator.animatedValue as Int
+                val layoutParams: ViewGroup.LayoutParams = menuFab.layoutParams
+                layoutParams.width = value
+                menuFab.layoutParams = layoutParams
+            }
+            anim.duration = 50
+            anim.start()
+
+        extended = false
     }
 
     private fun rotateFab(view: View?, context: Context) {
@@ -43,24 +83,6 @@ class MainActivityViewModel() : BaseViewModel() {
             )
             unRotateFab.fillAfter = true
             view?.startAnimation(unRotateFab)
-        }
-    }
-
-    private fun animateFabViews(views: List<LinearLayout>) {
-        extended = !extended
-        views.forEach {
-            when (extended) {
-                true -> {
-                    if (it.id == R.id.yesterday) extendFab(it, extended, -200f, -210f)
-                    if (it.id == R.id.today) extendFab(it, extended, 0f, -310f)
-                    if (it.id == R.id.other_days) extendFab(it, extended, 200f, -210f)
-                }
-                false -> {
-                    if (it.id == R.id.yesterday) closeFab(it, extended, 0f, 0f)
-                    if (it.id == R.id.today) closeFab(it, extended, 0f, 0f)
-                    if (it.id == R.id.other_days) closeFab(it, extended, 0f, 0f)
-                }
-            }
         }
     }
 

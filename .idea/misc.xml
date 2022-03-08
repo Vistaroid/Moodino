@@ -25,11 +25,14 @@
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_more_outlined.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_share.xml" value="0.1" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_stats.xml" value="0.1" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/ic_time.xml" value="0.119" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_very_bad_outlined.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_very_happy_outlined.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/outlined_circle.xml" value="0.1" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/primary_circle_shape.xml" value="0.1" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/round_corner_rectangle.xml" value="0.1" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/round_left_corner_rectangle.xml" value="0.119" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/round_right_corner_rectangle.xml" value="0.119" />
         <entry key="..\:/Moodino/app/src/main/res/layout/achievement_icon.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/layout/achievements_card.xml" value="0.264" />
         <entry key="..\:/Moodino/app/src/main/res/layout/activity_main.xml" value="0.128" />
@@ -40,6 +43,7 @@
         <entry key="..\:/Moodino/app/src/main/res/layout/emojies_item.xml" value="0.24547101449275363" />
         <entry key="..\:/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.24547101449275363" />
         <entry key="..\:/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.136" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/fab_menu.xml" value="0.264" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.24547101449275363" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_calender.xml" value="0.10185185185185185" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.4" />
