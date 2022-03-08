@@ -52,66 +52,66 @@
         app:layout_anchor="@id/bottomAppBar"
         />
 
-    <LinearLayout
-        android:id="@+id/fabMenu"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="25dp"
-        android:layout_gravity="bottom|center_horizontal">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/fabMenu"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:layout_marginBottom="25dp"-->
+<!--        android:layout_gravity="bottom|center_horizontal">-->
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/yesterday_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableTop="@drawable/ic_back_arrow"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:drawableTint="@color/white"
-            android:paddingTop="16dp"
-            android:textSize="10sp"
-            android:paddingBottom="8dp"
-            android:background="@drawable/round_left_corner_rectangle"
-            android:backgroundTint="@color/green"
-            android:textColor="@color/white"
-            android:text="yesterday"
-            />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/today_button"
-            android:background="@drawable/rectangle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableTop="@drawable/ic_time"
-            android:drawableTint="@color/white"
-            android:paddingTop="16dp"
-            android:textSize="10sp"
-            android:backgroundTint="@color/pink"
-            android:textColor="@color/white"
-            android:paddingBottom="8dp"
-            android:text="today"
-            />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/yesterday_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:drawableTop="@drawable/ic_back_arrow"-->
+<!--            android:paddingLeft="10dp"-->
+<!--            android:paddingRight="10dp"-->
+<!--            android:drawableTint="@color/white"-->
+<!--            android:paddingTop="16dp"-->
+<!--            android:textSize="10sp"-->
+<!--            android:paddingBottom="8dp"-->
+<!--            android:background="@drawable/round_left_corner_rectangle"-->
+<!--            android:backgroundTint="@color/green"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:text="yesterday"-->
+<!--            />-->
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/otherDay_button"
-            android:background="@drawable/round_right_corner_rectangle"
-            android:layout_width="wrap_content"
-            android:textSize="10sp"
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/today_button"-->
+<!--            android:background="@drawable/rectangle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:drawableTop="@drawable/ic_time"-->
+<!--            android:drawableTint="@color/white"-->
+<!--            android:paddingTop="16dp"-->
+<!--            android:textSize="10sp"-->
+<!--            android:backgroundTint="@color/pink"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:paddingBottom="8dp"-->
+<!--            android:text="today"-->
+<!--            />-->
 
-            android:backgroundTint="@color/orange"
-            android:layout_height="match_parent"
-            android:drawableTop="@drawable/ic_calendar"
-            android:drawableTint="@color/white"
-            android:paddingTop="16dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@color/white"
-            android:paddingBottom="8dp"
-            android:text="yesterday"
-            />
 
-    </LinearLayout>
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/otherDay_button"-->
+<!--            android:background="@drawable/round_right_corner_rectangle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:textSize="10sp"-->
+
+<!--            android:backgroundTint="@color/orange"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:drawableTop="@drawable/ic_calendar"-->
+<!--            android:drawableTint="@color/white"-->
+<!--            android:paddingTop="16dp"-->
+<!--            android:paddingLeft="10dp"-->
+<!--            android:paddingRight="10dp"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:paddingBottom="8dp"-->
+<!--            android:text="yesterday"-->
+<!--            />-->
+
+<!--    </LinearLayout>-->
 
 <!--    <LinearLayout-->
 <!--        android:id="@+id/yesterday"-->
