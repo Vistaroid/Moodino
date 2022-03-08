@@ -54,5 +54,8 @@ dependencies {
 
     //charts dependency
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    //calendar
+    implementation 'com.github.persian-calendar:calendar:1.2.0'
 }
 

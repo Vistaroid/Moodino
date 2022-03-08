@@ -19,4 +19,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <attr name="colorSelectDay" format="reference"/>
+    <attr name="colorCurrentDay" format="reference"/>
+    <attr name="colorTextDayName" format="reference"/>
+    <attr name="colorTextDaySelected" format="reference"/>
+
 </resources>

@@ -48,6 +48,7 @@ fun View.implementSpringAnimationTrait() {
     }
 }
 val Number.dp : Float get() = this.toFloat() * Resources.getSystem().displayMetrics.density
+val Number.sp : Float get() = this.toFloat() * Resources.getSystem().displayMetrics.scaledDensity
 
 fun Context.resolveColor(attribute: Int)= TypedValue().let {
     theme.resolveAttribute(attribute,it,true)

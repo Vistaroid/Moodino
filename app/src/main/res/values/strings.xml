@@ -36,4 +36,9 @@
     <string name="photo">Photo</string>
     <string name="tap_to_add_photo">Tap to Add Photo</string>
     <string name="social">social</string>
+
+<!--calendars-->
+    <string name="shamsi_calendar">Persian Calendar</string>
+    <string name="shamsi_calendar_short">Persian</string>
+
 </resources>
