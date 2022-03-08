@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/moodChartHeader">
+
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/outlined_circle" />
+
+        <ImageView
+            android:id="@+id/achievementIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/ic_book" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/achievementFirstStar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="3dp"
+                android:src="@drawable/ic_star"
+                app:tint="@color/pink" />
+
+            <ImageView
+                android:id="@+id/achievementSecondStar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/ic_star"
+                app:tint="@color/pink" />
+
+            <ImageView
+                android:id="@+id/achievementThirdStar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="3dp"
+                android:src="@drawable/ic_star"
+                app:tint="@color/gray" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/achievementName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Going String" />
+</LinearLayout>

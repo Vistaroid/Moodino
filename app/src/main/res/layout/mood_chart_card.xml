@@ -12,7 +12,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="1.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/include2"
+    app:layout_constraintTop_toBottomOf="@+id/daysInRowCardInclude"
     app:layout_constraintVertical_bias="0.027">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:text="Mood Chart"
             android:textAlignment="viewStart"
+            android:paddingBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +68,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:background="#9A9F9F9F" />
 
                 <ImageView
                     android:layout_width="22dp"
@@ -78,7 +79,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:background="#9A9F9F9F" />
 
                 <ImageView
                     android:layout_width="22dp"
@@ -89,7 +90,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:background="#9A9F9F9F" />
 
                 <ImageView
                     android:layout_width="22dp"
@@ -100,7 +101,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:background="#9A9F9F9F" />
 
                 <ImageView
                     android:layout_width="22dp"

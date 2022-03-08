@@ -33,7 +33,7 @@
             android:background="@android:color/transparent"
             android:elevation="0dp"
             android:translationZ="0dp"
-            app:menu="@menu/botton_nav" />
+            app:menu="@menu/bottom_nav" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -126,8 +126,8 @@
             android:layout_height="40dp"
             android:background="@drawable/custom_circle_button"
             android:padding="8dp"
-            android:src="@drawable/ic_add_no_border"
-            app:tint="@color/white" />
+            android:src="@drawable/ic_calendar"
+            app:tint="@color/white"/>
 
         <TextView
             android:layout_width="wrap_content"
