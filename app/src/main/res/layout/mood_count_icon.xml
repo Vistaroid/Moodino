@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayout2"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/moodCountPieChart"
+    android:layout_width="55dp"
+    android:layout_height="55dp">
+
+    <android.widget.ImageView
+        android:id="@+id/moodIconImageView"
+        app:tint="@color/pink"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_very_happy_outlined" />
+
+    <android.widget.ImageView
+        android:id="@+id/moodCountTextView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="end"
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="@color/pink"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textFontWeight="700" />
+</FrameLayout>

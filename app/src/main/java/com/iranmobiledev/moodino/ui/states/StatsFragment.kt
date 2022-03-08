@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
+import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 
 
 class StatsFragment : BaseFragment() {
@@ -25,9 +26,14 @@ class StatsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val model :StatsFragmentViewModel by viewModels()
+        val model : StatsFragmentViewModel by viewModels()
 
-        model.initializeLineChart(binding.moodChartCardInclude.moodsLineChart,requireContext())
+        val lineChart = binding.moodChartCardInclude.moodsLineChart
+        model.initializeLineChart(lineChart,requireContext())
+
+        val pieChart = binding.moodCountCardInclude.moodCountPieChart
+        model.initializePieChart(pieChart,requireContext())
+
 
 //        val greyFilter = PorterDuffColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY)
 //        myLayout.getBackground().setColorFilter(greyFilter)

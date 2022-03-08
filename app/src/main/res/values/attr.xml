@@ -4,4 +4,10 @@
         <attr name="ItemMore_title" format="string"/>
         <attr name="ItemMore_icon" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="CountIcon">
+        <attr name="MoodIcon" format="integer"/>
+        <attr name="MoodCount" format="string"/>
+        <attr name="MoodTint" format="color"/>
+    </declare-styleable>
 </resources>
