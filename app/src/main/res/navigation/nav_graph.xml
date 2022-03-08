@@ -54,4 +54,5 @@
         android:name="com.iranmobiledev.moodino.ui.entries.EntryDetailFragment"
         android:label="EntryDetailFragment"
         tools:layout="@layout/entry_detail_fragment"/>
+
 </navigation>

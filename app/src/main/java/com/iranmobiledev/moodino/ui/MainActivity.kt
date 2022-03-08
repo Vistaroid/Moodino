@@ -54,10 +54,12 @@ class MainActivity : AppCompatActivity() {
 
         activityMainBinding.todayButton.setOnClickListener{
             model.actionFab(fabMenu, it, this)
-
             fab.hide()
+            fab.isClickable = false
             bottomAppBar.visibility = View.GONE
             bottomAppBar.performHide(true)
+            navController.navigate(R.id.addEntryFragment)
+
         }
 
     }
