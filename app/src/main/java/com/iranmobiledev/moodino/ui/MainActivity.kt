@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.activity.viewModels
@@ -20,9 +21,9 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var navController: NavController
-    private lateinit var todayIv : LinearLayout
-    private lateinit var yesterdayIv : LinearLayout
-    private lateinit var otherDayIv : LinearLayout
+    private lateinit var todayIv : Button
+    private lateinit var yesterdayIv : Button
+    private lateinit var otherDayIv : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         //fab 3 buttons to be animate
         val fab: FloatingActionButton = activityMainBinding.fab
+        val fabMenu = activityMainBinding.fabMenu
 
 
 
@@ -48,28 +50,22 @@ class MainActivity : AppCompatActivity() {
         navView.background = null
 
         fab.setOnClickListener { it ->
-            model.actionFab(getFloatActionButtonMenuItems() ,it,this)
+            model.actionFab(fabMenu ,it,this)
         }
 
-        activityMainBinding.imageViewToday.setOnClickListener{
-            model.actionFab(getFloatActionButtonMenuItems(), it, this)
+        activityMainBinding.todayButton.setOnClickListener{
+            model.actionFab(fabMenu, it, this)
             fab.visibility = View.GONE
             bottomAppBar.visibility = View.GONE
             navController.navigate(R.id.action_entriesFragment_to_addEntryFragment)
-
-
         }
 
     }
 
     private fun initViews(){
-        todayIv = activityMainBinding.today
-        yesterdayIv = activityMainBinding.yesterday
-        otherDayIv = activityMainBinding.otherDays
-    }
-
-    private fun getFloatActionButtonMenuItems() : List<LinearLayout>{
-        return listOf(todayIv, yesterdayIv, otherDayIv)
+        todayIv = activityMainBinding.todayButton
+        yesterdayIv = activityMainBinding.yesterdayButton
+        otherDayIv = activityMainBinding.otherDayButton
     }
 }
 

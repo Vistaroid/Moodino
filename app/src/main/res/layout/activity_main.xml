@@ -55,91 +55,63 @@
 
 
     <LinearLayout
-        android:id="@+id/yesterday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="36dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:elevation="10dp">
+        android:id="@+id/fabMenu"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="bottom|center_horizontal">
 
-        <ImageButton
-            android:id="@+id/yesterdayImageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/custom_circle_button"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/yesterday_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableTop="@drawable/ic_back_arrow"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawableTint="@color/white"
+            android:paddingTop="16dp"
+            android:textSize="10sp"
+            android:paddingBottom="8dp"
+            android:background="@drawable/round_left_corner_rectangle"
             android:backgroundTint="@color/green"
-            android:padding="8dp"
-            android:src="@drawable/ic_back_arrow"
-            app:tint="@color/white" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
             android:text="yesterday"
-            android:textColor="#474747"
-            android:textStyle="bold"
-            android:visibility="gone" />
-    </LinearLayout>
+            />
 
-    <LinearLayout
-        android:id="@+id/today"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="36dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:elevation="10dp">
 
-        <ImageButton
-            android:id="@+id/imageViewToday"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/custom_circle_button"
-            android:backgroundTint="@color/orange"
-            android:padding="8dp"
-            android:src="@drawable/ic_time"
-            app:tint="@color/white" />
-
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/today_button"
+            android:background="@drawable/rectangle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:layout_height="match_parent"
+            android:drawableTop="@drawable/ic_time"
+            android:drawableTint="@color/white"
+            android:paddingTop="16dp"
+            android:textSize="10sp"
+            android:backgroundTint="@color/pink"
+            android:textColor="@color/white"
+            android:paddingBottom="8dp"
             android:text="today"
-            android:textColor="#474747"
-            android:textStyle="bold"
-            android:visibility="gone" />
-    </LinearLayout>
+            />
 
-    <LinearLayout
-        android:id="@+id/other_days"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="36dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:elevation="10dp">
 
-        <ImageButton
-            android:id="@+id/otherDayImageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/custom_circle_button"
-            android:padding="8dp"
-            android:src="@drawable/ic_calendar"
-            app:tint="@color/white"/>
-
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/otherDay_button"
+            android:background="@drawable/round_right_corner_rectangle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="other day"
-            android:textColor="#474747"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            android:textSize="10sp"
+
+            android:backgroundTint="@color/orange"
+            android:layout_height="match_parent"
+            android:drawableTop="@drawable/ic_calendar"
+            android:drawableTint="@color/white"
+            android:paddingTop="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/white"
+            android:paddingBottom="8dp"
+            android:text="yesterday"
+            />
+
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
