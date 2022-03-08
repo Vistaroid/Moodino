@@ -20,4 +20,5 @@
         <attr name="ThirdStarTint" format="color"/>
         <attr name="Name" format="string"/>
     </declare-styleable>
+
 </resources>

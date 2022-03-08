@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.add
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -14,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
+import com.iranmobiledev.moodino.ui.entries.AddEntryFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,11 +57,11 @@ class MainActivity : AppCompatActivity() {
 
         activityMainBinding.todayButton.setOnClickListener{
             model.actionFab(fabMenu, it, this)
-
             fab.hide()
+            fab.isClickable = false
             bottomAppBar.visibility = View.GONE
             bottomAppBar.performHide(true)
-            navController.navigate(R.id.action_entriesFragment_to_addEntryFragment)
+            navController.navigate(R.id.addEntryFragment)
         }
 
     }
