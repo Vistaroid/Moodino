@@ -60,6 +60,7 @@
         android:layout_gravity="bottom|center_horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/yesterday_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableTop="@drawable/ic_back_arrow"
@@ -77,6 +78,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/today_button"
             android:background="@drawable/rectangle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -92,6 +94,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/otherDay_button"
             android:background="@drawable/round_right_corner_rectangle"
             android:layout_width="wrap_content"
             android:textSize="10sp"
