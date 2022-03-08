@@ -31,13 +31,13 @@ class MainActivity : AppCompatActivity() {
 
         //fab 3 buttons to be animate
         val fab: FloatingActionButton = activityMainBinding.fab
-        val fabMenuView = activityMainBinding.fabMenu
+//        val fabMenuView = activityMainBinding.fabMenu
 
         //fix nav background problem
         navView.background = null
 
         fab.setOnClickListener { it ->
-            model.actionFab(fabMenuView,it,this)
+//            model.actionFab(fabMenuView,it,this)
         }
 
     }
