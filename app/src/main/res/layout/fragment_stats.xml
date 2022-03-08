@@ -5,20 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.states.StatsFragment">
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+           <include
+               android:id="@+id/daysInRowCardInclude"
+               layout="@layout/days_in_a_row_card" />
 
-        <include
-            android:id="@+id/include2"
-            layout="@layout/days_in_a_row_card" />
+           <include
+               android:id="@+id/moodChartCardInclude"
+               layout="@layout/mood_chart_card" />
 
-        <include
-            android:id="@+id/moodChartCardInclude"
-            layout="@layout/mood_chart_card" />
+           <include android:id="@+id/achievementsCardInclude"
+               layout="@layout/achievements_card"/>
 
-        <include android:id="@+id/achievementsCardInclude"
-            layout="@layout/achievements_card"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+           <include
+               android:id="@+id/moodCountCardInclude"
+               layout="@layout/moods_count_card"
+               tools:layout_editor_absoluteX="12dp"
+               tools:layout_editor_absoluteY="804dp" />
+
+           <Space
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/moodCountCardInclude" />
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+   </ScrollView>
 </FrameLayout>

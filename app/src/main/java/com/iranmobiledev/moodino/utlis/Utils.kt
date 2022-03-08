@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
+import com.github.mikephil.charting.utils.ColorTemplate
 
 fun View.implementSpringAnimationTrait() {
     val scaleXAnim = SpringAnimation(this, DynamicAnimation.SCALE_X, 0.90f)
@@ -53,4 +54,3 @@ fun Context.resolveColor(attribute: Int)= TypedValue().let {
     theme.resolveAttribute(attribute,it,true)
     ContextCompat.getColor(this,it.resourceId)
 }
-

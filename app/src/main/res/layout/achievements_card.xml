@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/CardViewStyle"
     android:id="@+id/achievementsCard"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
     android:layout_width="match_parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -12,14 +13,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/achievementsConstraintLayout"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
-            style="@style/cardHeaderTextStyle"
             android:id="@+id/moodChartHeader"
-            android:layout_height="wrap_content"
+            style="@style/cardHeaderTextStyle"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
             android:text="Achievements"
             android:textAlignment="viewStart"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,204 +31,87 @@
             android:id="@+id/moreImageButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
-
             android:background="@color/white"
             android:src="@drawable/ic_share"
             app:layout_constraintBottom_toBottomOf="@+id/moodChartHeader"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/moodChartHeader"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewAchievement
+            android:id="@+id/customViewAchievement"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            app:FirstStarTint="@color/pink"
+            app:Icon="@drawable/ic_book"
+            app:Name="Going String"
+            app:SecondStarTint="@color/gray"
+            app:ThirdStarTint="@color/gray"
+            app:layout_constraintEnd_toStartOf="@+id/customViewAchievement2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/moodChartHeader" />
+
+        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewAchievement
+            android:id="@+id/customViewAchievement2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:FirstStarTint="@color/pink"
+            app:Icon="@drawable/ic_camera_for_achievements"
+            app:Name="Going String"
+            app:SecondStarTint="@color/gray"
+            app:ThirdStarTint="@color/gray"
+            app:layout_constraintEnd_toStartOf="@+id/customViewAchievement3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/customViewAchievement"
+            app:layout_constraintTop_toBottomOf="@+id/moodChartHeader" />
+
+        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewAchievement
+            android:id="@+id/customViewAchievement3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:FirstStarTint="@color/pink"
+            app:Icon="@drawable/ic_library"
+            app:Name="Going String"
+            app:SecondStarTint="@color/gray"
+            app:ThirdStarTint="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/customViewAchievement2"
+            app:layout_constraintTop_toBottomOf="@+id/moodChartHeader" />
+
+
+        <View
+            android:id="@+id/dividerAchievement"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/customViewAchievement"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <TextView
+            android:id="@+id/totalAchievementsTextView"
             android:layout_width="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:text="3 out of 20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/moodChartHeader">
+            app:layout_constraintTop_toBottomOf="@id/dividerAchievement" />
 
-            <FrameLayout
-                android:layout_height="100dp"
-                android:layout_width="100dp">
-
-                <ImageView
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:src="@drawable/outlined_circle" />
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_width="60dp"
-                    android:src="@drawable/ic_book" />
-
-                <LinearLayout
-                    android:background="@color/white"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_height="36dp"
-                    android:layout_width="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-
-                    <ImageView
-                        android:layout_height="24dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_width="24dp"
-                        android:src="@drawable/ic_star"
-                        app:tint="@color/pink" />
-
-                    <ImageView
-                        android:layout_height="24dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_width="24dp"
-                        android:src="@drawable/ic_star"
-                        app:tint="@color/pink" />
-
-                    <ImageView
-                        android:layout_height="24dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_width="24dp"
-                        android:src="@drawable/ic_star"
-                        app:tint="@color/gray" />
-                </LinearLayout>
-            </FrameLayout>
-
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Going String" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+        <TextView
             android:layout_width="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <FrameLayout
-                android:layout_height="100dp"
-                android:layout_width="100dp">
-
-                <ImageView
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:src="@drawable/outlined_circle" />
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="60dp"
-                    android:src="@drawable/ic_camera_for_achievements" />
-
-                <LinearLayout
-                    android:background="@color/white"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_height="36dp"
-                    android:layout_width="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-
-                    <ImageView
-                        android:layout_height="24dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_width="24dp"
-                        android:src="@drawable/ic_star"
-                        app:tint="@color/pink" />
-
-                    <ImageView
-                        android:layout_height="24dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_width="24dp"
-                        android:src="@drawable/ic_star"
-                        app:tint="@color/gray" />
-
-                    <ImageView
-                        android:layout_height="24dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_width="24dp"
-                        android:src="@drawable/ic_star"
-                        app:tint="@color/gray" />
-                </LinearLayout>
-            </FrameLayout>
-
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Going String" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBaseline_toBottomOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            android:layout_marginRight="4dp"
+            android:backgroundTint="@color/white"
+            android:text="SHOW ALL"
+            android:textColor="@color/pink"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/totalAchievementsTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
-
-            <FrameLayout
-                android:layout_height="100dp"
-                android:layout_width="100dp">
-
-                <ImageView
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:src="@drawable/outlined_circle" />
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_width="60dp"
-                    android:src="@drawable/ic_library" />
-
-                <LinearLayout
-                    android:background="@color/white"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_height="36dp"
-                    android:layout_width="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-
-                    <ImageView
-                        android:layout_height="24dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_width="24dp"
-                        android:src="@drawable/ic_star"
-                        app:tint="@color/pink" />
-
-                    <ImageView
-                        android:layout_height="24dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_width="24dp"
-                        android:src="@drawable/ic_star"
-                        app:tint="@color/pink" />
-
-                    <ImageView
-                        android:layout_height="24dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_width="24dp"
-                        android:src="@drawable/ic_star"
-                        app:tint="@color/gray" />
-                </LinearLayout>
-            </FrameLayout>
-
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Going String" />
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="@+id/totalAchievementsTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

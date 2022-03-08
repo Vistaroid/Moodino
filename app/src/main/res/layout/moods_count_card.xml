@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/moodCountPieChartCard"
+    style="@style/CardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/achievementsCardInclude">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="20dp">
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/cardHeaderTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Mood Count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/moodCountPieChart"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <View
+            android:layout_marginTop="10dp"
+            android:id="@+id/pieChartDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/moodCountPieChart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+            android:id="@+id/moodCountVeryHappy"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:MoodCount="2"
+            app:MoodCountBackground="@drawable/circle_shape"
+            app:MoodIcon="@drawable/ic_very_happy_outlined"
+            app:MoodTint="@color/pink"
+            app:MoodName="@string/rad"
+            app:layout_constraintEnd_toStartOf="@+id/moodCountHappy"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+
+
+        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+            android:id="@+id/moodCountHappy"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:MoodCount="13"
+            app:MoodCountBackground="@drawable/circle_shape"
+            app:MoodIcon="@drawable/ic_happy_outlined"
+            app:MoodTint="@color/green"
+            app:layout_constraintEnd_toStartOf="@+id/moodCountNothing"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:MoodName="@string/good"
+            app:layout_constraintStart_toEndOf="@+id/moodCountVeryHappy"
+            app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+
+
+        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+            android:id="@+id/moodCountNothing"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:MoodCount="2"
+            app:MoodName="@string/meh"
+            app:MoodCountBackground="@drawable/circle_shape"
+            app:MoodIcon="@drawable/ic_nothing_outlined"
+            app:MoodTint="@color/gray"
+            app:layout_constraintEnd_toStartOf="@+id/moodCountBad"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/moodCountHappy"
+            app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+
+
+        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+            android:id="@+id/moodCountBad"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:MoodCount="2"
+            app:MoodName="@string/bad"
+            app:MoodCountBackground="@drawable/circle_shape"
+            app:MoodIcon="@drawable/ic_bad_outlined"
+            app:MoodTint="@color/orange"
+            app:layout_constraintEnd_toStartOf="@+id/moodCountVeryBad"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/moodCountNothing"
+            app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+
+
+        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+            android:id="@+id/moodCountVeryBad"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:MoodName="@string/awful"
+            app:MoodCount="2"
+            app:MoodCountBackground="@drawable/circle_shape"
+            app:MoodIcon="@drawable/ic_very_bad_outlined"
+            app:MoodTint="@color/blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/moodCountBad"
+            app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

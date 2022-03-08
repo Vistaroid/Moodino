@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"/>
+        app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -30,10 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
-            android:translationZ="0dp"
             android:background="@android:color/transparent"
             android:elevation="0dp"
-            app:menu="@menu/botton_nav" />
+            android:translationZ="0dp"
+            app:menu="@menu/bottom_nav" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -44,23 +44,23 @@
         android:layout_marginTop="10dp"
         android:contentDescription="@string/app_name"
         android:foreground="@drawable/custom_add_button_background"
-        app:elevation="10dp"
         android:src="@drawable/ic_add_round_corner"
-        android:tint="@color/pink"
-        app:backgroundTint="@color/white"
+        app:tint="@color/black"
+        app:backgroundTint="#FFFFFF"
+        app:elevation="10dp"
         app:fabCustomSize="70dp"
         app:layout_anchor="@id/bottomAppBar"
-        app:maxImageSize="35dp" />
+        />
 
     <LinearLayout
         android:id="@+id/yesterday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:elevation="10dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="36dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:elevation="10dp">
 
         <ImageButton
             android:layout_width="40dp"
@@ -86,11 +86,11 @@
         android:id="@+id/today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:elevation="10dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="36dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:elevation="10dp">
 
         <ImageButton
             android:layout_width="40dp"
@@ -114,20 +114,20 @@
     <LinearLayout
         android:id="@+id/other_days"
         android:layout_width="wrap_content"
-        app:elevation="10dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="36dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:elevation="10dp">
 
         <ImageButton
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/custom_circle_button"
             android:padding="8dp"
-            android:src="@drawable/ic_add_no_border"
-            app:tint="@color/white" />
+            android:src="@drawable/ic_calendar"
+            app:tint="@color/white"/>
 
         <TextView
             android:layout_width="wrap_content"

@@ -4,4 +4,20 @@
         <attr name="ItemMore_title" format="string"/>
         <attr name="ItemMore_icon" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="CountIcon">
+        <attr name="MoodIcon" format="integer"/>
+        <attr name="MoodCount" format="string"/>
+        <attr name="MoodTint" format="color" />
+        <attr name="MoodCountBackground" format="integer"/>
+        <attr name="MoodName" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="AchievementIcon">
+        <attr name="Icon" format="integer"/>
+        <attr name="FirstStarTint" format="color"/>
+        <attr name="SecondStarTint" format="color"/>
+        <attr name="ThirdStarTint" format="color"/>
+        <attr name="Name" format="string"/>
+    </declare-styleable>
 </resources>
