@@ -9,16 +9,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.ui.entries.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
+import org.greenrobot.eventbus.EventBus
 
 class EntriesFragment : BaseFragment() {
 
     private lateinit var binding : FragmentEntriesBinding
     private lateinit var entriesContainerRv : RecyclerView
 
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        EventBus.getDefault().post(BottomNavState(true))
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

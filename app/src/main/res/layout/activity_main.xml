@@ -46,12 +46,13 @@
         android:contentDescription="@string/app_name"
         android:foreground="@drawable/custom_add_button_background"
         android:src="@drawable/ic_add_round_corner"
-        app:tint="@color/black"
+        app:tint="?colorPrimary"
         app:backgroundTint="#FFFFFF"
         app:elevation="10dp"
         app:fabCustomSize="70dp"
         app:layout_anchor="@id/bottomAppBar"
-        app:maxImageSize="35dp"
+        app:maxImageSize="@dimen/_20mdp"
+
         />
 
 
