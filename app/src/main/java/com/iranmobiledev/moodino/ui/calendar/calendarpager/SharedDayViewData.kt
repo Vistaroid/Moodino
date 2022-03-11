@@ -2,11 +2,15 @@ package com.iranmobiledev.moodino.ui.calendar.calendarpager
 
 import android.content.Context
 import android.graphics.Paint
+import android.view.ViewGroup
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.utlis.dp
 import com.iranmobiledev.moodino.utlis.resolveColor
 
 class SharedDayViewData(context: Context,height: Float) {
+
+
+    val layoutParams= ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,height.toInt())
 
     val selectedPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
         it.style= Paint.Style.FILL
