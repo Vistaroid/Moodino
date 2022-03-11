@@ -2,13 +2,10 @@ package com.iranmobiledev.moodino.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.fragment.app.add
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -59,7 +56,6 @@ class MainActivity : AppCompatActivity() {
         //fab 3 buttons to be animate
 
         val fabMenu = activityMainBinding.fabMenu
-
         //fix nav background problem
         navView.background = null
 
@@ -99,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             fab.isClickable = false
             bottomAppBar.visibility = View.GONE
             bottomAppBar.performHide(true)
+
         }
 
     }

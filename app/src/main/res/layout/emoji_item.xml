@@ -1,100 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="15dp">
-    <LinearLayout
-        android:layout_width="wrap_content"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:layout_gravity="center">
+
         <LinearLayout
             android:id="@+id/item_veryHappy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
+            app:layout_constraintEnd_toStartOf="@+id/item_happy"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="0dp">
+
             <ImageView
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_very_happy_outlined"/>
+                app:srcCompat="@drawable/ic_very_happy_outlined" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_gravity="center_horizontal"
+                android:text="@string/rad"
                 android:textColor="@color/black"
-                android:text="@string/rad"/>
+                android:textSize="16sp" />
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/item_happy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="@dimen/_40mdp"
-                android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_happy_outlined"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:text="@string/good"/>
-        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/item_nothing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/item_sad"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_happy"
+            tools:layout_editor_absoluteY="0dp">
+
             <ImageView
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_nothing_outlined"/>
+                app:srcCompat="@drawable/ic_nothing_outlined" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_gravity="center_horizontal"
+                android:text="@string/meh"
                 android:textColor="@color/black"
-                android:text="@string/meh"/>
+
+                android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/item_sad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/item_verySad"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_nothing"
+            tools:layout_editor_absoluteY="0dp">
+
             <ImageView
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_bad_outlined"/>
+                app:srcCompat="@drawable/ic_bad_outlined" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_gravity="center_horizontal"
+                android:text="@string/bad"
                 android:textColor="@color/black"
-                android:text="@string/bad"/>
+
+                android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/item_verySad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_sad"
+            tools:layout_editor_absoluteY="0dp">
+
             <ImageView
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_very_bad_outlined"/>
+                app:srcCompat="@drawable/ic_very_bad_outlined" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_gravity="center_horizontal"
+                android:text="@string/awful"
+
                 android:textColor="@color/black"
-                android:text="@string/awful"/>
+                android:textSize="16sp" />
         </LinearLayout>
-    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/item_happy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/item_nothing"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_veryHappy"
+            tools:layout_editor_absoluteY="0dp">
+
+            <ImageView
+                android:layout_width="@dimen/_40mdp"
+                android:layout_height="@dimen/_40mdp"
+                app:srcCompat="@drawable/ic_happy_outlined" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/good"
+
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
