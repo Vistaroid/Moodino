@@ -20,6 +20,8 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
 import com.iranmobiledev.moodino.ui.entries.AddEntryFragment
+import com.iranmobiledev.moodino.utlis.DateContainer
+import com.iranmobiledev.moodino.utlis.DateContainerImpl
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -68,7 +70,12 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.todayButton.setOnClickListener {
             model.actionFab(fabMenu, it, this)
             bottomNavVisibility(false)
-            navController.navigate(R.id.addEntryFragment)
+
+            val dateContainer = DateContainerImpl()
+            navController.navigate(R.id.addEntryFragment, Bundle().apply {
+                putString("date", dateContainer.today())
+                putString("time", dateContainer.time())
+            })
         }
 
     }
