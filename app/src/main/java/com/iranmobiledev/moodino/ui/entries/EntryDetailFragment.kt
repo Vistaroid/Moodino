@@ -10,11 +10,12 @@ import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.ui.entries.adapter.ActivitiesAdapter
+import com.iranmobiledev.moodino.ui.entries.adapter.ActivityContainerAdapter
 
-class EntryDetailFragment : BaseFragment(), ActivitiesAdapter.AdapterItemCallback{
+class EntryDetailFragment(private val entryViewModel: EntryViewModel) : BaseFragment(), ActivityContainerAdapter.AdapterItemCallback{
 
     private lateinit var binding : EntryDetailFragmentBinding
-    private lateinit var activitiesAdapter : ActivitiesAdapter
+    private lateinit var activitiesContainerAdapter : ActivityContainerAdapter
     private lateinit var activitiesRv : RecyclerView
     private lateinit var save : ViewGroup
 
@@ -37,11 +38,12 @@ class EntryDetailFragment : BaseFragment(), ActivitiesAdapter.AdapterItemCallbac
     }
     private fun activitiesRvImpl(){
         activitiesRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        activitiesRv.adapter = activitiesAdapter
+        activitiesRv.adapter = activitiesContainerAdapter
     }
     private fun initViews(){
-        activitiesAdapter = ActivitiesAdapter(this)
-        activitiesRv = binding.activitiesRv
+        //TODO get activities from database
+        activitiesContainerAdapter = ActivityContainerAdapter(entryViewModel.getActivities(), this, requireContext())
+        activitiesRv = binding.activitiesContainerRv
         save = binding.saveLayout
     }
     override fun onExpandViewClicked() {

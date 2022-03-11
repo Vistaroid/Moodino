@@ -68,7 +68,7 @@ class MainActivityViewModel() : BaseViewModel() {
         extended = false
     }
 
-    private fun rotateFab(view: View?, context: Context) {
+    fun rotateFab(view: View?, context: Context) {
         if (!extended) {
             val rotateFab = AnimationUtils.loadAnimation(
                 context,

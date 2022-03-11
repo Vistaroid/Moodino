@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.data.EntryList
 
-class EntryContainerAdapter(private val context: Context, private val entriesList : List<List<Entry>>) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+class EntryContainerAdapter(private val context: Context, private val entriesList : List<EntryList>) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val entryRecyclerView = itemView.findViewById<RecyclerView>(R.id.entryRv)
@@ -26,7 +27,7 @@ class EntryContainerAdapter(private val context: Context, private val entriesLis
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(entriesList[position])
+        holder.bind(entriesList[position].entries)
     }
 
     override fun getItemCount(): Int = entriesList.size

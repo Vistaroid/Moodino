@@ -20,6 +20,10 @@ class AddEntryFragment : BaseFragment() {
     ): View {
         binding = AddEntryFragmentBinding.inflate(inflater, container, false)
         emojiItemClickHandler()
+
+        binding.dateTv.text = arguments?.getString("date")
+        binding.timeTv.text = arguments?.getString("time")
+
         return binding.root
     }
 
