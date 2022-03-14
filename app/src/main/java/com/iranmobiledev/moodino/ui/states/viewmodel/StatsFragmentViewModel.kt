@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.ui.states.viewmodel
 
 import android.content.Context
 import android.graphics.Color
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
@@ -9,7 +10,10 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
+import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.utlis.ColorArray
+import java.util.*
+import kotlin.collections.ArrayList
 
 class StatsFragmentViewModel : BaseViewModel() {
 
@@ -155,4 +159,64 @@ class StatsFragmentViewModel : BaseViewModel() {
             pieChartEntries.add(it)
         }
     }
+
+    fun daysInRowManager(context: Context, binding: DaysInARowCardBinding) {
+
+        val weekDays = getFiveDaysAsWeekDays()
+        val daysTextView = arrayListOf<TextView>(
+            binding.dayOneTextView,
+            binding.dayTwoTextView,
+            binding.dayThreeTextView,
+            binding.dayFourTextView,
+            binding.dayFiveTextView
+        )
+
+        //adding weekDays to textView in days in a row card
+        daysTextView[0].text = weekDays[0]
+        daysTextView[1].text = weekDays[1]
+        daysTextView[2].text = weekDays[2]
+        daysTextView[3].text = weekDays[3]
+        daysTextView[4].text = weekDays[4]
+
+        binding.longestChainTextView.text = "${getLongestChain()}"
+        binding.daysInRowNumberTextView.text = "${getChainDayInRow()}"
+    }
+
+    private fun getLongestChain(): String {
+        //TODO need db and entries part for this
+        return "todo !"
+    }
+
+    private fun getChainDayInRow(): String{
+        //TODO need db and entries part for this
+        return "todo !"
+    }
+
+    fun getFiveDaysAsWeekDays() : ArrayList<String>{
+
+        var days = arrayListOf<String>()
+        val calendar = Calendar.getInstance()
+
+        for (i in 1..5){
+
+            /**
+             * get five days before from today for dayInaRowCard
+             */
+
+            calendar.add(Calendar.DAY_OF_WEEK,-1)
+            val weekDay = calendar.time.toString().slice(0..2)
+
+            if (days.size >= 5){
+                days.clear()
+                days.add(weekDay)
+            }else{
+                days.add(weekDay)
+
+            }
+        }
+
+        return days
+    }
+
+
 }

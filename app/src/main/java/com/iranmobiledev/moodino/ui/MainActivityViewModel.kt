@@ -17,9 +17,11 @@ class MainActivityViewModel() : BaseViewModel() {
 
     var extended = false
 
-    fun actionFab(menuFab: LinearLayout, view: View, context: MainActivity) {
-        rotateFab(view, context)
-//        showMenuFab(context, menuFab)
+    fun actionFab(menuFab: LinearLayout, view: View, context: MainActivity,rotateIcon:Boolean = false) {
+
+        if(rotateIcon) {
+            rotateFab(view, context)
+        }
 
         if (extended) {
             hideMenuFab(context, menuFab)
