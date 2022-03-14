@@ -12,6 +12,11 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.utlis.ColorArray
+import com.iranmobiledev.moodino.utlis.Moods.AWFUL
+import com.iranmobiledev.moodino.utlis.Moods.BAD
+import com.iranmobiledev.moodino.utlis.Moods.GOOD
+import com.iranmobiledev.moodino.utlis.Moods.MEH
+import com.iranmobiledev.moodino.utlis.Moods.RAD
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -77,13 +82,13 @@ class StatsFragmentViewModel : BaseViewModel() {
         if (lineChartEntries.isEmpty()) {
             setEntriesForLineChart(
                 arrayListOf(
-                    Entry(1f, 1f),
-                    Entry(2f, 2f),
-                    Entry(3f, 3f),
-                    Entry(4f, 4f),
-                    Entry(5f, 5f),
-                    Entry(6f, 4f),
-                    Entry(7f, 3f)
+                    Entry(1f, AWFUL),
+                    Entry(2f, BAD),
+                    Entry(3f, MEH),
+                    Entry(4f, GOOD),
+                    Entry(5f, AWFUL),
+                    Entry(6f, RAD),
+                    Entry(7f, GOOD)
                 )
             )
         }
@@ -211,12 +216,8 @@ class StatsFragmentViewModel : BaseViewModel() {
                 days.add(weekDay)
             }else{
                 days.add(weekDay)
-
             }
         }
-
         return days
     }
-
-
 }
