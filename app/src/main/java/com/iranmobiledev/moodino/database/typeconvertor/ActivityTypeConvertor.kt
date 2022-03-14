@@ -6,6 +6,14 @@ import com.google.gson.reflect.TypeToken
 import com.iranmobiledev.moodino.data.Activity
 
 class ActivityTypeConvertor {
+
+    /**
+     * what is type converter ?
+     * room can store only primitive types,
+     * but for un primitive types like(bitmap,data classes value and ...) you will get error
+     * so you have to use this functions and convert them to a primitive type.
+     */
+
     @TypeConverter
     fun fromActivity(activities : List<Activity>) : String{
         val gson = Gson()

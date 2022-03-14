@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.ui.entries
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.navigation.Navigation
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
+import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 
 class AddEntryFragment : BaseFragment() {
     private lateinit var binding : AddEntryFragmentBinding
@@ -36,5 +38,10 @@ class AddEntryFragment : BaseFragment() {
         binding.include.itemSad.setOnClickListener(emojiItemClickListener)
         binding.include.itemVerySad.setOnClickListener(emojiItemClickListener)
         binding.include.itemVeryHappy.setOnClickListener(emojiItemClickListener)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        BottomNavVisibility.currentFragment.value = this.id
     }
 }

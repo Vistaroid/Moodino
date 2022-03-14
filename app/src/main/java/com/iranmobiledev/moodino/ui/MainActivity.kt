@@ -17,11 +17,14 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
 import com.iranmobiledev.moodino.ui.entries.AddEntryFragment
+import com.iranmobiledev.moodino.ui.entries.EntriesFragment
+import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.iranmobiledev.moodino.utlis.DateContainer
 import com.iranmobiledev.moodino.utlis.DateContainerImpl
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import kotlin.math.absoluteValue
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,21 +49,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(activityMainBinding.root)
         initViews()
 
-
         //setup navigation controller
         val navView: BottomNavigationView = activityMainBinding.bottomNavigationView
         navController = findNavController(R.id.fragmentContainerView)
         navView.setupWithNavController(navController)
-
-
-        //fab 3 buttons to be animate
 
         val fabMenu = activityMainBinding.fabMenu
         //fix nav background problem
         navView.background = null
 
         fab.setOnClickListener { it ->
-            model.actionFab(fabMenu, it, this)
+            model.actionFab(fabMenu, it, this, true)
         }
 
         activityMainBinding.todayButton.setOnClickListener {
@@ -95,14 +94,11 @@ class MainActivity : AppCompatActivity() {
             fab.isClickable = false
             bottomAppBar.visibility = View.GONE
             bottomAppBar.performHide(true)
-
         }
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun mustBottomNavShow(bottomNavState: BottomNavState) {
-        model.rotateFab(fab, this)
         bottomNavVisibility(bottomNavState.mustShow)
     }
 

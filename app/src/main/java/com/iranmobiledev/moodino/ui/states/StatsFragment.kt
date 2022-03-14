@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.states
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.BottomNavState
+import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
+import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import org.greenrobot.eventbus.EventBus
 
 
@@ -35,6 +38,9 @@ class StatsFragment : BaseFragment() {
 
         val model : StatsFragmentViewModel by viewModels()
 
+        val daysInARowCardBinding = binding.daysInRowCardInclude
+        model.daysInRowManager(requireContext(),daysInARowCardBinding)
+
         val lineChart = binding.moodChartCardInclude.moodsLineChart
         model.initializeLineChart(lineChart,requireContext())
 
@@ -42,9 +48,5 @@ class StatsFragment : BaseFragment() {
         model.initializePieChart(pieChart,requireContext())
 
 
-//        val greyFilter = PorterDuffColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY)
-//        myLayout.getBackground().setColorFilter(greyFilter)
-//        myImageView.setColorFilter(greyFilter)
-//        myTextView.setTextColor(-0x888889)
     }
 }

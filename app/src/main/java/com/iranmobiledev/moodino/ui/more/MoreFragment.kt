@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.more
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.FragmentMoreBinding
+import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import org.greenrobot.eventbus.EventBus
 
 class MoreFragment : BaseFragment() {
@@ -26,5 +28,10 @@ class MoreFragment : BaseFragment() {
     ): View {
         binding = FragmentMoreBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        BottomNavVisibility.currentFragment.value = this.id
     }
 }
