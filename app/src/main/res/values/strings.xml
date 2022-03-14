@@ -40,5 +40,10 @@
 <!--calendars-->
     <string name="shamsi_calendar">Persian Calendar</string>
     <string name="shamsi_calendar_short">Persian</string>
+    <!-- Used in accessibility, previous day or month or year -->
+    <string name="previous_x">Previous %1$s</string>
+    <!-- Used in accessibility, next day or month or year -->
+    <string name="next_x">Next %1$s</string>
+    <string name="month">Month</string>
 
 </resources>

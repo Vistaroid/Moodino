@@ -24,5 +24,6 @@
     <attr name="colorCurrentDay" format="reference"/>
     <attr name="colorTextDayName" format="reference"/>
     <attr name="colorTextDaySelected" format="reference"/>
+    <attr name="colorMonthSwitch" format="reference"/>
 
 </resources>

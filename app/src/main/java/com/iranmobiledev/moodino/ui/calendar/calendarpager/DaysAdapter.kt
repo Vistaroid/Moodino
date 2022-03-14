@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 
-class DaysAdapter(context: Context,private val sharedDayViewData: SharedDayViewData
-                ): RecyclerView.Adapter<DaysAdapter.ViewHolder>() {
+class DaysAdapter(context: Context,private val sharedDayViewData: SharedDayViewData,
+                calendarPager: CalendarPager): RecyclerView.Adapter<DaysAdapter.ViewHolder>() {
     var days= emptyList<Jdn>()
     var startingDayOfWeek = 0
 
