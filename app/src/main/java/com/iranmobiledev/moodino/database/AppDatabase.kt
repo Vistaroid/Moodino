@@ -5,12 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.iranmobiledev.moodino.data.ActivityList
 import com.iranmobiledev.moodino.data.EntryList
 import com.iranmobiledev.moodino.database.typeconvertor.ActivityTypeConvertor
 import com.iranmobiledev.moodino.database.typeconvertor.EntryTypeConvertor
 
 
-@Database(version = 1, exportSchema = false, entities = [EntryList::class])
+@Database(version = 1, exportSchema = false, entities = [EntryList::class, ActivityList::class])
 @TypeConverters(EntryTypeConvertor::class, ActivityTypeConvertor::class)
 abstract class AppDatabase : RoomDatabase() {
     companion object{

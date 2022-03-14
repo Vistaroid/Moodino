@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.database
 
 
 
+import androidx.room.*
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryList
 
