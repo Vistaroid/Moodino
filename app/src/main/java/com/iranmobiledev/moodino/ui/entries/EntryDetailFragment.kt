@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.entries
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.ui.entries.adapter.ActivitiesAdapter
 import com.iranmobiledev.moodino.ui.entries.adapter.ActivityContainerAdapter
+import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 
 class EntryDetailFragment(private val entryViewModel: EntryViewModel) : BaseFragment(), ActivityContainerAdapter.AdapterItemCallback{
 
@@ -52,4 +54,8 @@ class EntryDetailFragment(private val entryViewModel: EntryViewModel) : BaseFrag
         //view.visibility = visibility
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        BottomNavVisibility.currentFragment.value = this.id
+    }
 }

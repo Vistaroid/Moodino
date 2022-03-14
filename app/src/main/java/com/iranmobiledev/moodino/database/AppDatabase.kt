@@ -28,5 +28,4 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract val getEntryListDao : EntryListDao
     abstract val getActivityDao : ActivitiesDao
-
 }
