@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.ui.states.viewmodel
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
@@ -17,6 +18,7 @@ import com.iranmobiledev.moodino.utlis.Moods.BAD
 import com.iranmobiledev.moodino.utlis.Moods.GOOD
 import com.iranmobiledev.moodino.utlis.Moods.MEH
 import com.iranmobiledev.moodino.utlis.Moods.RAD
+import kotlinx.coroutines.delay
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -25,9 +27,9 @@ class StatsFragmentViewModel : BaseViewModel() {
     private val lineChartEntries = arrayListOf<Entry>()
     private val pieChartEntries = mutableListOf<PieEntry>()
 
-    fun initializePieChart(pieChart: PieChart, context: Context) {
+   suspend fun initializePieChart(pieChart: PieChart, context: Context) {
 
-        val entries = getEntriesForPieChart()
+       val entries = getEntriesForPieChart()
         //mocked entries for chart
         if (pieChartEntries.isEmpty()) {
             setEntriesForPieChart(
@@ -76,7 +78,7 @@ class StatsFragmentViewModel : BaseViewModel() {
 
     }
 
-    fun initializeLineChart(lineChart: LineChart, context: Context) {
+    suspend fun initializeLineChart(lineChart: LineChart, context: Context) {
 
         //mocked entries for chart
         if (lineChartEntries.isEmpty()) {
@@ -165,8 +167,7 @@ class StatsFragmentViewModel : BaseViewModel() {
         }
     }
 
-    fun daysInRowManager(context: Context, binding: DaysInARowCardBinding) {
-
+   suspend fun daysInRowManager(context: Context, binding: DaysInARowCardBinding) {
         val weekDays = getFiveDaysAsWeekDays()
         val daysTextView = arrayListOf<TextView>(
             binding.dayOneTextView,
