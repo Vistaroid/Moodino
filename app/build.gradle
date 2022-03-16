@@ -75,5 +75,9 @@ dependencies {
 
     implementation 'com.github.samanzamani:PersianDate:1.3.4'
     implementation 'com.google.code.gson:gson:2.8.9'
+
+    //ktx kotlin extentions library
+    implementation "androidx.core:core-ktx:1.7.0"
+
 }
 
