@@ -24,12 +24,12 @@ import kotlin.collections.ArrayList
 
 class StatsFragmentViewModel : BaseViewModel() {
 
-    private val lineChartEntries = arrayListOf<Entry>()
-    private val pieChartEntries = mutableListOf<PieEntry>()
+    val lineChartEntries = arrayListOf<Entry>()
+    val pieChartEntries = mutableListOf<PieEntry>()
 
-   suspend fun initializePieChart(pieChart: PieChart, context: Context) {
+    suspend fun initializePieChart(pieChart: PieChart, context: Context) {
 
-       val entries = getEntriesForPieChart()
+        val entries = getEntriesForPieChart()
         //mocked entries for chart
         if (pieChartEntries.isEmpty()) {
             setEntriesForPieChart(
@@ -44,11 +44,11 @@ class StatsFragmentViewModel : BaseViewModel() {
         }
 
         val colors = arrayListOf<Int>()
-        for (color in ColorArray.COLORS){
+        for (color in ColorArray.COLORS) {
             colors.add(color)
         }
 
-        val dataSet = PieDataSet(entries,null)
+        val dataSet = PieDataSet(entries, null)
         dataSet.apply {
             setColors(colors)
         }
@@ -62,7 +62,7 @@ class StatsFragmentViewModel : BaseViewModel() {
 
         }
 
-        pieChart.apply{
+        pieChart.apply {
             data = pieData
             description.isEnabled = false
             isDrawHoleEnabled = true
@@ -146,28 +146,7 @@ class StatsFragmentViewModel : BaseViewModel() {
         }
     }
 
-    private fun getEntriesForLineChart(): ArrayList<Entry> {
-        return lineChartEntries
-    }
-
-    private fun setEntriesForLineChart(entriesList: ArrayList<Entry>) {
-        entriesList.forEach {
-            lineChartEntries.add(it)
-        }
-    }
-
-    private fun getEntriesForPieChart():
-            MutableList<PieEntry> {
-        return pieChartEntries
-    }
-
-    private fun setEntriesForPieChart(entriesList: MutableList<PieEntry>) {
-        entriesList.forEach {
-            pieChartEntries.add(it)
-        }
-    }
-
-   suspend fun daysInRowManager(context: Context, binding: DaysInARowCardBinding) {
+    suspend fun daysInRowManager(context: Context, binding: DaysInARowCardBinding) {
         val weekDays = getFiveDaysAsWeekDays()
         val daysTextView = arrayListOf<TextView>(
             binding.dayOneTextView,
@@ -186,39 +165,5 @@ class StatsFragmentViewModel : BaseViewModel() {
 
         binding.longestChainTextView.text = "${getLongestChain()}"
         binding.daysInRowNumberTextView.text = "${getChainDayInRow()}"
-    }
-
-    private fun getLongestChain(): String {
-        //TODO need db and entries part for this
-        return "todo !"
-    }
-
-    private fun getChainDayInRow(): String{
-        //TODO need db and entries part for this
-        return "todo !"
-    }
-
-    fun getFiveDaysAsWeekDays() : ArrayList<String>{
-
-        var days = arrayListOf<String>()
-        val calendar = Calendar.getInstance()
-
-        for (i in 1..5){
-
-            /**
-             * get five days before from today for dayInaRowCard
-             */
-
-            calendar.add(Calendar.DAY_OF_WEEK,-1)
-            val weekDay = calendar.time.toString().slice(0..2)
-
-            if (days.size >= 5){
-                days.clear()
-                days.add(weekDay)
-            }else{
-                days.add(weekDay)
-            }
-        }
-        return days
     }
 }

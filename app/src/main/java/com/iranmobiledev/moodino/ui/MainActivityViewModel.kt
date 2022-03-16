@@ -16,7 +16,6 @@ class MainActivityViewModel() : BaseViewModel() {
     var extended = false
 
     fun actionFab(menuFab: LinearLayout, view: View, context: MainActivity,rotateIcon:Boolean = false) {
-
         if(rotateIcon) {
             rotateFab(view, context)
         }
@@ -26,11 +25,9 @@ class MainActivityViewModel() : BaseViewModel() {
         } else {
             showMenuFab(context,menuFab)
         }
-
     }
 
     private fun showMenuFab(context: MainActivity, menuFab: LinearLayout) {
-
         extendFab(menuFab, true, 40f, -200f)
 
         //convert dp to pixel

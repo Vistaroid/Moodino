@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
                 putString("time", dateContainer.time())
             })
         }
-
     }
 
     private fun initViews() {
