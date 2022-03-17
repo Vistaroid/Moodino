@@ -7,7 +7,7 @@ with moodino you can track your moods.
 * kotlin
 * xml
 * room
-* hilt
+* koin
 * courutine
 * mpAndroidChart
 * self-developed solar calendar
