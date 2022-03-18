@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.navigation.Navigation
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 
@@ -29,15 +31,39 @@ class AddEntryFragment : BaseFragment() {
         return binding.root
     }
 
-    private val emojiItemClickListener = View.OnClickListener {
-        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_addEntryFragment_to_entryDetailFragment)
+    private fun navigateToEntryDetailFragment(bundle : Bundle){
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_addEntryFragment_to_entryDetailFragment, bundle)
     }
+
+
     private fun emojiItemClickHandler(){
-        binding.include.itemNothing.setOnClickListener(emojiItemClickListener)
-        binding.include.itemHappy.setOnClickListener(emojiItemClickListener)
-        binding.include.itemSad.setOnClickListener(emojiItemClickListener)
-        binding.include.itemVerySad.setOnClickListener(emojiItemClickListener)
-        binding.include.itemVeryHappy.setOnClickListener(emojiItemClickListener)
+
+        val entry = Entry()
+        val bundle = Bundle()
+        entry.time = arguments?.getString("time", "").toString()
+        entry.date = arguments?.getString("date", "").toString()
+        bundle.putParcelable("entry", entry)
+
+        binding.include.itemNothing.setOnClickListener{
+            entry.icon = R.drawable.ic_emoji_nothing
+            navigateToEntryDetailFragment(bundle)
+        }
+        binding.include.itemHappy.setOnClickListener{
+            entry.icon = R.drawable.ic_emoji_happy
+            navigateToEntryDetailFragment(bundle)
+        }
+        binding.include.itemSad.setOnClickListener{
+            entry.icon = R.drawable.ic_emoji_sad
+            navigateToEntryDetailFragment(bundle)
+        }
+        binding.include.itemVerySad.setOnClickListener{
+            entry.icon = R.drawable.ic_emoji_very_sad
+            navigateToEntryDetailFragment(bundle)
+        }
+        binding.include.itemVeryHappy.setOnClickListener{
+            entry.icon = R.drawable.ic_emoji_very_happy
+            navigateToEntryDetailFragment(bundle)
+        }
     }
 
     override fun onAttach(context: Context) {

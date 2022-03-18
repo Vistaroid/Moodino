@@ -13,7 +13,7 @@ import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.ActivityList
 
 class ActivityContainerAdapter(
-    private val activities: List<ActivityList>,
+    private var activities: List<ActivityList>,
     private val adapterItemCallback: AdapterItemCallback,
     private val context: Context
 ) : RecyclerView.Adapter<ActivityContainerAdapter.ViewHolder>() {
@@ -41,6 +41,13 @@ class ActivityContainerAdapter(
     }
 
     override fun getItemCount(): Int = activities.size
+
+    fun addActivitiesList(list : List<ActivityList>?) {
+        list?.let {
+            activities = list
+            notifyDataSetChanged()
+        }
+    }
 
     interface AdapterItemCallback {
         //todo pass view to this function
