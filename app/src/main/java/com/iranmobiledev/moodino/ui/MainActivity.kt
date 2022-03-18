@@ -23,6 +23,9 @@ import com.iranmobiledev.moodino.ui.entries.EntriesFragment
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.iranmobiledev.moodino.utlis.DateContainer
 import com.iranmobiledev.moodino.utlis.DateContainerImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -61,6 +64,8 @@ class MainActivity : BaseActivity() {
         navController = findNavController(R.id.fragmentContainerView)
         navView.setupWithNavController(navController)
 
+        val scope = CoroutineScope(Dispatchers.IO)
+
         val fabMenu = activityMainBinding.fabMenu
         //fix nav background problem
         navView.background = null
@@ -70,16 +75,18 @@ class MainActivity : BaseActivity() {
         }
 
         activityMainBinding.todayButton.setOnClickListener {
-            model.actionFab(fabMenu, it, this)
-            bottomNavVisibility(false)
 
+            scope.launch {
+                model.actionFab(fabMenu, it, MainActivity())
+            }
+
+            bottomNavVisibility(false)
             val dateContainer = DateContainerImpl()
             navController.navigate(R.id.addEntryFragment, Bundle().apply {
                 putString("date", dateContainer.today())
                 putString("time", dateContainer.time())
             })
         }
-
     }
 
     private fun initViews() {

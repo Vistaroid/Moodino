@@ -81,5 +81,6 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
 
     implementation 'com.github.jrvansuita:PickImage:+'
+
 }
 
