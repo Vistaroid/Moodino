@@ -21,6 +21,10 @@ class EntryContainerAdapter(private val context: Context, private val entriesLis
         }
     }
 
+    fun addEntry(entry: Entry){
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry_container, parent, false)
         return ViewHolder(view)

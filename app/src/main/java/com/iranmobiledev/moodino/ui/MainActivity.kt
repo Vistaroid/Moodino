@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.ui
 
 import android.content.Intent
+import android.media.metrics.Event
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -14,6 +15,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.R
+import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
 import com.iranmobiledev.moodino.ui.entries.AddEntryFragment
@@ -27,7 +29,7 @@ import org.greenrobot.eventbus.ThreadMode
 import kotlin.math.absoluteValue
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -41,6 +43,11 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,11 +107,6 @@ class MainActivity : AppCompatActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun mustBottomNavShow(bottomNavState: BottomNavState) {
         bottomNavVisibility(bottomNavState.mustShow)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
     }
 }
 
