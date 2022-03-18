@@ -1,18 +1,15 @@
 package com.iranmobiledev.moodino.ui.entries
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -23,14 +20,10 @@ import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryState
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
-import com.iranmobiledev.moodino.ui.entries.adapter.ActivitiesAdapter
 import com.iranmobiledev.moodino.ui.entries.adapter.ActivityContainerAdapter
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
-import com.vansuita.pickimage.bean.PickResult
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
-import com.vansuita.pickimage.listeners.IPickCancel
-import com.vansuita.pickimage.listeners.IPickResult
 import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -84,9 +77,10 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
             entry.note = it.toString()
         }
         imageUri?.let {
-            entry.photo = imageUri
+            entry.photo = imageUri.toString()
         }
-        EventBus.getDefault().post(entry)
+        EventBus.getDefault().postSticky(entry)
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_entryDetailFragment_to_entriesFragment)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

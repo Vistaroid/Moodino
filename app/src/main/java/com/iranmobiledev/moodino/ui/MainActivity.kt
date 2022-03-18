@@ -1,35 +1,28 @@
 package com.iranmobiledev.moodino.ui
 
-import android.content.Intent
-import android.media.metrics.Event
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.data.BottomNavState
+import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
-import com.iranmobiledev.moodino.ui.entries.AddEntryFragment
-import com.iranmobiledev.moodino.ui.entries.EntriesFragment
-import com.iranmobiledev.moodino.utlis.BottomNavVisibility
-import com.iranmobiledev.moodino.utlis.DateContainer
-import com.iranmobiledev.moodino.utlis.DateContainerImpl
+import com.iranmobiledev.moodino.utlis.MoodinoDateImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import kotlin.math.absoluteValue
+import saman.zamani.persiandate.PersianDate
 
 
 class MainActivity : BaseActivity() {
@@ -76,16 +69,22 @@ class MainActivity : BaseActivity() {
 
         activityMainBinding.todayButton.setOnClickListener {
 
-            scope.launch {
+            scope.launch (Dispatchers.Main){
                 model.actionFab(fabMenu, it, MainActivity())
             }
 
             bottomNavVisibility(false)
-            val dateContainer = DateContainerImpl()
-            navController.navigate(R.id.addEntryFragment, Bundle().apply {
-                putString("date", dateContainer.today())
-                putString("time", dateContainer.time())
-            })
+            val bundle = Bundle()
+            val persianDate = PersianDate()
+            bundle.putParcelable("entryDate", EntryDate(
+                persianDate.second,
+                persianDate.minute,
+                persianDate.hour,
+                persianDate.grgDay,
+                persianDate.grgMonth,
+                persianDate.grgYear
+            ))
+            navController.navigate(R.id.addEntryFragment, bundle)
         }
     }
 

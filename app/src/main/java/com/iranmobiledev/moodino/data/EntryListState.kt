@@ -1,5 +1,5 @@
 package com.iranmobiledev.moodino.data
 
-enum class EntryState {
+enum class EntryListState {
     ADD,DELETE,UPDATE
 }
