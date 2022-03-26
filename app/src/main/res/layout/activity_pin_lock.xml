@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.more.pinLock.PinLockActivity"
+    android:background="@color/background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:elevation="@dimen/_4mdp">
+
+        <com.iranmobiledev.moodino.ui.view.MoodinoToolBar
+            android:id="@+id/pinLock_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:ToolBar_title="@string/pin_lock"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+
+        <ImageView
+            android:layout_width="@dimen/_70mdp"
+            android:layout_height="@dimen/_70mdp"
+            android:src="@drawable/ic_lock_notactive"
+            android:scaleType="fitXY"
+            android:layout_marginTop="@dimen/_25mdp"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PIN Lock Not Active"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15font_mdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_20mdp"/>
+
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_35mdp"
+            android:background="@color/white"
+            >
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Allow Fingerprint Access"
+                android:textSize="@dimen/_13font_mdp"
+                android:layout_marginStart="@dimen/_20mdp"
+                android:layout_marginEnd="@dimen/_20mdp"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Only PIN Lock Access"
+                android:textSize="@dimen/_13font_mdp"
+                android:layout_marginStart="@dimen/_20mdp"
+                android:layout_marginEnd="@dimen/_20mdp"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Off"
+                android:textSize="@dimen/_13font_mdp"
+                android:layout_marginStart="@dimen/_20mdp"
+                android:layout_marginEnd="@dimen/_20mdp"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Active Pin Lock"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/_10mdp"
+        android:layout_marginEnd="@dimen/_10mdp"
+        android:layout_marginBottom="@dimen/_5mdp"
+        android:padding="@dimen/_10mdp"
+        app:cornerRadius="@dimen/_10mdp"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
