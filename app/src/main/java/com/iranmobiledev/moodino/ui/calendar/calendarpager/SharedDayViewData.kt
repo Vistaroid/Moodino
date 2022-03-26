@@ -4,8 +4,6 @@ import android.content.Context
 import android.graphics.Paint
 import android.view.ViewGroup
 import com.iranmobiledev.moodino.R
-import com.iranmobiledev.moodino.utlis.dp
-import com.iranmobiledev.moodino.utlis.resolveColor
 
 class SharedDayViewData(context: Context,height: Float) {
 

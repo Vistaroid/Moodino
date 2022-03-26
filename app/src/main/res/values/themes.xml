@@ -13,6 +13,14 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/pink</item>
         <!-- Customize your theme here. -->
         <item name="bottomNavigationStyle">@style/myNavigationView</item>
+
+        <!--  Calendar Color-->
+        <item name="colorSelectDay">@color/blue</item>
+        <item name="colorCurrentDay">@color/white</item>
+        <item name="colorTextDayName">@color/gray</item>
+        <item name="colorTextDaySelected">@color/gray</item>
+        <item name="colorMonthSwitch">@color/gray</item>
+
     </style>
 
     <style name="Theme.Moodino.NoActionBar">

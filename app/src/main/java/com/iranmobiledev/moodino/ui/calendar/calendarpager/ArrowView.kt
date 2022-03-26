@@ -4,11 +4,12 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
+import com.iranmobiledev.moodino.R
 
 class ArrowView(context: Context, attr: AttributeSet? = null) : AppCompatImageView(context, attr) {
 
     init {
-        setImageResource(androidx.preference.R.drawable.ic_arrow_down_24dp)
+        setImageResource(R.drawable.ic_down_arrow)
     }
 
     private var lastDegree = 0f
@@ -32,5 +33,10 @@ class ArrowView(context: Context, attr: AttributeSet? = null) : AppCompatImageVi
         it.addUpdateListener { v -> applyRotation(v?.animatedValue as? Float ?: 0f) }
     }.start()
 
-    enum class Direction(val degree: Float) { START(90f), END(-90f), UP(180f), DOWN(0f) }
+    enum class Direction(val degree: Float) {
+        START(90f),
+        END(-90f),
+        UP(180f),
+        DOWN(0f)
+    }
 }

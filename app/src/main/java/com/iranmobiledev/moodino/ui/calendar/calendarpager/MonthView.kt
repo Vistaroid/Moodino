@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.calendar
+package com.iranmobiledev.moodino.ui.calendar.calendarpager
 
 import android.content.Context
 import android.graphics.Rect
@@ -40,7 +40,6 @@ class MonthView(context: Context, attributeSet: AttributeSet): RecyclerView(cont
 
     private var monthName = ""
 
-
     fun bind(monthStartJdn: Jdn, monthStartDate: AbstractDate) {
         val monthLength = mainCalendar.getMonthLength(monthStartDate.year, monthStartDate.month)
         monthName = language.my.format(monthStartDate.monthName, formatNumber(monthStartDate.year))
@@ -53,9 +52,13 @@ class MonthView(context: Context, attributeSet: AttributeSet): RecyclerView(cont
             it.weeksCount = (monthStartJdn + monthLength - 1).getWeekOfYear(startOfYearJdn) -
                     it.weekOfYearStart + 1
             it.days = monthStartJdn.createMonthDaysList(monthLength)
-            it.initializeMonthEvents()
+         //   it.initializeMonthEvents()
             it.notifyItemRangeChanged(0, it.itemCount)
         }
+    }
+
+    fun selectDay(dayOfMonth: Int) {
+        daysAdapter?.selectDay(dayOfMonth)
     }
 
 }

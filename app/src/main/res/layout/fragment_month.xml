@@ -15,7 +15,7 @@
         android:gravity="center"
         app:tint="?attr/colorMonthSwitch" />
 
-    <com.iranmobiledev.moodino.ui.calendar.MonthView
+    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MonthView
         android:id="@+id/month_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

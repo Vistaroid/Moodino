@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.FragmentMonthBinding
-import com.iranmobiledev.moodino.utlis.layoutInflater
-import com.iranmobiledev.moodino.utlis.sp
 import io.github.persiancalendar.calendar.AbstractDate
 import java.lang.ref.WeakReference
 
@@ -39,7 +37,6 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
                 applyOffset(position = -mainCalendar.getMonthsDistance(baseJdn, jdn)), smoothScroll
             )
         }
-
         refresh()
     }
 
@@ -133,7 +130,7 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
                 pageRefresh = { isEventsModification: Boolean, jdn: Jdn? ->
                     if (viewPager.currentItem == position) {
                         if (isEventsModification && jdn != null) {
-                            binding.monthView.initializeMonthEvents()
+                           // binding.monthView.initializeMonthEvents()
                             onDayClicked(jdn)
                         } else {
                             onMonthSelected()
