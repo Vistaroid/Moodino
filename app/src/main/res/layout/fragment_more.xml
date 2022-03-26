@@ -6,10 +6,33 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        app:elevation="0dp">
+        
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15font_mdp"
+                android:layout_gravity="center"/>
+            
+        </com.google.android.material.appbar.MaterialToolbar>
+        
+    </com.google.android.material.appbar.AppBarLayout>
   
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,6 +40,7 @@
             android:orientation="vertical">
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:id="@+id/btn_more_goals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ItemMore_title="@string/goals"
@@ -76,11 +100,11 @@
                 android:clickable="true"/>
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:id="@+id/btn_more_activities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ItemMore_title="@string/edite_activity"
-                app:ItemMore_icon="@drawable/ic_activity"
-                android:clickable="true"/>
+                app:ItemMore_icon="@drawable/ic_activity"/>
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
                 android:layout_width="match_parent"
@@ -90,37 +114,31 @@
                 android:clickable="true"/>
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:id="@+id/btn_more_colorMode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ItemMore_title="@string/color_mode"
-                app:ItemMore_icon="@drawable/ic_mode"
-                android:clickable="true"/>
+                app:ItemMore_icon="@drawable/ic_mode" />
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:id="@+id/btn_more_pinLock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ItemMore_title="@string/pin_lock"
-                app:ItemMore_icon="@drawable/ic_lock"
-                android:clickable="true" />
+                app:ItemMore_icon="@drawable/ic_lock" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_20mdp"
                 android:background="@color/background"/>
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/start_week"
-                app:ItemMore_icon="@drawable/ic_calendar"
-                android:clickable="true"/>
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:id="@+id/btn_more_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ItemMore_title="@string/language"
-                app:ItemMore_icon="@drawable/ic_language"
-                android:clickable="true" />
+                app:ItemMore_icon="@drawable/ic_language" />
 
             <View
                 android:layout_width="match_parent"

@@ -39,7 +39,8 @@
         android:id="@+id/moreFragment"
         android:name="com.iranmobiledev.moodino.ui.more.MoreFragment"
         android:label="fragment_more"
-        tools:layout="@layout/fragment_more"/>
+        tools:layout="@layout/fragment_more">
+    </fragment>
     <fragment
         android:id="@+id/addEntryFragment"
         android:name="com.iranmobiledev.moodino.ui.entries.AddEntryFragment"

@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.base
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 
@@ -7,6 +8,10 @@ import androidx.lifecycle.ViewModel
  * All fragments should extend this base fragment
  */
 open class BaseFragment : Fragment(), BaseView{
+
+}
+
+open class BaseActivity : AppCompatActivity(), BaseView{
 
 }
 /**

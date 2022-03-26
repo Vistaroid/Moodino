@@ -11,9 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moodino">
         <activity
-            android:theme="@style/Theme.Moodino.NoActionBar"
+            android:name=".ui.more.pinLock.PinLockActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.more.activities.ActivitiesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true"
-            android:name=".ui.MainActivity">
+            android:theme="@style/Theme.Moodino.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

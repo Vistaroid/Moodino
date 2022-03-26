@@ -5,6 +5,10 @@
         <attr name="ItemMore_icon" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="ToolBar">
+        <attr name="ToolBar_title" format="string"/>
+    </declare-styleable>
+
     <declare-styleable name="CountIcon">
         <attr name="MoodIcon" format="integer"/>
         <attr name="MoodCount" format="string"/>
@@ -13,6 +17,7 @@
         <attr name="MoodName" format="string"/>
     </declare-styleable>
 
+
     <declare-styleable name="AchievementIcon">
         <attr name="Icon" format="integer"/>
         <attr name="FirstStarTint" format="color"/>
@@ -20,5 +25,4 @@
         <attr name="ThirdStarTint" format="color"/>
         <attr name="Name" format="string"/>
     </declare-styleable>
-
 </resources>
