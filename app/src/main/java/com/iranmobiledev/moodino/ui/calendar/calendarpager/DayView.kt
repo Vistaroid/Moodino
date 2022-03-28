@@ -45,11 +45,19 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
 
     private val textBounds= Rect()
     private fun drawText(canvas: Canvas?, shared: SharedDayViewData) {
-        val textPain= shared.weekDayInitialsTextPaint
+        val textPaint = when {
+            jdn != null -> when {
+             //   holiday -> shared.dayOfMonthNumberTextHolidayPaint
+                dayIsSelected -> shared.dayOfMonthNumberTextSelectedPaint
+                else /*!dayIsSelected*/ -> shared.dayOfMonthNumberTextPaint
+            }
+            isWeekNumber -> shared.weekNumberTextPaint
+            else -> shared.weekDayInitialsTextPaint
+        }
 
-        textPain.getTextBounds(text, 0 , text.length , textBounds)
+        textPaint.getTextBounds(text, 0 , text.length , textBounds)
         val yPos= (height + textBounds.height()) / 2f
-        canvas?.drawText(text, width/2f, yPos + 3.sp, textPain)
+        canvas?.drawText(text, width/2f, yPos + 3.sp, textPaint)
     }
 
     private fun drawHeader(canvas: Canvas?, shared: SharedDayViewData){
@@ -70,7 +78,7 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
     ) {
         this.text= text
         this.today= isToday
-        this.isSelected= isSelected
+        this.dayIsSelected= isSelected
         this.holiday= isHoliday
         this.jdn= jdn
         this.dayOfMonth= dayOfMonth

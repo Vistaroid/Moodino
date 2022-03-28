@@ -15,10 +15,11 @@
         <item name="bottomNavigationStyle">@style/myNavigationView</item>
 
         <!--  Calendar Color-->
+        <item name="colorTextDay">@color/gray</item>
         <item name="colorSelectDay">@color/blue</item>
         <item name="colorCurrentDay">@color/white</item>
         <item name="colorTextDayName">@color/gray</item>
-        <item name="colorTextDaySelected">@color/gray</item>
+        <item name="colorTextDaySelected">@color/white</item>
         <item name="colorMonthSwitch">@color/gray</item>
 
     </style>
@@ -28,6 +29,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <attr name="colorTextDay" format="reference" />
     <attr name="colorSelectDay" format="reference"/>
     <attr name="colorCurrentDay" format="reference"/>
     <attr name="colorTextDayName" format="reference"/>

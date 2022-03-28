@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentCalendarBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import io.github.persiancalendar.calendar.AbstractDate
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -74,8 +75,9 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun updateToolbar(binding: FragmentCalendarBinding, date: AbstractDate) {
-       // val toolbar = binding.appBar.toolbar
-       // val secondaryCalendar = secondaryCalendar
+        binding.monthName.text= date.monthName  + " "+ date.year
+//        val toolbar = binding.appBar.toolbar
+//        val secondaryCalendar = secondaryCalendar
 //        if (secondaryCalendar == null) {
 //            toolbar.title = date.monthName
 //            toolbar.subtitle = formatNumber(date.year)

@@ -60,6 +60,7 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
         viewPager.adapter = PagerAdapter()
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) = refresh()
+
         })
         addView(viewPager)
         viewPager.setCurrentItem(applyOffset(0), false)
@@ -114,7 +115,6 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
                         true
                     }
                 }
-
                 addViewHolder(this)
             }
 

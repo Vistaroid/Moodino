@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/month_name"
+        android:gravity="center"
+        tools:text="@string/month"
+        android:padding="5dp"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <com.iranmobiledev.moodino.ui.calendar.calendarpager.CalendarPager
         android:id="@+id/calendarPager"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_320mdp"/>
 
-</FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
