@@ -26,7 +26,7 @@ class EntryAdapter(private val entries : List<Entry>) : RecyclerView.Adapter<Ent
             //TODO check entry title and then set entry icon (hint : use switch)
             entryIcon.setImageResource(R.drawable.ic_emoji_very_happy)
             entryTitle.text = entry.time
-            entryImage.setImageResource(entry.image)
+            entry.photo?.let { entryImage.setImageURI(it) }
             entryNote.text = entry.note
         }
     }

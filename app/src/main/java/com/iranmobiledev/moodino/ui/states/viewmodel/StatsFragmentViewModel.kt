@@ -2,6 +2,8 @@ package com.iranmobiledev.moodino.ui.states.viewmodel
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
@@ -9,14 +11,23 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
+import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.utlis.ColorArray
+import com.iranmobiledev.moodino.utlis.Moods.AWFUL
+import com.iranmobiledev.moodino.utlis.Moods.BAD
+import com.iranmobiledev.moodino.utlis.Moods.GOOD
+import com.iranmobiledev.moodino.utlis.Moods.MEH
+import com.iranmobiledev.moodino.utlis.Moods.RAD
+import kotlinx.coroutines.delay
+import java.util.*
+import kotlin.collections.ArrayList
 
 class StatsFragmentViewModel : BaseViewModel() {
 
-    private val lineChartEntries = arrayListOf<Entry>()
-    private val pieChartEntries = mutableListOf<PieEntry>()
+    val lineChartEntries = arrayListOf<Entry>()
+    val pieChartEntries = mutableListOf<PieEntry>()
 
-    fun initializePieChart(pieChart: PieChart, context: Context) {
+    suspend fun initializePieChart(pieChart: PieChart, context: Context) {
 
         val entries = getEntriesForPieChart()
         //mocked entries for chart
@@ -33,11 +44,11 @@ class StatsFragmentViewModel : BaseViewModel() {
         }
 
         val colors = arrayListOf<Int>()
-        for (color in ColorArray.COLORS){
+        for (color in ColorArray.COLORS) {
             colors.add(color)
         }
 
-        val dataSet = PieDataSet(entries,null)
+        val dataSet = PieDataSet(entries, null)
         dataSet.apply {
             setColors(colors)
         }
@@ -51,7 +62,7 @@ class StatsFragmentViewModel : BaseViewModel() {
 
         }
 
-        pieChart.apply{
+        pieChart.apply {
             data = pieData
             description.isEnabled = false
             isDrawHoleEnabled = true
@@ -67,19 +78,19 @@ class StatsFragmentViewModel : BaseViewModel() {
 
     }
 
-    fun initializeLineChart(lineChart: LineChart, context: Context) {
+    suspend fun initializeLineChart(lineChart: LineChart, context: Context) {
 
         //mocked entries for chart
         if (lineChartEntries.isEmpty()) {
             setEntriesForLineChart(
                 arrayListOf(
-                    Entry(1f, 1f),
-                    Entry(2f, 2f),
-                    Entry(3f, 3f),
-                    Entry(4f, 4f),
-                    Entry(5f, 5f),
-                    Entry(6f, 4f),
-                    Entry(7f, 3f)
+                    Entry(1f, AWFUL),
+                    Entry(2f, BAD),
+                    Entry(3f, MEH),
+                    Entry(4f, GOOD),
+                    Entry(5f, AWFUL),
+                    Entry(6f, RAD),
+                    Entry(7f, GOOD)
                 )
             )
         }
@@ -135,24 +146,24 @@ class StatsFragmentViewModel : BaseViewModel() {
         }
     }
 
-    private fun getEntriesForLineChart(): ArrayList<Entry> {
-        return lineChartEntries
-    }
+    suspend fun daysInRowManager(context: Context, binding: DaysInARowCardBinding) {
+        val weekDays = getFiveDaysAsWeekDays()
+        val daysTextView = arrayListOf<TextView>(
+            binding.dayOneTextView,
+            binding.dayTwoTextView,
+            binding.dayThreeTextView,
+            binding.dayFourTextView,
+            binding.dayFiveTextView
+        )
 
-    private fun setEntriesForLineChart(entriesList: ArrayList<Entry>) {
-        entriesList.forEach {
-            lineChartEntries.add(it)
-        }
-    }
+        //adding weekDays to textView in days in a row card
+        daysTextView[0].text = weekDays[0]
+        daysTextView[1].text = weekDays[1]
+        daysTextView[2].text = weekDays[2]
+        daysTextView[3].text = weekDays[3]
+        daysTextView[4].text = weekDays[4]
 
-    private fun getEntriesForPieChart():
-            MutableList<PieEntry> {
-        return pieChartEntries
-    }
-
-    private fun setEntriesForPieChart(entriesList: MutableList<PieEntry>) {
-        entriesList.forEach {
-            pieChartEntries.add(it)
-        }
+        binding.longestChainTextView.text = "${getLongestChain()}"
+        binding.daysInRowNumberTextView.text = "${getChainDayInRow()}"
     }
 }

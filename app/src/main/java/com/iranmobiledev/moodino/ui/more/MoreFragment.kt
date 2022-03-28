@@ -13,12 +13,18 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.FragmentMoreBinding
 import com.iranmobiledev.moodino.ui.more.activities.ActivitiesActivity
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockActivity
 
 class MoreFragment : BaseFragment() {
     private lateinit var binding : FragmentMoreBinding
+
+    override fun onResume() {
+        super.onResume()
+        EventBus.getDefault().post(BottomNavState(true))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
