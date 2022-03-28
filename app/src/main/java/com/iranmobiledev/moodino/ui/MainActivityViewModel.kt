@@ -3,34 +3,31 @@ package com.iranmobiledev.moodino.ui
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
-import com.iranmobiledev.moodino.utlis.dp
 
 
 class MainActivityViewModel() : BaseViewModel() {
 
     var extended = false
 
-    fun actionFab(menuFab: LinearLayout, view: View, context: MainActivity) {
-        rotateFab(view, context)
-//        showMenuFab(context, menuFab)
+    fun actionFab(menuFab: LinearLayout, view: View, context: MainActivity,rotateIcon:Boolean = false) {
+        if(rotateIcon) {
+            rotateFab(view, context)
+        }
 
         if (extended) {
-            hideMenuFab(context, menuFab)
+            hideMenuFab(menuFab)
         } else {
             showMenuFab(context,menuFab)
         }
-
     }
 
     private fun showMenuFab(context: MainActivity, menuFab: LinearLayout) {
-
         extendFab(menuFab, true, 40f, -200f)
 
         //convert dp to pixel
@@ -51,7 +48,7 @@ class MainActivityViewModel() : BaseViewModel() {
         extended = true
     }
 
-    private fun hideMenuFab(context: MainActivity, menuFab: LinearLayout) {
+    private fun hideMenuFab(menuFab: LinearLayout) {
             closeFab(menuFab, true, 0f, 0f)
 
             //increase width animated
@@ -68,7 +65,7 @@ class MainActivityViewModel() : BaseViewModel() {
         extended = false
     }
 
-    private fun rotateFab(view: View?, context: Context) {
+    fun rotateFab(view: View?, context: Context) {
         if (!extended) {
             val rotateFab = AnimationUtils.loadAnimation(
                 context,
@@ -86,7 +83,7 @@ class MainActivityViewModel() : BaseViewModel() {
         }
     }
 
-    private fun extendFab(view: LinearLayout, extended: Boolean, x: Float, y: Float) {
+    private fun extendFab(view: LinearLayout, x1: Boolean, x: Float, y: Float) {
         ObjectAnimator.ofFloat(view, "translationX", x).apply {
             duration = 220
             start()
@@ -98,7 +95,7 @@ class MainActivityViewModel() : BaseViewModel() {
         }
     }
 
-    private fun closeFab(view: LinearLayout, extended: Boolean, x: Float, y: Float) {
+    private fun closeFab(view: LinearLayout, x1: Boolean, x: Float, y: Float) {
         ObjectAnimator.ofFloat(view, "translationX", x).apply {
             duration = 220
             start()

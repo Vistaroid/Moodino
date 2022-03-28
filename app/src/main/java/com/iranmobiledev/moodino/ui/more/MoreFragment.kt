@@ -3,6 +3,7 @@ package com.iranmobiledev.moodino.ui.more
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +14,20 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.FragmentMoreBinding
 import com.iranmobiledev.moodino.ui.more.activities.ActivitiesActivity
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockActivity
+import com.iranmobiledev.moodino.utlis.BottomNavVisibility
+import org.greenrobot.eventbus.EventBus
 
 class MoreFragment : BaseFragment() {
-    private lateinit var binding : FragmentMoreBinding
+    private lateinit var binding: FragmentMoreBinding
+
+    override fun onResume() {
+        super.onResume()
+        EventBus.getDefault().post(BottomNavState(true))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,11 +43,16 @@ class MoreFragment : BaseFragment() {
 
 
         binding.btnMoreActivities.setOnClickListener {
-            requireActivity().startActivity(Intent(requireContext() , ActivitiesActivity::class.java))
+            requireActivity().startActivity(
+                Intent(
+                    requireContext(),
+                    ActivitiesActivity::class.java
+                )
+            )
         }
 
         binding.btnMorePinLock.setOnClickListener {
-            requireActivity().startActivity(Intent(requireContext() , PinLockActivity::class.java))
+            requireActivity().startActivity(Intent(requireContext(), PinLockActivity::class.java))
         }
 
         binding.btnMoreColorMode.setOnClickListener {
@@ -50,21 +64,26 @@ class MoreFragment : BaseFragment() {
         }
     }
 
-    fun changeMode(){
+    fun changeMode() {
 
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_change_mode , null)
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_change_mode, null)
         val dialog = AlertDialog.Builder(requireContext()).setView(view).create()
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
 
     }
 
-    fun changeLanguage(){
+    fun changeLanguage() {
 
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_change_language , null)
+        val view =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dialog_change_language, null)
         val dialog = AlertDialog.Builder(requireContext()).setView(view).create()
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
+    }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        BottomNavVisibility.currentFragment.value = this.id
     }
 }

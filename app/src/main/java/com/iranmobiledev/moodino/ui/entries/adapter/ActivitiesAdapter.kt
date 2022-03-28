@@ -1,6 +1,5 @@
 package com.iranmobiledev.moodino.ui.entries.adapter
 
-import android.animation.LayoutTransition
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,21 +7,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
+import com.iranmobiledev.moodino.data.Activity
 
-class ActivitiesAdapter(private val adapterItemCallback: AdapterItemCallback) : RecyclerView.Adapter<ActivitiesAdapter.ViewHolder>() {
+class ActivitiesAdapter(private val activities : List<Activity>) : RecyclerView.Adapter<ActivitiesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        private val title = itemView.findViewById<TextView>(R.id.activitytitle)
+        private val icon = itemView.findViewById<ImageView>(R.id.activityIcon)
 
-        private val expand : ImageView = itemView.findViewById(R.id.expandIv)
-        private val expandLayout : ViewGroup = itemView.findViewById(R.id.expandLayout)
-
-        fun bind(){
-            expand.setOnClickListener{
-                adapterItemCallback.onExpandViewClicked()
-            }
-            expandLayout.setOnClickListener{
-                adapterItemCallback.onExpandViewClicked()
-            }
+        fun bind(activity : Activity){
+            title.text = activity.title
+            icon.setImageResource(activity.image)
         }
     }
 
@@ -32,14 +27,10 @@ class ActivitiesAdapter(private val adapterItemCallback: AdapterItemCallback) : 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(activities[position])
     }
 
-    override fun getItemCount(): Int = 9
+    override fun getItemCount(): Int = activities.size
 
-    interface AdapterItemCallback{
-        //todo pass view to this function
-        fun onExpandViewClicked()
 
-    }
 }

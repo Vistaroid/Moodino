@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.ui
 
 import android.content.Intent
+import android.media.metrics.Event
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -9,21 +10,51 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.eventbus.EventBus
 import com.iranmobiledev.moodino.R
-import com.iranmobiledev.moodino.data.Activity
+import com.iranmobiledev.moodino.base.BaseActivity
+import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
 import com.iranmobiledev.moodino.ui.entries.AddEntryFragment
+import com.iranmobiledev.moodino.ui.entries.EntriesFragment
+import com.iranmobiledev.moodino.utlis.BottomNavVisibility
+import com.iranmobiledev.moodino.utlis.DateContainer
+import com.iranmobiledev.moodino.utlis.DateContainerImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.greenrobot.eventbus.EventBus.getDefault
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
+import kotlin.math.absoluteValue
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var navController: NavController
-    private lateinit var todayIv : Button
-    private lateinit var yesterdayIv : Button
-    private lateinit var otherDayIv : Button
+    private lateinit var todayIv: Button
+    private lateinit var yesterdayIv: Button
+    private lateinit var otherDayIv: Button
+    private lateinit var fab: FloatingActionButton
+    private lateinit var bottomAppBar: BottomAppBar
+    private val model: MainActivityViewModel by viewModels()
+
+    override fun onStart() {
+        super.onStart()
+        getDefault().register(this)
+    }
+
+    override fun onStop() {
+        getDefault().unregister(this)
+        super.onStop()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,43 +62,61 @@ class MainActivity : AppCompatActivity() {
         setContentView(activityMainBinding.root)
         initViews()
 
-        val bottomAppBar = activityMainBinding.bottomAppBar
-
         //setup navigation controller
         val navView: BottomNavigationView = activityMainBinding.bottomNavigationView
         navController = findNavController(R.id.fragmentContainerView)
         navView.setupWithNavController(navController)
 
-        val model: MainActivityViewModel by viewModels()
+        val scope = CoroutineScope(Dispatchers.IO)
 
-        //fab 3 buttons to be animate
-        val fab: FloatingActionButton = activityMainBinding.fab
         val fabMenu = activityMainBinding.fabMenu
-
-
         //fix nav background problem
         navView.background = null
 
         fab.setOnClickListener { it ->
-            model.actionFab(fabMenu ,it,this)
+            model.actionFab(fabMenu, it, this, true)
         }
 
-        activityMainBinding.todayButton.setOnClickListener{
-            model.actionFab(fabMenu, it, this)
+        activityMainBinding.todayButton.setOnClickListener {
+
+            scope.launch (Dispatchers.Main){
+                model.actionFab(fabMenu, it, MainActivity())
+            }
+
+            bottomNavVisibility(false)
+            val dateContainer = DateContainerImpl()
+            navController.navigate(R.id.addEntryFragment, Bundle().apply {
+                putString("date", dateContainer.today())
+                putString("time", dateContainer.time())
+            })
+        }
+    }
+
+    private fun initViews() {
+        todayIv = activityMainBinding.todayButton
+        yesterdayIv = activityMainBinding.yesterdayButton
+        otherDayIv = activityMainBinding.otherDayButton
+        fab = activityMainBinding.fab
+        bottomAppBar = activityMainBinding.bottomAppBar
+    }
+
+    private fun bottomNavVisibility(mustShow: Boolean) {
+        if (mustShow) {
+            fab.show()
+            fab.isClickable = true
+            bottomAppBar.visibility = View.VISIBLE
+            bottomAppBar.performShow()
+        } else {
             fab.hide()
             fab.isClickable = false
             bottomAppBar.visibility = View.GONE
             bottomAppBar.performHide(true)
-            navController.navigate(R.id.addEntryFragment)
-
         }
-
     }
 
-    private fun initViews(){
-        todayIv = activityMainBinding.todayButton
-        yesterdayIv = activityMainBinding.yesterdayButton
-        otherDayIv = activityMainBinding.otherDayButton
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun mustBottomNavShow(bottomNavState: BottomNavState) {
+        bottomNavVisibility(bottomNavState.mustShow)
     }
 }
 
