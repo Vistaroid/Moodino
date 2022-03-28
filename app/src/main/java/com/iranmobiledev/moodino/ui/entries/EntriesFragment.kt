@@ -76,7 +76,7 @@ class EntriesFragment : BaseFragment() {
         entriesContainerRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,false)
         entriesContainerRv.adapter = entriesContainerAdapter
     }
-
+    //init
     private fun initViews(){
         entriesContainerRv = binding.entriesContainerRv
         val appDatabase = AppDatabase.getAppDatabase(requireContext())
