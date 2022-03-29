@@ -26,7 +26,6 @@ import com.iranmobiledev.moodino.utlis.DateContainerImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -77,7 +76,7 @@ class MainActivity : BaseActivity() {
 
         activityMainBinding.todayButton.setOnClickListener {
 
-            scope.launch (Dispatchers.Main){
+            scope.launch {
                 model.actionFab(fabMenu, it, MainActivity())
             }
 
