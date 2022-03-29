@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 @Entity(tableName = "tbl_activities")
 data class ActivityList(
     @PrimaryKey(autoGenerate = true)
-    val id : Int?,
+    var id : Int? = null,
     val title : String,
     val activities : List<Activity>
 )

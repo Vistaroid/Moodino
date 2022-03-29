@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryList
+import com.iranmobiledev.moodino.data.EntryListState
+import org.greenrobot.eventbus.EventBus
 
-class EntryContainerAdapter(private val context: Context, private val entriesList : List<EntryList>) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+class EntryContainerAdapter(private val context: Context, private val entriesList : MutableList<EntryList>) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val entryRecyclerView = itemView.findViewById<RecyclerView>(R.id.entryRv)
@@ -22,7 +24,36 @@ class EntryContainerAdapter(private val context: Context, private val entriesLis
     }
 
     fun addEntry(entry: Entry){
+        val entryList = findEntryListMatchWithEntry(entry)
+        entryList?.let {
+            it.entries.add(0,entry)
+            entryList.state = EntryListState.UPDATE
+            EventBus.getDefault().postSticky(it)
+        }
+        if(entryList == null){
+            val entries = listOf(entry)
+            val entryList = EntryList(null, entry.date!! , EntryListState.ADD,
+                entries as MutableList<Entry>
+            )
+            entriesList.add(entryList)
+            entryList.state = EntryListState.ADD
+            EventBus.getDefault().post(entryList)
+        }
+        notifyDataSetChanged()
+    }
 
+    private fun findEntryListMatchWithEntry(entry: Entry) : EntryList? {
+        var entryList: EntryList? = null
+        for(i in entriesList){
+            if(entry.date?.year == i.date.year &&
+               entry.date?.month == i.date.month &&
+               entry.date?.day == i.date.day){
+                entryList = i
+                break
+            }
+
+        }
+        return entryList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -63,19 +63,22 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="@dimen/_150mdp"
-        android:layout_height="@dimen/_150mdp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_180mdp"
+        android:layout_marginTop="@dimen/_12mdp"
         app:cardCornerRadius="@dimen/_16mdp"
         app:cardElevation="0dp"
+        android:layout_marginEnd="@dimen/_12mdp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/entryNote"
-        app:layout_constraintTop_toBottomOf="@+id/entryNote"
-        android:layout_marginTop="@dimen/_12mdp">
+        app:layout_constraintTop_toBottomOf="@+id/entryNote">
 
         <ImageView
             android:id="@+id/entryImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:background="?colorPrimary"/>
+            android:scaleType="centerCrop"
+            tools:background="?colorPrimary" />
     </com.google.android.material.card.MaterialCardView>
 
     <ImageView
