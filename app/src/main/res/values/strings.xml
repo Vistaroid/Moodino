@@ -45,7 +45,4 @@
     <string name="dark_mode">Dark</string>
     <string name="system_mode">System Default</string>
     <string name="cancel">Cancel</string>
-    <string name="activityItemText">calendar</string>
-    <string name="take_photo">Take Photo</string>
-    <string name="open_gallery">Open Gallery</string>
 </resources>
