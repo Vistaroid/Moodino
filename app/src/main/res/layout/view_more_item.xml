@@ -3,17 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?selectableItemBackground"
-    >
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/_10mdp"
-        android:background="@color/white">
+        android:background="?selectableItemBackground">
 
         <ImageView
             android:id="@+id/iv_itemMore_icon"
@@ -35,6 +34,7 @@
             android:textColor="@color/black"
             android:textSize="17sp"
             android:layout_marginStart="@dimen/_15font_mdp"/>
+
     </LinearLayout>
 
 </FrameLayout>

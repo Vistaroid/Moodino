@@ -10,15 +10,15 @@ import com.iranmobiledev.moodino.data.EntryList
 interface EntryListDao {
 
     @Insert
-    suspend fun add(entries : EntryList) : Long
+    fun add(entries : EntryList) : Long
 
     @Update
-    suspend fun update(entries: EntryList) : Int
+    fun update(entries: EntryList) : Int
 
     @Delete
-    suspend fun delete(entries: EntryList) : Int
+    fun delete(entries: EntryList) : Int
 
     @Query("SELECT * FROM table_entries")
-    suspend fun getAll() : List<EntryList>
+    fun getAll() : List<EntryList>
 
 }

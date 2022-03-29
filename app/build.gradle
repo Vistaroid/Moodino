@@ -80,7 +80,7 @@ dependencies {
     def koin_version = "3.1.2"
     implementation "io.insert-koin:koin-android:$koin_version"
 
-    implementation 'com.github.jrvansuita:PickImage:+'
+    implementation 'com.github.jrvansuita:PickImage:3.0.0'
 
 }
 

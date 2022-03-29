@@ -39,7 +39,8 @@
         android:id="@+id/moreFragment"
         android:name="com.iranmobiledev.moodino.ui.more.MoreFragment"
         android:label="fragment_more"
-        tools:layout="@layout/fragment_more"/>
+        tools:layout="@layout/fragment_more">
+    </fragment>
     <fragment
         android:id="@+id/addEntryFragment"
         android:name="com.iranmobiledev.moodino.ui.entries.AddEntryFragment"
@@ -59,6 +60,12 @@
         android:id="@+id/entryDetailFragment"
         android:name="com.iranmobiledev.moodino.ui.entries.EntryDetailFragment"
         android:label="EntryDetailFragment"
-        tools:layout="@layout/entry_detail_fragment"/>
+        tools:layout="@layout/entry_detail_fragment">
+        <action
+            android:id="@+id/action_entryDetailFragment_to_entriesFragment"
+            app:destination="@id/entriesFragment"
+            app:popUpTo="@id/entriesFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 </navigation>

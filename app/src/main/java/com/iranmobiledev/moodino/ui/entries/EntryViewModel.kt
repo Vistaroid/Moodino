@@ -19,25 +19,17 @@ class EntryViewModel(private val entryListDao: EntryListDao, private val activit
     private val mutableActivitiesLiveData = MutableLiveData<List<ActivityList>>()
 
     fun addEntry(entryList: EntryList) {
-        viewModelScope.launch (Dispatchers.IO){
             entryListDao.add(entryList)
-        }
     }
     fun deleteEntry(entryList: EntryList){
-        viewModelScope.launch (Dispatchers.IO){
             entryListDao.delete(entryList)
-        }
     }
     fun updateEntry(entryList: EntryList){
-        viewModelScope.launch (Dispatchers.IO){
             entryListDao.update(entryList)
-        }
     }
     fun getEntries() : List<EntryList>{
         var entriesList = ArrayList<EntryList>()
-        viewModelScope.launch (Dispatchers.IO){
-            entriesList = entryListDao.getAll() as ArrayList<EntryList>
-        }
+        entriesList = entryListDao.getAll() as ArrayList<EntryList>
         return entriesList
     }
 
