@@ -19,7 +19,7 @@
             app:layout_constraintEnd_toStartOf="@+id/item_happy"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="0dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="@dimen/_40mdp"
@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toStartOf="@+id/item_sad"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/item_happy"
-            tools:layout_editor_absoluteY="0dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="@dimen/_40mdp"
@@ -68,7 +68,7 @@
             app:layout_constraintEnd_toStartOf="@+id/item_verySad"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/item_nothing"
-            tools:layout_editor_absoluteY="0dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="@dimen/_40mdp"
@@ -93,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/item_sad"
-            tools:layout_editor_absoluteY="0dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="@dimen/_40mdp"
@@ -118,7 +118,7 @@
             app:layout_constraintEnd_toStartOf="@+id/item_nothing"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/item_veryHappy"
-            tools:layout_editor_absoluteY="0dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="@dimen/_40mdp"

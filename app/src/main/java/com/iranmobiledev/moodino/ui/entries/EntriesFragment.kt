@@ -95,15 +95,11 @@ class EntriesFragment : BaseFragment() {
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun entryListSentToMe(entryList: EntryList){
         if(entryList.state == EntryListState.UPDATE){
-            GlobalScope.launch {
                 entryViewModel.updateEntry(entryList)
-            }
         }
 
         if(entryList.state == EntryListState.ADD){
-            GlobalScope.launch {
                 entryViewModel.addEntry(entryList)
-            }
         }
     }
 }
