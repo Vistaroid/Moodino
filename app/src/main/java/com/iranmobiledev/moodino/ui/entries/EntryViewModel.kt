@@ -19,22 +19,13 @@ class EntryViewModel(private val entryListDao: EntryListDao, private val activit
     private val mutableActivitiesLiveData = MutableLiveData<List<ActivityList>>()
 
     fun addEntry(entryList: EntryList) {
-<<<<<<< Updated upstream
             entryListDao.add(entryList)
-
-=======
-           entryListDao.add(entryList)
->>>>>>> Stashed changes
     }
     fun deleteEntry(entryList: EntryList){
             entryListDao.delete(entryList)
     }
     fun updateEntry(entryList: EntryList){
-<<<<<<< Updated upstream
             entryListDao.update(entryList)
-=======
-        entryListDao.update(entryList)
->>>>>>> Stashed changes
     }
     fun getEntries() : List<EntryList>{
         var entriesList = ArrayList<EntryList>()

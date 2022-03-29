@@ -10,6 +10,6 @@ data class EntryList(
     @PrimaryKey(autoGenerate = true)
     var id : Int? = null,
     val date : EntryDate,
-    val state : EntryListState,
+    var state : EntryListState,
     val entries : MutableList<Entry>
 )

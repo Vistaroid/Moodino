@@ -26,7 +26,8 @@ class EntryContainerAdapter(private val context: Context, private val entriesLis
     fun addEntry(entry: Entry){
         val entryList = findEntryListMatchWithEntry(entry)
         entryList?.let {
-            it.entries.add(entry)
+            it.entries.add(0,entry)
+            entryList.state = EntryListState.UPDATE
             EventBus.getDefault().postSticky(it)
         }
         if(entryList == null){
@@ -35,8 +36,8 @@ class EntryContainerAdapter(private val context: Context, private val entriesLis
                 entries as MutableList<Entry>
             )
             entriesList.add(entryList)
-
-            EventBus.getDefault().postSticky(entryList)
+            entryList.state = EntryListState.ADD
+            EventBus.getDefault().post(entryList)
         }
         notifyDataSetChanged()
     }
@@ -44,10 +45,13 @@ class EntryContainerAdapter(private val context: Context, private val entriesLis
     private fun findEntryListMatchWithEntry(entry: Entry) : EntryList? {
         var entryList: EntryList? = null
         for(i in entriesList){
-            if(entry.date?.year == i.date.day &&
+            if(entry.date?.year == i.date.year &&
                entry.date?.month == i.date.month &&
-               entry.date?.day == i.date.day)
-                   entryList = i
+               entry.date?.day == i.date.day){
+                entryList = i
+                break
+            }
+
         }
         return entryList
     }
