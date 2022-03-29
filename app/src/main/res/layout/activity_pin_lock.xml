@@ -33,7 +33,7 @@
         <ImageView
             android:layout_width="@dimen/_70mdp"
             android:layout_height="@dimen/_70mdp"
-            android:src="@drawable/ic_lock_notactive"
+            android:src="@drawable/ic_lock"
             android:scaleType="fitXY"
             android:layout_marginTop="@dimen/_25mdp"
             android:layout_gravity="center_horizontal"/>

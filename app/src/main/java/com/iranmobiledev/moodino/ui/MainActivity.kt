@@ -69,7 +69,7 @@ class MainActivity : BaseActivity() {
 
         activityMainBinding.todayButton.setOnClickListener {
 
-            scope.launch {
+            scope.launch (Dispatchers.Main){
                 model.actionFab(fabMenu, it, MainActivity())
             }
 

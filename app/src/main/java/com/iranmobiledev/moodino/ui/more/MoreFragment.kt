@@ -17,6 +17,7 @@ import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.FragmentMoreBinding
 import com.iranmobiledev.moodino.ui.more.activities.ActivitiesActivity
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockActivity
+import org.greenrobot.eventbus.EventBus
 
 class MoreFragment : BaseFragment() {
     private lateinit var binding : FragmentMoreBinding
