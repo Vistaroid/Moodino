@@ -38,6 +38,9 @@
     <string name="activityItemText">calendar</string>
     <string name="take_photo">Take Photo</string>
     <string name="open_gallery">Open Gallery</string>
+    <string name="let_s_add_first_entry_tap_the_big_plus_button">Let\'s add first entry!\nTap the big PLUS button</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
     <string name="about">About</string>
     <string name="more">More</string>
     <string name="create_new_goals">Create New Goal</string>

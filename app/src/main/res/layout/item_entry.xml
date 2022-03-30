@@ -20,7 +20,9 @@
         app:layout_constraintEnd_toEndOf="@+id/EntryIcon"
         app:layout_constraintStart_toStartOf="@+id/EntryIcon"
         app:layout_constraintTop_toBottomOf="@+id/EntryIcon"
-        android:background="@color/silver"/>
+        app:layout_constraintBottom_toBottomOf="@id/imageContainer"
+        android:background="@color/silver"
+        android:layout_marginTop="@dimen/_8mdp"/>
 
     <TextView
         android:id="@+id/entryTitle"
@@ -48,7 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/entryTitle"
-        app:layout_constraintTop_toBottomOf="@+id/entryTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/entryTitle"
+        />
 
     <TextView
         android:id="@+id/entryNote"
@@ -59,10 +62,11 @@
         android:text="@string/note"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintStart_toStartOf="@+id/entryTitle"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"/>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/imageContainer"
         android:layout_width="0dp"
         android:layout_height="@dimen/_180mdp"
         android:layout_marginTop="@dimen/_12mdp"
@@ -70,8 +74,9 @@
         app:cardElevation="0dp"
         android:layout_marginEnd="@dimen/_12mdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/entryNote"
-        app:layout_constraintTop_toBottomOf="@+id/entryNote">
+        app:layout_constraintStart_toStartOf="@+id/entryTitle"
+        app:layout_constraintTop_toBottomOf="@+id/entryNote"
+        >
 
         <ImageView
             android:id="@+id/entryImage"
@@ -81,7 +86,7 @@
             tools:background="?colorPrimary" />
     </com.google.android.material.card.MaterialCardView>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/moreIcon"
         android:layout_width="@dimen/_25mdp"
         android:layout_height="@dimen/_25mdp"
@@ -91,5 +96,6 @@
         app:layout_constraintTop_toTopOf="@+id/textView7"
         app:srcCompat="@drawable/ic_more"
         app:tint="@color/gray"
-        android:layout_marginEnd="@dimen/_12mdp"/>
+        android:layout_marginEnd="@dimen/_12mdp"
+        android:scaleType="fitXY"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
