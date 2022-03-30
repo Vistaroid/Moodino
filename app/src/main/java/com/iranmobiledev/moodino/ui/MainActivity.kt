@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.eventbus.EventBus
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.data.BottomNavState
@@ -24,7 +25,6 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import saman.zamani.persiandate.PersianDate
 
-
 class MainActivity : BaseActivity() {
 
     lateinit var activityMainBinding: ActivityMainBinding
@@ -38,11 +38,11 @@ class MainActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        EventBus.getDefault().register(this)
+        getDefault().register(this)
     }
 
     override fun onStop() {
-        EventBus.getDefault().unregister(this)
+        getDefault().unregister(this)
         super.onStop()
     }
 
