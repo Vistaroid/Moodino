@@ -37,47 +37,21 @@
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/layout/activity_main.xml" value="0.12552083333333333" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/layout/emojies_item.xml" value="0.5" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/layout/entries_fragment.xml" value="0.25" />
-        <entry key="app/src/main/res/drawable/background_gradiant.xml" value="0.1285" />
-        <entry key="app/src/main/res/drawable/background_ovel.xml" value="0.165" />
-        <entry key="app/src/main/res/drawable/ic_achievement.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_activity.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_add_round_corner.xml" value="0.1685" />
-        <entry key="app/src/main/res/drawable/ic_backup.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_calender.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_chart.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_color.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_emoji.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_emoji_happy.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_emoji_nothing.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_export.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_gallery.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_info.xml" value="0.1845" />
-        <entry key="app/src/main/res/drawable/ic_language.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_lock.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_mode.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_moon.xml" value="0.1285" />
-        <entry key="app/src/main/res/drawable/ic_tick.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_timer.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/ic_widgets.xml" value="0.1915" />
-        <entry key="app/src/main/res/layout/achievements_card.xml" value="0.11197916666666667" />
-        <entry key="app/src/main/res/layout/activity_activities.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/activity_pin_lock.xml" value="0.22780797101449277" />
-        <entry key="app/src/main/res/layout/add_entry_fragment.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/dialog_change_language.xml" value="0.22780797101449277" />
-        <entry key="app/src/main/res/layout/dialog_change_mode.xml" value="0.24479166666666666" />
-        <entry key="app/src/main/res/layout/emojies_item.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/fragment_entries.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/fragment_goals.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/mood_chart_card.xml" value="0.22780797101449277" />
-        <entry key="app/src/main/res/layout/mood_count_icon.xml" value="0.22780797101449277" />
-        <entry key="app/src/main/res/layout/moods_count_card.xml" value="0.22780797101449277" />
-        <entry key="app/src/main/res/layout/view_item_more.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/view_more_item.xml" value="0.24427083333333333" />
-        <entry key="app/src/main/res/layout/view_toolbar.xml" value="0.24427083333333333" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/drawable/dialog_bg.xml" value="0.1495" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_camera.xml" value="0.1495" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_emoji_nothing.xml" value="0.1495" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_gallery.xml" value="0.1495" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_remove.xml" value="0.218" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/drawable/view_bg_stroke.xml" value="0.149" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/add_entry_fragment.xml" value="0.25" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/emoji_item.xml" value="0.2513586956521739" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/empry_state_fragment.xml" value="0.2513586956521739" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/entry_detail_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity.xml" value="0.5" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity_container.xml" value="0.25" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_entry.xml" value="0.16" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_entry_container.xml" value="0.2513586956521739" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/select_photo_dialog.xml" value="0.22" />
       </map>
     </option>
   </component>

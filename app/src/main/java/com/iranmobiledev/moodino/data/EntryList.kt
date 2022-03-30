@@ -8,8 +8,8 @@ import java.sql.Timestamp
 @Entity(tableName = "table_entries")
 data class EntryList(
     @PrimaryKey(autoGenerate = true)
-    val id : Int?,
-    //todo change date datatype
-    val date : String,
-    val entries : List<Entry>
+    var id : Int? = null,
+    val date : EntryDate,
+    var state : EntryListState,
+    val entries : MutableList<Entry>
 )

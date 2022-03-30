@@ -7,6 +7,7 @@ import com.iranmobiledev.moodino.data.activities2
 import com.iranmobiledev.moodino.data.activities3
 import com.iranmobiledev.moodino.database.AppDatabase
 import com.iranmobiledev.moodino.ui.entries.EntryViewModel
+import com.iranmobiledev.moodino.ui.entries.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel

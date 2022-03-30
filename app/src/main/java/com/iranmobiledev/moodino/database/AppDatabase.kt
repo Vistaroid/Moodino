@@ -8,11 +8,12 @@ import androidx.room.TypeConverters
 import com.iranmobiledev.moodino.data.ActivityList
 import com.iranmobiledev.moodino.data.EntryList
 import com.iranmobiledev.moodino.database.typeconvertor.ActivityTypeConvertor
+import com.iranmobiledev.moodino.database.typeconvertor.EntryDateConvertor
 import com.iranmobiledev.moodino.database.typeconvertor.EntryTypeConvertor
 
 
 @Database(version = 1, exportSchema = false, entities = [EntryList::class, ActivityList::class])
-@TypeConverters(EntryTypeConvertor::class, ActivityTypeConvertor::class)
+@TypeConverters(EntryTypeConvertor::class, ActivityTypeConvertor::class, EntryDateConvertor::class)
 abstract class AppDatabase : RoomDatabase() {
     companion object{
         @JvmStatic
@@ -21,7 +22,8 @@ abstract class AppDatabase : RoomDatabase() {
         @JvmStatic
         fun getAppDatabase(context: Context) : AppDatabase{
             if(database == null)
-                database = Room.databaseBuilder(context, AppDatabase::class.java, "name").build()
+                database = Room.databaseBuilder(context, AppDatabase::class.java, "name")
+                    .allowMainThreadQueries().build()
             return database as AppDatabase
         }
     }

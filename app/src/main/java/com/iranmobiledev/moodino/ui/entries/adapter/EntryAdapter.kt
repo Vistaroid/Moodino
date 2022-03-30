@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.entries.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,8 +26,9 @@ class EntryAdapter(private val entries : List<Entry>) : RecyclerView.Adapter<Ent
         fun bind(entry: Entry){
             //TODO check entry title and then set entry icon (hint : use switch)
             entryIcon.setImageResource(R.drawable.ic_emoji_very_happy)
-            entryTitle.text = entry.time
-            entry.photo?.let { entryImage.setImageURI(it) }
+            entryTitle.text = entry.title
+
+            entry.photo?.let { entryImage.setImageURI(Uri.parse(it)) }
             entryNote.text = entry.note
         }
     }

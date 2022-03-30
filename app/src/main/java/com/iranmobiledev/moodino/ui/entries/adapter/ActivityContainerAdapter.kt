@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.ActivityList
+import saman.zamani.persiandate.PersianDate
 
 class ActivityContainerAdapter(
     private var activities: List<ActivityList>,
@@ -53,5 +54,8 @@ class ActivityContainerAdapter(
         //todo pass view to this function
         fun onExpandViewClicked()
 
+    }
+
+    private fun thisDateExist(){
     }
 }
