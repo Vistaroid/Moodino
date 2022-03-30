@@ -3,6 +3,7 @@ package com.iranmobiledev.moodino.utlis
 import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -10,6 +11,8 @@ import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import com.github.mikephil.charting.utils.ColorTemplate
+import io.github.persiancalendar.calendar.CivilDate
+import java.util.*
 
 fun View.implementSpringAnimationTrait() {
     val scaleXAnim = SpringAnimation(this, DynamicAnimation.SCALE_X, 0.90f)
@@ -48,9 +51,7 @@ fun View.implementSpringAnimationTrait() {
         false
     }
 }
-val Number.dp : Float get() = this.toFloat() * Resources.getSystem().displayMetrics.density
 
-fun Context.resolveColor(attribute: Int)= TypedValue().let {
-    theme.resolveAttribute(attribute,it,true)
-    ContextCompat.getColor(this,it.resourceId)
-}
+
+
+

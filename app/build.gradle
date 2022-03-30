@@ -83,5 +83,14 @@ dependencies {
 
     implementation 'com.github.jrvansuita:PickImage:3.0.0'
 
+
+    //calendar
+    implementation 'com.github.persian-calendar:calendar:1.2.0'
+
+    implementation("androidx.preference:preference-ktx:1.2.0")
+    // Persian Date
+    implementation 'com.github.samanzamani:PersianDate:1.3.4'
+
+
 }
 
