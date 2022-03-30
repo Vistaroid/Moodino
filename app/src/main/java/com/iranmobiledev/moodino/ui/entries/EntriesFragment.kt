@@ -6,8 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.*
 import com.iranmobiledev.moodino.database.AppDatabase
@@ -30,6 +35,8 @@ class EntriesFragment : BaseFragment() {
     private lateinit var entriesContainerRv : RecyclerView
     private val entryViewModel : EntryViewModel by viewModel()
     private lateinit var entriesContainerAdapter : EntryContainerAdapter
+    private lateinit var navController: NavController
+
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
@@ -59,6 +66,7 @@ class EntriesFragment : BaseFragment() {
 
         binding.addEntryCardView.setOnClickListener{}
         makeSpringAnimation(binding.addEntryCardView)
+
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,11 +82,13 @@ class EntriesFragment : BaseFragment() {
         entriesContainerAdapter = EntryContainerAdapter(requireContext(),
             entriesList as MutableList<EntryList>
         )
+
         entriesContainerRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,false)
         entriesContainerRv.adapter = entriesContainerAdapter
     }
     private fun initViews(){
         entriesContainerRv = binding.entriesContainerRv
+        navController = NavHostFragment.findNavController(this)
         val appDatabase = AppDatabase.getAppDatabase(requireContext())
     }
     override fun onAttach(context: Context) {
@@ -94,12 +104,12 @@ class EntriesFragment : BaseFragment() {
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun entryListSentToMe(entryList: EntryList){
-        if(entryList.state == EntryListState.UPDATE){
+        if(entryList.state == EntryListState.UPDATE)
                 entryViewModel.updateEntry(entryList)
-        }
 
-        if(entryList.state == EntryListState.ADD){
+        if(entryList.state == EntryListState.ADD)
                 entryViewModel.addEntry(entryList)
-        }
+        entriesContainerRv.smoothScrollToPosition(0)
     }
+
 }

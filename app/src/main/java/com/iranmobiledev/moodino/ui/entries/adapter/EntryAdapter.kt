@@ -1,17 +1,19 @@
 package com.iranmobiledev.moodino.ui.entries.adapter
 
+import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
 
-class EntryAdapter(private val entries : List<Entry>) : RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
+class EntryAdapter(private val entries : List<Entry>, private val context: Context) : RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -30,6 +32,13 @@ class EntryAdapter(private val entries : List<Entry>) : RecyclerView.Adapter<Ent
 
             entry.photo?.let { entryImage.setImageURI(Uri.parse(it)) }
             entryNote.text = entry.note
+
+            moreIcon.setOnClickListener {
+                val popupMenu = PopupMenu(context, it)
+                popupMenu.inflate(R.menu.popup_menu)
+
+                popupMenu.show()
+            }
         }
     }
 
