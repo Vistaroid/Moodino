@@ -10,7 +10,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.eventbus.EventBus
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.data.BottomNavState
@@ -38,11 +37,11 @@ class MainActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        getDefault().register(this)
+        EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
-        getDefault().unregister(this)
+        EventBus.getDefault().unregister(this)
         super.onStop()
     }
 
@@ -69,7 +68,7 @@ class MainActivity : BaseActivity() {
 
         activityMainBinding.todayButton.setOnClickListener {
 
-            scope.launch {
+            scope.launch (Dispatchers.Main){
                 model.actionFab(fabMenu, it, MainActivity())
             }
 

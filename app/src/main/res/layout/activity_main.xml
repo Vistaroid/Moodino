@@ -25,7 +25,8 @@
         android:background="@color/pink"
         app:backgroundTint="@color/pink"
         app:fabCradleMargin="0dp"
-        app:fabCradleRoundedCornerRadius="0dp">
+        app:fabCradleRoundedCornerRadius="0dp"
+        >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

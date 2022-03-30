@@ -13,10 +13,6 @@ open class BaseActivity : AppCompatActivity(){
 open class BaseFragment : Fragment(), BaseView{
 
 }
-
-open class BaseActivity : AppCompatActivity(), BaseView{
-
-}
 /**
  * All View Models should extend this view model
  */
