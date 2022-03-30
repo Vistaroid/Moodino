@@ -51,4 +51,39 @@
     <string name="dark_mode">Dark</string>
     <string name="system_mode">System Default</string>
     <string name="cancel">Cancel</string>
+
+<!--calendars-->
+    <string name="shamsi_calendar">Persian Calendar</string>
+    <string name="shamsi_calendar_short">Persian</string>
+    <!-- Used in accessibility, previous day or month or year -->
+    <string name="previous_x">Previous %1$s</string>
+    <!-- Used in accessibility, next day or month or year -->
+    <string name="next_x">Next %1$s</string>
+    <string name="month">Month</string>
+    <!-- Used in accessibility, describes headers of calendar -->
+    <string name="week_days_name_column">%1$s column in days table</string>
+
+    <!--Persian Calendar months-->
+    <string name="farvardin">Farvardin</string>
+    <string name="ordibehesht">Ordibehesht</string>
+    <string name="khordad">Khordad</string>
+    <string name="tir">Tir</string>
+    <string name="mordad">Mordad</string>
+    <string name="shahrivar">Shahrivar</string>
+    <string name="mehr">Mehr</string>
+    <string name="aban">Aban</string>
+    <string name="azar">Azar</string>
+    <string name="dey">Dey</string>
+    <string name="bahman">Bahman</string>
+    <string name="esfand">Esfand</string>
+
+    <!--Week Days-->
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+
 </resources>

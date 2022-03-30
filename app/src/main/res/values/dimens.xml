@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="grid_calendar_height">320sp</dimen>
+    <dimen name="arrow_size">26dp</dimen>
+</resources>
