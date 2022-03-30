@@ -3,7 +3,6 @@ package com.iranmobiledev.moodino.base
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import org.greenrobot.eventbus.EventBus
 
 open class BaseActivity : AppCompatActivity(){
 
@@ -12,6 +11,10 @@ open class BaseActivity : AppCompatActivity(){
  * All fragments should extend this base fragment
  */
 open class BaseFragment : Fragment(), BaseView{
+
+}
+
+open class BaseActivity : AppCompatActivity(), BaseView{
 
 }
 /**
