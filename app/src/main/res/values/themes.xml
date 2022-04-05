@@ -16,10 +16,10 @@
         <item name="listPopupWindowStyle">@style/popupMenuStyle</item>
 
         <!--  Calendar Color-->
-        <item name="colorTextDay">@color/gray</item>
+        <item name="colorTextDay">@color/gray_dark_700</item>
         <item name="colorSelectDay">@color/blue</item>
-        <item name="colorCurrentDay">@color/white</item>
-        <item name="colorTextDayName">@color/gray</item>
+        <item name="colorCurrentDay">@color/gray</item>
+        <item name="colorTextDayName">@color/gray_dark_500</item>
         <item name="colorTextDaySelected">@color/white</item>
         <item name="colorMonthSwitch">@color/gray</item>
 

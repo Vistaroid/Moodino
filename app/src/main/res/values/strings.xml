@@ -85,5 +85,6 @@
     <string name="wednesday">Wednesday</string>
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
+    <string name="average_mood">"average mood "</string>
 
 </resources>
