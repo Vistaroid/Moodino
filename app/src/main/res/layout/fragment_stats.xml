@@ -14,7 +14,8 @@
 
            <include
                android:id="@+id/daysInRowCardInclude"
-               layout="@layout/days_in_a_row_card" />
+               layout="@layout/days_in_a_row_card"
+             />
 
            <include
                android:id="@+id/moodChartCardInclude"
@@ -26,8 +27,7 @@
            <include
                android:id="@+id/moodCountCardInclude"
                layout="@layout/moods_count_card"
-               tools:layout_editor_absoluteX="12dp"
-               tools:layout_editor_absoluteY="804dp" />
+              />
 
            <Space
                android:layout_width="match_parent"
