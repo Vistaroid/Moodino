@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:padding="5dp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/ad"
+        android:src="@drawable/ic_widgets"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/view_circle_bg_stroke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageButton
+        android:id="@+id/arrow_before"
+        android:src="@drawable/ic_arrow_left"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/view_circle_bg_stroke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/title"
+        android:layout_marginHorizontal="20dp"
+        android:layout_weight="1"
+        tools:text="toolbar title"
+        android:textColor="?attr/colorTextDay"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <ImageButton
+        android:id="@+id/arrow_next"
+        android:src="@drawable/ic_arrow_right"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/view_circle_bg_stroke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageButton
+        android:id="@+id/search"
+        android:src="@drawable/ic_search"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/view_circle_bg_stroke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
