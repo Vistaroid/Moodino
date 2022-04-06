@@ -5,11 +5,10 @@
     android:id="@+id/daysInRowCard"
     style="@style/CardViewStyleNoPadding"
     android:layout_width="match_parent"
-    android:layout_marginTop="16dp"
     android:layout_height="wrap_content"
-    app:cardElevation="16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/moodChartCardInclude"
     app:layout_constraintTop_toTopOf="parent" >
 
     <androidx.constraintlayout.widget.ConstraintLayout

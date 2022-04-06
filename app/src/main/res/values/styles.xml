@@ -13,18 +13,19 @@
         <item name="cardCornerRadius">16dp</item>
         <item name="android:layout_marginEnd">12dp</item>
         <item name="android:layout_marginStart">12dp</item>
-        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">4dp</item>
         <item name="cardElevation">16dp</item>
         <item name="contentPadding">20dp</item>
     </style>
 
-    //removed padding used for stats fragment first card
+    //removed padding used for days in a row card in stats fragment
     <style name="CardViewStyleNoPadding" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">20dp</item>
+        <item name="cardCornerRadius">16dp</item>
         <item name="android:layout_marginEnd">12dp</item>
         <item name="android:layout_marginStart">12dp</item>
-        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
             <item name="cardElevation">16dp</item>
     </style>
 
