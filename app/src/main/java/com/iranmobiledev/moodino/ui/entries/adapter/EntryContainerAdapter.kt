@@ -15,22 +15,56 @@ import saman.zamani.persiandate.PersianDateFormat
 
 class EntryContainerAdapter(
     private val context: Context,
-    private val entriesList: MutableList<List<Entry>>
-) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+    private val entriesList: MutableList<MutableList<Entry>>,
+    private val onPopupMenuEventListener: EntryAdapter.OnPopupMenuEventListener,
+    private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
+
+    ) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val entryListDate = itemView.findViewById<TextView>(R.id.entryListDate)
         private val entryRecyclerView = itemView.findViewById<RecyclerView>(R.id.entryRv)
+
+
         @SuppressLint("SetTextI18n")
         fun bind(entries: List<Entry>) {
 
             val persianDate = PersianDate()
             persianDate.grgMonth = entries[0].date?.month!!
-            entryListDate.text = PersianDateFormat.format(persianDate, "j F", PersianDateFormat.PersianDateNumberCharacter.ENGLISH)
+            entryListDate.text = PersianDateFormat.format(
+                persianDate,
+                "j F",
+                PersianDateFormat.PersianDateNumberCharacter.ENGLISH
+            )
 
             entryRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            entryRecyclerView.adapter = EntryAdapter(entries, context)
+            val entryAdapter = EntryAdapter(
+                onPopupMenuEventListener,
+                entries as MutableList<Entry>, context
+            )
+            entryRecyclerView.adapter = entryAdapter
+            entryAdapters.add(entryAdapter)
+        }
+    }
+
+    fun removeItem(entry: Entry) {
+        entryAdapters.forEach {
+            if(it.entries.contains(entry)){
+                it.remove(entry)
+                checkItemsToBeNotEmpty()
+                return
+            }
+        }
+
+    }
+
+    private fun checkItemsToBeNotEmpty(){
+        entriesList.forEachIndexed { index, list ->
+            if(list.size == 0){
+                entriesList.removeAt(index)
+            }
         }
     }
 

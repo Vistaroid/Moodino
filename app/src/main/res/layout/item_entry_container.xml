@@ -48,6 +48,8 @@
             android:id="@+id/entryRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6mdp"/>
+            android:layout_marginTop="@dimen/_6mdp"
+            android:paddingBottom="@dimen/_24mdp"
+            android:clipToPadding="false"/>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

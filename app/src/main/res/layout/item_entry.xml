@@ -27,10 +27,10 @@
             android:layout_width="@dimen/_2mdp"
             android:layout_height="0dp"
             android:background="@color/silver"
-            app:layout_constraintBottom_toBottomOf="@id/imageContainer"
             app:layout_constraintEnd_toEndOf="@+id/EntryIcon"
             app:layout_constraintStart_toStartOf="@+id/EntryIcon"
-            app:layout_constraintTop_toBottomOf="@+id/EntryIcon" />
+            app:layout_constraintTop_toBottomOf="@+id/EntryIcon"
+            app:layout_constraintBottom_toBottomOf="@id/imageContainer"/>
 
         <TextView
             android:id="@+id/entryTitle"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
-            app:layout_constraintTop_toBottomOf="@+id/entryTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/entryTitle"/>
 
         <TextView
             android:id="@+id/entryNote"
@@ -68,10 +68,10 @@
             android:layout_marginEnd="@dimen/_12mdp"
             android:text="@{entryItem.note}"
             android:textStyle="bold"
-            android:visibility="@{entryItem.note.length() > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+            android:visibility="@{entryItem.note.length() > 0 ? View.VISIBLE : View.GONE}"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/imageContainer"
