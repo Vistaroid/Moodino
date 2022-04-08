@@ -1,54 +1,47 @@
 package com.iranmobiledev.moodino.ui.entries
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.Activity
-import com.iranmobiledev.moodino.data.ActivityList
-import com.iranmobiledev.moodino.data.EntryList
-import com.iranmobiledev.moodino.database.ActivitiesDao
-import com.iranmobiledev.moodino.database.EntryListDao
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.repository.activity.ActivityRepository
+import com.iranmobiledev.moodino.repository.entry.EntryRepository
 
-class EntryViewModel(private val entryListDao: EntryListDao, private val activitiesDao: ActivitiesDao) : BaseViewModel() {
 
-    private val mutableActivitiesLiveData = MutableLiveData<List<ActivityList>>()
+class EntryViewModel(
+    private val entryRepository: EntryRepository,
+    private val activityRepository: ActivityRepository
+) : BaseViewModel() {
 
-    fun addEntry(entryList: EntryList) {
-            entryListDao.add(entryList)
-    }
-    fun deleteEntry(entryList: EntryList){
-            entryListDao.delete(entryList)
-    }
-    fun updateEntry(entryList: EntryList){
-            entryListDao.update(entryList)
-    }
-    fun getEntries() : List<EntryList>{
-        var entriesList = ArrayList<EntryList>()
-        entriesList = entryListDao.getAll() as ArrayList<EntryList>
-        return entriesList
+    val listOfEntries = ArrayList<List<Entry>>()
+
+    fun addEntry(entry: Entry) {
+        entryRepository.add(entry)
     }
 
-    fun getActivities() : List<ActivityList> {
-        var activitiesList = ArrayList<ActivityList>()
-        viewModelScope.launch (Dispatchers.IO){
-            activitiesList = activitiesDao.getAll() as ArrayList<ActivityList>
-            mutableActivitiesLiveData.postValue(activitiesList)
+    fun deleteEntry(entry: Entry) {
+        entryRepository.delete(entry)
+    }
+
+    fun updateEntry(entry: Entry) {
+        entryRepository.update(entry)
+    }
+
+    fun getEntries(): List<List<Entry>> {
+        return makeListFromEntries(entryRepository.getAll() as MutableList<Entry>)
+    }
+
+    private fun makeListFromEntries(entries: MutableList<Entry>): List<List<Entry>> {
+        entries.forEach { entry ->
+            val filteredList = entries.filter { it.date ==  entry.date}
+            if(!listOfEntries.contains(filteredList))
+                listOfEntries.add(0,filteredList)
         }
-        return activitiesList
+        return listOfEntries
     }
 
-    fun addActivity(activities : ActivityList) {
-        viewModelScope.launch(Dispatchers.IO){
-            activitiesDao.add(activities)
-        }
+    fun addActivity(activity: Activity): Long {
+        return activityRepository.add(activity)
     }
 
-    fun activitiesLiveData() : LiveData<List<ActivityList>> {
-        return mutableActivitiesLiveData
-    }
 }

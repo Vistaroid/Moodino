@@ -67,11 +67,9 @@ class MoreFragment : BaseFragment() {
     }
 
     fun changeLanguage(){
-
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_change_language , null)
         val dialog = AlertDialog.Builder(requireContext()).setView(view).create()
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
-
     }
 }

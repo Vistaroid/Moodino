@@ -37,22 +37,10 @@ class EntriesFragment : BaseFragment() {
     private lateinit var entriesContainerAdapter : EntryContainerAdapter
     private lateinit var navController: NavController
 
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
-    override fun onStop() {
-        EventBus.getDefault().unregister(this)
-        super.onStop()
-    }
 
     override fun onResume() {
         super.onResume()
         EventBus.getDefault().post(BottomNavState(true))
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     override fun onCreateView(
@@ -77,10 +65,9 @@ class EntriesFragment : BaseFragment() {
         view.implementSpringAnimationTrait()
     }
     private fun entriesContainerRvImpl(){
-        //TODO should receive from database
         val entriesList = entryViewModel.getEntries()
         entriesContainerAdapter = EntryContainerAdapter(requireContext(),
-            entriesList as MutableList<EntryList>
+            entriesList as MutableList<List<Entry>>
         )
 
         entriesContainerRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,false)
@@ -89,27 +76,9 @@ class EntriesFragment : BaseFragment() {
     private fun initViews(){
         entriesContainerRv = binding.entriesContainerRv
         navController = NavHostFragment.findNavController(this)
-        val appDatabase = AppDatabase.getAppDatabase(requireContext())
     }
     override fun onAttach(context: Context) {
         super.onAttach(context)
         BottomNavVisibility.currentFragment.value = this.id
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun entrySentToMe(entry: Entry){
-        if(entry.state == EntryState.ADD)
-        entriesContainerAdapter.addEntry(entry)
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun entryListSentToMe(entryList: EntryList){
-        if(entryList.state == EntryListState.UPDATE)
-                entryViewModel.updateEntry(entryList)
-
-        if(entryList.state == EntryListState.ADD)
-                entryViewModel.addEntry(entryList)
-        entriesContainerRv.smoothScrollToPosition(0)
-    }
-
 }
