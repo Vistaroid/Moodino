@@ -1,19 +1,19 @@
 package com.iranmobiledev.moodino.database
 
 import androidx.room.*
-import com.iranmobiledev.moodino.data.ActivityList
+import com.iranmobiledev.moodino.data.Activity
 
 @Dao
 interface ActivitiesDao {
     @Insert
-    suspend fun add(activityList: ActivityList) : Long
+    fun add(activity : Activity) : Long
 
     @Update
-    suspend fun update(activityList: ActivityList) : Int
+    fun update(activity : Activity) : Int
 
     @Delete
-    suspend fun delete(activityList: ActivityList) : Int
+    fun delete(activity : Activity) : Int
 
-    @Query("SELECT * FROM tbl_activities")
-    suspend fun getAll() : List<ActivityList>
+    @Query("SELECT * FROM table_activity")
+    fun getAll() : List<Activity>
 }
