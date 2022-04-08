@@ -31,10 +31,10 @@
     </style>
 
     <attr name="colorTextDay" format="reference" />
-    <attr name="colorSelectDay" format="reference"/>
-    <attr name="colorCurrentDay" format="reference"/>
-    <attr name="colorTextDayName" format="reference"/>
-    <attr name="colorTextDaySelected" format="reference"/>
-    <attr name="colorMonthSwitch" format="reference"/>
+    <attr name="colorSelectDay" format="reference" />
+    <attr name="colorCurrentDay" format="reference" />
+    <attr name="colorTextDayName" format="reference" />
+    <attr name="colorTextDaySelected" format="reference" />
+    <attr name="colorMonthSwitch" format="reference" />
 
 </resources>

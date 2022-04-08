@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="myNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@color/bottom_navigation_item</item>
         <item name="itemTextColor">@color/bottom_navigation_item</item>
@@ -20,13 +21,14 @@
     </style>
 
     //removed padding used for days in a row card in stats fragment
+
     <style name="CardViewStyleNoPadding" parent="Widget.MaterialComponents.CardView">
         <item name="cardCornerRadius">16dp</item>
         <item name="android:layout_marginEnd">12dp</item>
         <item name="android:layout_marginStart">12dp</item>
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:layout_marginBottom">16dp</item>
-            <item name="cardElevation">16dp</item>
+        <item name="cardElevation">16dp</item>
     </style>
 
     <style name="cardHeaderTextStyle" parent="Widget.MaterialComponents.TextView">

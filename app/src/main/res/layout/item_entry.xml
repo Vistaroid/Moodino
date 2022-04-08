@@ -94,7 +94,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView7"
-        app:srcCompat="@drawable/ic_more"
+        app:srcCompat="@drawable/ic_more_outlined"
         app:tint="@color/gray"
         android:layout_marginEnd="@dimen/_12mdp"
         android:scaleType="fitXY"/>

@@ -1,6 +1,5 @@
 package com.iranmobiledev.moodino.ui.entries
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,7 +20,6 @@ import com.iranmobiledev.moodino.data.EntryState
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.ui.entries.adapter.ActivityContainerAdapter
-import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
 import org.greenrobot.eventbus.EventBus
@@ -80,7 +78,7 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
             entry.photo = imageUri.toString()
         }
         EventBus.getDefault().postSticky(entry)
-        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_entryDetailFragment_to_entriesFragment)
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainer).navigate(R.id.action_entryDetailFragment_to_entriesFragment)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -116,9 +114,5 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
 
         //val visibility = if(view.visibility == View.GONE) View.VISIBLE else View.GONE
         //view.visibility = visibility
-    }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        BottomNavVisibility.currentFragment.value = this.id
     }
 }

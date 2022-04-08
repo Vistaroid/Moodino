@@ -1,8 +1,6 @@
 package com.iranmobiledev.moodino.ui.entries
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
-import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 
 class AddEntryFragment() : BaseFragment() {
 
@@ -42,7 +39,7 @@ class AddEntryFragment() : BaseFragment() {
     }
 
     private fun navigateToEntryDetailFragment(bundle : Bundle){
-        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_addEntryFragment_to_entryDetailFragment, bundle)
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainer).navigate(R.id.action_addEntryFragment_to_entryDetailFragment, bundle)
     }
 
     private fun makeDateStandard(entryDate: EntryDate) : String{
@@ -81,8 +78,4 @@ class AddEntryFragment() : BaseFragment() {
             return arguments?.getParcelable("entryDate")
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        BottomNavVisibility.currentFragment.value = this.id
-    }
 }

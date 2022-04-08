@@ -1,6 +1,5 @@
 package com.iranmobiledev.moodino.ui.calendar
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.FragmentCalendarBinding
-import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
-import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import org.greenrobot.eventbus.EventBus
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
@@ -36,11 +33,6 @@ class CalendarFragment : BaseFragment() {
     ): View {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        BottomNavVisibility.currentFragment.value = this.id
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

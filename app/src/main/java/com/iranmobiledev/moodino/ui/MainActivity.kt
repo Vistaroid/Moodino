@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
+import androidx.core.view.marginBottom
+import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -12,16 +15,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
-import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
-import com.iranmobiledev.moodino.utlis.MoodinoDateImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import saman.zamani.persiandate.PersianDate
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
 
@@ -34,17 +32,9 @@ class MainActivity : BaseActivity() {
     private lateinit var otherDayIv: Button
     private lateinit var fab: FloatingActionButton
     private lateinit var bottomAppBar: BottomAppBar
+    private lateinit var fragmentContainer: View
+
     private val model: MainActivityViewModel by viewModels()
-
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
-
-    override fun onStop() {
-        EventBus.getDefault().unregister(this)
-        super.onStop()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +45,23 @@ class MainActivity : BaseActivity() {
 
         //setup navigation controller
         val navView: BottomNavigationView = activityMainBinding.bottomNavigationView
-        navController = findNavController(R.id.fragmentContainerView)
+        navController = findNavController(R.id.fragmentContainer)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (
+                destination.id != R.id.entriesFragment &&
+                destination.id != R.id.statsFragment &&
+                destination.id != R.id.calenderFragment &&
+                destination.id != R.id.moreFragment
+            ){
+                bottomAppBar.performHide(false)
+                fab.hide()
+            }else {
+                bottomAppBar.performShow(false)
+                fab.show()
+            }
+        }
 
         val scope = CoroutineScope(Dispatchers.IO)
 
@@ -74,7 +79,6 @@ class MainActivity : BaseActivity() {
                 model.actionFab(fabMenu, it, MainActivity())
             }
 
-            bottomNavVisibility(false)
             val bundle = Bundle()
             val persianDate = PersianDate()
             bundle.putParcelable("entryDate", EntryDate(
@@ -95,25 +99,7 @@ class MainActivity : BaseActivity() {
         otherDayIv = activityMainBinding.otherDayButton
         fab = activityMainBinding.fab
         bottomAppBar = activityMainBinding.bottomAppBar
-    }
-
-    private fun bottomNavVisibility(mustShow: Boolean) {
-        if (mustShow) {
-            fab.show()
-            fab.isClickable = true
-            bottomAppBar.visibility = View.VISIBLE
-            bottomAppBar.performShow()
-        } else {
-            fab.hide()
-            fab.isClickable = false
-            bottomAppBar.visibility = View.GONE
-            bottomAppBar.performHide(true)
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun mustBottomNavShow(bottomNavState: BottomNavState) {
-        bottomNavVisibility(bottomNavState.mustShow)
+        fragmentContainer = findViewById(R.id.fragmentContainer)
     }
 }
 
