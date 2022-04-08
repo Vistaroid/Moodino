@@ -10,6 +10,7 @@
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_add.xml" value="0.1" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_add_mo_border.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_add_round_corner.xml" value="0.192" />
+        <entry key="..\:/Moodino/app/src/main/res/drawable/ic_arrow_right.xml" value="0.1815" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_back_arrow.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_bad_outlined.xml" value="0.192" />
         <entry key="..\:/Moodino/app/src/main/res/drawable/ic_bar_chart.xml" value="0.192" />
@@ -37,7 +38,9 @@
         <entry key="..\:/Moodino/app/src/main/res/layout/achievements_card.xml" value="0.264" />
         <entry key="..\:/Moodino/app/src/main/res/layout/activity_main.xml" value="0.128" />
         <entry key="..\:/Moodino/app/src/main/res/layout/add_entry_fragment.xml" value="0.1628901239846088" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/circles_row.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/layout/custom_nagation_bar_add_button.xml" value="0.24547101449275363" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/dat_circle.xml" value="0.6" />
         <entry key="..\:/Moodino/app/src/main/res/layout/day_checked_fragment_stats.xml" value="0.12037037037037036" />
         <entry key="..\:/Moodino/app/src/main/res/layout/day_not_checked_fragment_stats.xml" value="0.12037037037037036" />
         <entry key="..\:/Moodino/app/src/main/res/layout/days_in_a_row_card.xml" value="0.25416666666666665" />
@@ -55,6 +58,7 @@
         <entry key="..\:/Moodino/app/src/main/res/layout/mood_count_icon.xml" value="0.536" />
         <entry key="..\:/Moodino/app/src/main/res/layout/moods_count_card.xml" value="0.4178082191780822" />
         <entry key="..\:/Moodino/app/src/main/res/layout/view_more_item.xml" value="0.20863616930312098" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/year_in_pixels_card.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/menu/botton_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/activity_main.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.17239583333333333" />
