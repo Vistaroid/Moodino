@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteY="20dp">
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/entryTimeTv"
             style="@style/cardHeaderTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,9 +33,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_share"
-            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintBottom_toBottomOf="@+id/entryTimeTv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView7" />
+            app:layout_constraintTop_toTopOf="@+id/entryTimeTv" />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/moodCountPieChart"
@@ -43,7 +43,7 @@
             android:layout_height="220dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintTop_toBottomOf="@+id/entryTimeTv" />
 
         <View
             android:layout_marginTop="10dp"

@@ -17,6 +17,7 @@ import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.*
 import com.iranmobiledev.moodino.database.AppDatabase
 import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
+import com.iranmobiledev.moodino.ui.entries.adapter.EntryAdapter
 import com.iranmobiledev.moodino.ui.entries.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
@@ -29,7 +30,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EntriesFragment : BaseFragment() {
+class EntriesFragment : BaseFragment(), EntryAdapter.OnPopupMenuEventListener{
 
     private lateinit var binding : FragmentEntriesBinding
     private lateinit var entriesContainerRv : RecyclerView
@@ -37,22 +38,10 @@ class EntriesFragment : BaseFragment() {
     private lateinit var entriesContainerAdapter : EntryContainerAdapter
     private lateinit var navController: NavController
 
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
-    override fun onStop() {
-        EventBus.getDefault().unregister(this)
-        super.onStop()
-    }
 
     override fun onResume() {
         super.onResume()
         EventBus.getDefault().post(BottomNavState(true))
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     override fun onCreateView(
@@ -77,10 +66,10 @@ class EntriesFragment : BaseFragment() {
         view.implementSpringAnimationTrait()
     }
     private fun entriesContainerRvImpl(){
-        //TODO should receive from database
         val entriesList = entryViewModel.getEntries()
         entriesContainerAdapter = EntryContainerAdapter(requireContext(),
-            entriesList as MutableList<EntryList>
+            entriesList as MutableList<MutableList<Entry>>,
+            this
         )
 
         entriesContainerRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,false)
@@ -89,27 +78,19 @@ class EntriesFragment : BaseFragment() {
     private fun initViews(){
         entriesContainerRv = binding.entriesContainerRv
         navController = NavHostFragment.findNavController(this)
-        val appDatabase = AppDatabase.getAppDatabase(requireContext())
     }
     override fun onAttach(context: Context) {
         super.onAttach(context)
         BottomNavVisibility.currentFragment.value = this.id
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun entrySentToMe(entry: Entry){
-        if(entry.state == EntryState.ADD)
-        entriesContainerAdapter.addEntry(entry)
+    override fun onPopupMenuItemClicked(entry: Entry, itemId: Int): Boolean {
+        when(itemId){
+            R.id.delete -> {
+                entryViewModel.deleteEntry(entry)
+                entriesContainerAdapter.removeItem(entry)
+            }
+        }
+        return true
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun entryListSentToMe(entryList: EntryList){
-        if(entryList.state == EntryListState.UPDATE)
-                entryViewModel.updateEntry(entryList)
-
-        if(entryList.state == EntryListState.ADD)
-                entryViewModel.addEntry(entryList)
-        entriesContainerRv.smoothScrollToPosition(0)
-    }
-
 }

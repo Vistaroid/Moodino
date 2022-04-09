@@ -1,7 +1,7 @@
 package com.iranmobiledev.moodino.ui.entries.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,31 +12,33 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
+import org.koin.core.component.KoinComponent
 
-class EntryAdapter(private val entries : List<Entry>, private val context: Context) : RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
+
+class EntryAdapter(private val onPopupMenuEventListener: OnPopupMenuEventListener, val entries : MutableList<Entry>, private val context: Context) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         private val binding : ItemEntryBinding = ItemEntryBinding.bind(itemView)
 
         private val entryIcon : ImageView = binding.EntryIcon
-        private val entryTitle : TextView = binding.entryTitle
         private val moreIcon : ImageView = binding.moreIcon
         private val entryImage : ImageView = binding.entryImage
-        private val entryNote : TextView = binding.entryNote
+        private val entryTimeTv : TextView = binding.entryTimeTv
 
+        @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry){
-            //TODO check entry title and then set entry icon (hint : use switch)
-            entryIcon.setImageResource(R.drawable.ic_emoji_very_happy)
-            entryTitle.text = entry.title
 
-            entry.photo?.let { entryImage.setImageURI(Uri.parse(it)) }
-            entryNote.text = entry.note
-
+            entryIcon.setImageResource(entry.icon)
+            entryTimeTv.text = "${entry.time?.hour}:${entry.time?.minutes}"
+            binding.entryItem = entry
             moreIcon.setOnClickListener {
                 val popupMenu = PopupMenu(context, it)
                 popupMenu.inflate(R.menu.popup_menu)
-
+                popupMenu.setOnMenuItemClickListener { menuItem ->
+                    onPopupMenuEventListener.onPopupMenuItemClicked(entry, menuItem.itemId)
+                }
                 popupMenu.show()
             }
         }
@@ -45,6 +47,20 @@ class EntryAdapter(private val entries : List<Entry>, private val context: Conte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
         return ViewHolder(view)
+    }
+
+    fun remove(entry: Entry){
+        val i = entries.indexOf(entry)
+        if(i == -1)
+            return
+        else{
+            entries.remove(entry)
+            notifyItemRemoved(i)
+        }
+    }
+
+    interface OnPopupMenuEventListener{
+        fun onPopupMenuItemClicked(entry: Entry, itemId : Int) : Boolean
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -1,101 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/_6mdp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/EntryIcon"
-        android:layout_width="@dimen/_60mdp"
-        android:layout_height="@dimen/_60mdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_emoji_happy" />
+    <data>
 
-    <View
-        android:layout_width="@dimen/_2mdp"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="@+id/EntryIcon"
-        app:layout_constraintStart_toStartOf="@+id/EntryIcon"
-        app:layout_constraintTop_toBottomOf="@+id/EntryIcon"
-        app:layout_constraintBottom_toBottomOf="@id/imageContainer"
-        android:background="@color/silver"
-        android:layout_marginTop="@dimen/_8mdp"/>
+        <variable
+            name="entryItem"
+            type="com.iranmobiledev.moodino.data.Entry" />
+        <import type="android.view.View" />
+    </data>
 
-    <TextView
-        android:id="@+id/entryTitle"
-        style="@style/cardHeaderTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16mdp"
-        android:text="@string/awful"
-        android:textAppearance="?textAppearanceHeadline6"
-        app:layout_constraintStart_toEndOf="@+id/EntryIcon"
-        app:layout_constraintTop_toTopOf="@+id/EntryIcon" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6mdp"
-        android:text="@string/time"
-        app:layout_constraintBottom_toBottomOf="@+id/entryTitle"
-        app:layout_constraintStart_toEndOf="@+id/entryTitle"
-        app:layout_constraintTop_toTopOf="@+id/entryTitle" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/entryTitle"
-        app:layout_constraintTop_toBottomOf="@+id/entryTitle"
-        />
-
-    <TextView
-        android:id="@+id/entryNote"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10mdp"
-        android:layout_marginEnd="@dimen/_12mdp"
-        android:text="@string/note"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/entryTitle"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"/>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/imageContainer"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_180mdp"
-        android:layout_marginTop="@dimen/_12mdp"
-        app:cardCornerRadius="@dimen/_16mdp"
-        app:cardElevation="0dp"
-        android:layout_marginEnd="@dimen/_12mdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/entryTitle"
-        app:layout_constraintTop_toBottomOf="@+id/entryNote"
-        >
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/entryImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:background="?colorPrimary" />
-    </com.google.android.material.card.MaterialCardView>
+            android:id="@+id/EntryIcon"
+            android:layout_width="@dimen/_60mdp"
+            android:layout_height="@dimen/_60mdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_emoji_happy"/>
 
-    <ImageButton
-        android:id="@+id/moreIcon"
-        android:layout_width="@dimen/_25mdp"
-        android:layout_height="@dimen/_25mdp"
-        android:background="@drawable/circle_shape"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView7"
-        app:srcCompat="@drawable/ic_more"
-        app:tint="@color/gray"
-        android:layout_marginEnd="@dimen/_12mdp"
-        android:scaleType="fitXY"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:layout_width="@dimen/_2mdp"
+            android:layout_height="0dp"
+            android:background="@color/silver"
+            app:layout_constraintEnd_toEndOf="@+id/EntryIcon"
+            app:layout_constraintStart_toStartOf="@+id/EntryIcon"
+            app:layout_constraintTop_toBottomOf="@+id/EntryIcon"
+            app:layout_constraintBottom_toBottomOf="@id/imageContainer"/>
+
+        <TextView
+            android:id="@+id/entryTitle"
+            style="@style/cardHeaderTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16mdp"
+            android:text="@{entryItem.title}"
+            android:textColor="?colorPrimary"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintStart_toEndOf="@+id/EntryIcon"
+            app:layout_constraintTop_toTopOf="@+id/EntryIcon"/>
+
+        <TextView
+            android:id="@+id/entryTimeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6mdp"
+            app:layout_constraintBottom_toBottomOf="@+id/entryTitle"
+            app:layout_constraintStart_toEndOf="@+id/entryTitle"
+            app:layout_constraintTop_toTopOf="@+id/entryTitle" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/entryTitle"
+            app:layout_constraintTop_toBottomOf="@+id/entryTitle"/>
+
+        <TextView
+            android:id="@+id/entryNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10mdp"
+            android:layout_marginEnd="@dimen/_12mdp"
+            android:text="@{entryItem.note}"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/entryTitle"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+            android:visibility="@{entryItem.note.length() > 0 ? View.VISIBLE : View.GONE}"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/imageContainer"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_180mdp"
+            android:layout_marginTop="@dimen/_12mdp"
+            android:layout_marginEnd="@dimen/_12mdp"
+            app:cardCornerRadius="@dimen/_16mdp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/entryTitle"
+            app:layout_constraintTop_toBottomOf="@+id/entryNote"
+            android:visibility="@{entryItem.photoPath.length() > 0 ? View.VISIBLE : View.GONE}"
+            >
+
+            <ImageView
+                android:id="@+id/entryImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                bind:loadImageUrl="@{entryItem.photoPath}"
+                tools:background="?colorPrimary" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageButton
+            android:id="@+id/moreIcon"
+            android:layout_width="@dimen/_25mdp"
+            android:layout_height="@dimen/_25mdp"
+            android:layout_marginEnd="@dimen/_12mdp"
+            android:background="@drawable/circle_shape"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@+id/entryTimeTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/entryTimeTv"
+            app:srcCompat="@drawable/ic_more"
+            app:tint="@color/gray" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

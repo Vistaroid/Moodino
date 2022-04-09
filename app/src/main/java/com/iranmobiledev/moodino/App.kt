@@ -2,12 +2,16 @@ package com.iranmobiledev.moodino
 
 import android.app.Application
 import android.content.SharedPreferences
-import com.iranmobiledev.moodino.data.activities1
-import com.iranmobiledev.moodino.data.activities2
-import com.iranmobiledev.moodino.data.activities3
+import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.database.AppDatabase
+import com.iranmobiledev.moodino.repository.activity.ActivityRepository
+import com.iranmobiledev.moodino.repository.activity.ActivityRepositoryImpl
+import com.iranmobiledev.moodino.repository.activity.source.ActivityLocalDataSource
+import com.iranmobiledev.moodino.repository.entry.EntryRepository
+import com.iranmobiledev.moodino.repository.entry.EntryRepositoryImpl
+import com.iranmobiledev.moodino.repository.entry.source.EntryLocalDataSource
+import com.iranmobiledev.moodino.ui.entries.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entries.EntryViewModel
-import com.iranmobiledev.moodino.ui.entries.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -23,8 +27,12 @@ class App : Application() , KoinComponent{
         val database = AppDatabase.getAppDatabase(this)
 
         val modules = module {
-            viewModel { EntryViewModel(database.getEntryListDao, database.getActivityDao) }
+            viewModel { EntryViewModel(get(), get()) }
+            viewModel { EntryDetailViewModel(get(), get()) }
+            factory <EntryRepository> { EntryRepositoryImpl(EntryLocalDataSource(database.getEntryDao)) }
+            factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
         }
+
         startKoin {
             androidContext(this@App)
             modules(modules)
@@ -34,13 +42,12 @@ class App : Application() , KoinComponent{
         val firstEnter = sharedPref.getBoolean("first_enter", false)
         if(!firstEnter)
             makeDefaultActivities()
-
     }
 
     private fun makeDefaultActivities() {
         val viewModel : EntryViewModel = get()
-        viewModel.addActivity(activities1())
-        viewModel.addActivity(activities2())
-        viewModel.addActivity(activities3())
+        viewModel.addActivity(Activity(id = null, image = R.drawable.ic_arrow_bottom,title = "achievement", category = "CT"))
+        viewModel.addActivity(Activity(id = null, image = R.drawable.ic_arrow_bottom,title = "achievement", category = "CT"))
+        viewModel.addActivity(Activity(id = null, image = R.drawable.ic_arrow_bottom,title = "achievement", category = "CT"))
     }
 }

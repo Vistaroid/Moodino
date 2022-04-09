@@ -58,6 +58,7 @@ class StatsFragment : BaseFragment() {
         val pieChart = binding.moodCountCardInclude.moodCountPieChart
         scope.launch {
             model.initializePieChart(pieChart,requireContext())
+            
         }
     }
 }
