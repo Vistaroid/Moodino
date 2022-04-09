@@ -32,6 +32,7 @@
         android:layout_weight="1"
         tools:text="toolbar title"
         android:textColor="?attr/colorTextDay"
+        android:textStyle="bold"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>

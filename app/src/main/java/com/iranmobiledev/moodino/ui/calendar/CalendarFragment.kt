@@ -90,7 +90,7 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun updateToolbar(binding: FragmentCalendarBinding, date: AbstractDate) {
-        binding.monthName.text= date.monthName  + " "+ date.year
+        binding.mainToolbar.title.text= date.monthName  + " "+ date.year
 //        val toolbar = binding.appBar.toolbar
 //        val secondaryCalendar = secondaryCalendar
 //        if (secondaryCalendar == null) {

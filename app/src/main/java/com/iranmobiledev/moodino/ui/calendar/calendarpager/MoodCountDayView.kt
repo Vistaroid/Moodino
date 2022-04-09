@@ -18,7 +18,7 @@ class MoodCountDayView(context: Context, attr: AttributeSet): View(context, attr
         textPaint.also {
             it.color= defaultColor
             it.textAlign= Paint.Align.CENTER
-            it.textSize= 40f
+            it.textSize= 36f
         }
         rectPaint.color= defaultColor
     }
@@ -26,7 +26,7 @@ class MoodCountDayView(context: Context, attr: AttributeSet): View(context, attr
     companion object{
         const val defaultColor= Color.GRAY
         const val defaultText= 0
-        const val rectHeight= 20
+        const val rectHeight= 16
         const val rectWidth= 100
     }
 
