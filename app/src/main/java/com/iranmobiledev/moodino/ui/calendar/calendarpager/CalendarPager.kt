@@ -88,33 +88,33 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
             init {
                 binding.monthView.initialize(sharedDayViewData, this@CalendarPager)
 
-                binding.previous.let {
-                    it.contentDescription = it.context.getString(
-                        R.string.previous_x, it.context.getString(R.string.month)
-                    )
-                    it.rotateTo(ArrowView.Direction.START)
-                    it.setOnClickListener {
-                        viewPager.setCurrentItem(viewPager.currentItem - 1, true)
-                    }
-                    it.setOnLongClickListener {
-                        viewPager.setCurrentItem(viewPager.currentItem - 12, false)
-                        true
-                    }
-                }
+//                binding.previous.let {
+//                    it.contentDescription = it.context.getString(
+//                        R.string.previous_x, it.context.getString(R.string.month)
+//                    )
+//                    it.rotateTo(ArrowView.Direction.START)
+//                    it.setOnClickListener {
+//                        viewPager.setCurrentItem(viewPager.currentItem - 1, true)
+//                    }
+//                    it.setOnLongClickListener {
+//                        viewPager.setCurrentItem(viewPager.currentItem - 12, false)
+//                        true
+//                    }
+//                }
 
-                binding.next.let {
-                    it.contentDescription = it.context.getString(
-                        R.string.next_x, it.context.getString(R.string.month)
-                    )
-                    it.rotateTo(ArrowView.Direction.END)
-                    it.setOnClickListener {
-                        viewPager.setCurrentItem(viewPager.currentItem + 1, true)
-                    }
-                    it.setOnLongClickListener {
-                        viewPager.setCurrentItem(viewPager.currentItem + 12, false)
-                        true
-                    }
-                }
+//                binding.next.let {
+//                    it.contentDescription = it.context.getString(
+//                        R.string.next_x, it.context.getString(R.string.month)
+//                    )
+//                    it.rotateTo(ArrowView.Direction.END)
+//                    it.setOnClickListener {
+//                        viewPager.setCurrentItem(viewPager.currentItem + 1, true)
+//                    }
+//                    it.setOnLongClickListener {
+//                        viewPager.setCurrentItem(viewPager.currentItem + 12, false)
+//                        true
+//                    }
+//                }
                 addViewHolder(this)
             }
 
