@@ -13,10 +13,10 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 
-class EntryAdapter(private val entries : List<Entry>, private val context: Context) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
+class EntryAdapter(private val onPopupMenuEventListener: OnPopupMenuEventListener, val entries : MutableList<Entry>, private val context: Context) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -36,6 +36,9 @@ class EntryAdapter(private val entries : List<Entry>, private val context: Conte
             moreIcon.setOnClickListener {
                 val popupMenu = PopupMenu(context, it)
                 popupMenu.inflate(R.menu.popup_menu)
+                popupMenu.setOnMenuItemClickListener { menuItem ->
+                    onPopupMenuEventListener.onPopupMenuItemClicked(entry, menuItem.itemId)
+                }
                 popupMenu.show()
             }
         }
@@ -46,7 +49,19 @@ class EntryAdapter(private val entries : List<Entry>, private val context: Conte
         return ViewHolder(view)
     }
 
+    fun remove(entry: Entry){
+        val i = entries.indexOf(entry)
+        if(i == -1)
+            return
+        else{
+            entries.remove(entry)
+            notifyItemRemoved(i)
+        }
+    }
 
+    interface OnPopupMenuEventListener{
+        fun onPopupMenuItemClicked(entry: Entry, itemId : Int) : Boolean
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(entries[position])
