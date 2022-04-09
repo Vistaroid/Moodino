@@ -6,15 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Activity
-import com.iranmobiledev.moodino.data.ActivityList
-import saman.zamani.persiandate.PersianDate
 
 class ActivityContainerAdapter(
-    private var activities: List<ActivityList>,
+    private var activities: List<List<Activity>>,
     private val adapterItemCallback: AdapterItemCallback,
     private val context: Context
 ) : RecyclerView.Adapter<ActivityContainerAdapter.ViewHolder>() {
@@ -38,17 +35,17 @@ class ActivityContainerAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(activities[position].activities)
+        holder.bind(activities[position])
     }
 
     override fun getItemCount(): Int = activities.size
 
-    fun addActivitiesList(list : List<ActivityList>?) {
-        list?.let {
-            activities = list
-            notifyDataSetChanged()
-        }
-    }
+//    fun addActivitiesList(list : List<Activity>?) {
+//        list?.let {
+//            activities = list
+//            notifyDataSetChanged()
+//        }
+//    }
 
     interface AdapterItemCallback {
         //todo pass view to this function

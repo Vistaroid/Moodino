@@ -13,7 +13,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.data.BottomNavState
-import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
 import com.iranmobiledev.moodino.utlis.MoodinoDateImpl
 import kotlinx.coroutines.CoroutineScope
@@ -77,14 +76,7 @@ class MainActivity : BaseActivity() {
             bottomNavVisibility(false)
             val bundle = Bundle()
             val persianDate = PersianDate()
-            bundle.putParcelable("entryDate", EntryDate(
-                persianDate.second,
-                persianDate.minute,
-                persianDate.hour,
-                persianDate.grgDay,
-                persianDate.grgMonth,
-                persianDate.grgYear
-            ))
+            //TODO send date from bundle
             navController.navigate(R.id.addEntryFragment, bundle)
         }
     }

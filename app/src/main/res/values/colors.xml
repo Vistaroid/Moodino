@@ -9,6 +9,8 @@
     <color name="white">#FFFFFF</color>
     <color name="background">#E9E9EA</color>
     <color name="gray">#CFCFCF</color>
+    <color name="gray_dark_700">#494848</color>
+    <color name="gray_dark_500">#6C6B6B</color>
     <color name="gold">#EFD002</color>
     <color name="silver">#DFDFDF</color>
     <color name="blue_light">#e9f0fa</color>

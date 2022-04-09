@@ -1,22 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/month_name"
+    <include
+        android:id="@+id/main_toolbar"
+        layout="@layout/main_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+<ScrollView
+    app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_marginHorizontal="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="horizontal"
         android:gravity="center"
-        tools:text="@string/month"
-        android:padding="5dp"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:background="@drawable/round_corner_rectangle"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="2dp"
+        android:layout_marginVertical="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:src="@drawable/ic_happy_outlined"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:tint="@color/green" />
+
+        <TextView
+            android:id="@+id/average_mood"
+            android:layout_margin="5dp"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:text="@string/average_mood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.iranmobiledev.moodino.ui.calendar.calendarpager.CalendarPager
         android:id="@+id/calendarPager"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_320mdp"/>
+        android:layout_height="@dimen/_220mdp"/>
+
+    <View
+        android:layout_marginHorizontal="15dp"
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+            android:id="@+id/vary_happy"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+            android:id="@+id/happy"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+            android:id="@+id/normal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+            android:id="@+id/sad"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+            android:id="@+id/very_sad"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

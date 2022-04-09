@@ -11,13 +11,16 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
-import com.iranmobiledev.moodino.utlis.BottomNavVisibility
+import com.iranmobiledev.moodino.utlis.*
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
 
 class AddEntryFragment() : BaseFragment() {
 
-    private var entryDate : EntryDate? = null
     private lateinit var binding : AddEntryFragmentBinding
+    private var persianDate : PersianDate = PersianDate()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,59 +29,59 @@ class AddEntryFragment() : BaseFragment() {
     ): View {
         binding = AddEntryFragmentBinding.inflate(inflater, container, false)
         emojiItemClickHandler()
-        entryDate = arguments?.getParcelable("entryDate")
-        entryDate?.let {
-            binding.dateTv.text = makeDateStandard(entryDate!!)
-            binding.timeTv.text = makeTimeStandard(entryDate!!)
-        }
+
+        binding.dateTv.text = getDate()
+        binding.timeTv.text = getTime()
 
         return binding.root
-    }
-
-    private fun makeTimeStandard(entryDate: EntryDate): String {
-         if(entryDate.minute < 10)
-             return "${entryDate.hours}:0${entryDate.minute}"
-         return "${entryDate.hours}:${entryDate.minute}"
     }
 
     private fun navigateToEntryDetailFragment(bundle : Bundle){
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_addEntryFragment_to_entryDetailFragment, bundle)
     }
-
-    private fun makeDateStandard(entryDate: EntryDate) : String{
-        return "${entryDate.month} ${entryDate.day}"
-    }
     private fun emojiItemClickHandler(){
 
-        val entry = Entry()
+        val entry = Entry(null)
         val bundle = Bundle()
-        entry.date = getDate()
+        entry.date = EntryDate(persianDate.grgYear, persianDate.grgMonth, persianDate.grgDay)
+        entry.time = EntryTime(persianDate.hour, persianDate.minute)
         bundle.putParcelable("entry", entry)
+
 
         binding.include.itemNothing.setOnClickListener{
             entry.icon = R.drawable.ic_emoji_nothing
+            entry.title = MEH
             navigateToEntryDetailFragment(bundle)
         }
         binding.include.itemHappy.setOnClickListener{
             entry.icon = R.drawable.ic_emoji_happy
+            entry.title = GOOD
             navigateToEntryDetailFragment(bundle)
         }
         binding.include.itemSad.setOnClickListener{
             entry.icon = R.drawable.ic_emoji_sad
+            entry.title = BAD
             navigateToEntryDetailFragment(bundle)
         }
         binding.include.itemVerySad.setOnClickListener{
             entry.icon = R.drawable.ic_emoji_very_sad
+            entry.title = AWFUL
             navigateToEntryDetailFragment(bundle)
         }
         binding.include.itemVeryHappy.setOnClickListener{
+            entry.title = RAD
             entry.icon = R.drawable.ic_emoji_very_happy
             navigateToEntryDetailFragment(bundle)
         }
     }
 
-    private fun getDate(): EntryDate? {
-            return arguments?.getParcelable("entryDate")
+    private fun getDate(): String {
+        //TODO this format (english of farsi) should receive from const type
+        return PersianDateFormat.format(persianDate, "Y F", PersianDateFormat.PersianDateNumberCharacter.FARSI)
+    }
+
+    private fun getTime() : String{
+        return PersianDateFormat.format(persianDate, "H i")
     }
 
     override fun onAttach(context: Context) {

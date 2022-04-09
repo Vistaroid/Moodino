@@ -7,15 +7,15 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.iranmobiledev.moodino.ui.calendar.calendarpager.ArrowView
-        android:id="@+id/previous"
-        android:layout_width="@dimen/arrow_size"
-        android:layout_height="@dimen/arrow_size"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="?attr/selectableItemBackground"
-        android:gravity="center"
-        app:tint="?attr/colorMonthSwitch" />
+<!--    <com.iranmobiledev.moodino.ui.calendar.calendarpager.ArrowView-->
+<!--        android:id="@+id/previous"-->
+<!--        android:layout_width="@dimen/arrow_size"-->
+<!--        android:layout_height="@dimen/arrow_size"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="?attr/selectableItemBackground"-->
+<!--        android:gravity="center"-->
+<!--        app:tint="?attr/colorMonthSwitch" />-->
 
     <com.iranmobiledev.moodino.ui.calendar.calendarpager.MonthView
         android:id="@+id/month_view"
@@ -27,14 +27,14 @@
         android:scrollbarSize="0dp"
         android:scrollbars="vertical" />
 
-    <com.iranmobiledev.moodino.ui.calendar.calendarpager.ArrowView
-        android:id="@+id/next"
-        android:layout_width="@dimen/arrow_size"
-        android:layout_height="@dimen/arrow_size"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="?attr/selectableItemBackground"
-        android:gravity="center"
-        app:tint="?attr/colorMonthSwitch" />
+<!--    <com.iranmobiledev.moodino.ui.calendar.calendarpager.ArrowView-->
+<!--        android:id="@+id/next"-->
+<!--        android:layout_width="@dimen/arrow_size"-->
+<!--        android:layout_height="@dimen/arrow_size"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:background="?attr/selectableItemBackground"-->
+<!--        android:gravity="center"-->
+<!--        app:tint="?attr/colorMonthSwitch" />-->
 
 </LinearLayout>
