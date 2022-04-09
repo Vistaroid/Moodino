@@ -20,10 +20,12 @@ import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.ui.entries.adapter.ActivityContainerAdapter
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
+import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterItemCallback, KoinComponent{
 
@@ -33,12 +35,12 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
     private lateinit var save : ViewGroup
     private lateinit var saveFab : FloatingActionButton
     private lateinit var entryImage : ImageView
-    private var imageUri : String? = null
+    private var imagePath : String? = null
     private lateinit var entryImageContainer : MaterialCardView
     private lateinit var noteEt : EditText
     private val entryDetailViewModel : EntryDetailViewModel by viewModel()
     private var entry = Entry(id = null)
-
+    private val imageLoader : ImageLoadingService by inject()
     override fun onStart() {
         super.onStart()
         entry = arguments?.getParcelable("entry")!!
@@ -61,10 +63,12 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
 
             PickImageDialog.build(setupPhotoDialog()) {
                 if(it.error == null){
-                    imageUri = it.path
+                    imagePath = it.path
                     entryImageContainer.visibility = View.VISIBLE
                     entry.photoPath = it.path
-
+                    context?.let { context ->
+                        imageLoader.load(context, entry.photoPath, entryImage)
+                    }
                 }
             }.show(parentFragmentManager)
         }
