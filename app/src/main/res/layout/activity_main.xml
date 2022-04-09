@@ -6,16 +6,19 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".ui.MainActivity"
+    android:orientation="vertical"
     android:id="@+id/mainFragmentConianer">
 
     <fragment
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/fragmentContainer"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"
-        android:layout_marginBottom="@dimen/_45mdp"/>
+
+        app:navGraph="@navigation/nav_graph"/>
+<!--        -->
+<!--        android:layout_marginBottom="@dimen/_44mdp"/>-->
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -33,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
             android:elevation="0dp"
             android:translationZ="0dp"
             app:menu="@menu/bottom_nav" />

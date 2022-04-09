@@ -29,11 +29,23 @@
                layout="@layout/moods_count_card"
               />
 
+
+           <androidx.compose.ui.platform.ComposeView
+               android:id="@+id/composeView"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintBottom_toTopOf="@id/space"
+               app:layout_constraintTop_toBottomOf="@id/moodCountCardInclude"
+               android:elevation="16dp"/>
+
            <Space
+               android:id="@+id/space"
                android:layout_width="match_parent"
                android:layout_height="100dp"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/moodCountCardInclude" />
+               app:layout_constraintTop_toBottomOf="@+id/composeView" />
 
        </androidx.constraintlayout.widget.ConstraintLayout>
    </ScrollView>

@@ -3,22 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.iranmobiledev.moodino">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".App"
         android:theme="@style/Theme.Moodino">
+        <activity
+            android:name=".ui.states.customView.composable.DaysInYearComposable"
+            android:exported="false"
+            android:label="@string/title_activity_days_in_year_composable"
+            android:theme="@style/Theme.Moodino" />
+
         <provider
             android:name="com.vansuita.pickimage.provider.PickImageFileProvider"
             android:authorities="${applicationId}.com.vansuita.pickimage.provider"
@@ -29,6 +37,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/picker_provider_paths" />
         </provider>
+
         <activity
             android:name=".ui.more.pinLock.PinLockActivity"
             android:exported="false" />
