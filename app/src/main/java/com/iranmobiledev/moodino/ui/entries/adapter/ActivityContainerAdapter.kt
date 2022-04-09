@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Activity
+import com.iranmobiledev.moodino.data.Entry
 
 class ActivityContainerAdapter(
     private var activities: List<List<Activity>>,
-    private val adapterItemCallback: AdapterItemCallback,
     private val context: Context
 ) : RecyclerView.Adapter<ActivityContainerAdapter.ViewHolder>() {
 
@@ -40,19 +40,4 @@ class ActivityContainerAdapter(
 
     override fun getItemCount(): Int = activities.size
 
-//    fun addActivitiesList(list : List<Activity>?) {
-//        list?.let {
-//            activities = list
-//            notifyDataSetChanged()
-//        }
-//    }
-
-    interface AdapterItemCallback {
-        //todo pass view to this function
-        fun onExpandViewClicked()
-
-    }
-
-    private fun thisDateExist(){
-    }
 }

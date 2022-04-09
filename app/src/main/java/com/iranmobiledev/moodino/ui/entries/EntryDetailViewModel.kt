@@ -8,7 +8,7 @@ import com.iranmobiledev.moodino.repository.entry.EntryRepository
 
 class EntryDetailViewModel(
     private val entryRepository: EntryRepository,
-    private val activityRepository: ActivityRepository
+    private val activityRepository: ActivityRepository,
 ) : BaseViewModel() {
 
     fun addEntry(entry: Entry): Long {

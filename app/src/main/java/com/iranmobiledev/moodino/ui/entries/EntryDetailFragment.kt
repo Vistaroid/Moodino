@@ -20,6 +20,7 @@ import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.ui.entries.adapter.ActivityContainerAdapter
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
+import com.iranmobiledev.moodino.utlis.EntryEventListener
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
@@ -27,7 +28,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterItemCallback, KoinComponent{
+class EntryDetailFragment : BaseFragment(), KoinComponent {
 
     private lateinit var binding : EntryDetailFragmentBinding
     private lateinit var activitiesContainerAdapter : ActivityContainerAdapter
@@ -101,7 +102,7 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
     }
     private fun initViews(){
         //TODO make list from list of activities
-        activitiesContainerAdapter = ActivityContainerAdapter(entryDetailViewModel.getActivities(), this, requireContext())
+        activitiesContainerAdapter = ActivityContainerAdapter(entryDetailViewModel.getActivities(), requireContext())
         activitiesRv = binding.activitiesContainerRv
         save = binding.saveLayout
         saveFab = binding.saveEntryFab
@@ -110,13 +111,6 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
         noteEt = binding.noteEt
     }
 
-
-
-    override fun onExpandViewClicked() {
-
-        //val visibility = if(view.visibility == View.GONE) View.VISIBLE else View.GONE
-        //view.visibility = visibility
-    }
     override fun onAttach(context: Context) {
         super.onAttach(context)
         BottomNavVisibility.currentFragment.value = this.id

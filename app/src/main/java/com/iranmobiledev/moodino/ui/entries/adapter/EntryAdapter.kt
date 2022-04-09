@@ -12,10 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
+import com.iranmobiledev.moodino.utlis.EntryEventListener
 import org.koin.core.component.KoinComponent
 
 
-class EntryAdapter(private val onPopupMenuEventListener: OnPopupMenuEventListener, val entries : MutableList<Entry>, private val context: Context) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
+class EntryAdapter(private val entryEventListener: EntryEventListener, val entries : MutableList<Entry>, private val context: Context) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -36,8 +37,8 @@ class EntryAdapter(private val onPopupMenuEventListener: OnPopupMenuEventListene
             moreIcon.setOnClickListener {
                 val popupMenu = PopupMenu(context, it)
                 popupMenu.inflate(R.menu.popup_menu)
-                popupMenu.setOnMenuItemClickListener { menuItem ->
-                    onPopupMenuEventListener.onPopupMenuItemClicked(entry, menuItem.itemId)
+                popupMenu.setOnMenuItemClickListener {
+                    entryEventListener.deleteEntry(entry)
                 }
                 popupMenu.show()
             }
@@ -47,6 +48,10 @@ class EntryAdapter(private val onPopupMenuEventListener: OnPopupMenuEventListene
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
         return ViewHolder(view)
+    }
+
+    fun add(entry: Entry){
+
     }
 
     fun remove(entry: Entry){
@@ -59,9 +64,6 @@ class EntryAdapter(private val onPopupMenuEventListener: OnPopupMenuEventListene
         }
     }
 
-    interface OnPopupMenuEventListener{
-        fun onPopupMenuItemClicked(entry: Entry, itemId : Int) : Boolean
-    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(entries[position])

@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.database.AppDatabase
@@ -12,6 +13,7 @@ import com.iranmobiledev.moodino.repository.entry.EntryRepositoryImpl
 import com.iranmobiledev.moodino.repository.entry.source.EntryLocalDataSource
 import com.iranmobiledev.moodino.ui.entries.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entries.EntryViewModel
+import com.iranmobiledev.moodino.ui.entries.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
@@ -34,6 +36,7 @@ class App : Application() , KoinComponent{
             factory <EntryRepository> { EntryRepositoryImpl(EntryLocalDataSource(database.getEntryDao)) }
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
             single <ImageLoadingService>{ GlideImageLoader() }
+
         }
 
         startKoin {
