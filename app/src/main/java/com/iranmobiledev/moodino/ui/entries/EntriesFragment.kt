@@ -77,6 +77,7 @@ class EntriesFragment : BaseFragment(), EntryAdapter.OnPopupMenuEventListener{
     }
     private fun initViews(){
         entriesContainerRv = binding.entriesContainerRv
+        entriesContainerRv.itemAnimator = null
         navController = NavHostFragment.findNavController(this)
     }
     override fun onAttach(context: Context) {

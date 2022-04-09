@@ -14,7 +14,6 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
-import com.iranmobiledev.moodino.utlis.MoodinoDateImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -78,6 +77,9 @@ class MainActivity : BaseActivity() {
             val persianDate = PersianDate()
             //TODO send date from bundle
             navController.navigate(R.id.addEntryFragment, bundle)
+        }
+
+        activityMainBinding.otherDayButton.setOnClickListener{
         }
     }
 

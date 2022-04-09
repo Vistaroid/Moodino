@@ -45,6 +45,7 @@ class EntryContainerAdapter(
                 entries as MutableList<Entry>, context
             )
             entryRecyclerView.adapter = entryAdapter
+            entryRecyclerView.itemAnimator = null
             entryAdapters.add(entryAdapter)
         }
     }
