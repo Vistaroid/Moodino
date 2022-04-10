@@ -145,10 +145,6 @@ fun DaysInYearDetail(monthsLength: ArrayList<Int>) {
         monthsLength.forEach {
             MonthComposable(monthLength = it)
         }
-
-
-
-        //compose
     }
 }
 
