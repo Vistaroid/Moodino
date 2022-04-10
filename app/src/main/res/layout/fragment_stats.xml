@@ -29,11 +29,22 @@
                layout="@layout/moods_count_card"
               />
 
+           <androidx.compose.ui.platform.ComposeView
+               android:id="@+id/yearInPixels"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               android:elevation="16dp"
+               app:layout_constraintTop_toBottomOf="@id/moodCountCardInclude"
+               />
+
            <Space
+               android:id="@+id/spacer"
                android:layout_width="match_parent"
                android:layout_height="100dp"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/moodCountCardInclude" />
+               app:layout_constraintTop_toBottomOf="@+id/yearInPixels" />
 
        </androidx.constraintlayout.widget.ConstraintLayout>
    </ScrollView>

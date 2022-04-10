@@ -55,7 +55,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+        <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
             android:id="@+id/moodCountVeryHappy"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
 
 
-        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+        <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
             android:id="@+id/moodCountHappy"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
 
 
-        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+        <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
             android:id="@+id/moodCountNothing"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
 
 
-        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+        <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
             android:id="@+id/moodCountBad"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
 
 
-        <com.iranmobiledev.moodino.ui.states.CustomView.CustomViewMoodCount
+        <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
             android:id="@+id/moodCountVeryBad"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
