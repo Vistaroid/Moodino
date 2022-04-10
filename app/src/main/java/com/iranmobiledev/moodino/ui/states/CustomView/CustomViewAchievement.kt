@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.states.customView
+package com.iranmobiledev.moodino.ui.states.CustomView
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,10 +1,6 @@
 package com.iranmobiledev.moodino.ui.entries
 
-<<<<<<< HEAD
 import android.content.Context
-=======
-import android.net.Uri
->>>>>>> g
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,11 +19,8 @@ import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.ui.entries.adapter.ActivityContainerAdapter
-<<<<<<< HEAD
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
-=======
->>>>>>> g
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -86,16 +79,8 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
         noteEt.text?.let {
             entry.note = it.toString()
         }
-<<<<<<< HEAD
         entryDetailViewModel.addEntry(entry)
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_entryDetailFragment_to_entriesFragment)
-=======
-        imageUri?.let {
-            entry.photo = imageUri.toString()
-        }
-        EventBus.getDefault().postSticky(entry)
-        Navigation.findNavController(requireActivity(), R.id.fragmentContainer).navigate(R.id.action_entryDetailFragment_to_entriesFragment)
->>>>>>> g
     }
     private fun setupPhotoDialog() : PickSetup{
         return PickSetup().apply {
@@ -131,5 +116,9 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
 
         //val visibility = if(view.visibility == View.GONE) View.VISIBLE else View.GONE
         //view.visibility = visibility
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        BottomNavVisibility.currentFragment.value = this.id
     }
 }
