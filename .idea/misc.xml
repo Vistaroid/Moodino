@@ -36,28 +36,36 @@
         <entry key="..\:/Moodino/app/src/main/res/drawable/round_right_corner_rectangle.xml" value="0.119" />
         <entry key="..\:/Moodino/app/src/main/res/layout/achievement_icon.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/layout/achievements_card.xml" value="0.264" />
-        <entry key="..\:/Moodino/app/src/main/res/layout/activity_main.xml" value="0.128" />
-        <entry key="..\:/Moodino/app/src/main/res/layout/add_entry_fragment.xml" value="0.1628901239846088" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/add_entry_fragment.xml" value="0.264" />
         <entry key="..\:/Moodino/app/src/main/res/layout/circles_row.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/layout/custom_nagation_bar_add_button.xml" value="0.24547101449275363" />
         <entry key="..\:/Moodino/app/src/main/res/layout/dat_circle.xml" value="0.6" />
         <entry key="..\:/Moodino/app/src/main/res/layout/day_checked_fragment_stats.xml" value="0.12037037037037036" />
         <entry key="..\:/Moodino/app/src/main/res/layout/day_not_checked_fragment_stats.xml" value="0.12037037037037036" />
         <entry key="..\:/Moodino/app/src/main/res/layout/days_in_a_row_card.xml" value="0.25416666666666665" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/dialog_change_language.xml" value="0.21846943138093203" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/dialog_change_mode.xml" value="0.21846943138093203" />
         <entry key="..\:/Moodino/app/src/main/res/layout/emoji_item.xml" value="0.536" />
         <entry key="..\:/Moodino/app/src/main/res/layout/emojies_item.xml" value="0.24547101449275363" />
         <entry key="..\:/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.24547101449275363" />
         <entry key="..\:/Moodino/app/src/main/res/layout/entries_fragment.xml" value="0.136" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/entry_detail_fragment.xml" value="0.21846943138093203" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fab_menu.xml" value="0.264" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.24547101449275363" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_calender.xml" value="0.10185185185185185" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.4" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_more.xml" value="0.10185185185185185" />
         <entry key="..\:/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.2" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/item_entry.xml" value="0.21846943138093203" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/item_entry_container.xml" value="0.21846943138093203" />
         <entry key="..\:/Moodino/app/src/main/res/layout/mood_chart_card.xml" value="0.4" />
         <entry key="..\:/Moodino/app/src/main/res/layout/mood_count_icon.xml" value="0.536" />
         <entry key="..\:/Moodino/app/src/main/res/layout/moods_count_card.xml" value="0.4178082191780822" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/select_photo_dialog.xml" value="0.21846943138093203" />
         <entry key="..\:/Moodino/app/src/main/res/layout/view_more_item.xml" value="0.20863616930312098" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/view_toolbar.xml" value="0.21846943138093203" />
+        <entry key="..\:/Moodino/app/src/main/res/layout/year_card.xml" value="0.21846943138093203" />
         <entry key="..\:/Moodino/app/src/main/res/layout/year_in_pixels_card.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/menu/botton_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Toka/.gradle/caches/transforms-3/e8355805880ab3ae0cd727f09bde7696/transformed/preference-1.2.0/res/drawable/ic_arrow_down_24dp.xml" value="0.1" />

@@ -23,6 +23,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_emoji_happy"/>
 
+<<<<<<< HEAD
         <View
             android:layout_width="@dimen/_2mdp"
             android:layout_height="0dp"
@@ -110,3 +111,18 @@
             app:tint="@color/gray" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+=======
+    <ImageButton
+        android:id="@+id/moreIcon"
+        android:layout_width="@dimen/_25mdp"
+        android:layout_height="@dimen/_25mdp"
+        android:background="@drawable/circle_shape"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView7"
+        app:srcCompat="@drawable/ic_more_outlined"
+        app:tint="@color/gray"
+        android:layout_marginEnd="@dimen/_12mdp"
+        android:scaleType="fitXY"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> g

@@ -1,16 +1,12 @@
-package com.iranmobiledev.moodino.ui.states.CustomView
+package com.iranmobiledev.moodino.ui.states.customView
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.util.AttributeSet
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.iranmobiledev.moodino.R
-import org.w3c.dom.Text
 
 class CustomViewMoodCount(context: Context, attributeSet: AttributeSet?) :
     LinearLayout(context, attributeSet) {

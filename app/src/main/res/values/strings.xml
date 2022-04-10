@@ -52,7 +52,7 @@
     <string name="system_mode">System Default</string>
     <string name="cancel">Cancel</string>
 
-<!--calendars-->
+    <!--calendars-->
     <string name="shamsi_calendar">Persian Calendar</string>
     <string name="shamsi_calendar_short">Persian</string>
     <!-- Used in accessibility, previous day or month or year -->
@@ -86,5 +86,6 @@
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
     <string name="average_mood">"average mood "</string>
+    <string name="title_activity_days_in_year_composable">DaysInYearComposable</string>
 
 </resources>
