@@ -1,9 +1,11 @@
 package com.iranmobiledev.moodino.ui.states.customView.composable
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.iranmobiledev.moodino.R
 import androidx.compose.ui.unit.sp
 
-@Preview
 @Composable
 fun DaysInYearComposable() {
 
@@ -44,6 +45,10 @@ fun DaysInYearComposable() {
         "BA",
         "ES",
     )
+
+//    for(i in persianMonthsName){
+//        Log.d("df234das", "DaysInYearComposable: $i")
+//    }
 
     Column(
         modifier = Modifier
@@ -76,7 +81,9 @@ fun DaysInYearComposable() {
 
 @Composable
 fun MoodsChart() {
-    Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.padding(top = 8.dp).fillMaxWidth()) {
+    Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+        .padding(top = 8.dp)
+        .fillMaxWidth()) {
         ChartElement(2, colorResource(id = R.color.pink))
         ChartElement(4, colorResource(id = R.color.green))
         ChartElement(6, colorResource(id = R.color.gray))
@@ -188,6 +195,8 @@ fun MonthsName(persianMonthsName: ArrayList<String>) {
         persianMonthsName.forEach {
             DaysInYearText(text = it)
         }
+
+
     }
 }
 
@@ -217,8 +226,6 @@ fun DaysInYearText(
         ),
     )
 }
-
-
 
 
 
