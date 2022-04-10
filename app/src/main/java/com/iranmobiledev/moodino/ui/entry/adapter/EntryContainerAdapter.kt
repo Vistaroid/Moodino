@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.entries.adapter
+package com.iranmobiledev.moodino.ui.entry.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.listener.EntryEventLister
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
 class EntryContainerAdapter(
     private val context: Context,
     private val entriesList: MutableList<MutableList<Entry>>,
-    private val onPopupMenuEventListener: EntryAdapter.OnPopupMenuEventListener,
+    private val entryEventLister: EntryEventLister,
     private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
 
     ) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
@@ -41,7 +42,7 @@ class EntryContainerAdapter(
             entryRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             val entryAdapter = EntryAdapter(
-                onPopupMenuEventListener,
+                entryEventLister,
                 entries as MutableList<Entry>, context
             )
             entryRecyclerView.adapter = entryAdapter

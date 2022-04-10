@@ -1,6 +1,5 @@
-package com.iranmobiledev.moodino.ui.entries
+package com.iranmobiledev.moodino.ui.entry
 
-import androidx.lifecycle.MutableLiveData
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Entry

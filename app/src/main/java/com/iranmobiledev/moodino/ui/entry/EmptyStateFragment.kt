@@ -1,10 +1,9 @@
-package com.iranmobiledev.moodino.ui.entries
+package com.iranmobiledev.moodino.ui.entry
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.EmptyStateFragmentBinding
 

@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.entries
+package com.iranmobiledev.moodino.ui.entry
 
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.Activity

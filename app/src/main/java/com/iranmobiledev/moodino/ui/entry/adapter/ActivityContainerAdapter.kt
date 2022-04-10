@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.entries.adapter
+package com.iranmobiledev.moodino.ui.entry.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

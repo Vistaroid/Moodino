@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.entries
+package com.iranmobiledev.moodino.ui.entry
 
 import android.content.Context
 import android.os.Bundle
@@ -18,7 +18,7 @@ import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
-import com.iranmobiledev.moodino.ui.entries.adapter.ActivityContainerAdapter
+import com.iranmobiledev.moodino.ui.entry.adapter.ActivityContainerAdapter
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.vansuita.pickimage.bundle.PickSetup
@@ -66,9 +66,7 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
                     imagePath = it.path
                     entryImageContainer.visibility = View.VISIBLE
                     entry.photoPath = it.path
-                    context?.let { context ->
-                        imageLoader.load(context, entry.photoPath, entryImage)
-                    }
+                    imageLoader.load(requireContext(), entry.photoPath, entryImage)
                 }
             }.show(parentFragmentManager)
         }
