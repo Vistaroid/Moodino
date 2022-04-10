@@ -10,8 +10,8 @@ import com.iranmobiledev.moodino.repository.activity.source.ActivityLocalDataSou
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepositoryImpl
 import com.iranmobiledev.moodino.repository.entry.source.EntryLocalDataSource
-import com.iranmobiledev.moodino.ui.entries.EntryDetailViewModel
-import com.iranmobiledev.moodino.ui.entries.EntryViewModel
+import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
+import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences

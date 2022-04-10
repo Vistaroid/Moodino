@@ -18,7 +18,7 @@
 <!--    </activity>-->
     <fragment
         android:id="@+id/entriesFragment"
-        android:name="com.iranmobiledev.moodino.ui.entries.EntriesFragment"
+        android:name="com.iranmobiledev.moodino.ui.entry.EntriesFragment"
         android:label="fragment_entries"
         tools:layout="@layout/fragment_entries" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/addEntryFragment"
-        android:name="com.iranmobiledev.moodino.ui.entries.AddEntryFragment"
+        android:name="com.iranmobiledev.moodino.ui.entry.AddEntryFragment"
         android:label="AddEntryFragment"
         tools:layout="@layout/add_entry_fragment">
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/entryDetailFragment"
-        android:name="com.iranmobiledev.moodino.ui.entries.EntryDetailFragment"
+        android:name="com.iranmobiledev.moodino.ui.entry.EntryDetailFragment"
         android:label="EntryDetailFragment"
         tools:layout="@layout/entry_detail_fragment">
         <action
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/emptyStateFragment"
-        android:name="com.iranmobiledev.moodino.ui.entries.EmptyStateFragment"
+        android:name="com.iranmobiledev.moodino.ui.entry.EmptyStateFragment"
         android:label="EmptyStateFragment"
         tools:layout="@layout/empty_state_fragment"/>
 

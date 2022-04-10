@@ -1,15 +1,10 @@
 package com.iranmobiledev.moodino.data
 
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Parcelable
 import androidx.annotation.LayoutRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.iranmobiledev.moodino.utlis.MoodinoDate
 import kotlinx.android.parcel.Parcelize
-import saman.zamani.persiandate.PersianDate
-import java.sql.Timestamp
 
 
 //TODO warning some of this can be null while adding a entry ! byTayeb.

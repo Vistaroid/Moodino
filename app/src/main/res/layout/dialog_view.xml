@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/_12mdp">
+
+    <View
+        android:id="@+id/topDialogView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80mdp"
+        android:alpha="0.2"
+        android:background="?colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="@dimen/_90mdp"
+        android:layout_height="@dimen/_90mdp"
+        app:cardCornerRadius="@dimen/_100mdp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/topDialogView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topDialogView">
+
+        <ImageView
+            android:id="@+id/dialogIcon"
+            android:layout_width="@dimen/_40mdp"
+            android:layout_height="@dimen/_40mdp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/mainTextDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16mdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_20mdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        tools:text="Delete loving memory?" />
+
+    <TextView
+        android:id="@+id/subTextDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12mdp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTextDialog"
+        tools:text="This is your life we are talking\n about. Do you want to delete a\n part of it?" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rightButton"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_42mdp"
+        android:textSize="@dimen/_13mdp"
+        app:layout_constraintEnd_toStartOf="@+id/leftButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subTextDialog"
+        android:text="@string/delete"
+        android:textAllCaps="true"
+        android:layout_marginStart="@dimen/_16mdp"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/leftButton"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+        android:textSize="@dimen/_13mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rightButton"
+        app:layout_constraintTop_toTopOf="@+id/rightButton"
+        android:text="@string/keep"
+        android:textAllCaps="true"
+        android:layout_marginEnd="@dimen/_16mdp"
+        app:rippleColor="#3B79CD3C"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

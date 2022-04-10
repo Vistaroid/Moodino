@@ -104,6 +104,7 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/dialog_bg.xml" value="0.1495" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_book.xml" value="0.2175" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_camera.xml" value="0.1495" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_delete.xml" value="0.1905" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_emoji_nothing.xml" value="0.1495" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_gallery.xml" value="0.1495" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_remove.xml" value="0.218" />
@@ -118,6 +119,7 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/activity_pin_lock.xml" value="0.22" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/add_entry_fragment.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/dialog_change_language.xml" value="0.25181159420289856" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/dialog_view.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/emoji_item.xml" value="0.2513586956521739" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empry_state_fragment.xml" value="0.2513586956521739" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.25" />
