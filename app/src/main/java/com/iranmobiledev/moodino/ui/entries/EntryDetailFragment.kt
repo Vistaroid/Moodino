@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,8 +28,9 @@ import com.vansuita.pickimage.dialog.PickImageDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.core.parameter.parametersOf
 
-class EntryDetailFragment : BaseFragment(), KoinComponent {
+class EntryDetailFragment : BaseFragment(), EntryEventListener, KoinComponent {
 
     private lateinit var binding : EntryDetailFragmentBinding
     private lateinit var activitiesContainerAdapter : ActivityContainerAdapter
@@ -39,7 +41,7 @@ class EntryDetailFragment : BaseFragment(), KoinComponent {
     private var imagePath : String? = null
     private lateinit var entryImageContainer : MaterialCardView
     private lateinit var noteEt : EditText
-    private val entryDetailViewModel : EntryDetailViewModel by viewModel()
+    private val entryDetailViewModel : EntryDetailViewModel by viewModel { parametersOf(this) }
     private var entry = Entry(id = null)
     private val imageLoader : ImageLoadingService by inject()
     override fun onStart() {
@@ -80,7 +82,7 @@ class EntryDetailFragment : BaseFragment(), KoinComponent {
         noteEt.text?.let {
             entry.note = it.toString()
         }
-        entryDetailViewModel.addEntry(entry)
+        addEntry(entry)
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_entryDetailFragment_to_entriesFragment)
     }
     private fun setupPhotoDialog() : PickSetup{
@@ -109,6 +111,11 @@ class EntryDetailFragment : BaseFragment(), KoinComponent {
         entryImage = binding.entryImage
         entryImageContainer = binding.entryImageContainer
         noteEt = binding.noteEt
+    }
+
+    override fun addEntry(entry: Entry) {
+        entryDetailViewModel.addEntry(entry)
+        lastInstanceOfEntryContainerAdapter?.add(entry)
     }
 
     override fun onAttach(context: Context) {

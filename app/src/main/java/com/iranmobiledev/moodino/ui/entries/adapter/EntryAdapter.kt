@@ -51,7 +51,8 @@ class EntryAdapter(private val entryEventListener: EntryEventListener, val entri
     }
 
     fun add(entry: Entry){
-
+        entries.add(0, entry)
+        notifyItemInserted(0)
     }
 
     fun remove(entry: Entry){

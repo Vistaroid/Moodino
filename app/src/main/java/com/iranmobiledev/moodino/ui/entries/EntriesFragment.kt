@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.ui.entries
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,16 +19,20 @@ import com.iranmobiledev.moodino.utlis.EntryEventListener
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import org.greenrobot.eventbus.EventBus
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class EntriesFragment : BaseFragment(), EntryEventListener{
+var firstEnter = true
+var lastInstanceOfEntryContainerAdapter : EntryContainerAdapter? = null
 
-    private lateinit var binding : FragmentEntriesBinding
-    private lateinit var entriesContainerRv : RecyclerView
-    private val entryViewModel : EntryViewModel by viewModel()
-    private lateinit var entriesContainerAdapter : EntryContainerAdapter
+class EntriesFragment : BaseFragment(), EntryEventListener {
+
+    private lateinit var binding: FragmentEntriesBinding
+    private lateinit var entriesContainerRv: RecyclerView
+    private val entryViewModel: EntryViewModel by viewModel()
+    private lateinit var entriesContainerAdapter: EntryContainerAdapter
     private lateinit var navController: NavController
-
 
     override fun onResume() {
         super.onResume()
@@ -43,33 +48,44 @@ class EntriesFragment : BaseFragment(), EntryEventListener{
         initViews()
         entriesContainerRvImpl()
 
-        binding.addEntryCardView.setOnClickListener{}
+        binding.addEntryCardView.setOnClickListener {}
         makeSpringAnimation(binding.addEntryCardView)
 
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MoodinoSharedPreferences.create(requireContext()).edit().putBoolean("first_enter", true).apply()
+        MoodinoSharedPreferences.create(requireContext()).edit().putBoolean("first_enter", true)
+            .apply()
     }
-    private fun makeSpringAnimation(view : View){
+
+    private fun makeSpringAnimation(view: View) {
         view.implementSpringAnimationTrait()
     }
-    private fun entriesContainerRvImpl(){
-        val entriesList = entryViewModel.getEntries()
-        entriesContainerAdapter = EntryContainerAdapter(requireContext(),
-            entriesList as MutableList<MutableList<Entry>>,
-            this
-        )
 
-        entriesContainerRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,false)
-        entriesContainerRv.adapter = entriesContainerAdapter
+    private fun entriesContainerRvImpl() {
+        val entriesList = entryViewModel.getEntries()
+        if(firstEnter){
+            entriesContainerAdapter = EntryContainerAdapter(
+                requireContext(),
+                entriesList as MutableList<MutableList<Entry>>,
+                this
+            )
+            lastInstanceOfEntryContainerAdapter = entriesContainerAdapter
+        }
+        firstEnter = false
+        entriesContainerRv.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        entriesContainerRv.adapter = lastInstanceOfEntryContainerAdapter
     }
-    private fun initViews(){
+
+    private fun initViews() {
         entriesContainerRv = binding.entriesContainerRv
         entriesContainerRv.itemAnimator = null
         navController = NavHostFragment.findNavController(this)
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         BottomNavVisibility.currentFragment.value = this.id

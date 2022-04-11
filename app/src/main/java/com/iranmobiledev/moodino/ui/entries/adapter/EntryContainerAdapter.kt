@@ -19,14 +19,12 @@ class EntryContainerAdapter(
     private val entriesList: MutableList<MutableList<Entry>>,
     private val entryEventListener: EntryEventListener,
     private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
-
     ) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val entryListDate = itemView.findViewById<TextView>(R.id.entryListDate)
         private val entryRecyclerView = itemView.findViewById<RecyclerView>(R.id.entryRv)
-
 
         @SuppressLint("SetTextI18n")
         fun bind(entries: List<Entry>) {
@@ -51,6 +49,21 @@ class EntryContainerAdapter(
         }
     }
 
+    fun add(entry: Entry){
+        var found = false
+        entryAdapters.forEach {
+            if(it.entries[0].date == entry.date){
+                found = true
+                it.add(entry)
+                return
+            }
+            if(!found){
+                val newList = mutableListOf(entry)
+                entriesList.add(0,newList)
+                notifyItemInserted(0)
+            }
+        }
+    }
     fun removeItem(entry: Entry) {
         entryAdapters.forEach {
             if(it.entries.contains(entry)){
@@ -61,7 +74,6 @@ class EntryContainerAdapter(
         }
 
     }
-
     private fun checkItemsToBeNotEmpty(){
         entriesList.forEachIndexed { index, list ->
             if(list.size == 0){
@@ -69,17 +81,14 @@ class EntryContainerAdapter(
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_entry_container, parent, false)
         return ViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(entriesList[position])
     }
-
     override fun getItemCount(): Int {
         return entriesList.size
     }
