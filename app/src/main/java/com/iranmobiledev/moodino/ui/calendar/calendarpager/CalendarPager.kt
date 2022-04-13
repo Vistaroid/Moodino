@@ -148,4 +148,13 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
             }
         }
     }
+
+    fun clickOnNextMonth(){
+        viewPager.setCurrentItem(viewPager.currentItem + 1, true)
+    }
+
+    fun clickOnPreviousMonth(){
+        viewPager.setCurrentItem(viewPager.currentItem - 1, true)
+    }
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.iranmobiledev.moodino.base.BaseFragment
@@ -15,12 +16,13 @@ import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import org.greenrobot.eventbus.EventBus
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
+import com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbarItemClickListener
 import io.github.persiancalendar.calendar.AbstractDate
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 
-class CalendarFragment : BaseFragment() {
+class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
     private lateinit var binding : FragmentCalendarBinding
     private val viewModel by viewModels<CalendarViewModel>()
 
@@ -68,6 +70,9 @@ class CalendarFragment : BaseFragment() {
 //            appBar.toolbar.setupMenuNavigation()
 //            appBar.root.hideToolbarBottomShadow()
 //        }
+
+        binding.mainToolbar.initialize(this)
+
     }
 
     private fun bringDate(jdn: Jdn, highlight: Boolean= true, monthChange: Boolean= true
@@ -90,7 +95,8 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun updateToolbar(binding: FragmentCalendarBinding, date: AbstractDate) {
-        binding.mainToolbar.title.text= date.monthName  + " "+ date.year
+          binding.mainToolbar.setMonth(date)
+   //     binding.mainToolbar.title.text= date.monthName  + " "+ date.year
 //        val toolbar = binding.appBar.toolbar
 //        val secondaryCalendar = secondaryCalendar
 //        if (secondaryCalendar == null) {
@@ -100,5 +106,25 @@ class CalendarFragment : BaseFragment() {
 //            toolbar.title = language.my.format(date.monthName, formatNumber(date.year))
 //            toolbar.subtitle = monthFormatForSecondaryCalendar(date, secondaryCalendar)
 //        }
+    }
+
+    override fun clickOnAdBtn() {
+        Toast.makeText(context, "show ad", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun clickOnPreviousBtn() {
+        binding.calendarPager.clickOnPreviousMonth()
+    }
+
+    override fun clickOnCurrentMonthBtn() {
+
+    }
+
+    override fun clickOnNextMonthBtn() {
+        binding.calendarPager.clickOnNextMonth()
+    }
+
+    override fun clickOnSearchBtn() {
+        Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
     }
 }
