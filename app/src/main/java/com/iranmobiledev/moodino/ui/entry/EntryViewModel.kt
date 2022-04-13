@@ -12,7 +12,6 @@ class EntryViewModel(
     private val activityRepository: ActivityRepository
 ) : BaseViewModel() {
 
-    val listOfEntries = ArrayList<List<Entry>>()
 
     fun addEntry(entry: Entry) {
         entryRepository.add(entry)
@@ -30,11 +29,13 @@ class EntryViewModel(
         return makeListFromEntries(entryRepository.getAll() as MutableList<Entry>)
     }
 
+
     private fun makeListFromEntries(entries: MutableList<Entry>): List<List<Entry>> {
+        val listOfEntries = ArrayList<ArrayList<Entry>>()
         entries.forEach { entry ->
             val filteredList = entries.filter { it.date ==  entry.date}
             if(!listOfEntries.contains(filteredList))
-                listOfEntries.add(0,filteredList)
+                listOfEntries.add(0, filteredList as ArrayList<Entry>)
         }
         return listOfEntries
     }

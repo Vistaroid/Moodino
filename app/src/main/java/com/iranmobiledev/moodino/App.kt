@@ -12,6 +12,7 @@ import com.iranmobiledev.moodino.repository.entry.EntryRepositoryImpl
 import com.iranmobiledev.moodino.repository.entry.source.EntryLocalDataSource
 import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
+import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
@@ -33,7 +34,8 @@ class App : Application() , KoinComponent{
             viewModel { EntryDetailViewModel(get(), get()) }
             factory <EntryRepository> { EntryRepositoryImpl(EntryLocalDataSource(database.getEntryDao)) }
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
-            single <ImageLoadingService>{ GlideImageLoader() }
+            single <ImageLoadingService> { params ->  GlideImageLoader(params.get(), params.get()) }
+            single { EntryContainerAdapter() }
         }
 
         startKoin {

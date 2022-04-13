@@ -27,20 +27,21 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterItemCallback, KoinComponent{
+class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterItemCallback,
+    KoinComponent {
 
-    private lateinit var binding : EntryDetailFragmentBinding
-    private lateinit var activitiesContainerAdapter : ActivityContainerAdapter
-    private lateinit var activitiesRv : RecyclerView
-    private lateinit var save : ViewGroup
-    private lateinit var saveFab : FloatingActionButton
-    private lateinit var entryImage : ImageView
-    private var imagePath : String? = null
-    private lateinit var entryImageContainer : MaterialCardView
-    private lateinit var noteEt : EditText
-    private val entryDetailViewModel : EntryDetailViewModel by viewModel()
+    private lateinit var binding: EntryDetailFragmentBinding
+    private lateinit var activitiesContainerAdapter: ActivityContainerAdapter
+    private lateinit var activitiesRv: RecyclerView
+    private lateinit var save: ViewGroup
+    private lateinit var saveFab: FloatingActionButton
+    private lateinit var entryImage: ImageView
+    private var imagePath: String? = null
+    private lateinit var entryImageContainer: MaterialCardView
+    private lateinit var noteEt: EditText
+    private val entryDetailViewModel: EntryDetailViewModel by viewModel()
     private var entry = Entry(id = null)
-    private val imageLoader : ImageLoadingService by inject()
+    private val imageLoader: ImageLoadingService by inject()
     override fun onStart() {
         super.onStart()
         entry = arguments?.getParcelable("entry")!!
@@ -59,10 +60,10 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
         save.setOnClickListener(saveOnClick)
         saveFab.setOnClickListener(saveOnClick)
 
-        binding.selectImageLayout.setOnClickListener{
+        binding.selectImageLayout.setOnClickListener {
 
             PickImageDialog.build(setupPhotoDialog()) {
-                if(it.error == null){
+                if (it.error == null) {
                     imagePath = it.path
                     entryImageContainer.visibility = View.VISIBLE
                     entry.photoPath = it.path
@@ -72,15 +73,20 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
         }
         return binding.root
     }
+
     private val saveOnClick = View.OnClickListener {
 
         noteEt.text?.let {
             entry.note = it.toString()
         }
         entryDetailViewModel.addEntry(entry)
-        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_entryDetailFragment_to_entriesFragment)
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
+            .navigate(R.id.action_entryDetailFragment_to_entriesFragment, Bundle().apply {
+                putParcelable("entry", entry)
+            })
     }
-    private fun setupPhotoDialog() : PickSetup{
+
+    private fun setupPhotoDialog(): PickSetup {
         return PickSetup().apply {
             cameraIcon = R.drawable.ic_camera
             galleryIcon = R.drawable.ic_gallery
@@ -90,16 +96,21 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
             height = 500
         }
     }
-    private fun makeSpringAnimation(){
+
+    private fun makeSpringAnimation() {
         save.implementSpringAnimationTrait()
     }
-    private fun activitiesRvImpl(){
-        activitiesRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+    private fun activitiesRvImpl() {
+        activitiesRv.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         activitiesRv.adapter = activitiesContainerAdapter
     }
-    private fun initViews(){
+
+    private fun initViews() {
         //TODO make list from list of activities
-        activitiesContainerAdapter = ActivityContainerAdapter(entryDetailViewModel.getActivities(), this, requireContext())
+        activitiesContainerAdapter =
+            ActivityContainerAdapter(entryDetailViewModel.getActivities(), this, requireContext())
         activitiesRv = binding.activitiesContainerRv
         save = binding.saveLayout
         saveFab = binding.saveEntryFab
@@ -109,12 +120,12 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
     }
 
 
-
     override fun onExpandViewClicked() {
 
         //val visibility = if(view.visibility == View.GONE) View.VISIBLE else View.GONE
         //view.visibility = visibility
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         BottomNavVisibility.currentFragment.value = this.id

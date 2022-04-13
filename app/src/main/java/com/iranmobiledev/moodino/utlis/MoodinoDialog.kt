@@ -33,12 +33,6 @@ class MoodinoDialog(
         drawContent()
         itemClickListener()
 
-        dialog?.let { dialog ->
-            dialog.window?.let { window ->
-                window.setBackgroundDrawableResource(R.drawable.dialog_bg)
-            }
-        }
-
         val alertDialog = AlertDialog.Builder(context)
 
         return alertDialog.setView(binding.root).create()
