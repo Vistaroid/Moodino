@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,21 +16,23 @@ import com.iranmobiledev.moodino.data.*
 import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
+import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
+import io.github.persiancalendar.calendar.AbstractDate
 import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EntriesFragment : BaseFragment(), EntryEventLister {
+class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth {
 
     private lateinit var binding: FragmentEntriesBinding
     private lateinit var entriesContainerRv: RecyclerView
     private val entryViewModel: EntryViewModel by viewModel()
     private lateinit var entriesContainerAdapter: EntryContainerAdapter
     private lateinit var navController: NavController
-
 
     override fun onResume() {
         super.onResume()
@@ -47,6 +50,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister {
 
         binding.addEntryCardView.setOnClickListener {}
         makeSpringAnimation(binding.addEntryCardView)
+
+        binding.mainToolbar.initialize(this)
 
         return binding.root
     }
@@ -107,5 +112,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister {
         })
         dialog.show(parentFragmentManager, null)
         return true
+    }
+
+    override fun changeCurrentMonth(date: AbstractDate) {
+        Toast.makeText(context, date.year.toString() + date.monthName, Toast.LENGTH_SHORT).show()
     }
 }
