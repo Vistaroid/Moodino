@@ -2,9 +2,10 @@ package com.iranmobiledev.moodino.repository.entry.source
 
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.database.EntryDao
+import kotlinx.coroutines.flow.Flow
 
 class EntryLocalDataSource(private val entryDao: EntryDao) : EntryDataSource {
-    override fun add(entry: Entry): Long {
+    override suspend fun add(entry: Entry): Long {
         return entryDao.add(entry)
     }
 
@@ -12,11 +13,11 @@ class EntryLocalDataSource(private val entryDao: EntryDao) : EntryDataSource {
         return entryDao.update(entry)
     }
 
-    override fun delete(entry: Entry): Int {
+    override suspend fun delete(entry: Entry): Int {
         return entryDao.delete(entry)
     }
 
-    override fun getAll(): List<Entry> {
+    override suspend fun getAll(): List<Entry> {
         return entryDao.getAll()
     }
 }
