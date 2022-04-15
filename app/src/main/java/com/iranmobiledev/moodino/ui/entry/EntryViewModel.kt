@@ -1,10 +1,16 @@
 package com.iranmobiledev.moodino.ui.entry
 
+import androidx.lifecycle.viewModelScope
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.repository.activity.ActivityRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class EntryViewModel(
@@ -12,13 +18,10 @@ class EntryViewModel(
     private val activityRepository: ActivityRepository
 ) : BaseViewModel() {
 
-
-    fun addEntry(entry: Entry) {
-        entryRepository.add(entry)
-    }
-
     fun deleteEntry(entry: Entry) {
-        entryRepository.delete(entry)
+        viewModelScope.launch(Dispatchers.IO + CoroutineName("deleteCoroutine")){
+            entryRepository.delete(entry)
+        }
     }
 
     fun updateEntry(entry: Entry) {
@@ -26,7 +29,12 @@ class EntryViewModel(
     }
 
     fun getEntries(): List<List<Entry>> {
-        return makeListFromEntries(entryRepository.getAll() as MutableList<Entry>)
+        var entries = mutableListOf<Entry>()
+        val job = viewModelScope.launch (Dispatchers.IO){
+            entries = entryRepository.getAll() as MutableList<Entry>
+        }
+        runBlocking { job.join() }
+        return makeListFromEntries(entries)
     }
 
 

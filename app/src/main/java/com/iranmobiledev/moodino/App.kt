@@ -34,7 +34,7 @@ class App : Application() , KoinComponent{
             viewModel { EntryDetailViewModel(get(), get()) }
             factory <EntryRepository> { EntryRepositoryImpl(EntryLocalDataSource(database.getEntryDao)) }
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
-            single <ImageLoadingService> { params ->  GlideImageLoader(params.get(), params.get()) }
+            single <ImageLoadingService> { GlideImageLoader() }
             single { EntryContainerAdapter() }
         }
 

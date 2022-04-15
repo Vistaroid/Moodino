@@ -75,7 +75,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     private fun checkItemsToBeNotEmpty() {
         entriesList.forEachIndexed { index, list ->
             if (list.size == 0) {
-                //entriesList.removeAt(index)
+                entriesList.removeAt(index)
                 notifyItemRemoved(index)
             }
         }
