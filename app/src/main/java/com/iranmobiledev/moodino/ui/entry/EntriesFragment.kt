@@ -1,7 +1,9 @@
 package com.iranmobiledev.moodino.ui.entry
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,14 +27,25 @@ import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import io.github.persiancalendar.calendar.AbstractDate
 import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth {
+class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth, KoinComponent {
 
     private lateinit var binding: FragmentEntriesBinding
     private lateinit var entriesContainerRv: RecyclerView
     private val entryViewModel: EntryViewModel by viewModel()
-    private lateinit var entriesContainerAdapter: EntryContainerAdapter
     private lateinit var navController: NavController
+    private val entryContainerAdapter: EntryContainerAdapter by inject()
+
+    override fun onStart() {
+        super.onStart()
+        val entry = arguments?.getParcelable<Entry>("entry")
+        entry?.let {
+            entryContainerAdapter.addEntry(it)
+        }
+        arguments?.clear()
+    }
 
     override fun onResume() {
         super.onResume()
@@ -67,19 +80,14 @@ class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth {
     }
 
     private fun entriesContainerRvImpl() {
-        val entriesList = entryViewModel.getEntries()
-        entriesContainerAdapter = EntryContainerAdapter(
-            requireContext(),
-            entriesList as MutableList<MutableList<Entry>>,
-            this
-        )
-
-        entriesContainerRv.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        entriesContainerRv.adapter = entriesContainerAdapter
+        entriesContainerRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        entriesContainerRv.adapter = entryContainerAdapter
     }
 
     private fun initViews() {
+        entryContainerAdapter.create(requireContext(), this,
+            entryViewModel.getEntries() as MutableList<MutableList<Entry>>
+        )
         entriesContainerRv = binding.entriesContainerRv
         entriesContainerRv.itemAnimator = null
         navController = NavHostFragment.findNavController(this)
@@ -96,12 +104,12 @@ class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth {
             subText = "This is your life we are talking\nabout. Do you want to delete a\npart of it?",
             icon = R.drawable.ic_delete,
         )
-        dialog.setItemEventListener(object: DialogEventListener{
+        dialog.setItemEventListener(object : DialogEventListener {
             override fun clickedItem(itemId: Int) {
-                when(itemId){
+                when (itemId) {
                     R.id.rightButton -> {
                         entryViewModel.deleteEntry(entry)
-                        entriesContainerAdapter.removeItem(entry)
+                        entryContainerAdapter.removeItem(entry)
                         dialog.dismiss()
                     }
                     R.id.leftButton -> {

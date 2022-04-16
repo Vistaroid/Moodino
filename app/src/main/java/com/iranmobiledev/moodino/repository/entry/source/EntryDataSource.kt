@@ -1,10 +1,11 @@
 package com.iranmobiledev.moodino.repository.entry.source
 
 import com.iranmobiledev.moodino.data.Entry
+import kotlinx.coroutines.flow.Flow
 
 interface EntryDataSource {
-    fun add(entry : Entry) : Long
+    suspend fun add(entry : Entry) : Long
     fun update(entry: Entry) : Int
-    fun delete(entry: Entry) : Int
-    fun getAll() : List<Entry>
+    suspend fun delete(entry: Entry) : Int
+    suspend fun getAll() : List<Entry>
 }

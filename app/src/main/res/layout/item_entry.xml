@@ -93,7 +93,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 bind:loadImageUrl="@{entryItem.photoPath}"
-                tools:background="?colorPrimary" />
+                tools:background="?colorPrimary"/>
         </com.google.android.material.card.MaterialCardView>
 
         <ImageButton

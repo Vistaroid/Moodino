@@ -16,20 +16,24 @@ import com.iranmobiledev.moodino.listener.EntryEventLister
 import org.koin.core.component.KoinComponent
 
 
-class EntryAdapter(private val entryEventLister: EntryEventLister, val entries : MutableList<Entry>, private val context: Context) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
+class EntryAdapter(
+    private val entryEventLister: EntryEventLister,
+    val entries: MutableList<Entry>,
+    private val context: Context
+) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
 
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val binding : ItemEntryBinding = ItemEntryBinding.bind(itemView)
+        private val binding: ItemEntryBinding = ItemEntryBinding.bind(itemView)
 
-        private val entryIcon : ImageView = binding.EntryIcon
-        private val moreIcon : ImageView = binding.moreIcon
-        private val entryImage : ImageView = binding.entryImage
-        private val entryTimeTv : TextView = binding.entryTimeTv
+        private val entryIcon: ImageView = binding.EntryIcon
+        private val moreIcon: ImageView = binding.moreIcon
+        private val entryImage: ImageView = binding.entryImage
+        private val entryTimeTv: TextView = binding.entryTimeTv
 
         @SuppressLint("ResourceType", "SetTextI18n")
-        fun bind(entry: Entry){
+        fun bind(entry: Entry) {
 
             entryIcon.setImageResource(entry.icon)
             entryTimeTv.text = "${entry.time?.hour}:${entry.time?.minutes}"
@@ -50,18 +54,15 @@ class EntryAdapter(private val entryEventLister: EntryEventLister, val entries :
         return ViewHolder(view)
     }
 
-    fun remove(entry: Entry){
-        val i = entries.indexOf(entry)
-        if(i == -1)
-            return
-        else{
-            entries.remove(entry)
-            notifyItemRemoved(i)
-        }
+    fun remove(entry: Entry) {
+        val index = entries.indexOf(entry)
+        entries.remove(entry)
+        notifyItemRemoved(index)
     }
 
-    interface OnPopupMenuEventListener{
-        fun onPopupMenuItemClicked(entry: Entry, itemId : Int) : Boolean
+    fun add(entry: Entry) {
+        entries.add(0, entry)
+        notifyItemInserted(0)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
