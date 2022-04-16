@@ -15,6 +15,7 @@ import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import org.greenrobot.eventbus.EventBus
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.mainCalendar
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbarItemClickListener
 import io.github.persiancalendar.calendar.AbstractDate
@@ -127,4 +128,5 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
     override fun clickOnSearchBtn() {
         Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
     }
+
 }
