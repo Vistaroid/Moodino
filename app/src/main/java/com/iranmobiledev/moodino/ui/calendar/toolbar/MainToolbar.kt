@@ -8,9 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.MainToolbarBinding
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.mainCalendar
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.*
 import io.github.persiancalendar.calendar.AbstractDate
 
 class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(context, attr) {
@@ -19,8 +17,8 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
     private var title: String = ""
     private var mainToolbarItemClickListener: MainToolbarItemClickListener? = null
 
-    private var monthsLimit = 5000
-    private var monthPosition = monthsLimit / 2
+   //  private var monthsLimit = 5000
+   // private var monthPosition = monthsLimit / 2
     private val baseJdn = Jdn.today()
     private var changeCurrentMonth: ChangeCurrentMonth? = null
 
@@ -30,7 +28,7 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
         view = MainToolbarBinding.inflate(inflater, this, true)
 
        // view?.title = title
-        bind(monthPosition)
+        bind(monthPositionGlobal)
 
         view?.clickListener = OnClickListener {
             when (it.id) {
@@ -57,8 +55,9 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
 
     private fun beforeMonth() {
         mainToolbarItemClickListener?.clickOnPreviousBtn()
-        monthPosition--
-        changeCurrentMonth?.changeCurrentMonth(bind(monthPosition))
+        monthPositionGlobal--
+        val date= bind(monthPositionGlobal)
+        changeCurrentMonth?.changeCurrentMonth(date)
     }
 
     private fun monthClick() {
@@ -67,8 +66,9 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
 
     private fun nextMonth() {
         mainToolbarItemClickListener?.clickOnNextMonthBtn()
-        monthPosition++
-        changeCurrentMonth?.changeCurrentMonth(bind(monthPosition))
+        monthPositionGlobal++
+        val date= bind(monthPositionGlobal)
+        changeCurrentMonth?.changeCurrentMonth(date)
     }
 
     private fun search() {
@@ -76,7 +76,7 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
     }
 
 
-    fun setMonth(date: AbstractDate) {
+    private fun setMonthName(date: AbstractDate) {
         view?.title = date.monthName + " " + date.year
     }
 
@@ -84,11 +84,11 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
         val date=  mainCalendar.getMonthStartFromMonthsDistance(
             baseJdn, -applyOffset(position)
         )
-        setMonth(date)
+        setMonthName(date)
         return date
     }
 
-    private fun applyOffset(position: Int) = monthsLimit / 2 - position
+    private fun applyOffset(position: Int) = monthLimit / 2 - position
 
 }
 

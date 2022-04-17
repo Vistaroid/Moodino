@@ -2,13 +2,14 @@ package com.iranmobiledev.moodino.ui.calendar
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.mainCalendar
 import io.github.persiancalendar.calendar.AbstractDate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class CalendarViewModel(application: Application): AndroidViewModel(application) {
+class CalendarViewModel: BaseViewModel() {
 
     // State
     private val _selectedDay = MutableStateFlow(Jdn.today())

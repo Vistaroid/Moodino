@@ -10,6 +10,7 @@ import com.iranmobiledev.moodino.repository.activity.source.ActivityLocalDataSou
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepositoryImpl
 import com.iranmobiledev.moodino.repository.entry.source.EntryLocalDataSource
+import com.iranmobiledev.moodino.ui.calendar.CalendarViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
@@ -32,6 +33,7 @@ class App : Application() , KoinComponent{
         val modules = module {
             viewModel { EntryViewModel(get(), get()) }
             viewModel { EntryDetailViewModel(get(), get()) }
+            viewModel { CalendarViewModel() }
             factory <EntryRepository> { EntryRepositoryImpl(EntryLocalDataSource(database.getEntryDao)) }
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
             single <ImageLoadingService> { GlideImageLoader() }
