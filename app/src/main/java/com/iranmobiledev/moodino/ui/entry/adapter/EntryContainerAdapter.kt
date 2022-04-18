@@ -11,20 +11,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.listener.EmptyStateListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
-class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
-    private var context: Context? = null
-    private var entriesList: MutableList<MutableList<Entry>> = mutableListOf()
-    private var entryEventLister: EntryEventLister? = null
+class EntryContainerAdapter: RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+
     private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
+    private lateinit var context: Context
+    private var entriesList: MutableList<MutableList<Entry>> = mutableListOf()
+    private var entryEventListener: EntryEventLister? = null
+    private var emptyStateEventListener : EmptyStateListener? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val entryListDate = itemView.findViewById<TextView>(R.id.entryListDate)
         private val entryRecyclerView = itemView.findViewById<RecyclerView>(R.id.entryRv)
-
 
         @SuppressLint("SetTextI18n")
         fun bind(entries: List<Entry>) {
@@ -39,12 +41,26 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
 
             entryRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            entryRecyclerView.itemAnimator = null
+
+            var repeated = false
+            entryAdapters.forEach {
+                if (it.entries[0].date == entries[0].date) {
+                    entryRecyclerView.adapter = it
+                    repeated = true
+                }
+            }
+            if (!repeated)
+                makeNewAdapter(entries as MutableList<Entry>)
+            println("entries size container adapter: ${entries.size}")
+        }
+
+        private fun makeNewAdapter(entries: MutableList<Entry>) {
             val entryAdapter = EntryAdapter(
-                entryEventLister!!,
-                entries as MutableList<Entry>, context!!
+                entryEventListener!!,
+                entries, context
             )
             entryRecyclerView.adapter = entryAdapter
-            entryRecyclerView.itemAnimator = null
             entryAdapters.add(entryAdapter)
         }
     }
@@ -58,14 +74,14 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
             }
         }
         if (!found || entryAdapters.size == 0) {
-            entryAdapters.add(0, EntryAdapter(entryEventLister!!, mutableListOf(entry), context!!))
+            entryAdapters.add(0, EntryAdapter(entryEventListener!!, mutableListOf(entry), context!!))
             notifyItemInserted(0)
         }
     }
 
     fun removeItem(entry: Entry) {
         entryAdapters.forEach {
-            if(it.entries.contains(entry)){
+            if (it.entries.contains(entry)) {
                 it.remove(entry)
             }
             checkItemsToBeNotEmpty()
@@ -73,11 +89,12 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     }
 
     private fun checkItemsToBeNotEmpty() {
-        entriesList.forEachIndexed { index, list ->
-            if (list.size == 0) {
-                entriesList.removeAt(index)
-                notifyItemRemoved(index)
-            }
+        entriesList.removeAll {
+            it.size == 0
+        }
+        entryAdapters.forEachIndexed { index, entryAdapter ->
+            if (entryAdapter.entries.size == 0)
+                entryAdapters.removeAt(index)
         }
     }
 
@@ -92,17 +109,18 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     }
 
     override fun getItemCount(): Int {
+        emptyStateEventListener!!.emptyStateVisibility(entriesList.size == 0)
         return entriesList.size
     }
 
-    fun create(
-        context: Context,
-        entryEventListener: EntryEventLister,
-        entries: MutableList<MutableList<Entry>>
-    ) {
+    fun create(context: Context,
+               entriesList: MutableList<MutableList<Entry>>,
+               entryEventListener: EntryEventLister,
+               emptyStateEventListener : EmptyStateListener){
         this.context = context
-        this.entryEventLister = entryEventListener
-        entriesList = entries
+        this.entriesList = entriesList
+        this.emptyStateEventListener = emptyStateEventListener
+        this.entryEventListener = entryEventListener
     }
 }
 

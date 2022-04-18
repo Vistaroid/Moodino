@@ -11,7 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
+import com.iranmobiledev.moodino.listener.EmptyStateListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import org.koin.core.component.KoinComponent
 
@@ -19,6 +21,7 @@ import org.koin.core.component.KoinComponent
 class EntryAdapter(
     private val entryEventLister: EntryEventLister,
     val entries: MutableList<Entry>,
+
     private val context: Context
 ) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
 
@@ -34,19 +37,22 @@ class EntryAdapter(
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry) {
-
             entryIcon.setImageResource(entry.icon)
             entryTimeTv.text = "${entry.time?.hour}:${entry.time?.minutes}"
             binding.entryItem = entry
             moreIcon.setOnClickListener {
                 val popupMenu = PopupMenu(context, it)
                 popupMenu.inflate(R.menu.popup_menu)
+                println("adapter is : $this")
                 popupMenu.setOnMenuItemClickListener { menuItem ->
                     entryEventLister.delete(entry)
                 }
                 popupMenu.show()
             }
+            println("entries size adapter: ${entries.size}")
+
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -69,5 +75,7 @@ class EntryAdapter(
         holder.bind(entries[position])
     }
 
-    override fun getItemCount(): Int = entries.size
+    override fun getItemCount(): Int {
+        return entries.size
+    }
 }

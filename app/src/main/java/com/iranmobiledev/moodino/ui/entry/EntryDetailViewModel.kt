@@ -23,13 +23,14 @@ class EntryDetailViewModel(
         runBlocking {
             job.join()
         }
+
     }
 
     fun getActivities(): List<List<Activity>> {
         return sortActivities(activityRepository.getAll())
     }
 
-    private fun sortActivities(activities : List<Activity>) : List<List<Activity>>{
+    private fun sortActivities(activities: List<Activity>): List<List<Activity>> {
         val newActivities = ArrayList<List<Activity>>()
         return newActivities
     }

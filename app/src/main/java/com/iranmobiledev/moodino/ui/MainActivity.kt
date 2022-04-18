@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -50,7 +51,6 @@ class MainActivity : BaseActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
         initViews()
-
         //setup navigation controller
         val navView: BottomNavigationView = activityMainBinding.bottomNavigationView
         navController = findNavController(R.id.fragmentContainerView)
@@ -109,5 +109,6 @@ class MainActivity : BaseActivity() {
     fun mustBottomNavShow(bottomNavState: BottomNavState) {
         bottomNavVisibility(bottomNavState.mustShow)
     }
+
 }
 
