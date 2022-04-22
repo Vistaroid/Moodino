@@ -87,5 +87,10 @@
     <string name="friday">Friday</string>
     <string name="average_mood">"average mood "</string>
     <string name="keep">KEEP</string>
+    <string name="enter_pin">enter your new pin</string>
+    <string name="confirm_pin">confirm your pin</string>
+    <string name="error_pin">PIN lock not match</string>
+    <string name="not_active_pin_lock">PIN Lock Not Active</string>
+    <string name="active_pin_lock">PIN Lock Is Active</string>
 
 </resources>
