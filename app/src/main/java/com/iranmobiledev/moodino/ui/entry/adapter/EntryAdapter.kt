@@ -26,7 +26,6 @@ class EntryAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding: ItemEntryBinding = ItemEntryBinding.bind(itemView)
-
         private val entryIcon: ImageView = binding.EntryIcon
         private val moreIcon: ImageView = binding.moreIcon
         private val entryImage: ImageView = binding.entryImage
