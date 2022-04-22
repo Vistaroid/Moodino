@@ -36,10 +36,11 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@drawable/dialog_bg</item>
+    <style name="DialogStyle">
         <item name="colorPrimary">@color/pink</item>
+        <item name="dialogCornerRadius">@dimen/_12mdp</item>
     </style>
+
 
     <style name="popupMenuStyle" parent="Widget.Material3.PopupMenu.ListPopupWindow">
         <item name="android:popupBackground">@drawable/popup_bg</item>

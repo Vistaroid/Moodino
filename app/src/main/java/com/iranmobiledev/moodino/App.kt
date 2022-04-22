@@ -16,6 +16,7 @@ import com.iranmobiledev.moodino.repository.more.source.MoreLocalDataSource
 import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
+import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
@@ -40,6 +41,7 @@ class App : Application() , KoinComponent{
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
             factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(MoodinoSharedPreferences.create(this@App))) }
             single <ImageLoadingService>{ GlideImageLoader() }
+            single { EntryContainerAdapter() }
         }
 
         startKoin {
