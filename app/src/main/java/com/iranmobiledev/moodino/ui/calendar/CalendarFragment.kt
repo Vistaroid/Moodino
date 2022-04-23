@@ -32,6 +32,7 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
         EventBus.getDefault().post(BottomNavState(true))
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
