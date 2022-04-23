@@ -6,26 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.FragmentCalendarBinding
-import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import org.greenrobot.eventbus.EventBus
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.mainCalendar
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbarItemClickListener
 import io.github.persiancalendar.calendar.AbstractDate
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
     private lateinit var binding : FragmentCalendarBinding
-    private val viewModel by viewModels<CalendarViewModel>()
+    private val viewModel: CalendarViewModel by viewModel()
 
     override fun onResume() {
         super.onResume()
@@ -96,7 +93,7 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
     }
 
     private fun updateToolbar(binding: FragmentCalendarBinding, date: AbstractDate) {
-          binding.mainToolbar.setMonth(date)
+   //       binding.mainToolbar.setMonthName(date)
    //     binding.mainToolbar.title.text= date.monthName  + " "+ date.year
 //        val toolbar = binding.appBar.toolbar
 //        val secondaryCalendar = secondaryCalendar

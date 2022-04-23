@@ -31,6 +31,10 @@ var isTalkBackEnabled = false
     private set
 var weekDaysInitials = weekDaysEmptyList
     private set
+ var monthLimit= 5000
+ private set
+
+var monthPositionGlobal: Int= 2500
 
 // This should be called before any use of Utils on the activity and services
 fun initGlobal(context: Context) {

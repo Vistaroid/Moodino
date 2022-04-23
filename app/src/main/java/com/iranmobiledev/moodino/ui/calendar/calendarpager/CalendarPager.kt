@@ -49,9 +49,10 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
     // Package API, to be rewritten with viewPager.adapter.notifyItemChanged()
     private fun addViewHolder(vh: PagerAdapter.ViewHolder) = pagesViewHolders.add(WeakReference(vh))
 
-    private val monthsLimit = 5000 // this should be an even number
+ //   private val monthsLimit = 5000 // this should be an even number
 
-    private fun applyOffset(position: Int) = monthsLimit / 2 - position
+   // private fun applyOffset(position: Int) = monthsLimit / 2 - position
+    private fun applyOffset(position: Int) = monthLimit / 2 - position
 
     private val viewPager = ViewPager2(context)
     private var selectedJdn: Jdn? = null
@@ -63,7 +64,9 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
 
         })
         addView(viewPager)
-        viewPager.setCurrentItem(applyOffset(0), false)
+    //    viewPager.setCurrentItem(applyOffset(0), false)
+        viewPager.setCurrentItem(monthPositionGlobal, true)
+        viewPager.isUserInputEnabled= false
     }
 
     inner class PagerAdapter : RecyclerView.Adapter<PagerAdapter.ViewHolder>() {
@@ -74,7 +77,7 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(position)
 
-        override fun getItemCount() = monthsLimit
+        override fun getItemCount() = monthLimit
 
         private val sharedDayViewData = SharedDayViewData(
             context, resources.getDimension(R.dimen.grid_calendar_height) / 7 - 4.5.sp
