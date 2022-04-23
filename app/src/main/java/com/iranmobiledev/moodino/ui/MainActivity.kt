@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -22,6 +23,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import saman.zamani.persiandate.PersianDate
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
+import com.iranmobiledev.moodino.ui.entry.viewmodel.AddEntrySharedViewModel
 
 class MainActivity : BaseActivity() {
 
@@ -50,7 +52,7 @@ class MainActivity : BaseActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
         initViews()
-
+        initSharedViewModels()
         //setup navigation controller
         val navView: BottomNavigationView = activityMainBinding.bottomNavigationView
         navController = findNavController(R.id.fragmentContainerView)
@@ -81,6 +83,10 @@ class MainActivity : BaseActivity() {
 
         activityMainBinding.otherDayButton.setOnClickListener{
         }
+    }
+
+    private fun initSharedViewModels() {
+        val addEntrySharedViewModel = ViewModelProvider(this).get(AddEntrySharedViewModel::class.java)
     }
 
     private fun initViews() {

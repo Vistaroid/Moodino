@@ -14,8 +14,8 @@ import com.iranmobiledev.moodino.ui.calendar.CalendarViewModel
 import com.iranmobiledev.moodino.repository.more.MoreRepository
 import com.iranmobiledev.moodino.repository.more.MoreRepositoryImpl
 import com.iranmobiledev.moodino.repository.more.source.MoreLocalDataSource
-import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
-import com.iranmobiledev.moodino.ui.entry.EntryViewModel
+import com.iranmobiledev.moodino.ui.entry.viewmodel.EntryDetailViewModel
+import com.iranmobiledev.moodino.ui.entry.viewmodel.EntryViewModel
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.GlideImageLoader

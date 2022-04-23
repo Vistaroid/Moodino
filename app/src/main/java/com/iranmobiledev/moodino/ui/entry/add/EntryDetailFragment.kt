@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.entry
+package com.iranmobiledev.moodino.ui.entry.add
 
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,9 @@ import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
+import com.iranmobiledev.moodino.ui.entry.viewmodel.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.ActivityContainerAdapter
+import com.iranmobiledev.moodino.ui.entry.viewmodel.AddEntrySharedViewModel
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.vansuita.pickimage.bundle.PickSetup
@@ -27,7 +30,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterItemCallback,
+class EntryDetailFragment : BaseFragment(), ActivityContainerAdapter.AdapterItemCallback,
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
@@ -40,12 +43,9 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
     private lateinit var entryImageContainer: MaterialCardView
     private lateinit var noteEt: EditText
     private val entryDetailViewModel: EntryDetailViewModel by viewModel()
-    private var entry = Entry(id = null)
+    private var entry = Entry()
+    private lateinit var sharedViewModel : AddEntrySharedViewModel
     private val imageLoader: ImageLoadingService by inject()
-    override fun onStart() {
-        super.onStart()
-        entry = arguments?.getParcelable("entry")!!
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +53,10 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
         savedInstanceState: Bundle?
     ): View {
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(AddEntrySharedViewModel::class.java)
         initViews()
+
+        entry = sharedViewModel.entry
         activitiesRvImpl()
         makeSpringAnimation()
 
@@ -65,9 +68,9 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
             PickImageDialog.build(setupPhotoDialog()) {
                 if (it.error == null) {
                     imagePath = it.path
-                    entryImageContainer.visibility = View.VISIBLE
                     entry.photoPath = it.path
-                    imageLoader.load(requireContext(), entry.photoPath, entryImage)
+                    sharedViewModel.photo = it.path
+                    showEntryImage()
                 }
             }.show(parentFragmentManager)
         }
@@ -80,10 +83,9 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
             entry.note = it.toString()
         }
         entryDetailViewModel.addEntry(entry)
+        sharedViewModel.newEntry.value = entry
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
-            .navigate(R.id.action_entryDetailFragment_to_entriesFragment, Bundle().apply {
-                putParcelable("entry", entry)
-            })
+            .navigate(R.id.action_entryDetailFragment_to_entriesFragment)
     }
 
     private fun setupPhotoDialog(): PickSetup {
@@ -91,8 +93,8 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
             cameraIcon = R.drawable.ic_camera
             galleryIcon = R.drawable.ic_gallery
             buttonOrientation = LinearLayout.HORIZONTAL
-            isSystemDialog = false
             width = 500
+            isSystemDialog = false
             height = 500
         }
     }
@@ -117,11 +119,17 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
         entryImage = binding.entryImage
         entryImageContainer = binding.entryImageContainer
         noteEt = binding.noteEt
+        showEntryImage()
     }
 
-
+    private fun showEntryImage() {
+        if(sharedViewModel.photo.isNotEmpty()){
+            println("path is ${sharedViewModel.photo}")
+            entryImageContainer.visibility = View.VISIBLE
+            imageLoader.load(requireActivity(), entry.photoPath, entryImage)
+        }
+    }
     override fun onExpandViewClicked() {
-
         //val visibility = if(view.visibility == View.GONE) View.VISIBLE else View.GONE
         //view.visibility = visibility
     }

@@ -1,10 +1,11 @@
-package com.iranmobiledev.moodino.ui.entry
+package com.iranmobiledev.moodino.ui.entry.add
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
@@ -12,14 +13,16 @@ import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
+import com.iranmobiledev.moodino.ui.entry.viewmodel.AddEntrySharedViewModel
 import com.iranmobiledev.moodino.utlis.*
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
-class AddEntryFragment() : BaseFragment() {
+class AddEntryFragment : BaseFragment() {
 
     private lateinit var binding : AddEntryFragmentBinding
     private var persianDate : PersianDate = PersianDate()
+    private lateinit var sharedViewModel : AddEntrySharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +30,7 @@ class AddEntryFragment() : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = AddEntryFragmentBinding.inflate(inflater, container, false)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(AddEntrySharedViewModel::class.java)
         emojiItemClickHandler()
 
         binding.dateTv.text = getDate()
@@ -35,42 +39,44 @@ class AddEntryFragment() : BaseFragment() {
         return binding.root
     }
 
-    private fun navigateToEntryDetailFragment(bundle : Bundle){
-        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_addEntryFragment_to_entryDetailFragment, bundle)
+    private fun navigateToEntryDetailFragment(){
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_addEntryFragment_to_entryDetailFragment)
     }
     private fun emojiItemClickHandler(){
 
         val entry = Entry(null)
-        val bundle = Bundle()
         entry.date = EntryDate(persianDate.grgYear, persianDate.grgMonth, persianDate.grgDay)
         entry.time = EntryTime(persianDate.hour, persianDate.minute)
-        bundle.putParcelable("entry", entry)
-
 
         binding.include.itemNothing.setOnClickListener{
             entry.icon = R.drawable.ic_emoji_nothing
             entry.title = MEH
-            navigateToEntryDetailFragment(bundle)
+            sharedViewModel.entry = entry
+            navigateToEntryDetailFragment()
         }
         binding.include.itemHappy.setOnClickListener{
             entry.icon = R.drawable.ic_emoji_happy
             entry.title = GOOD
-            navigateToEntryDetailFragment(bundle)
+            sharedViewModel.entry = entry
+            navigateToEntryDetailFragment()
         }
         binding.include.itemSad.setOnClickListener{
             entry.icon = R.drawable.ic_emoji_sad
             entry.title = BAD
-            navigateToEntryDetailFragment(bundle)
+            sharedViewModel.entry = entry
+            navigateToEntryDetailFragment()
         }
         binding.include.itemVerySad.setOnClickListener{
             entry.icon = R.drawable.ic_emoji_very_sad
             entry.title = AWFUL
-            navigateToEntryDetailFragment(bundle)
+            sharedViewModel.entry = entry
+            navigateToEntryDetailFragment()
         }
         binding.include.itemVeryHappy.setOnClickListener{
             entry.title = RAD
             entry.icon = R.drawable.ic_emoji_very_happy
-            navigateToEntryDetailFragment(bundle)
+            sharedViewModel.entry = entry
+            navigateToEntryDetailFragment()
         }
     }
 

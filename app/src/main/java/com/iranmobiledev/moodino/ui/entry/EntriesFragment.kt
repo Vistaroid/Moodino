@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,8 @@ import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
+import com.iranmobiledev.moodino.ui.entry.viewmodel.AddEntrySharedViewModel
+import com.iranmobiledev.moodino.ui.entry.viewmodel.EntryViewModel
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
 import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
@@ -35,15 +38,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth, Koi
     private val entryViewModel: EntryViewModel by viewModel()
     private lateinit var navController: NavController
     private val entryContainerAdapter: EntryContainerAdapter by inject()
+    private lateinit var sharedViewModel : AddEntrySharedViewModel
 
-    override fun onStart() {
-        super.onStart()
-        val entry = arguments?.getParcelable<Entry>("entry")
-        entry?.let {
-            entryContainerAdapter.addEntry(it)
-        }
-        arguments?.clear()
-    }
 
     override fun onResume() {
         super.onResume()
@@ -58,12 +54,13 @@ class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth, Koi
         binding = FragmentEntriesBinding.inflate(inflater, container, false)
         initViews()
         entriesContainerRvImpl()
-
-        binding.addEntryCardView.setOnClickListener {}
-        makeSpringAnimation(binding.addEntryCardView)
-
         binding.mainToolbar.initialize(this)
 
+        sharedViewModel = ViewModelProvider(requireActivity()).get(AddEntrySharedViewModel::class.java)
+
+        sharedViewModel.newEntryAdded().observe(viewLifecycleOwner){ entry ->
+            entryContainerAdapter.addEntry(entry)
+        }
         return binding.root
     }
 
@@ -89,6 +86,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth, Koi
         entriesContainerRv = binding.entriesContainerRv
         entriesContainerRv.itemAnimator = null
         navController = NavHostFragment.findNavController(this)
+        binding.addEntryCardView.setOnClickListener {}
+        makeSpringAnimation(binding.addEntryCardView)
     }
 
     override fun onAttach(context: Context) {

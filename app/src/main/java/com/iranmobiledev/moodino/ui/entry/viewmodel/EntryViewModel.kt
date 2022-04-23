@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.entry
+package com.iranmobiledev.moodino.ui.entry.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.iranmobiledev.moodino.base.BaseViewModel
@@ -8,7 +8,6 @@ import com.iranmobiledev.moodino.repository.activity.ActivityRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 

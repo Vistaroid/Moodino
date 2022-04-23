@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.entry
+package com.iranmobiledev.moodino.ui.entry.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.iranmobiledev.moodino.base.BaseViewModel

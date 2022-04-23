@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/addEntryFragment"
-        android:name="com.iranmobiledev.moodino.ui.entry.AddEntryFragment"
+        android:name="com.iranmobiledev.moodino.ui.entry.add.AddEntryFragment"
         android:label="AddEntryFragment"
         tools:layout="@layout/add_entry_fragment">
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/entryDetailFragment"
-        android:name="com.iranmobiledev.moodino.ui.entry.EntryDetailFragment"
+        android:name="com.iranmobiledev.moodino.ui.entry.add.EntryDetailFragment"
         android:label="EntryDetailFragment"
         tools:layout="@layout/entry_detail_fragment">
         <action
