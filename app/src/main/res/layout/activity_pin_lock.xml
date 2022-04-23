@@ -31,17 +31,18 @@
 
 
         <ImageView
+            android:id="@+id/iv_pinlock"
             android:layout_width="@dimen/_70mdp"
             android:layout_height="@dimen/_70mdp"
-            android:src="@drawable/ic_lock"
+            android:src="@drawable/ic_img_dont_locke"
             android:scaleType="fitXY"
             android:layout_marginTop="@dimen/_25mdp"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
+            android:id="@+id/tv_pinlock_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PIN Lock Not Active"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="@dimen/_15font_mdp"
@@ -50,14 +51,15 @@
 
 
         <RadioGroup
+            android:id="@+id/rg_pinlock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/_35mdp"
-            android:background="@color/white"
-            >
+            android:background="@color/white">
 
             <RadioButton
+                android:id="@+id/rb_pinlock_FingetPrint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Allow Fingerprint Access"
@@ -66,6 +68,7 @@
                 android:layout_marginEnd="@dimen/_20mdp"/>
 
             <RadioButton
+                android:id="@+id/rb_pinlock_PINLock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Only PIN Lock Access"
@@ -74,6 +77,7 @@
                 android:layout_marginEnd="@dimen/_20mdp"/>
 
             <RadioButton
+                android:id="@+id/rb_pinlock_off"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Off"
@@ -87,6 +91,7 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_pinlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Active Pin Lock"

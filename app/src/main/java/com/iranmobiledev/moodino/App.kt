@@ -11,8 +11,12 @@ import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepositoryImpl
 import com.iranmobiledev.moodino.repository.entry.source.EntryLocalDataSource
 import com.iranmobiledev.moodino.ui.calendar.CalendarViewModel
+import com.iranmobiledev.moodino.repository.more.MoreRepository
+import com.iranmobiledev.moodino.repository.more.MoreRepositoryImpl
+import com.iranmobiledev.moodino.repository.more.source.MoreLocalDataSource
 import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
+import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
@@ -34,9 +38,11 @@ class App : Application() , KoinComponent{
             viewModel { EntryViewModel(get(), get()) }
             viewModel { EntryDetailViewModel(get(), get()) }
             viewModel { CalendarViewModel() }
+            viewModel { PinLockViewModel(get()) }
             factory <EntryRepository> { EntryRepositoryImpl(EntryLocalDataSource(database.getEntryDao)) }
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
-            single <ImageLoadingService> { GlideImageLoader() }
+            factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(MoodinoSharedPreferences.create(this@App))) }
+            single <ImageLoadingService>{ GlideImageLoader() }
             single { EntryContainerAdapter() }
         }
 
