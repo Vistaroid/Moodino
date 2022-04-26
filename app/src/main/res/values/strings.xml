@@ -92,5 +92,7 @@
     <string name="error_pin">PIN lock not match</string>
     <string name="not_active_pin_lock">PIN Lock Not Active</string>
     <string name="active_pin_lock">PIN Lock Is Active</string>
+    <string name="b1">b1</string>
+    <string name="b2">b2</string>
 
 </resources>
