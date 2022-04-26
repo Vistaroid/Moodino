@@ -30,6 +30,8 @@ class StatsFragmentViewModel(
     val lineChartEntries = arrayListOf<Entry>()
     val pieChartEntries = mutableListOf<PieEntry>()
     var longestChainLiveData :MutableLiveData<Int> = MutableLiveData(0)
+    var latestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
+    var lastFiveDaysStatus: MutableLiveData<List<Boolean>> = MutableLiveData(listOf(false,false,false,false,false))
 
     init {
         viewModelScope.launch {
@@ -177,8 +179,5 @@ class StatsFragmentViewModel(
         daysTextView[2].text = weekDays[2]
         daysTextView[3].text = weekDays[3]
         daysTextView[4].text = weekDays[4]
-
-        println("chain123 ${longestChainLiveData.value}")
-        binding.daysInRowNumberTextView.text = "${getChainDayInRow()}"
     }
 }
