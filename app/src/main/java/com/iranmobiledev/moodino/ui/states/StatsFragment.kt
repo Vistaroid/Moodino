@@ -13,11 +13,12 @@ import com.iranmobiledev.moodino.ui.states.customView.composable.DaysInYearCompo
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import kotlinx.coroutines.*
 import org.greenrobot.eventbus.EventBus
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class StatsFragment : BaseFragment() {
     private lateinit var binding: FragmentStatsBinding
-
+    private val model : StatsFragmentViewModel by viewModel()
     override fun onResume() {
         super.onResume()
         EventBus.getDefault().post(BottomNavState(true))
@@ -44,12 +45,7 @@ class StatsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val model : StatsFragmentViewModel by viewModels()
 
-        /**
-         * with scope variable we can call launch and
-         * do heavy tasks in a coroutine thread .
-         */
         val scope = CoroutineScope(Dispatchers.IO)
 
         val daysInARowCardBinding = binding.daysInRowCardInclude
@@ -58,14 +54,13 @@ class StatsFragment : BaseFragment() {
         }
 
         val lineChart = binding.moodChartCardInclude.moodsLineChart
-        scope.launch {
             model.initializeLineChart(lineChart,requireContext())
-        }
 
         val pieChart = binding.moodCountCardInclude.moodCountPieChart
-        scope.launch {
             model.initializePieChart(pieChart,requireContext())
-            
+
+        model.longestChainLiveData.observe(viewLifecycleOwner){
+            binding.daysInRowCardInclude.longestChainTextView.text = it.toString()
         }
     }
 }

@@ -1,16 +1,14 @@
 package com.iranmobiledev.moodino.ui.entry
 
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.repository.activity.ActivityRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 
 class EntryViewModel(
@@ -19,7 +17,7 @@ class EntryViewModel(
 ) : BaseViewModel() {
 
     fun deleteEntry(entry: Entry) {
-        viewModelScope.launch(Dispatchers.IO + CoroutineName("deleteCoroutine")){
+        viewModelScope.launch(Dispatchers.IO + CoroutineName("deleteCoroutine")) {
             entryRepository.delete(entry)
         }
     }
@@ -30,8 +28,8 @@ class EntryViewModel(
 
     fun getEntries(): List<List<Entry>> {
         var entries = mutableListOf<Entry>()
-        val job = viewModelScope.launch (Dispatchers.IO){
-            entries = entryRepository.getAll() as MutableList<Entry>
+        val job = viewModelScope.launch(Dispatchers.IO) {
+                entries = entryRepository.getEntriesFlow.first() as MutableList<Entry>
         }
         runBlocking { job.join() }
         return makeListFromEntries(entries)
@@ -41,8 +39,8 @@ class EntryViewModel(
     private fun makeListFromEntries(entries: MutableList<Entry>): List<List<Entry>> {
         val listOfEntries = ArrayList<ArrayList<Entry>>()
         entries.forEach { entry ->
-            val filteredList = entries.filter { it.date ==  entry.date}
-            if(!listOfEntries.contains(filteredList))
+            val filteredList = entries.filter { it.date == entry.date }
+            if (!listOfEntries.contains(filteredList))
                 listOfEntries.add(0, filteredList as ArrayList<Entry>)
         }
         return listOfEntries

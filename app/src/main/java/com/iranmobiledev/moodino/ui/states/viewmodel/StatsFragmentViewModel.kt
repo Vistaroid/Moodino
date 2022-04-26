@@ -2,9 +2,11 @@ package com.iranmobiledev.moodino.ui.states.viewmodel
 
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.XAxis
@@ -12,22 +14,26 @@ import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
+import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.utlis.ColorArray
 import com.iranmobiledev.moodino.utlis.Moods.AWFUL
 import com.iranmobiledev.moodino.utlis.Moods.BAD
 import com.iranmobiledev.moodino.utlis.Moods.GOOD
 import com.iranmobiledev.moodino.utlis.Moods.MEH
 import com.iranmobiledev.moodino.utlis.Moods.RAD
-import kotlinx.coroutines.delay
-import java.util.*
-import kotlin.collections.ArrayList
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-class StatsFragmentViewModel : BaseViewModel() {
+class StatsFragmentViewModel(
+    private val entryRepository: EntryRepository
+    ) : BaseViewModel() {
 
     val lineChartEntries = arrayListOf<Entry>()
     val pieChartEntries = mutableListOf<PieEntry>()
+    var longestChainLiveData :MutableLiveData<Int> = MutableLiveData(0)
 
-    suspend fun initializePieChart(pieChart: PieChart, context: Context) {
+
+    fun initializePieChart(pieChart: PieChart, context: Context) {
 
         val entries = getEntriesForPieChart()
         //mocked entries for chart
@@ -78,7 +84,7 @@ class StatsFragmentViewModel : BaseViewModel() {
 
     }
 
-    suspend fun initializeLineChart(lineChart: LineChart, context: Context) {
+    fun initializeLineChart(lineChart: LineChart, context: Context) {
 
         //mocked entries for chart
         if (lineChartEntries.isEmpty()) {
@@ -147,6 +153,13 @@ class StatsFragmentViewModel : BaseViewModel() {
     }
 
     suspend fun daysInRowManager(context: Context, binding: DaysInARowCardBinding) {
+
+        viewModelScope.launch {
+            entryRepository.getEntriesFlow.collectLatest {
+                getChain(it)
+            }
+        }
+
         val weekDays = getFiveDaysAsWeekDays()
         val daysTextView = arrayListOf<TextView>(
             binding.dayOneTextView,
@@ -163,7 +176,7 @@ class StatsFragmentViewModel : BaseViewModel() {
         daysTextView[3].text = weekDays[3]
         daysTextView[4].text = weekDays[4]
 
-        binding.longestChainTextView.text = "${getLongestChain()}"
+        println("chain123 ${longestChainLiveData.value}")
         binding.daysInRowNumberTextView.text = "${getChainDayInRow()}"
     }
 }
