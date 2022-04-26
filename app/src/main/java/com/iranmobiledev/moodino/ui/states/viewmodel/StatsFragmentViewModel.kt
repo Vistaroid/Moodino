@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
@@ -32,9 +31,19 @@ class StatsFragmentViewModel(
     val pieChartEntries = mutableListOf<PieEntry>()
     var longestChainLiveData :MutableLiveData<Int> = MutableLiveData(0)
 
+    init {
+        viewModelScope.launch {
+            entryRepository.getEntriesFlow.collectLatest {
+                getChain(it)
+                if (it.size >= 5){
+                    getLastFiveDaysStatus(it)
+                }
+            }
+        }
+    }
+
 
     fun initializePieChart(pieChart: PieChart, context: Context) {
-
         val entries = getEntriesForPieChart()
         //mocked entries for chart
         if (pieChartEntries.isEmpty()) {
@@ -152,14 +161,7 @@ class StatsFragmentViewModel(
         }
     }
 
-    suspend fun daysInRowManager(context: Context, binding: DaysInARowCardBinding) {
-
-        viewModelScope.launch {
-            entryRepository.getEntriesFlow.collectLatest {
-                getChain(it)
-            }
-        }
-
+    fun daysInRowManager(context: Context, binding: DaysInARowCardBinding) {
         val weekDays = getFiveDaysAsWeekDays()
         val daysTextView = arrayListOf<TextView>(
             binding.dayOneTextView,

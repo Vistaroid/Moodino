@@ -62,5 +62,6 @@ class StatsFragment : BaseFragment() {
         model.longestChainLiveData.observe(viewLifecycleOwner){
             binding.daysInRowCardInclude.longestChainTextView.text = it.toString()
         }
+
     }
 }

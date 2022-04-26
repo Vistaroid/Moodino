@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieEntry
 import com.iranmobiledev.moodino.data.EntryDate
+import saman.zamani.persiandate.PersianDate
 import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
@@ -71,6 +72,34 @@ private fun getLongestChainFromDates(dates: List<EntryDate>): Int{
     }
 
     return chainLengthMax
+}
+
+@SuppressLint("NewApi")
+fun StatsFragmentViewModel.getLastFiveDaysStatus(entries: List<com.iranmobiledev.moodino.data.Entry>): List<Boolean> {
+
+    val lastFiveDayStatus = mutableListOf(false,false,false,false,false)
+
+    val today = LocalDate.now()
+    var index = 5
+    while (index != 0){
+        if (index != 1){
+            val entry = entries[entries.size - index]
+            if (LocalDate.of(entry.date!!.year,entry.date!!.month,entry.date!!.day) == today.minusDays(index.toLong())){
+                lastFiveDayStatus[index-1] = true
+            }else {
+                lastFiveDayStatus[index-1] = true
+            }
+        }else{
+            val entry = entries.last()
+            lastFiveDayStatus[0] = LocalDate.of(entry.date!!.year,entry.date!!.month,entry.date!!.day) == today.minusDays(index.toLong())
+        }
+        index--
+    }
+
+    lastFiveDayStatus.forEach {
+        println("chain123 $it")
+    }
+    return lastFiveDayStatus.toList()
 }
 
 fun StatsFragmentViewModel.getEntriesForLineChart(): ArrayList<Entry> {
