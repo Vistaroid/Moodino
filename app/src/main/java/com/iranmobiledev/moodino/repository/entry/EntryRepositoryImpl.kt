@@ -1,23 +1,23 @@
 package com.iranmobiledev.moodino.repository.entry
 
 import com.iranmobiledev.moodino.data.Entry
-import com.iranmobiledev.moodino.repository.entry.source.EntryLocalDataSource
+import com.iranmobiledev.moodino.database.EntryDao
 import kotlinx.coroutines.flow.Flow
 
-class EntryRepositoryImpl(private val localDataSource: EntryLocalDataSource) : EntryRepository {
+class EntryRepositoryImpl(private val entryDao: EntryDao) : EntryRepository {
     override suspend fun add(entry: Entry): Long {
-        return localDataSource.add(entry)
+        return entryDao.add(entry)
     }
 
     override fun update(entry: Entry): Int {
-        return localDataSource.update(entry)
+        return entryDao.update(entry)
     }
 
     override suspend fun delete(entry: Entry): Int {
-        return localDataSource.delete(entry)
+        return entryDao.delete(entry)
     }
 
-    override suspend fun getAll(): List<Entry> {
-        return localDataSource.getAll()
-    }
+    override val getEntriesFlow: Flow<List<Entry>>
+        get() = entryDao.getAll()
+
 }

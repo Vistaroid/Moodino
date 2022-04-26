@@ -85,6 +85,9 @@ dependencies {
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.1'
 
+    //live data
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+
 
     def room_version = "2.4.2"
     implementation "androidx.room:room-runtime:$room_version"

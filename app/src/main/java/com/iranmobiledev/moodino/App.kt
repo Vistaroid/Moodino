@@ -4,20 +4,22 @@ import android.app.Application
 import android.content.SharedPreferences
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.database.AppDatabase
+import com.iranmobiledev.moodino.database.EntryDao
 import com.iranmobiledev.moodino.repository.activity.ActivityRepository
 import com.iranmobiledev.moodino.repository.activity.ActivityRepositoryImpl
 import com.iranmobiledev.moodino.repository.activity.source.ActivityLocalDataSource
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepositoryImpl
-import com.iranmobiledev.moodino.repository.entry.source.EntryLocalDataSource
 import com.iranmobiledev.moodino.ui.calendar.CalendarViewModel
 import com.iranmobiledev.moodino.repository.more.MoreRepository
 import com.iranmobiledev.moodino.repository.more.MoreRepositoryImpl
 import com.iranmobiledev.moodino.repository.more.source.MoreLocalDataSource
+import com.iranmobiledev.moodino.ui.MainActivity
 import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
+import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
@@ -39,7 +41,8 @@ class App : Application() , KoinComponent{
             viewModel { EntryDetailViewModel(get(), get()) }
             viewModel { CalendarViewModel() }
             viewModel { PinLockViewModel(get()) }
-            factory <EntryRepository> { EntryRepositoryImpl(EntryLocalDataSource(database.getEntryDao)) }
+            viewModel {StatsFragmentViewModel(get())}
+            factory  <EntryRepository> {EntryRepositoryImpl(database.getEntryDao)}
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
             factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(MoodinoSharedPreferences.create(this@App))) }
             single <ImageLoadingService>{ GlideImageLoader() }
