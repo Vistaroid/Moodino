@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
@@ -20,27 +19,24 @@ import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.BottomNavVisibility
-import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
-import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import io.github.persiancalendar.calendar.AbstractDate
 import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth, KoinComponent {
+class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth, KoinComponent {
 
     private lateinit var binding: FragmentEntriesBinding
-    private lateinit var entriesContainerRv: RecyclerView
-    private val entryViewModel: EntryViewModel by viewModel()
-    private lateinit var navController: NavController
-    private val entryContainerAdapter: EntryContainerAdapter by inject()
+    private lateinit var recyclerView: RecyclerView
+    private val viewModel: EntryViewModel by viewModel()
+    private lateinit var adapter: EntryContainerAdapter
 
     override fun onStart() {
         super.onStart()
         val entry = arguments?.getParcelable<Entry>("entry")
         entry?.let {
-            entryContainerAdapter.addEntry(it)
+            adapter.addEntry(it)
         }
         arguments?.clear()
     }
@@ -56,39 +52,28 @@ class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth, Koi
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEntriesBinding.inflate(inflater, container, false)
-        initViews()
-        entriesContainerRvImpl()
-
-        binding.addEntryCardView.setOnClickListener {}
-        makeSpringAnimation(binding.addEntryCardView)
-
-        binding.mainToolbar.initialize(this)
-
+        setupUi()
+        setupClicks()
+        setupObserver()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        MoodinoSharedPreferences.create(requireContext()).edit().putBoolean("first_enter", true)
-            .apply()
+    private fun setupUi() {
+        binding.mainToolbar.initialize(this)
+        recyclerView = binding.entriesContainerRv
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        adapter = EntryContainerAdapter(requireContext(), mutableListOf(), this)
+        recyclerView.adapter = adapter
     }
-
-    private fun makeSpringAnimation(view: View) {
-        view.implementSpringAnimationTrait()
+    private fun setupObserver() {
+        viewModel.getEntries().observe(viewLifecycleOwner){
+            adapter.setEntries(it)
+            adapter.notifyDataSetChanged()
+        }
     }
-
-    private fun entriesContainerRvImpl() {
-        entriesContainerRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        entriesContainerRv.adapter = entryContainerAdapter
-    }
-
-    private fun initViews() {
-        entryContainerAdapter.create(requireContext(), this,
-            entryViewModel.getEntries() as MutableList<MutableList<Entry>>
-        )
-        entriesContainerRv = binding.entriesContainerRv
-        entriesContainerRv.itemAnimator = null
-        navController = NavHostFragment.findNavController(this)
+    private fun setupClicks() {
+        binding.addEntryCardView.setOnClickListener {}
     }
 
     override fun onAttach(context: Context) {
@@ -106,8 +91,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister,ChangeCurrentMonth, Koi
             override fun clickedItem(itemId: Int) {
                 when (itemId) {
                     R.id.rightButton -> {
-                        entryViewModel.deleteEntry(entry)
-                        entryContainerAdapter.removeItem(entry)
+                        viewModel.deleteEntry(entry)
+                        adapter.removeItem(entry)
                         dialog.dismiss()
                     }
                     R.id.leftButton -> {

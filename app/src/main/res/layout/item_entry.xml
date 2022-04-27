@@ -21,7 +21,7 @@
             android:layout_height="@dimen/_60mdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_emoji_happy"/>
+            android:src="@{entryItem.icon}"/>
 
         <View
             android:layout_width="@dimen/_2mdp"
@@ -84,8 +84,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
             app:layout_constraintTop_toBottomOf="@+id/entryNote"
-            android:visibility="@{entryItem.photoPath.length() > 0 ? View.VISIBLE : View.GONE}"
-            >
+            android:visibility="@{entryItem.photoPath.length() > 0 ? View.VISIBLE : View.GONE}">
 
             <ImageView
                 android:id="@+id/entryImage"
