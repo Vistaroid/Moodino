@@ -15,20 +15,19 @@ import com.iranmobiledev.moodino.listener.EntryEventLister
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
-class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
-    private var context: Context? = null
-    private var entriesList: MutableList<MutableList<Entry>> = mutableListOf()
-    private var entryEventLister: EntryEventLister? = null
+class EntryContainerAdapter(
+    private val context: Context,
+    private var entries: MutableList<MutableList<Entry>>,
+    private val entryEventListener: EntryEventLister
+) :
+    RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
     private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val entryListDate = itemView.findViewById<TextView>(R.id.entryListDate)
         private val entryRecyclerView = itemView.findViewById<RecyclerView>(R.id.entryRv)
 
-
         @SuppressLint("SetTextI18n")
         fun bind(entries: List<Entry>) {
-
             val persianDate = PersianDate()
             persianDate.grgMonth = entries[0].date?.month!!
             entryListDate.text = PersianDateFormat.format(
@@ -40,7 +39,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
             entryRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             val entryAdapter = EntryAdapter(
-                entryEventLister!!,
+                entryEventListener,
                 entries as MutableList<Entry>, context!!
             )
             entryRecyclerView.adapter = entryAdapter
@@ -48,7 +47,9 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
             entryAdapters.add(entryAdapter)
         }
     }
-
+    fun setEntries(entries: List<List<Entry>>){
+        this.entries = entries as MutableList<MutableList<Entry>>
+    }
     fun addEntry(entry: Entry) {
         var found = false
         entryAdapters.forEach {
@@ -58,24 +59,22 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
             }
         }
         if (!found || entryAdapters.size == 0) {
-            entryAdapters.add(0, EntryAdapter(entryEventLister!!, mutableListOf(entry), context!!))
+            entryAdapters.add(0, EntryAdapter(entryEventListener, mutableListOf(entry), context!!))
             notifyItemInserted(0)
         }
     }
-
     fun removeItem(entry: Entry) {
         entryAdapters.forEach {
-            if(it.entries.contains(entry)){
+            if (it.entries.contains(entry)) {
                 it.remove(entry)
             }
             checkItemsToBeNotEmpty()
         }
     }
-
     private fun checkItemsToBeNotEmpty() {
-        entriesList.forEachIndexed { index, list ->
+        entries.forEachIndexed { index, list ->
             if (list.size == 0) {
-                entriesList.removeAt(index)
+                entries.removeAt(index)
                 notifyItemRemoved(index)
             }
         }
@@ -88,21 +87,11 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(entriesList[position])
+        holder.bind(entries[position])
     }
 
     override fun getItemCount(): Int {
-        return entriesList.size
-    }
-
-    fun create(
-        context: Context,
-        entryEventListener: EntryEventLister,
-        entries: MutableList<MutableList<Entry>>
-    ) {
-        this.context = context
-        this.entryEventLister = entryEventListener
-        entriesList = entries
+        return entries.size
     }
 }
 
