@@ -103,6 +103,7 @@
                         android:background="@drawable/circle_shape">
 
                         <ImageView
+                            android:id="@+id/firstDayIV"
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:layout_gravity="center"
@@ -135,6 +136,7 @@
                         android:background="@drawable/circle_shape">
 
                         <ImageView
+                            android:id="@+id/secondDayIV"
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:layout_gravity="center"
@@ -168,6 +170,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
+                            android:id="@+id/thirdDayIV"
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:layout_gravity="center"
@@ -190,23 +193,20 @@
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-
                     app:layout_constraintEnd_toStartOf="@+id/fifthDay"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/thirdDay"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <FrameLayout
-
-
                         android:id="@+id/fourthDayFramLayout"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-
                         android:background="@drawable/circle_shape"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
+                            android:id="@+id/fourthDayIV"
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:layout_gravity="center"
@@ -240,6 +240,7 @@
                         android:background="@drawable/circle_shape">
 
                         <ImageView
+                            android:id="@+id/fifthDayIV"
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:layout_gravity="center"
