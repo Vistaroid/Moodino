@@ -27,21 +27,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterItemCallback,
+class EntryDetailFragment : BaseFragment(),
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
-    private lateinit var activitiesContainerAdapter: ActivityContainerAdapter
-    private lateinit var activitiesRv: RecyclerView
-    private lateinit var save: ViewGroup
-    private lateinit var saveFab: FloatingActionButton
-    private lateinit var entryImage: ImageView
-    private var imagePath: String? = null
-    private lateinit var entryImageContainer: MaterialCardView
-    private lateinit var noteEt: EditText
     private val entryDetailViewModel: EntryDetailViewModel by viewModel()
-    private var entry = Entry(id = null)
     private val imageLoader: ImageLoadingService by inject()
+    private var entry = Entry()
+
     override fun onStart() {
         super.onStart()
         entry = arguments?.getParcelable("entry")!!
@@ -53,39 +46,22 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
         savedInstanceState: Bundle?
     ): View {
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
-        initViews()
-        activitiesRvImpl()
-        makeSpringAnimation()
-
-        save.setOnClickListener(saveOnClick)
-        saveFab.setOnClickListener(saveOnClick)
-
-        binding.selectImageLayout.setOnClickListener {
-
-            PickImageDialog.build(setupPhotoDialog()) {
-                if (it.error == null) {
-                    imagePath = it.path
-                    entryImageContainer.visibility = View.VISIBLE
-                    entry.photoPath = it.path
-                    imageLoader.load(requireContext(), entry.photoPath, entryImage)
-                }
-            }.show(parentFragmentManager)
-        }
+        setupClicks()
         return binding.root
     }
-
-    private val saveOnClick = View.OnClickListener {
-
-        noteEt.text?.let {
-            entry.note = it.toString()
+    private fun setupClicks() {
+        binding.saveLayout.setOnClickListener(saveOnClick)
+        binding.saveEntryFab.setOnClickListener(saveOnClick)
+        binding.selectImageLayout.setOnClickListener {
+            createPhotoSelectorDialog()
         }
-        entryDetailViewModel.addEntry(entry)
+    }
+    private fun navigateToEntryFragment(){
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
             .navigate(R.id.action_entryDetailFragment_to_entriesFragment, Bundle().apply {
                 putParcelable("entry", entry)
             })
     }
-
     private fun setupPhotoDialog(): PickSetup {
         return PickSetup().apply {
             cameraIcon = R.drawable.ic_camera
@@ -96,38 +72,24 @@ class EntryDetailFragment() : BaseFragment(), ActivityContainerAdapter.AdapterIt
             height = 500
         }
     }
-
-    private fun makeSpringAnimation() {
-        save.implementSpringAnimationTrait()
-    }
-
-    private fun activitiesRvImpl() {
-        activitiesRv.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        activitiesRv.adapter = activitiesContainerAdapter
-    }
-
-    private fun initViews() {
-        //TODO make list from list of activities
-        activitiesContainerAdapter =
-            ActivityContainerAdapter(entryDetailViewModel.getActivities(), this, requireContext())
-        activitiesRv = binding.activitiesContainerRv
-        save = binding.saveLayout
-        saveFab = binding.saveEntryFab
-        entryImage = binding.entryImage
-        entryImageContainer = binding.entryImageContainer
-        noteEt = binding.noteEt
-    }
-
-
-    override fun onExpandViewClicked() {
-
-        //val visibility = if(view.visibility == View.GONE) View.VISIBLE else View.GONE
-        //view.visibility = visibility
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         BottomNavVisibility.currentFragment.value = this.id
+    }
+    private fun createPhotoSelectorDialog() {
+        PickImageDialog.build(setupPhotoDialog()) {
+            if (it.error == null) {
+                binding.entryImageContainer.visibility = View.VISIBLE
+                entry.photoPath = it.path
+                imageLoader.load(requireContext(), entry.photoPath, binding.entryImage)
+            }
+        }.show(parentFragmentManager)
+    }
+    private val saveOnClick = View.OnClickListener {
+        binding.noteEt.text?.let {
+            entry.note = it.toString()
+        }
+        entryDetailViewModel.addEntry(entry)
+        navigateToEntryFragment()
     }
 }

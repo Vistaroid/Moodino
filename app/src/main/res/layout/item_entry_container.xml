@@ -42,7 +42,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_circle"
-                android:layout_marginStart="32dp"/>
+                android:layout_marginStart="32dp"
+                app:tint="@color/white" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/entryRv"

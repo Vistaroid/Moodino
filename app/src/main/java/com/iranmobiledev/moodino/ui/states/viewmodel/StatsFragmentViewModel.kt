@@ -35,7 +35,7 @@ class StatsFragmentViewModel(
 
     init {
         viewModelScope.launch {
-            entryRepository.getEntriesFlow.collectLatest {
+            entryRepository.getAll().collectLatest {
                 getChain(it)
                 if (it.size >= 5){
                     getLastFiveDaysStatus(it)
