@@ -24,7 +24,7 @@
             <ImageView
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_very_happy_outlined" />
+                app:srcCompat="@drawable/emoji_rad" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,7 +32,8 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/rad"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginTop="3dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -48,7 +49,7 @@
             <ImageView
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_nothing_outlined" />
+                app:srcCompat="@drawable/emoji_meh" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,7 +57,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/meh"
                 android:textColor="@color/black"
-
+                android:layout_marginTop="3dp"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -73,7 +74,7 @@
             <ImageView
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_bad_outlined" />
+                app:srcCompat="@drawable/emoji_bad" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,7 +82,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/bad"
                 android:textColor="@color/black"
-
+                android:layout_marginTop="3dp"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -98,14 +99,14 @@
             <ImageView
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_very_bad_outlined" />
+                app:srcCompat="@drawable/emoji_awful" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/awful"
-
+                android:layout_marginTop="3dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -123,14 +124,14 @@
             <ImageView
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
-                app:srcCompat="@drawable/ic_happy_outlined" />
+                app:srcCompat="@drawable/emoji_good" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/good"
-
+                android:layout_marginTop="3dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>

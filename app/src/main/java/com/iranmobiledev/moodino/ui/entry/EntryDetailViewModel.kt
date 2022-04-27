@@ -17,20 +17,8 @@ class EntryDetailViewModel(
 ) : BaseViewModel() {
 
     fun addEntry(entry: Entry) {
-        val job = viewModelScope.launch(Dispatchers.IO + CoroutineName("addEntryCoroutine")) {
+        viewModelScope.launch(Dispatchers.IO) {
             entryRepository.add(entry)
         }
-        runBlocking {
-            job.join()
-        }
-    }
-
-    fun getActivities(): List<List<Activity>> {
-        return sortActivities(activityRepository.getAll())
-    }
-
-    private fun sortActivities(activities : List<Activity>) : List<List<Activity>>{
-        val newActivities = ArrayList<List<Activity>>()
-        return newActivities
     }
 }

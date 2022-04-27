@@ -31,12 +31,13 @@ class EntryAdapter(
         private val entryImage: ImageView = binding.entryImage
         private val entryTimeTv: TextView = binding.entryTimeTv
 
+
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry) {
-
-            entryIcon.setImageResource(entry.icon)
+            println("color is adapter: ${entry.titleColor}")
             entryTimeTv.text = "${entry.time?.hour}:${entry.time?.minutes}"
             binding.entryItem = entry
+            entryIcon.setImageResource(entry.icon)
             moreIcon.setOnClickListener {
                 val popupMenu = PopupMenu(context, it)
                 popupMenu.inflate(R.menu.popup_menu)
