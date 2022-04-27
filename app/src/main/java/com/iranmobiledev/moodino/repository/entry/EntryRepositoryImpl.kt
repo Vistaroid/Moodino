@@ -17,7 +17,7 @@ class EntryRepositoryImpl(private val entryDao: EntryDao) : EntryRepository {
         return entryDao.delete(entry)
     }
 
-    override val getEntriesFlow: Flow<List<Entry>>
-        get() = entryDao.getAll()
-
+    override fun getAll(): Flow<List<Entry>> {
+        return entryDao.getAll()
+    }
 }
