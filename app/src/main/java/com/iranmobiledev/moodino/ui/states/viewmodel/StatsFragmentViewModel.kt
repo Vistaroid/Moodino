@@ -29,6 +29,7 @@ class StatsFragmentViewModel(
 
     val lineChartEntries = arrayListOf<Entry>()
     val pieChartEntries = mutableListOf<PieEntry>()
+    val isEnoughEntries : MutableLiveData<Boolean> = MutableLiveData(false)
     var longestChainLiveData :MutableLiveData<Int> = MutableLiveData(0)
     var latestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     var lastFiveDaysStatus: MutableLiveData<List<Boolean>> = MutableLiveData(listOf(false,false,false,false,false))
@@ -36,9 +37,12 @@ class StatsFragmentViewModel(
     init {
         viewModelScope.launch {
             entryRepository.getEntriesFlow.collectLatest {
-                getChain(it)
                 if (it.size >= 5){
                     getLastFiveDaysStatus(it)
+                    getChain(it)
+                    isEnoughEntries.postValue(true)
+                }else{
+                    isEnoughEntries.postValue(false)
                 }
             }
         }

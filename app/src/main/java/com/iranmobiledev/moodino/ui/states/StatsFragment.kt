@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.viewModels
 import com.iranmobiledev.moodino.R
@@ -57,65 +58,78 @@ class StatsFragment : BaseFragment() {
             model.daysInRowManager(requireContext(),daysInARowCardBinding)
         }
 
-        val lineChart = binding.moodChartCardInclude.moodsLineChart
-            model.initializeLineChart(lineChart,requireContext())
+       model.isEnoughEntries.observe(viewLifecycleOwner){
+           if (it){
+               val lineChart = binding.moodChartCardInclude.moodsLineChart
+               model.initializeLineChart(lineChart,requireContext())
 
-        val pieChart = binding.moodCountCardInclude.moodCountPieChart
-            model.initializePieChart(pieChart,requireContext())
+               val pieChart = binding.moodCountCardInclude.moodCountPieChart
+               model.initializePieChart(pieChart,requireContext())
 
-        model.longestChainLiveData.observe(viewLifecycleOwner){
-            binding.daysInRowCardInclude.longestChainTextView.text = it.toString()
-        }
+               model.longestChainLiveData.observe(viewLifecycleOwner){
+                   binding.daysInRowCardInclude.longestChainTextView.text = it.toString()
+               }
 
-        model.latestChainLiveData.observe(viewLifecycleOwner){
-            binding.daysInRowCardInclude.daysInRowNumberTextView.text = it.toString()
-        }
+               model.latestChainLiveData.observe(viewLifecycleOwner){
+                   binding.daysInRowCardInclude.daysInRowNumberTextView.text = it.toString()
+               }
 
-        model.lastFiveDaysStatus.observe(viewLifecycleOwner){
-            if (it[0]){
-                binding.daysInRowCardInclude.fifthDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
-                binding.daysInRowCardInclude.fifthDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
-                binding.daysInRowCardInclude.fifthDayIV.setColorFilter(resources.getColor(R.color.white))
-            }else{
-                binding.daysInRowCardInclude.fifthDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
-                binding.daysInRowCardInclude.fifthDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
-            }
+               model.lastFiveDaysStatus.observe(viewLifecycleOwner){
 
-            if (it[1]){
-                binding.daysInRowCardInclude.fourthDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
-                binding.daysInRowCardInclude.fourthDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
-                binding.daysInRowCardInclude.fourthDayIV.setColorFilter(resources.getColor(R.color.white))
-            }else{
-                binding.daysInRowCardInclude.fourthDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
-                binding.daysInRowCardInclude.fourthDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
-            }
+                   it.forEach { bool ->
+                       println("chain2223 $bool")
+                   }
 
-            if (it[2]){
-                binding.daysInRowCardInclude.thirdDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
-                binding.daysInRowCardInclude.thirdDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
-                binding.daysInRowCardInclude.thirdDayIV.setColorFilter(resources.getColor(R.color.white))
-            }else{
-                binding.daysInRowCardInclude.thirdDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
-                binding.daysInRowCardInclude.thirdDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
-            }
 
-            if (it[3]){
-                binding.daysInRowCardInclude.secondDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
-                binding.daysInRowCardInclude.secondDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
-                binding.daysInRowCardInclude.secondDayIV.setColorFilter(resources.getColor(R.color.white))
-            }else{
-                binding.daysInRowCardInclude.secondDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
-                binding.daysInRowCardInclude.secondDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
-            }
+                   if (it[2]){
+                       binding.daysInRowCardInclude.thirdDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
+                       binding.daysInRowCardInclude.thirdDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
+                       binding.daysInRowCardInclude.thirdDayIV.setColorFilter(resources.getColor(R.color.white))
+                   }else{
+                       binding.daysInRowCardInclude.thirdDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
+                       binding.daysInRowCardInclude.thirdDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
+                   }
 
-            if (it[4]){
-                binding.daysInRowCardInclude.firstDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
-                binding.daysInRowCardInclude.firstDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
-                binding.daysInRowCardInclude.firstDayIV.setColorFilter(resources.getColor(R.color.white))
-            }else{
-                binding.daysInRowCardInclude.firstDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
-                binding.daysInRowCardInclude.firstDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
-            }
-        }
+                   if (it[0]){
+                       binding.daysInRowCardInclude.fifthDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
+                       binding.daysInRowCardInclude.fifthDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
+                       binding.daysInRowCardInclude.fifthDayIV.setColorFilter(resources.getColor(R.color.white))
+                   }else{
+                       binding.daysInRowCardInclude.fifthDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
+                       binding.daysInRowCardInclude.fifthDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
+                   }
+
+                   if (it[1]){
+                       binding.daysInRowCardInclude.fourthDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
+                       binding.daysInRowCardInclude.fourthDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
+                       binding.daysInRowCardInclude.fourthDayIV.setColorFilter(resources.getColor(R.color.white))
+                   }else{
+                       binding.daysInRowCardInclude.fourthDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
+                       binding.daysInRowCardInclude.fourthDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
+                   }
+
+
+                   if (it[3]){
+                       binding.daysInRowCardInclude.secondDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
+                       binding.daysInRowCardInclude.secondDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
+                       binding.daysInRowCardInclude.secondDayIV.setColorFilter(resources.getColor(R.color.white))
+                   }else{
+                       binding.daysInRowCardInclude.secondDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
+                       binding.daysInRowCardInclude.secondDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
+                   }
+
+                   if (it[4]){
+                       binding.daysInRowCardInclude.firstDayFramLayout.background = resources.getDrawable(R.drawable.primary_circle_shape)
+                       binding.daysInRowCardInclude.firstDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
+                       binding.daysInRowCardInclude.firstDayIV.setColorFilter(resources.getColor(R.color.white))
+                   }else{
+                       binding.daysInRowCardInclude.firstDayFramLayout.background = resources.getDrawable(R.drawable.circle_shape)
+                       binding.daysInRowCardInclude.firstDayIV.setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
+                   }
+               }
+           }else{
+               Toast.makeText(requireContext(),"not enough entries",Toast.LENGTH_LONG).show()
+           }
+       }
     }
 }
