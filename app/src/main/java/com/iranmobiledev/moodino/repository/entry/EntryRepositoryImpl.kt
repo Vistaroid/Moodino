@@ -17,7 +17,7 @@ class EntryRepositoryImpl(private val localDataSource: EntryLocalDataSource) : E
         return localDataSource.delete(entry)
     }
 
-    override suspend fun getAll(): List<Entry> {
+    override suspend fun getAll(): Flow<List<Entry>> {
         return localDataSource.getAll()
     }
 }

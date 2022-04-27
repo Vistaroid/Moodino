@@ -17,7 +17,7 @@ class EntryLocalDataSource(private val entryDao: EntryDao) : EntryDataSource {
         return entryDao.delete(entry)
     }
 
-    override suspend fun getAll(): List<Entry> {
+    override suspend fun getAll(): Flow<List<Entry>> {
         return entryDao.getAll()
     }
 }

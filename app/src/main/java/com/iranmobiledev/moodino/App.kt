@@ -20,7 +20,7 @@ import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
-import com.iranmobiledev.moodino.utlis.MoodinoSharedPreferences
+import com.iranmobiledev.moodino.utlis.SharedPref
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.component.KoinComponent
@@ -33,6 +33,7 @@ class App : Application() , KoinComponent{
         super.onCreate()
 
         val database = AppDatabase.getAppDatabase(this)
+        SharedPref.create(this)
 
         val modules = module {
             viewModel { EntryViewModel(get(), get()) }
@@ -41,9 +42,8 @@ class App : Application() , KoinComponent{
             viewModel { PinLockViewModel(get()) }
             factory <EntryRepository> { EntryRepositoryImpl(EntryLocalDataSource(database.getEntryDao)) }
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
-            factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(MoodinoSharedPreferences.create(this@App))) }
+            factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(SharedPref.create(this@App))) }
             single <ImageLoadingService>{ GlideImageLoader() }
-            single { EntryContainerAdapter() }
         }
 
         startKoin {
@@ -51,7 +51,7 @@ class App : Application() , KoinComponent{
             modules(modules)
         }
 
-        val sharedPref : SharedPreferences = MoodinoSharedPreferences.create(this)
+        val sharedPref : SharedPreferences = SharedPref.create(this)
         val firstEnter = sharedPref.getBoolean("first_enter", false)
         if(!firstEnter)
             makeDefaultActivities()

@@ -19,6 +19,6 @@ interface EntryDao {
     fun delete(entry : Entry) : Int
 
     @Query("SELECT * FROM table_entry")
-    suspend fun getAll() : List<Entry>
+    fun getAll() : Flow<List<Entry>>
 
 }

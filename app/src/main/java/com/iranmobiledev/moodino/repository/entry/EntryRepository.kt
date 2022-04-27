@@ -7,5 +7,5 @@ interface EntryRepository {
     suspend fun add(entry : Entry) : Long
     fun update(entry: Entry) : Int
     suspend fun delete(entry: Entry) : Int
-    suspend fun getAll() : List<Entry>
+    suspend fun getAll() : Flow<List<Entry>>
 }
