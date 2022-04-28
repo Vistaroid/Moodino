@@ -18,11 +18,6 @@ class StatsFragment : BaseFragment() {
     private lateinit var binding: FragmentStatsBinding
     private val model: StatsFragmentViewModel by viewModel()
 
-    override fun onResume() {
-        super.onResume()
-        EventBus.getDefault().post(BottomNavState(true))
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

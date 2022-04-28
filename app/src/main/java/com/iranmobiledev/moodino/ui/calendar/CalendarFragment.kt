@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.iranmobiledev.moodino.base.BaseFragment
-import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.FragmentCalendarBinding
-import com.iranmobiledev.moodino.utlis.BottomNavVisibility
-import org.greenrobot.eventbus.EventBus
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
 import com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbarItemClickListener
 import io.github.persiancalendar.calendar.AbstractDate
@@ -24,11 +21,6 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
     private lateinit var binding : FragmentCalendarBinding
     private val viewModel: CalendarViewModel by viewModel()
 
-    override fun onResume() {
-        super.onResume()
-        EventBus.getDefault().post(BottomNavState(true))
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,11 +28,6 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
     ): View {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        BottomNavVisibility.currentFragment.value = this.id
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

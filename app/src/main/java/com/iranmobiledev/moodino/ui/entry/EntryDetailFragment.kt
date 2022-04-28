@@ -5,21 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
-import com.iranmobiledev.moodino.utlis.implementSpringAnimationTrait
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
-import com.iranmobiledev.moodino.ui.entry.adapter.ActivityContainerAdapter
-import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
@@ -72,10 +63,7 @@ class EntryDetailFragment : BaseFragment(),
             height = 500
         }
     }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        BottomNavVisibility.currentFragment.value = this.id
-    }
+
     private fun createPhotoSelectorDialog() {
         PickImageDialog.build(setupPhotoDialog()) {
             if (it.error == null) {

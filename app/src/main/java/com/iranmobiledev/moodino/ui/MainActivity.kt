@@ -11,7 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
-import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,11 +31,6 @@ class MainActivity : BaseActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
 
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
-
     override fun onStop() {
         EventBus.getDefault().unregister(this)
         super.onStop()
@@ -55,6 +49,7 @@ class MainActivity : BaseActivity() {
         navController = findNavController(R.id.fragmentContainerView)
         binding.bottomNavigationView.setupWithNavController(navController)
         binding.bottomNavigationView.background = null
+        setFragmentDestinationChangeListener()
     }
 
     private fun setupClicks() {
@@ -66,7 +61,6 @@ class MainActivity : BaseActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.actionFab(binding.fabMenu, it, MainActivity())
             }
-            bottomNavVisibility(false)
             val bundle = Bundle()
             val persianDate = PersianDate()
             //TODO send date from bundle
@@ -113,25 +107,32 @@ class MainActivity : BaseActivity() {
         return currentNavController?.value?.navigateUp() ?: false
     }
 
-    private fun bottomNavVisibility(mustShow: Boolean) {
-        val bottomAppBar = binding.bottomAppBar
-        val fab = binding.fab
-        if (mustShow) {
-            fab.show()
-            fab.isClickable = true
-            bottomAppBar.visibility = View.VISIBLE
-            bottomAppBar.performShow()
-        } else {
-            fab.hide()
-            fab.isClickable = false
-            bottomAppBar.visibility = View.GONE
-            bottomAppBar.performHide(true)
+    private fun setFragmentDestinationChangeListener(){
+        navController.addOnDestinationChangedListener { controller , destination , arguments ->
+            when(destination.id){
+                R.id.entriesFragment -> showBottomNav()
+                R.id.statsFragment -> showBottomNav()
+                R.id.calenderFragment -> showBottomNav()
+                R.id.moreFragment -> showBottomNav()
+                else -> hideBottomNav()
+            }
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun mustBottomNavShow(bottomNavState: BottomNavState) {
-        bottomNavVisibility(bottomNavState.mustShow)
+    private fun showBottomNav(){
+        binding.fab.show()
+        binding.fab.isClickable = true
+        binding.bottomAppBar.visibility = View.VISIBLE
+        binding.bottomAppBar.performShow()
+        binding.bottomNavigationView.visibility= View.VISIBLE
+    }
+
+    private fun hideBottomNav(){
+        binding.fab.hide()
+        binding.fab.isClickable = false
+        binding.bottomAppBar.visibility = View.GONE
+        binding. bottomAppBar.performHide(true)
+        binding.bottomNavigationView.visibility= View.GONE
     }
 }
 

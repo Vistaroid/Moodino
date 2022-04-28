@@ -34,7 +34,7 @@ class EntryAdapter(
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry) {
             binding.entryItem = entry
-            entryIcon.setImageResource(entry.icon)
+         //   entryIcon.setImageResource(entry.icon)
             moreIcon.setOnClickListener {
                 makePopupMenu(entry, it)
             }

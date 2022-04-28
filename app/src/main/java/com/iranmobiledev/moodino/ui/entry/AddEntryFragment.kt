@@ -91,8 +91,4 @@ class AddEntryFragment() : BaseFragment() {
         return PersianDateFormat.format(persianDate, "H:i")
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        BottomNavVisibility.currentFragment.value = this.id
-    }
 }
