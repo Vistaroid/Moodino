@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
@@ -18,12 +17,9 @@ import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
-import com.iranmobiledev.moodino.utlis.BottomNavVisibility
 import io.github.persiancalendar.calendar.AbstractDate
-import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth, KoinComponent {
 
@@ -39,11 +35,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth, Ko
             adapter.addEntry(it)
         }
         arguments?.clear()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        EventBus.getDefault().post(BottomNavState(true))
     }
 
     override fun onCreateView(
@@ -74,11 +65,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth, Ko
     }
     private fun setupClicks() {
         binding.addEntryCardView.setOnClickListener {}
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        BottomNavVisibility.currentFragment.value = this.id
     }
 
     override fun delete(entry: Entry): Boolean {
