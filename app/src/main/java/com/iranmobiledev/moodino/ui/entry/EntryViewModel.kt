@@ -33,6 +33,7 @@ class EntryViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             entryRepository.getAll().collect{
                 entriesLiveData.postValue(makeListFromEntries(it as MutableList<Entry>))
+                println("size123 of lsit is ${it.size}")
             }
 
         }
