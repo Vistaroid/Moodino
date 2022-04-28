@@ -13,8 +13,8 @@ object Moods {
     val RAD  = 5f
 }
 
-const val AWFUL = "AWFUL"
-const val BAD = "BAD"
-const val MEH = "MEH"
-const val GOOD = "GOOD"
-const val RAD = "RAD"
+const val AWFUL = "awful"
+const val BAD = "bad"
+const val MEH = "meh"
+const val GOOD = "good"
+const val RAD = "rad"

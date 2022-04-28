@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12mdp"
             android:text="@{entryItem.title}"
+            android:textSize="@dimen/_19mdp"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintBottom_toBottomOf="@+id/EntryIcon"
             app:layout_constraintStart_toEndOf="@+id/EntryIcon"
