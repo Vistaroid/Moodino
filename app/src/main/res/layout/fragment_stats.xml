@@ -394,7 +394,7 @@
                                android:layout_width="24dp"
                                android:layout_height="30dp"
                                android:src="@drawable/ic_very_happy_outlined"
-                               app:tint="@color/pink" />
+                               app:tint="@color/rad_color" />
 
                            <View
                                android:layout_width="match_parent"
@@ -405,7 +405,7 @@
                                android:layout_width="22dp"
                                android:layout_height="32dp"
                                android:src="@drawable/ic_happy_outlined"
-                               app:tint="@color/green" />
+                               app:tint="@color/good_color" />
 
                            <View
                                android:layout_width="match_parent"
@@ -416,7 +416,7 @@
                                android:layout_width="22dp"
                                android:layout_height="34dp"
                                android:src="@drawable/ic_nothing_outlined"
-                               app:tint="@color/gray" />
+                               app:tint="@color/meh_color" />
 
                            <View
                                android:layout_width="match_parent"
@@ -427,7 +427,7 @@
                                android:layout_width="22dp"
                                android:layout_height="34dp"
                                android:src="@drawable/ic_bad_outlined"
-                               app:tint="@color/orange" />
+                               app:tint="@color/bad_color" />
 
                            <View
                                android:layout_width="match_parent"
@@ -438,7 +438,7 @@
                                android:layout_width="22dp"
                                android:layout_height="32dp"
                                android:src="@drawable/ic_very_bad_outlined"
-                               app:tint="@color/blue" />
+                               app:tint="@color/awful_color" />
 
                        </LinearLayout>
 
@@ -680,7 +680,7 @@
                        app:MoodCount="2"
                        app:MoodCountBackground="@drawable/circle_shape"
                        app:MoodIcon="@drawable/ic_very_happy_outlined"
-                       app:MoodTint="@color/pink"
+                       app:MoodTint="@color/rad_color"
                        app:MoodName="@string/rad"
                        app:layout_constraintEnd_toStartOf="@+id/moodCountHappy"
                        app:layout_constraintHorizontal_bias="0.5"
@@ -696,7 +696,7 @@
                        app:MoodCount="13"
                        app:MoodCountBackground="@drawable/circle_shape"
                        app:MoodIcon="@drawable/ic_happy_outlined"
-                       app:MoodTint="@color/green"
+                       app:MoodTint="@color/good_color"
                        app:layout_constraintEnd_toStartOf="@+id/moodCountNothing"
                        app:layout_constraintHorizontal_bias="0.5"
                        app:MoodName="@string/good"
@@ -713,7 +713,7 @@
                        app:MoodName="@string/meh"
                        app:MoodCountBackground="@drawable/circle_shape"
                        app:MoodIcon="@drawable/ic_nothing_outlined"
-                       app:MoodTint="@color/gray"
+                       app:MoodTint="@color/meh_color"
                        app:layout_constraintEnd_toStartOf="@+id/moodCountBad"
                        app:layout_constraintHorizontal_bias="0.5"
                        app:layout_constraintStart_toEndOf="@+id/moodCountHappy"
@@ -729,7 +729,7 @@
                        app:MoodName="@string/bad"
                        app:MoodCountBackground="@drawable/circle_shape"
                        app:MoodIcon="@drawable/ic_bad_outlined"
-                       app:MoodTint="@color/orange"
+                       app:MoodTint="@color/bad_color"
                        app:layout_constraintEnd_toStartOf="@+id/moodCountVeryBad"
                        app:layout_constraintHorizontal_bias="0.5"
                        app:layout_constraintStart_toEndOf="@+id/moodCountNothing"
@@ -745,7 +745,7 @@
                        app:MoodCount="2"
                        app:MoodCountBackground="@drawable/circle_shape"
                        app:MoodIcon="@drawable/ic_very_bad_outlined"
-                       app:MoodTint="@color/blue"
+                       app:MoodTint="@color/awful_color"
                        app:layout_constraintEnd_toEndOf="parent"
                        app:layout_constraintHorizontal_bias="0.5"
                        app:layout_constraintStart_toEndOf="@+id/moodCountBad"

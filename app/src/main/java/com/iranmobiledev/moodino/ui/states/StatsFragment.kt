@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.iranmobiledev.moodino.base.BaseFragment
-import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
-import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -39,9 +37,12 @@ class StatsFragment : BaseFragment() {
         model.initDaysInRow(DaysInARowCardBinding.inflate(layoutInflater))
     }
 
-    private fun initLineChartCard() {}
+    private fun initLineChartCard() {
 
+    }
 
-    private fun initDayInRowCard() {}
+    private fun initDayInRowCard() {
+
+    }
 
 }
