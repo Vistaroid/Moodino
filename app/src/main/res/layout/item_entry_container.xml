@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="8dp"
+    app:cardElevation="5dp"
     app:cardCornerRadius="@dimen/_16mdp"
     android:layout_marginTop="@dimen/_10mdp"
     android:layout_marginBottom="@dimen/_10mdp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40mdp"
+            android:layout_height="@dimen/_30mdp"
             android:background="?colorPrimary">
 
             <TextView
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/date"
-                android:textColor="#FFDADA"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

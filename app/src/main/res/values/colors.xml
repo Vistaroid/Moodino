@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="pink">#EB4961</color>
+    <color name="turquoise">#2FA889</color>
     <color name="green">#79CD3C</color>
     <color name="orange">#FF8B3E</color>
     <color name="blue">#3E85FF</color>
