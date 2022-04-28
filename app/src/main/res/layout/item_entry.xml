@@ -22,8 +22,7 @@
             android:layout_height="@dimen/_40mdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="@dimen/_12mdp"
-            android:src="@{entryItem.icon}"/>
+            android:layout_margin="@dimen/_12mdp"/>
 
         <View
             android:layout_width="@dimen/_2mdp"
@@ -43,7 +42,6 @@
             android:layout_marginStart="@dimen/_12mdp"
             android:text="@{entryItem.title}"
             android:textAppearance="?textAppearanceHeadline6"
-            android:textColor="@{entryItem.titleColor}"
             app:layout_constraintBottom_toBottomOf="@+id/EntryIcon"
             app:layout_constraintStart_toEndOf="@+id/EntryIcon"
             app:layout_constraintTop_toTopOf="@+id/EntryIcon" />
@@ -55,7 +53,8 @@
             android:layout_marginStart="@dimen/_6mdp"
             app:layout_constraintBottom_toBottomOf="@+id/entryTitle"
             app:layout_constraintStart_toEndOf="@+id/entryTitle"
-            app:layout_constraintTop_toTopOf="@+id/entryTitle" />
+            app:layout_constraintTop_toTopOf="@+id/entryTitle"
+            android:text="@{entryItem.time.hour+`:`+entryItem.time.minutes}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
