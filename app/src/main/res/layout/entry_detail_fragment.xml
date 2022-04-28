@@ -26,12 +26,12 @@
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/_16mdp"
+                    android:layout_height="@dimen/_16mdp"
                     app:layout_constraintBottom_toBottomOf="@id/backIv"
                     app:layout_constraintStart_toEndOf="@id/backIv"
                     app:layout_constraintTop_toTopOf="@id/backIv"
-                    app:srcCompat="@drawable/ic_emoji_very_happy" />
+                    app:srcCompat="@drawable/emoji_good" />
 
                 <LinearLayout
                     android:id="@+id/saveLayout"
