@@ -18,8 +18,8 @@ import saman.zamani.persiandate.PersianDateFormat
 
 class AddEntryFragment() : BaseFragment() {
 
-    private lateinit var binding : AddEntryFragmentBinding
-    private var persianDate : PersianDate = PersianDate()
+    private lateinit var binding: AddEntryFragmentBinding
+    private var persianDate: PersianDate = PersianDate()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,60 +27,68 @@ class AddEntryFragment() : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = AddEntryFragmentBinding.inflate(inflater, container, false)
-        emojiItemClickHandler()
-
-        binding.dateTv.text = getDate()
-        binding.timeTv.text = getTime()
-
+        setupClicks()
+        setupUi()
         return binding.root
     }
 
-    private fun navigateToEntryDetailFragment(bundle : Bundle){
-        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView).navigate(R.id.action_addEntryFragment_to_entryDetailFragment, bundle)
+    private fun setupUi() {
+        binding.dateTv.text = getDate()
+        binding.timeTv.text = getTime()
     }
-    private fun emojiItemClickHandler(){
 
-        val entry = Entry(null)
+    private fun navigateToEntryDetailFragment(bundle: Bundle) {
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
+            .navigate(R.id.action_addEntryFragment_to_entryDetailFragment, bundle)
+    }
+
+    private fun setupClicks() {
+        val entry = Entry()
         val bundle = Bundle()
         entry.date = EntryDate(persianDate.grgYear, persianDate.grgMonth, persianDate.grgDay)
-        entry.time = EntryTime(persianDate.hour, persianDate.minute)
+        entry.time = EntryTime(
+            PersianDateFormat.format(persianDate, "H"),
+            PersianDateFormat.format(persianDate, "i")
+        )
         bundle.putParcelable("entry", entry)
 
-
-        binding.include.itemNothing.setOnClickListener{
-            entry.icon = R.drawable.ic_emoji_nothing
+        binding.include.itemNothing.setOnClickListener {
+            entry.icon = R.drawable.emoji_meh
             entry.title = MEH
             navigateToEntryDetailFragment(bundle)
         }
-        binding.include.itemHappy.setOnClickListener{
-            entry.icon = R.drawable.ic_emoji_happy
+        binding.include.itemHappy.setOnClickListener {
+            entry.icon = R.drawable.emoji_good
             entry.title = GOOD
             navigateToEntryDetailFragment(bundle)
         }
         binding.include.itemSad.setOnClickListener{
-            entry.icon = R.drawable.ic_emoji_sad
+            entry.icon = R.drawable.emoji_bad
             entry.title = BAD
             navigateToEntryDetailFragment(bundle)
         }
-        binding.include.itemVerySad.setOnClickListener{
-            entry.icon = R.drawable.ic_emoji_very_sad
+        binding.include.itemVerySad.setOnClickListener {
+            entry.icon = R.drawable.emoji_awful
             entry.title = AWFUL
             navigateToEntryDetailFragment(bundle)
         }
-        binding.include.itemVeryHappy.setOnClickListener{
+        binding.include.itemVeryHappy.setOnClickListener {
             entry.title = RAD
-            entry.icon = R.drawable.ic_emoji_very_happy
+            entry.icon = R.drawable.emoji_rad
             navigateToEntryDetailFragment(bundle)
         }
     }
 
     private fun getDate(): String {
-        //TODO this format (english of farsi) should receive from const type
-        return PersianDateFormat.format(persianDate, "Y F", PersianDateFormat.PersianDateNumberCharacter.FARSI)
+        return PersianDateFormat.format(
+            persianDate,
+            "Y F",
+            PersianDateFormat.PersianDateNumberCharacter.FARSI
+        )
     }
 
-    private fun getTime() : String{
-        return PersianDateFormat.format(persianDate, "H i")
+    private fun getTime(): String {
+        return PersianDateFormat.format(persianDate, "H:i")
     }
 
     override fun onAttach(context: Context) {

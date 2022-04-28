@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.data
 
 import android.os.Parcelable
+import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -32,6 +33,6 @@ data class EntryDate(
 
 @Parcelize
 data class EntryTime(
-    val hour : Int,
-    val minutes : Int
+    val hour : String,
+    val minutes : String
 ) : Parcelable
