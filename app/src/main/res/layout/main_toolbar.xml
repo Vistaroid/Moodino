@@ -36,7 +36,8 @@
             android:onClick="@{clickListener}"
             android:background="?attr/actionBarItemBackground"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:rotation="180"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/month_name"

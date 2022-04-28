@@ -15,7 +15,8 @@
         <!-- Customize your theme here. -->
         <item name="bottomNavigationStyle">@style/myNavigationView</item>
         <item name="listPopupWindowStyle">@style/popupMenuStyle</item>
-
+        <!-- Font family -->
+        <item name="android:fontFamily">@font/shabnam_medium</item>
         <!--  Calendar Color-->
         <item name="colorTextDay">@color/gray_dark_700</item>
         <item name="colorSelectDay">@color/blue</item>
