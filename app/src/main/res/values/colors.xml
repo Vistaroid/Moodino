@@ -19,5 +19,5 @@
     <color name="good_color">#7FAD30</color>
     <color name="meh_color">#5B91AD</color>
     <color name="bad_color">#D69048</color>
-    <color name="awful_color">#C12D47</color>
+    <color name="awful_color">#EB4961</color>
 </resources>

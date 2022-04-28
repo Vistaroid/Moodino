@@ -55,32 +55,26 @@ class AddEntryFragment() : BaseFragment() {
         binding.include.itemNothing.setOnClickListener {
             entry.icon = R.drawable.emoji_meh
             entry.title = MEH
-            entry.titleColor = R.color.meh_color
             navigateToEntryDetailFragment(bundle)
         }
         binding.include.itemHappy.setOnClickListener {
             entry.icon = R.drawable.emoji_good
             entry.title = GOOD
-            entry.titleColor = R.color.good_color
             navigateToEntryDetailFragment(bundle)
         }
         binding.include.itemSad.setOnClickListener{
             entry.icon = R.drawable.emoji_bad
             entry.title = BAD
-            entry.titleColor = R.color.bad_color
             navigateToEntryDetailFragment(bundle)
         }
         binding.include.itemVerySad.setOnClickListener {
             entry.icon = R.drawable.emoji_awful
             entry.title = AWFUL
-            entry.titleColor = R.color.awful_color
             navigateToEntryDetailFragment(bundle)
         }
         binding.include.itemVeryHappy.setOnClickListener {
             entry.title = RAD
             entry.icon = R.drawable.emoji_rad
-            entry.titleColor = R.color.rad_color
-            println("color is : ${R.color.rad_color}")
             navigateToEntryDetailFragment(bundle)
         }
     }

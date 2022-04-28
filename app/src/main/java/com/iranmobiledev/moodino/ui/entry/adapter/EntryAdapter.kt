@@ -13,6 +13,7 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
 import com.iranmobiledev.moodino.listener.EntryEventLister
+import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
 
 
@@ -28,27 +29,38 @@ class EntryAdapter(
         private val binding: ItemEntryBinding = ItemEntryBinding.bind(itemView)
         private val entryIcon: ImageView = binding.EntryIcon
         private val moreIcon: ImageView = binding.moreIcon
-        private val entryImage: ImageView = binding.entryImage
-        private val entryTimeTv: TextView = binding.entryTimeTv
-
+        private val entryTitle : TextView = binding.entryTitle
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry) {
-            println("color is adapter: ${entry.titleColor}")
-            entryTimeTv.text = "${entry.time?.hour}:${entry.time?.minutes}"
             binding.entryItem = entry
             entryIcon.setImageResource(entry.icon)
             moreIcon.setOnClickListener {
-                val popupMenu = PopupMenu(context, it)
-                popupMenu.inflate(R.menu.popup_menu)
-                popupMenu.setOnMenuItemClickListener { menuItem ->
-                    entryEventLister.delete(entry)
-                }
-                popupMenu.show()
+                makePopupMenu(entry, it)
+            }
+            setTitleColor(entry.title)
+        }
+        private fun setTitleColor(title: String) {
+            when(title){
+                RAD -> entryTitle.setTextColor(ColorArray.rad)
+                GOOD -> entryTitle.setTextColor(ColorArray.good)
+                MEH -> entryTitle.setTextColor(ColorArray.meh)
+                BAD -> entryTitle.setTextColor(ColorArray.bad)
+                AWFUL -> entryTitle.setTextColor(ColorArray.awful)
             }
         }
     }
 
+
+
+    private fun makePopupMenu(witchEntry: Entry, view: View){
+        val popupMenu = PopupMenu(context, view)
+        popupMenu.inflate(R.menu.popup_menu)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            entryEventLister.delete(witchEntry)
+        }
+        popupMenu.show()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
         return ViewHolder(view)

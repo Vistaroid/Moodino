@@ -16,7 +16,6 @@ data class Entry(
     @PrimaryKey(autoGenerate = true)
     var id : Int? = null,
     var title : String = "",
-    @ColorInt var titleColor: Int = -1,
     var note : String = "",
     var activities : List<Activity> = ArrayList(),
     var photoPath : String = "",

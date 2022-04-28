@@ -71,7 +71,7 @@ class StatsFragmentViewModel(
         }
 
         val colors = arrayListOf<Int>()
-        for (color in ColorArray.COLORS) {
+        for (color in ColorArray.colors) {
             colors.add(color)
         }
 

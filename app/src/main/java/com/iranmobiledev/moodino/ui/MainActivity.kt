@@ -3,17 +3,12 @@ package com.iranmobiledev.moodino.ui
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.data.BottomNavState
@@ -26,17 +21,13 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import saman.zamani.persiandate.PersianDate
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
+import com.iranmobiledev.moodino.utlis.setupWithNavController
 
 class MainActivity : BaseActivity() {
 
-    lateinit var activityMainBinding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    private lateinit var todayIv: Button
-    private lateinit var yesterdayIv: Button
-    private lateinit var otherDayIv: Button
-    private lateinit var fab: FloatingActionButton
-    private lateinit var bottomAppBar: BottomAppBar
-    private val model: MainActivityViewModel by viewModels()
+    private val viewModel: MainActivityViewModel by viewModels()
 
 
     private var currentNavController: LiveData<NavController>? = null
@@ -54,34 +45,27 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initGlobal(this)
-        activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(activityMainBinding.root)
-        if (savedInstanceState == null) {
-            setupBottomNavigationBar()
-        }
-        initViews()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupUi()
+        setupClicks()
+    }
 
-        //setup navigation controller
-        val navView: BottomNavigationView = activityMainBinding.bottomNavigationView
+    private fun setupUi() {
         navController = findNavController(R.id.fragmentContainerView)
-        navView.setupWithNavController(navController)
+        binding.bottomNavigationView.setupWithNavController(navController)
+        binding.bottomNavigationView.background = null
+    }
 
-        val scope = CoroutineScope(Dispatchers.IO)
-
-        val fabMenu = activityMainBinding.fabMenu
-        //fix nav background problem
-        navView.background = null
-
-        fab.setOnClickListener { it ->
-            model.actionFab(fabMenu, it, this, true)
+    private fun setupClicks() {
+        binding.fab.setOnClickListener { it ->
+            viewModel.actionFab(binding.fabMenu, it, this, true)
         }
 
-        activityMainBinding.todayButton.setOnClickListener {
-
-            scope.launch (Dispatchers.Main){
-                model.actionFab(fabMenu, it, MainActivity())
+        binding.todayButton.setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.actionFab(binding.fabMenu, it, MainActivity())
             }
-
             bottomNavVisibility(false)
             val bundle = Bundle()
             val persianDate = PersianDate()
@@ -89,10 +73,9 @@ class MainActivity : BaseActivity() {
             navController.navigate(R.id.addEntryFragment, bundle)
         }
 
-        activityMainBinding.otherDayButton.setOnClickListener{
+        binding.otherDayButton.setOnClickListener{
         }
     }
-
 
     override fun onRestoreInstanceState(
         savedInstanceState: Bundle?,
@@ -130,15 +113,9 @@ class MainActivity : BaseActivity() {
         return currentNavController?.value?.navigateUp() ?: false
     }
 
-    private fun initViews() {
-        todayIv = activityMainBinding.todayButton
-        yesterdayIv = activityMainBinding.yesterdayButton
-        otherDayIv = activityMainBinding.otherDayButton
-        fab = activityMainBinding.fab
-        bottomAppBar = activityMainBinding.bottomAppBar
-    }
-
     private fun bottomNavVisibility(mustShow: Boolean) {
+        val bottomAppBar = binding.bottomAppBar
+        val fab = binding.fab
         if (mustShow) {
             fab.show()
             fab.isClickable = true

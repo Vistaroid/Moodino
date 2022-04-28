@@ -131,7 +131,12 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/emoji_item.xml" value="0.2513586956521739" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empry_state_fragment.xml" value="0.2513586956521739" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.25" />
+<<<<<<< HEAD
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/entry_detail_fragment.xml" value="0.5" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/exam.xml" value="0.27291666666666664" />
+=======
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/entry_detail_fragment.xml" value="0.27291666666666664" />
+>>>>>>> 9fa1a156a089baf45a029eda2465b435ebdc557d
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity.xml" value="0.5" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity_container.xml" value="0.25" />

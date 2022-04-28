@@ -1,12 +1,10 @@
-package com.iranmobiledev.moodino.ui
+package com.iranmobiledev.moodino.utlis
 
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.util.SparseArray
 import androidx.core.util.forEach
-import androidx.core.util.set
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
