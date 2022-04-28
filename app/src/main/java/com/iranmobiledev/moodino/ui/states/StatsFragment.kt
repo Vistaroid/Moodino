@@ -1,22 +1,14 @@
 package com.iranmobiledev.moodino.ui.states
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.Toast
-import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.BottomNavState
+import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
-import com.iranmobiledev.moodino.ui.states.customView.composable.DaysInYearComposable
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
-import kotlinx.coroutines.*
 import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,37 +28,25 @@ class StatsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentStatsBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-//        val scope = CoroutineScope(Dispatchers.IO)
-//
-//        val daysInARowCardBinding = binding.daysInRowCardInclude
-//        scope.launch {
-//            model.daysInRowManager(requireContext(), daysInARowCardBinding)
-//        }
-//
-//        val lineChart = binding.moodChartCardInclude.moodsLineChart
-//        model.initializeLineChart(lineChart, requireContext())
-//
-//        val pieChart = binding.moodCountCardInclude.moodCountPieChart
-//        model.initializePieChart(pieChart, requireContext())
-//
-//        model.longestChainLiveData.observe(viewLifecycleOwner) {
-//            binding.daysInRowCardInclude.longestChainTextView.text = it.toString()
-//        }
-//
-//        model.latestChainLiveData.observe(viewLifecycleOwner) {
-//            binding.daysInRowCardInclude.daysInRowNumberTextView.text = it.toString()
-//        }
+        initDayInRowCard()
+        initLineChartCard()
+        initPieChartCard()
     }
+
+    private fun initPieChartCard() {
+        model.initDaysInRow(DaysInARowCardBinding.inflate(layoutInflater))
+    }
+
+    private fun initLineChartCard() {}
+
+
+    private fun initDayInRowCard() {}
 
 }
