@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.states.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.widget.TextView
@@ -12,6 +13,7 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
+import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.utlis.ColorArray
@@ -22,13 +24,17 @@ import com.iranmobiledev.moodino.utlis.Moods.MEH
 import com.iranmobiledev.moodino.utlis.Moods.RAD
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
 
 class StatsFragmentViewModel(
     private val entryRepository: EntryRepository
     ) : BaseViewModel() {
 
-    val lineChartEntries = arrayListOf<Entry>()
-    val pieChartEntries = mutableListOf<PieEntry>()
+    private val lineChartEntries = arrayListOf<Entry>()
+    private val pieChartEntries = mutableListOf<PieEntry>()
+    val isEnoughEntries : MutableLiveData<Boolean> = MutableLiveData(false)
     var longestChainLiveData :MutableLiveData<Int> = MutableLiveData(0)
     var latestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     var lastFiveDaysStatus: MutableLiveData<List<Boolean>> = MutableLiveData(listOf(false,false,false,false,false))
@@ -39,6 +45,10 @@ class StatsFragmentViewModel(
                 getChain(it)
                 if (it.size >= 5){
                     getLastFiveDaysStatus(it)
+                    getChain(it)
+                    isEnoughEntries.postValue(true)
+                }else{
+                    isEnoughEntries.postValue(false)
                 }
             }
         }
@@ -179,5 +189,126 @@ class StatsFragmentViewModel(
         daysTextView[2].text = weekDays[2]
         daysTextView[3].text = weekDays[3]
         daysTextView[4].text = weekDays[4]
+
+
+    }
+
+
+
+
+    object Mock {
+
+        val mockEntries = listOf<com.iranmobiledev.moodino.data.Entry>(
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 21)),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 22)),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 23)),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 24)),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 25)),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 20)),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 27)),
+        )
+    }
+
+    private fun getFiveDaysAsWeekDays(): ArrayList<String> {
+
+        var days = arrayListOf<String>()
+        val calendar = Calendar.getInstance()
+
+        for (i in 1..5) {
+            calendar.add(Calendar.DAY_OF_WEEK, -1)
+            val weekDay = calendar.time.toString().slice(0..2)
+
+            if (days.size >= 5) {
+                days.clear()
+                days.add(weekDay)
+            } else {
+                days.add(weekDay)
+            }
+        }
+        return days
+    }
+
+    fun getChain(entries: List<com.iranmobiledev.moodino.data.Entry>) {
+        val dates = getDatesFromEntries(entries)
+        getLongestChainFromDates(dates)
+    }
+
+    private fun getDatesFromEntries(entries: List<com.iranmobiledev.moodino.data.Entry>): List<EntryDate> {
+        val dates = mutableListOf<EntryDate>()
+        for (entry in entries) {
+            dates.add(entry.date!!)
+        }
+        return dates
+    }
+
+    @SuppressLint("NewApi")
+    private fun getLongestChainFromDates(dates: List<EntryDate>){
+
+        var chainLengthMax = 0
+        var latestChainLength = 1
+
+        for (date in dates) {
+            val nextDateAsLocalDate = LocalDate.of(date.year, date.month, date.day).plusDays(1)
+            if (date != dates.last()) {
+                val nextDateElement = dates[dates.indexOf(date) + 1]
+                val nextDate =
+                    LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
+                if (nextDateAsLocalDate == nextDate) {
+                    latestChainLength++
+                } else {
+                    if (chainLengthMax <= latestChainLength) {
+                        chainLengthMax = latestChainLength
+                    }
+                    latestChainLength = 1
+                }
+            }
+        }
+
+        longestChainLiveData.postValue(chainLengthMax)
+        latestChainLiveData.postValue(latestChainLength)
+    }
+
+    @SuppressLint("NewApi")
+    fun getLastFiveDaysStatus(entries: List<com.iranmobiledev.moodino.data.Entry>){
+
+        val lastFiveDayStatus = mutableListOf<Boolean>()
+        val today = LocalDate.now()
+
+        for (i in 0..4) {
+            val index = i + 1
+            val entry = entries[entries.size - index]
+            val entryAsLocalDate = LocalDate.of(entry.date!!.year,entry.date!!.month,entry.date!!.day)
+            val localDate = today.minusDays(i.toLong())
+
+            if (entryAsLocalDate == localDate) lastFiveDayStatus.add(true) else lastFiveDayStatus.add(false)
+        }
+
+        lastFiveDaysStatus.postValue(lastFiveDayStatus.toList())
+    }
+
+    fun getEntriesForLineChart(): ArrayList<com.github.mikephil.charting.data.Entry> {
+        return lineChartEntries
+    }
+
+    fun getEntriesForPieChart():
+            MutableList<PieEntry> {
+        return pieChartEntries
+    }
+
+
+    fun setEntriesForLineChart(entriesList: ArrayList<com.github.mikephil.charting.data.Entry>) {
+        entriesList.forEach {
+            lineChartEntries.add(it)
+        }
+    }
+
+
+    fun setEntriesForPieChart(entriesList: MutableList<PieEntry>) {
+        entriesList.forEach {
+            pieChartEntries.add(it)
+        }
     }
 }
+
+
+

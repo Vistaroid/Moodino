@@ -166,7 +166,7 @@
                         android:id="@+id/thirdDayFramLayout"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:background="@drawable/primary_circle_shape"
+                        android:background="@drawable/circle_shape"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
@@ -174,8 +174,7 @@
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_checked"
-                            app:tint="@color/white" />
+                            android:src="@drawable/ic_cross" />
                     </FrameLayout>
 
                     <TextView
@@ -270,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|center_horizontal"
-                        android:text="6"
+                        android:text="0"
                         android:textAlignment="center"
                         android:textSize="24dp" />
                 </FrameLayout>
@@ -317,7 +316,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Longest chain: 6" />
+                android:text="Longest chain: 0" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
