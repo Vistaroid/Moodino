@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/moodChartHeader">
+    app:layout_constraintTop_toBottomOf="@+id/achievementHeader">
 
     <FrameLayout
         android:layout_width="100dp"

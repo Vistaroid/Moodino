@@ -1,11 +1,15 @@
 package com.iranmobiledev.moodino.ui
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -34,6 +38,9 @@ class MainActivity : BaseActivity() {
     private lateinit var bottomAppBar: BottomAppBar
     private val model: MainActivityViewModel by viewModels()
 
+
+    private var currentNavController: LiveData<NavController>? = null
+
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
@@ -49,6 +56,9 @@ class MainActivity : BaseActivity() {
         initGlobal(this)
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
+        if (savedInstanceState == null) {
+            setupBottomNavigationBar()
+        }
         initViews()
 
         //setup navigation controller
@@ -81,6 +91,43 @@ class MainActivity : BaseActivity() {
 
         activityMainBinding.otherDayButton.setOnClickListener{
         }
+    }
+
+
+    override fun onRestoreInstanceState(
+        savedInstanceState: Bundle?,
+        persistentState: PersistableBundle?
+    ) {
+        if (savedInstanceState != null) {
+            super.onRestoreInstanceState(savedInstanceState)
+        }
+        // Now that BottomNavigationBar has restored its instance state
+        // and its selectedItemId, we can proceed with setting up the
+        // BottomNavigationBar with Navigation
+        setupBottomNavigationBar()
+    }
+
+    /**
+     * Called on first creation and when restoring state.
+     */
+    private fun setupBottomNavigationBar() {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+        val navGraphIds = listOf(R.navigation.nav_graph)
+
+        // Setup the bottom navigation view with a list of navigation graphs
+        val controller = bottomNavigationView.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = R.id.nav_graph,
+            intent = intent
+        )
+
+        currentNavController = controller
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false
     }
 
     private fun initViews() {
