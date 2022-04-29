@@ -3,45 +3,49 @@ package com.iranmobiledev.moodino.ui.states.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
+import androidx.compose.ui.text.toLowerCase
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.EntryDate
-import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.utlis.ColorArray
-import com.iranmobiledev.moodino.utlis.Moods.AWFUL
-import com.iranmobiledev.moodino.utlis.Moods.BAD
-import com.iranmobiledev.moodino.utlis.Moods.GOOD
-import com.iranmobiledev.moodino.utlis.Moods.MEH
-import com.iranmobiledev.moodino.utlis.Moods.RAD
-import kotlinx.coroutines.async
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class StatsFragmentViewModel(
     private val entryRepository: EntryRepository
 ) : BaseViewModel() {
 
 
-    private val lineChartEntries = arrayListOf<Entry>()
+    private val _lineChartEntries = MutableLiveData<List<Entry>>(listOf(Entry(1f, 2f)))
+    private val _lineChartDates = MutableLiveData<List<Int>>(listOf(10))
     private val pieChartEntries = mutableListOf<PieEntry>()
+    private val _weekDays = MutableLiveData<ArrayList<String>>()
     private val _isEnoughEntries: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     private val _longestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     private val _latestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     private val _lastFiveDaysStatus: MutableLiveData<List<Boolean>> =
         MutableLiveData(listOf(false, false, false, false, false))
 
+    val lineChartEntries: LiveData<List<Entry>>
+        get() = _lineChartEntries
     val isEnoughEntries: LiveData<Boolean>
         get() = _isEnoughEntries
     val longestChainLiveData: LiveData<Int>
@@ -50,42 +54,41 @@ class StatsFragmentViewModel(
         get() = _latestChainLiveData
     val lastFiveDaysStatus: LiveData<List<Boolean>>
         get() = _lastFiveDaysStatus
+    val weekDays: LiveData<ArrayList<String>>
+        get() = _weekDays
 
-
-    fun initDaysInRow(binding: DaysInARowCardBinding) {
-
-        val daysTextView = arrayListOf(
-            binding.dayOneTextView,
-            binding.dayTwoTextView,
-            binding.dayThreeTextView,
-            binding.dayFourTextView,
-            binding.dayFiveTextView
-        )
+    fun initDaysInRow() {
 
         viewModelScope.launch {
-            entryRepository.getAll().collectLatest {
+            entryRepository.getAll().collectLatest { entries ->
+
+                launch {
+                    if (entries.size > 3) {
+                        _isEnoughEntries.postValue(true)
+                    } else {
+                        _isEnoughEntries.postValue(false)
+                    }
+                }
 
                 //Adding week days name to days in a row card
                 launch {
-                    val weekDays = getFiveDaysAsWeekDays()
-                    for (textView in daysTextView) {
-                        textView.text = weekDays[daysTextView.indexOf(textView)]
-                    }
+                    getFiveDaysAsWeekDays()
                 }
 
-                entryRepository.getAll().collectLatest {
-                    val dates = getDatesFromEntries(it)
+                val dates = withContext(Dispatchers.IO) {
+                    getDatesFromEntries(entries)
+                }
+                launch {
                     getLongestChainFromDates(dates)
-
-                    launch {
-                        getLatestChain(dates)
-                    }
-
-                    launch {
-                        getLastFiveDaysStatus(dates)
-                    }
                 }
 
+                launch {
+                    getLatestChain(dates)
+                }
+
+                launch {
+                    getLastFiveDaysStatus(dates)
+                }
             }
         }
     }
@@ -149,21 +152,112 @@ class StatsFragmentViewModel(
         _longestChainLiveData.postValue(chainLengthMax)
     }
 
-    private fun getFiveDaysAsWeekDays(): ArrayList<String> {
-        var days = arrayListOf<String>()
-        val calendar = Calendar.getInstance()
+    fun initLineChart(lineChart: LineChart, entries: List<Entry>, context: Context) {
 
-        for (i in 1..5) {
-            calendar.add(Calendar.DAY_OF_WEEK, -1)
-            val weekDay = calendar.time.toString().slice(0..2)
-            if (days.size >= 5) {
-                days.clear()
-                days.add(weekDay)
-            } else {
-                days.add(weekDay)
+        viewModelScope.launch {
+            entryRepository.getAll().collectLatest {
+                launch {
+                    getEntriesForLineChart(it)
+                }
             }
         }
-        return days
+
+        //create dataSet from entries and customizing it
+        var dataSet = LineDataSet(entries, "moods")
+        dataSet.apply {
+            color = Color.RED
+            lineWidth = 2f
+            highLightColor = R.color.pink
+            setDrawFilled(true)
+            fillDrawable = ContextCompat.getDrawable(context, R.drawable.chart_gradient)
+            circleHoleColor = (Color.WHITE)
+            setCircleColor(Color.RED);
+            valueTextColor = Color.WHITE
+            valueTextSize = 0f
+        }
+
+        //getting xAxis for customizing
+        val xAxis = lineChart.xAxis
+        xAxis.apply {
+            position = XAxis.XAxisPosition.BOTTOM
+            gridColor = Color.WHITE
+            textColor = Color.GRAY
+            granularity = 1f
+            axisMinimum = 1f
+        }
+
+        //getting xAxis for customizing
+        val yAxis = lineChart.axisLeft
+        yAxis.apply {
+            valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float, axis: AxisBase): String {
+                    return _lineChartDates.value?.get(value.toInt()).toString() ?: "1"
+                }
+            }
+            gridColor = Color.WHITE
+            textColor = Color.WHITE
+            axisLineColor = Color.WHITE
+            granularity = 1f
+            setAxisMaxValue(5f)
+        }
+
+        //converting dataset to line in the chart
+        val lineData = LineData(dataSet)
+
+        //adding line to chart and some customizing for chartView
+        lineChart.apply {
+            data = lineData
+            invalidate()
+            description.isEnabled = false
+            legend.isEnabled = false
+            axisRight.isEnabled = false
+            setPinchZoom(false)
+            setTouchEnabled(false)
+        }
+    }
+
+    private fun getEntriesForLineChart(entries: List<com.iranmobiledev.moodino.data.Entry>) {
+        val entriesDaysNumber: MutableList<Int> = mutableListOf()
+        val entriesPieChart: MutableList<Entry> = mutableListOf()
+
+        for (entry in entries) {
+            println("entry123 ${entry.date!!.day}")
+            val x = entries.indexOf(entry) + 1.toFloat()
+            val y = when (entry.title) {
+                "RAD" -> 5f
+                "GOOD" -> 4f
+                "MEH" -> 3f
+                "BAD" -> 2f
+                "AWFUL" -> 1f
+                else -> {
+                    3f
+                }
+            }
+            entriesDaysNumber.add(entry.date!!.day)
+            entriesPieChart.add(
+                Entry(x, y)
+            )
+        }
+
+
+        _lineChartDates.postValue(entriesDaysNumber.toList())
+        _lineChartEntries.postValue(entriesPieChart.toList())
+
+    }
+
+    @SuppressLint("NewApi")
+    private fun getFiveDaysAsWeekDays() {
+        var days = arrayListOf<String>()
+        val today = LocalDate.now()
+        for (i in 0..4) {
+            val date = today.minusDays(i.toLong())
+            val weekDayName = date.dayOfWeek.name.slice(0..2).toLowerCase()
+            val formatedWeekDay = weekDayName.replaceFirstChar { it.uppercase() }
+            days.add(formatedWeekDay)
+        }
+
+        days.reverse()
+        _weekDays.postValue(days)
     }
 
     private fun getDatesFromEntries(entries: List<com.iranmobiledev.moodino.data.Entry>): List<EntryDate> {
@@ -175,36 +269,28 @@ class StatsFragmentViewModel(
     }
 
     @SuppressLint("NewApi")
-    fun getLastFiveDaysStatus(entries: List<EntryDate>) {
+    fun getLastFiveDaysStatus(entryDates: List<EntryDate>) {
 
         val lastFiveDayStatus = mutableListOf<Boolean>()
-        val today = LocalDate.now()
 
-        for (i in 0..4) {
-            val entry = entries[entries.size - (i + 1)]
-            val entryAsLocalDate = LocalDate.of(entry.year, entry.month, entry.day)
-            val localDate = today.minusDays(i.toLong())
-            if (entryAsLocalDate == localDate) lastFiveDayStatus.add(true) else lastFiveDayStatus.add(
-                false
-            )
+        for(i in 0..4){
+            val date = LocalDate.now().minusDays(i.toLong())
+
+                if (entryDates.contains(EntryDate(date.year,date.monthValue,date.dayOfMonth))){
+                    lastFiveDayStatus.add(true)
+                }else{
+                    lastFiveDayStatus.add(false)
+                }
         }
 
-        _lastFiveDaysStatus.postValue(lastFiveDayStatus.toList())
+        _lastFiveDaysStatus.postValue(lastFiveDayStatus)
     }
 
-    fun initializePieChart(pieChart: PieChart, context: Context) {
+    fun initPieChart(pieChart: PieChart, context: Context) {
         val entries = getEntriesForPieChart()
         //mocked entries for chart
         if (pieChartEntries.isEmpty()) {
-            setEntriesForPieChart(
-                arrayListOf<PieEntry>(
-                    PieEntry(0.1f, ""),
-                    PieEntry(0.3f, ""),
-                    PieEntry(0.15f, ""),
-                    PieEntry(0.4f, ""),
-                    PieEntry(0.5f, ""),
-                )
-            )
+
         }
 
         val colors = arrayListOf<Int>()
@@ -242,74 +328,6 @@ class StatsFragmentViewModel(
 
     }
 
-    fun initializeLineChart(lineChart: LineChart, context: Context) {
-
-        //mocked entries for chart
-        if (lineChartEntries.isEmpty()) {
-            setEntriesForLineChart(
-                arrayListOf(
-                    Entry(1f, AWFUL),
-                    Entry(2f, BAD),
-                    Entry(3f, MEH),
-                    Entry(4f, GOOD),
-                    Entry(5f, AWFUL),
-                    Entry(6f, RAD),
-                    Entry(7f, GOOD)
-                )
-            )
-        }
-
-        val entries = getEntriesForLineChart()
-        //create dataSet from entries and customizing it
-        var dataSet = LineDataSet(entries, "moods")
-        dataSet.apply {
-            color = Color.RED
-            lineWidth = 2f
-            highLightColor = R.color.pink
-            setDrawFilled(true)
-            fillDrawable = ContextCompat.getDrawable(context, R.drawable.chart_gradient)
-            circleHoleColor = (Color.WHITE)
-            setCircleColor(Color.RED);
-            valueTextColor = Color.WHITE
-            valueTextSize = 0f
-        }
-
-        //getting xAxis for customizing
-        val xAxis = lineChart.xAxis
-        xAxis.apply {
-            position = XAxis.XAxisPosition.BOTTOM
-            gridColor = Color.WHITE
-            textColor = Color.GRAY
-            granularity = 1f
-            axisMinimum = 1f
-        }
-
-        //getting xAxis for customizing
-        val yAxis = lineChart.axisLeft
-        yAxis.apply {
-            gridColor = Color.WHITE
-            textColor = Color.WHITE
-            axisLineColor = Color.WHITE
-            granularity = 1f
-            setAxisMaxValue(5f)
-
-        }
-
-        //converting dataset to line in the chart
-        val lineData = LineData(dataSet)
-
-        //adding line to chart and some customizing for chartView
-        lineChart.apply {
-            data = lineData
-            invalidate()
-            description.isEnabled = false
-            legend.isEnabled = false
-            axisRight.isEnabled = false
-            setPinchZoom(false)
-            setTouchEnabled(false)
-        }
-    }
-
     object Mock {
 
         val mockEntries = listOf<com.iranmobiledev.moodino.data.Entry>(
@@ -326,23 +344,10 @@ class StatsFragmentViewModel(
         )
     }
 
-
-    fun getEntriesForLineChart(): ArrayList<com.github.mikephil.charting.data.Entry> {
-        return lineChartEntries
-    }
-
     fun getEntriesForPieChart():
             MutableList<PieEntry> {
         return pieChartEntries
     }
-
-
-    fun setEntriesForLineChart(entriesList: ArrayList<com.github.mikephil.charting.data.Entry>) {
-        entriesList.forEach {
-            lineChartEntries.add(it)
-        }
-    }
-
 
     fun setEntriesForPieChart(entriesList: MutableList<PieEntry>) {
         entriesList.forEach {
