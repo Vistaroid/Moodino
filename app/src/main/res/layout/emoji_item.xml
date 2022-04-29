@@ -22,6 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/radImage"
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
                 app:srcCompat="@drawable/emoji_rad" />
@@ -47,6 +48,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/mehImage"
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
                 app:srcCompat="@drawable/emoji_meh" />
@@ -72,6 +74,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/badImage"
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
                 app:srcCompat="@drawable/emoji_bad" />
@@ -97,6 +100,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/awfulImage"
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
                 app:srcCompat="@drawable/emoji_awful" />
@@ -122,6 +126,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/goodImage"
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_40mdp"
                 app:srcCompat="@drawable/emoji_good" />
