@@ -108,7 +108,7 @@
                                app:layout_constraintTop_toTopOf="parent">
 
                                <FrameLayout
-                                   android:id="@+id/firstDayFramLayout"
+                                   android:id="@+id/firstDayFrameLayout"
                                    android:layout_width="36dp"
                                    android:layout_height="36dp"
                                    android:background="@drawable/circle_shape">
@@ -141,7 +141,7 @@
                                app:layout_constraintTop_toTopOf="parent">
 
                                <FrameLayout
-                                   android:id="@+id/secondDayFramLayout"
+                                   android:id="@+id/secondDayFrameLayout"
                                    android:layout_width="36dp"
                                    android:layout_height="36dp"
                                    android:background="@drawable/circle_shape">
@@ -174,7 +174,7 @@
                                app:layout_constraintTop_toTopOf="parent">
 
                                <FrameLayout
-                                   android:id="@+id/thirdDayFramLayout"
+                                   android:id="@+id/thirdDayFrameLayout"
                                    android:layout_width="36dp"
                                    android:layout_height="36dp"
                                    android:background="@drawable/circle_shape"
@@ -209,7 +209,7 @@
                                app:layout_constraintTop_toTopOf="parent">
 
                                <FrameLayout
-                                   android:id="@+id/fourthDayFramLayout"
+                                   android:id="@+id/fourthDayFrameLayout"
                                    android:layout_width="36dp"
                                    android:layout_height="36dp"
                                    android:background="@drawable/circle_shape"
@@ -244,7 +244,7 @@
                                app:layout_constraintTop_toTopOf="parent">
 
                                <FrameLayout
-                                   android:id="@+id/fifthDayFramLayout"
+                                   android:id="@+id/fifthDayFrameLayout"
                                    android:layout_width="36dp"
                                    android:layout_height="36dp"
                                    android:background="@drawable/circle_shape">
