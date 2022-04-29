@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="15dp"
-    android:layoutDirection="ltr">
+    android:padding="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,9 +31,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/rad"
-                android:textColor="@color/black"
+                android:textColor="@color/rad_color"
                 android:textSize="16sp"
-                android:layout_marginTop="3dp"/>
+                android:layout_marginTop="3dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/meh"
-                android:textColor="@color/black"
+                android:textColor="@color/meh_color"
                 android:layout_marginTop="3dp"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -82,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/bad"
-                android:textColor="@color/black"
+                android:textColor="@color/bad_color"
                 android:layout_marginTop="3dp"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -108,7 +107,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/awful"
                 android:layout_marginTop="3dp"
-                android:textColor="@color/black"
+                android:textColor="@color/awful_color"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -133,7 +132,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/good"
                 android:layout_marginTop="3dp"
-                android:textColor="@color/black"
+                android:textColor="@color/good_color"
                 android:textSize="16sp" />
         </LinearLayout>
 

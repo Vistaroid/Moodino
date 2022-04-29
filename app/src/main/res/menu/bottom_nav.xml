@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="entries"
+    <item android:title="@string/entries"
         android:id="@+id/entriesFragment"
         android:icon="@drawable/ic_note"/>
-    <item android:title="stats"
+    <item android:title="@string/statsStr"
         android:id="@+id/statsFragment"
         android:icon="@drawable/ic_chart"/>
 
     <item android:title=""
         android:id="@+id/placeHolder" />
 
-    <item android:title="calender"
+    <item android:title="@string/calenderStr"
         android:id="@+id/calenderFragment"
         android:icon="@drawable/ic_calendar"/>
-    <item android:title="more"
+    <item android:title="@string/moreStr"
         android:id="@+id/moreFragment"
         android:icon="@drawable/ic_more_with_border"/>
 

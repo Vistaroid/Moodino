@@ -77,6 +77,9 @@ class AddEntryFragment() : BaseFragment() {
             entry.icon = R.drawable.emoji_rad
             navigateToEntryDetailFragment(bundle)
         }
+        binding.closeFragment.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     private fun getDate(): String {

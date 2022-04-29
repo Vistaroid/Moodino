@@ -69,8 +69,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth, Ko
 
     override fun delete(entry: Entry): Boolean {
         val dialog = makeDialog(
-            mainText = "Delete loving memory?",
-            subText = "This is your life we are talking\nabout. Do you want to delete a\npart of it?",
+            mainText = R.string.dialogMainText,
+            subText = R.string.dialogSubText,
             icon = R.drawable.ic_delete,
         )
         dialog.setItemEventListener(object : DialogEventListener {
