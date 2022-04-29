@@ -175,8 +175,7 @@ class StatsFragmentViewModel(
     }
 
     @SuppressLint("NewApi")
-    fun getLastFiveDaysStatus(entries: List<EntryDate>) {
-
+   fun getLastFiveDaysStatus(entries: List<EntryDate>) {
         val lastFiveDayStatus = mutableListOf<Boolean>()
         val today = LocalDate.now()
 
@@ -325,7 +324,6 @@ class StatsFragmentViewModel(
             com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 27)),
         )
     }
-
 
     fun getEntriesForLineChart(): ArrayList<com.github.mikephil.charting.data.Entry> {
         return lineChartEntries
