@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Moodino</string>
+    <string name="let_s_pick_up_where_you_left_off">بیا از جایی که متوقف شدی، شروع کنیم!</string>
+    <string name="how_are_you">حالت چطوره؟</string>
+    <string name="rad">عالی</string>
+    <string name="good">خوب</string>
+    <string name="meh">بیخیال</string>
+    <string name="bad">بد</string>
+    <string name="awful">خیلی بد</string>
+    <string name="goals">Goals</string>
+    <string name="weekly_report">Weekly Report</string>
+    <string name="monthly_report">Monthly Report</string>
+    <string name="photo_gallery">Photo Gallery</string>
+    <string name="achiement">Achiement</string>
+    <string name="timer">Timer</string>
+    <string name="edite_moods">Edite Moods</string>
+    <string name="edite_activity">Edite Activities</string>
+    <string name="change_color">Change Colors</string>
+    <string name="color_mode">Color Mode</string>
+    <string name="pin_lock">PIN Lock</string>
+    <string name="start_week">Start of the Week</string>
+    <string name="language">Language</string>
+    <string name="backup_restore">Backup and Restore</string>
+    <string name="export_entries">Export Entries</string>
+    <string name="widgets">Widgets</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="date">YESTERDAY, MARCH 5</string>
+    <string name="time">22:30</string>
+    <string name="note">یادداشت</string>
+    <string name="continue_text">ادامه</string>
+    <string name="save">ذخیره</string>
+    <string name="what_have_you_been_up_to">امروز چیکار کردی؟</string>
+    <string name="add_note">افزودن یادداشت</string>
+    <string name="photo">عکس</string>
+    <string name="tap_to_add_photo">افزودن عکس</string>
+    <string name="social">social</string>
+    <string name="activityItemText">calendar</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="open_gallery">Open Gallery</string>
+    <string name="let_s_add_first_entry_tap_the_big_plus_button">Let\'s add first entry!\nTap the big PLUS button</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="about">About</string>
+    <string name="more">More</string>
+    <string name="create_new_goals">Create New Goal</string>
+    <string name="activities">Activities</string>
+    <string name="add_activity">Add Activity</string>
+    <string name="select_color_mode">Select your Color Mode</string>
+    <string name="light_mode">Light</string>
+    <string name="dark_mode">Dark</string>
+    <string name="system_mode">System Default</string>
+    <string name="cancel">Cancel</string>
+
+    <!--calendars-->
+    <string name="shamsi_calendar">Persian Calendar</string>
+    <string name="shamsi_calendar_short">Persian</string>
+    <!-- Used in accessibility, previous day or month or year -->
+    <string name="previous_x">Previous %1$s</string>
+    <!-- Used in accessibility, next day or month or year -->
+    <string name="next_x">Next %1$s</string>
+    <string name="month">Month</string>
+    <!-- Used in accessibility, describes headers of calendar -->
+    <string name="week_days_name_column">%1$s column in days table</string>
+
+    <!--Persian Calendar months-->
+    <string name="farvardin">Farvardin</string>
+    <string name="ordibehesht">Ordibehesht</string>
+    <string name="khordad">Khordad</string>
+    <string name="tir">Tir</string>
+    <string name="mordad">Mordad</string>
+    <string name="shahrivar">Shahrivar</string>
+    <string name="mehr">Mehr</string>
+    <string name="aban">Aban</string>
+    <string name="azar">Azar</string>
+    <string name="dey">Dey</string>
+    <string name="bahman">Bahman</string>
+    <string name="esfand">Esfand</string>
+
+    <!--Week Days-->
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="average_mood">"average mood "</string>
+    <string name="keep">KEEP</string>
+    <string name="enter_pin">enter your new pin</string>
+    <string name="confirm_pin">confirm your pin</string>
+    <string name="error_pin">PIN lock not match</string>
+    <string name="not_active_pin_lock">PIN Lock Not Active</string>
+    <string name="active_pin_lock">PIN Lock Is Active</string>
+    <string name="b1">b1</string>
+    <string name="b2">b2</string>
+
+</resources>
