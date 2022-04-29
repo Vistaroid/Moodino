@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.iranmobiledev.moodino.base.BaseFragment
-import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
