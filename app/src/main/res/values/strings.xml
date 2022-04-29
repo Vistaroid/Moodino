@@ -52,7 +52,7 @@
     <string name="system_mode">System Default</string>
     <string name="cancel">Cancel</string>
 
-<!--calendars-->
+    <!--calendars-->
     <string name="shamsi_calendar">Persian Calendar</string>
     <string name="shamsi_calendar_short">Persian</string>
     <!-- Used in accessibility, previous day or month or year -->
@@ -94,5 +94,12 @@
     <string name="active_pin_lock">PIN Lock Is Active</string>
     <string name="b1">b1</string>
     <string name="b2">b2</string>
-
+    <string name="dialogMainText">Delete loving memory?</string>
+    <string name="dialogSubText">This is your life we are talking about. Do you want to delete a part of it?</string>
+    <string name="dialogDeleteText">DELETE</string>
+    <string name="dialogCancelText">CANCEL</string>
+    <string name="entries">entries</string>
+    <string name="statsStr">stats</string>
+    <string name="calenderStr">calender</string>
+    <string name="moreStr">more</string>
 </resources>
