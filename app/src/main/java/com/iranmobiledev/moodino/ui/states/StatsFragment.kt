@@ -39,6 +39,17 @@ class StatsFragment : BaseFragment() {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun initDayInRowCard() {
+
+        model.initDaysInRow(DaysInARowCardBinding.inflate(layoutInflater))
+
+        model.longestChainLiveData.observe(viewLifecycleOwner){
+            binding.longestChainTextView.text = it.toString()
+        }
+
+        model.latestChainLiveData.observe(viewLifecycleOwner){
+            binding.daysInRowNumberTextView.text = it.toString()
+        }
+
         val daysContainer = arrayListOf(
             binding.fifthDayFrameLayout,
             binding.fourthDayFrameLayout,
@@ -55,16 +66,7 @@ class StatsFragment : BaseFragment() {
             binding.firstDayIV
         )
 
-        model.initDaysInRow(DaysInARowCardBinding.inflate(layoutInflater))
-
-        model.longestChainLiveData.observe(viewLifecycleOwner){
-            binding.longestChainTextView.text = it.toString()
-        }
-
-        model.latestChainLiveData.observe(viewLifecycleOwner){
-            binding.daysInRowNumberTextView.text = it.toString()
-        }
-
+        //change style of week days depend on status of is entry added or not
         model.lastFiveDaysStatus.observe(viewLifecycleOwner){
             daysContainer.forEach { view ->
                 val currentStatus = it[daysContainer.indexOf(view)]
