@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12mdp"
             android:text="@{entryItem.title}"
+            android:textSize="@dimen/_19mdp"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintBottom_toBottomOf="@+id/EntryIcon"
             app:layout_constraintStart_toEndOf="@+id/EntryIcon"
@@ -98,17 +99,14 @@
                 tools:background="?colorPrimary"/>
         </com.google.android.material.card.MaterialCardView>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/moreIcon"
             android:layout_width="@dimen/_25mdp"
             android:layout_height="@dimen/_25mdp"
-            android:layout_marginEnd="@dimen/_12mdp"
-            android:background="@drawable/circle_shape"
-            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="@+id/entryTimeTv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/entryTimeTv"
-            app:srcCompat="@drawable/ic_more"
-            app:tint="@color/gray" />
+            android:src="@drawable/ic_more"
+            android:layout_marginEnd="@dimen/_12mdp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

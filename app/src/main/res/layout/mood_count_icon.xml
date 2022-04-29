@@ -14,7 +14,7 @@
         android:layout_height="50dp">
         <ImageView
             android:id="@+id/moodIconImageView"
-            app:tint="@color/pink"
+            app:tint="@color/rad_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -25,7 +25,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="end"
-            android:backgroundTint="@color/pink"
+            android:backgroundTint="@color/rad_color"
             android:elevation="10dp"
             android:gravity="center"
             android:text="1"

@@ -20,3 +20,4 @@ const val BAD = R.string.bad
 const val MEH = R.string.meh
 const val GOOD = R.string.good
 const val RAD = R.string.rad
+
