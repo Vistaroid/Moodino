@@ -6,43 +6,56 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/how_are_you"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="60dp"/>
+    <ImageView
+        android:id="@+id/closeFragment"
+        android:layout_width="@dimen/_25mdp"
+        android:layout_height="@dimen/_25mdp"
+        android:layout_margin="@dimen/_16mdp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/how_are_you"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_50mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/closeFragment" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12mdp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="@dimen/_12mdp"
+        android:layoutDirection="ltr"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:layout_marginStart="@dimen/_12mdp"
-        android:layout_marginEnd="@dimen/_12mdp">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
         <LinearLayout
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="@dimen/_20mdp"
                 android:layout_height="@dimen/_20mdp"
+                android:layout_gravity="center_vertical"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:srcCompat="@drawable/ic_calendar"
-                app:tint="?colorPrimary"
-                android:layout_gravity="center_vertical"/>
+                app:tint="?colorPrimary" />
+
             <TextView
                 android:id="@+id/dateTv"
                 android:layout_width="wrap_content"
@@ -54,29 +67,33 @@
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="@+id/imageView" />
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:srcCompat="@drawable/ic_arrow_bottom"
-                app:tint="?colorPrimary"
+                android:layout_gravity="center_vertical"
                 android:rotation="180"
-                android:layout_gravity="center_vertical"/>
+                app:srcCompat="@drawable/ic_arrow_bottom"
+                app:tint="?colorPrimary" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="@dimen/_20mdp"
                 android:layout_height="@dimen/_20mdp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="12dp"
                 app:layout_constraintStart_toEndOf="@+id/dateTv"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:srcCompat="@drawable/ic_time"
-                app:tint="?colorPrimary"
-                android:layout_gravity="center_vertical"/>
+                app:tint="?colorPrimary" />
+
             <TextView
                 android:id="@+id/timeTv"
                 android:layout_width="wrap_content"
@@ -88,16 +105,18 @@
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:srcCompat="@drawable/ic_arrow_bottom"
-                app:tint="?colorPrimary"
+                android:layout_gravity="center_vertical"
                 android:rotation="180"
-                android:layout_gravity="center_vertical"/>
+                app:srcCompat="@drawable/ic_arrow_bottom"
+                app:tint="?colorPrimary" />
         </LinearLayout>
 
     </LinearLayout>
+
     <include
         android:id="@+id/include"
         layout="@layout/emoji_item"
@@ -113,12 +132,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
+        app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_arrow_right"
         app:rippleColor="@color/gray"
-        app:elevation="0dp"/>
+        app:srcCompat="@drawable/ic_arrow_right" />
+
     <TextView
 
         android:layout_width="wrap_content"
@@ -127,5 +147,5 @@
         android:textColor="?colorPrimary"
         app:layout_constraintEnd_toEndOf="@+id/goToUpFragment"
         app:layout_constraintStart_toStartOf="@+id/goToUpFragment"
-        app:layout_constraintTop_toBottomOf="@+id/goToUpFragment"/>
+        app:layout_constraintTop_toBottomOf="@+id/goToUpFragment" />
 </androidx.constraintlayout.widget.ConstraintLayout>

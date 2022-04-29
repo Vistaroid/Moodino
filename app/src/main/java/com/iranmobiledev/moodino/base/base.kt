@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.base
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -34,11 +35,11 @@ interface BaseView {
      * you can set nothing to each them and their view will being gone
      * */
     fun makeDialog(
-        mainText: String = "",
-        subText: String = "",
+        @StringRes mainText: Int = -1,
+        @StringRes subText: Int = -1,
         @DrawableRes icon: Int = 0,
-        deleteText: String = "",
-        cancelText: String = "",
+        @StringRes deleteText: Int = -1,
+        @StringRes cancelText: Int = -1,
     ): MoodinoDialog {
         return MoodinoDialog(mainText, subText, icon, deleteText, cancelText)
     }

@@ -270,7 +270,6 @@ class StatsFragmentViewModel(
 
     @SuppressLint("NewApi")
     fun getLastFiveDaysStatus(entryDates: List<EntryDate>) {
-
         val lastFiveDayStatus = mutableListOf<Boolean>()
 
         for(i in 0..4){
