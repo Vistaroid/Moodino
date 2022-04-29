@@ -22,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/pink"
-        app:backgroundTint="@color/pink"
+        android:background="@color/turquoise"
+        app:backgroundTint="@color/turquoise"
         app:fabCradleMargin="0dp"
         app:fabCradleRoundedCornerRadius="0dp"
         >
