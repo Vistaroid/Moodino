@@ -1,14 +1,17 @@
 package com.iranmobiledev.moodino.ui.states
 
+import android.annotation.SuppressLint
+import android.graphics.ColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.graphics.Color
+import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
-import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -34,13 +37,53 @@ class StatsFragment : BaseFragment() {
         initPieChartCard()
     }
 
-    private fun initPieChartCard() {
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun initDayInRowCard() {
+        val daysContainer = arrayListOf(
+            binding.fifthDayFrameLayout,
+            binding.fourthDayFrameLayout,
+            binding.thirdDayFrameLayout,
+            binding.secondDayFrameLayout,
+            binding.firstDayFrameLayout
+        )
+
+        val daysIcon = arrayListOf(
+            binding.fifthDayIV,
+            binding.fourthDayIV,
+            binding.thirdDayIV,
+            binding.secondDayIV,
+            binding.firstDayIV
+        )
+
         model.initDaysInRow(DaysInARowCardBinding.inflate(layoutInflater))
+
+        model.longestChainLiveData.observe(viewLifecycleOwner){
+            binding.longestChainTextView.text = it.toString()
+        }
+
+        model.latestChainLiveData.observe(viewLifecycleOwner){
+            binding.daysInRowNumberTextView.text = it.toString()
+        }
+
+        model.lastFiveDaysStatus.observe(viewLifecycleOwner){
+            daysContainer.forEach { view ->
+                val currentStatus = it[daysContainer.indexOf(view)]
+                if (currentStatus){
+                    view.background = resources.getDrawable(R.drawable.primary_circle_shape)
+                    daysIcon[daysContainer.indexOf(view)].apply {
+                        setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
+                    }
+                }else{
+                    view.background = resources.getDrawable(R.drawable.circle_shape)
+                    daysIcon[daysContainer.indexOf(view)].apply {
+                        setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
+                    }
+                }
+            }
+        }
     }
 
+    private fun initPieChartCard() {}
+
     private fun initLineChartCard() {}
-
-
-    private fun initDayInRowCard() {}
-
 }

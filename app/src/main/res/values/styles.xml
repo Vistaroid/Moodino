@@ -40,4 +40,13 @@
         <item name="android:popupBackground">@drawable/popup_bg</item>
     </style>
 
+    <style name="checkedDay" >
+        <item name="android:src">@drawable/ic_checked</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="crossedDay" >
+        <item name="android:src">@drawable/ic_cross</item>
+        <item name="tint">@color/gray</item>
+    </style>
 </resources>
