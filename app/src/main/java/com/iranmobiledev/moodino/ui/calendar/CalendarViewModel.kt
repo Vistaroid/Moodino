@@ -17,23 +17,16 @@ import kotlinx.coroutines.launch
 class CalendarViewModel(private val entryRepository: EntryRepository): BaseViewModel() {
 
 
-    private val entries= MutableLiveData<List<Entry>>()
+    private val _entries= MutableLiveData<List<Entry>>()
+    val entries: LiveData<List<Entry>> = _entries
 
-    init {
-        fetchEntries()
-    }
-
-    private fun fetchEntries(){
+    fun fetchEntries(){
         viewModelScope.launch(Dispatchers.IO) {
             entryRepository.getAll().collect{
-                entries.postValue(it)
+                _entries.postValue(it)
             }
         }
 
-    }
-
-    fun getEntries(): LiveData<List<Entry>>{
-        return entries
     }
 
     // State
