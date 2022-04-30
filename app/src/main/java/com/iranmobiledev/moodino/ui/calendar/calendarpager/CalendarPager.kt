@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.iranmobiledev.moodino.R
+import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.FragmentMonthBinding
 import io.github.persiancalendar.calendar.AbstractDate
 import java.lang.ref.WeakReference
@@ -26,6 +27,8 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
             baseJdn, -applyOffset(viewPager.currentItem)
         )
 
+    private var pagerAdapter: PagerAdapter?= null
+
     fun setSelectedDay(
         jdn: Jdn, highlight: Boolean = true, monthChange: Boolean = true,
         smoothScroll: Boolean = true
@@ -38,6 +41,10 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
             )
         }
         refresh()
+    }
+
+    fun setEntries(entries: List<Entry>){
+        pagerAdapter?.setEntries(entries)
     }
 
     // Public API, to be reviewed
@@ -58,7 +65,8 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
     private var selectedJdn: Jdn? = null
 
     init {
-        viewPager.adapter = PagerAdapter()
+        pagerAdapter= PagerAdapter()
+        viewPager.adapter = pagerAdapter
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) = refresh()
 
@@ -71,10 +79,12 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
 
     inner class PagerAdapter : RecyclerView.Adapter<PagerAdapter.ViewHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-            FragmentMonthBinding.inflate(parent.context.layoutInflater, parent, false)
-        )
+        private var entries: List<Entry>?= null
 
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val view= FragmentMonthBinding.inflate(parent.context.layoutInflater, parent, false)
+            return ViewHolder(view)
+        }
         override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(position)
 
         override fun getItemCount() = monthLimit
@@ -82,6 +92,11 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
         private val sharedDayViewData = SharedDayViewData(
             context, resources.getDimension(R.dimen.grid_calendar_height) / 7 - 4.5.sp
         )
+
+        fun setEntries(entries: List<Entry>){
+            this.entries= entries
+            notifyItemChanged(monthPositionGlobal)
+        }
 
         inner class ViewHolder(val binding: FragmentMonthBinding) :
             RecyclerView.ViewHolder(binding.root) {
@@ -130,6 +145,8 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
                     mainCalendar.getMonthLength(monthStartDate.year, monthStartDate.month)
                 binding.monthView.bind(monthStartJdn, monthStartDate)
 
+                binding.monthView.setEntries(entries)
+
                 pageRefresh = { isEventsModification: Boolean, jdn: Jdn? ->
                     if (viewPager.currentItem == position) {
                         if (isEventsModification && jdn != null) {
@@ -159,5 +176,7 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
     fun clickOnPreviousMonth(){
         viewPager.setCurrentItem(viewPager.currentItem - 1, true)
     }
+
+
 
 }

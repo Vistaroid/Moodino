@@ -1,7 +1,7 @@
 package com.iranmobiledev.moodino.ui.calendar
 
-import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentCalendarBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthPositionGlobal
+import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbarItemClickListener
 import io.github.persiancalendar.calendar.AbstractDate
 import kotlinx.coroutines.flow.launchIn
@@ -58,6 +60,10 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
 
         binding.mainToolbar.initialize(this)
 
+        viewModel.fetchEntries()
+//        viewModel.entries.observe(viewLifecycleOwner){
+//            println("enties= ${it.size}")
+//        }
     }
 
     private fun bringDate(jdn: Jdn, highlight: Boolean= true, monthChange: Boolean= true
@@ -80,6 +86,10 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
     }
 
     private fun updateToolbar(binding: FragmentCalendarBinding, date: AbstractDate) {
+        viewModel.entries.observe(viewLifecycleOwner){
+            binding.calendarPager.setEntries(it)
+        }
+
    //       binding.mainToolbar.setMonthName(date)
    //     binding.mainToolbar.title.text= date.monthName  + " "+ date.year
 //        val toolbar = binding.appBar.toolbar

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Paint
 import android.view.ViewGroup
 import com.iranmobiledev.moodino.R
+import com.iranmobiledev.moodino.utlis.ColorArray
 
 class SharedDayViewData(context: Context,height: Float) {
 
@@ -15,6 +16,12 @@ class SharedDayViewData(context: Context,height: Float) {
     val selectedPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
         it.style= Paint.Style.FILL
         it.color= context.resolveColor(R.attr.colorSelectDay)
+//        addShadowIfNeeded(it)
+    }
+
+    val haveEntryPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
+        it.style= Paint.Style.FILL
+        it.color= ColorArray.good // context.resolveColor(R.attr.colorSelectDay)
 //        addShadowIfNeeded(it)
     }
 
@@ -69,5 +76,12 @@ class SharedDayViewData(context: Context,height: Float) {
         it.textSize = headerTextSize
         it.color = colorTextDayName
    //     addShadowIfNeeded(it)
+    }
+
+    private val colorTextDayHavingEntry= context.resolveColor(R.attr.colorTextDayHaveEntry)
+    val haveEntryTextPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
+        it.textAlign= Paint.Align.CENTER
+        it.textSize= textSize
+        it.color= colorTextDayHavingEntry
     }
 }
