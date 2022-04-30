@@ -74,7 +74,7 @@ class StatsFragment : BaseFragment() {
 
         model.weekDays.observe(viewLifecycleOwner){ weekDays ->
             for (textView in daysTextView) {
-                textView.text = weekDays[daysTextView.indexOf(textView)]
+                textView.text= resources.getString(weekDays[daysTextView.indexOf(textView)])
             }
         }
 
