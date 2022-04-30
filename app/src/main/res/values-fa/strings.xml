@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Moodino</string>
+    <string name="app_name">مودینو</string>
     <string name="let_s_pick_up_where_you_left_off">بیا از جایی که متوقف شدی، شروع کنیم!</string>
     <string name="how_are_you">حالت چطوره؟</string>
     <string name="rad">عالی</string>
@@ -9,12 +9,12 @@
     <string name="bad">بد</string>
     <string name="awful">خیلی بد</string>
     <string name="goals">اهداف</string>
-    <string name="weekly_report">گدارش هفتگی</string>
-    <string name="monthly_report">گدارش ماهانه</string>
+    <string name="weekly_report">گذارش هفتگی</string>
+    <string name="monthly_report">گذارش ماهانه</string>
     <string name="photo_gallery">گالری عکس ها</string>
     <string name="achiement">دستاورد</string>
     <string name="timer">تایمر</string>
-    <string name="edite_moods">اصلاح حال</string>
+    <string name="edite_moods">اصلاح احساسات</string>
     <string name="edite_activity">اصلاح فعالیت</string>
     <string name="change_color">عوض کردن رنگ</string>
     <string name="color_mode">حالت رنگ</string>
@@ -22,7 +22,7 @@
     <string name="start_week">شروع هفته</string>
     <string name="language">زبان</string>
     <string name="backup_restore">پشتیبان گیری و بازیابی</string>
-    <string name="export_entries">صادر کردن ورودی</string>
+    <string name="export_entries">خروجی گرفتن خاطرات</string>
     <string name="widgets">ویجت ها</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -39,7 +39,7 @@
     <string name="activityItemText">تقویم</string>
     <string name="take_photo">گرفتن عکس</string>
     <string name="open_gallery">باز کردن گالری</string>
-    <string name="let_s_add_first_entry_tap_the_big_plus_button">Let\'s add first entry!\nTap the big PLUS button</string>
+    <string name="let_s_add_first_entry_tap_the_big_plus_button">اولین خاطره خودت رو اضافه کن</string>
     <string name="delete">حذف</string>
     <string name="edit">اصلاح</string>
     <string name="about">درباره</string>
@@ -54,11 +54,11 @@
     <string name="cancel">انصراف</string>
 
     <!--stats fragment-->
-    <string name="days_in_row">زنجیره حال من</string>
-    <string name="mood_chart">آمار حال های من</string>
+    <string name="days_in_row">زنجیره</string>
+    <string name="mood_chart">آمار</string>
     <string name="longest_chain">طولانی ترین زنجیره</string>
     <string name="achievements">دستاورد ها</string>
-    <string name="mood_count">تعداد حال های من</string>
+    <string name="mood_count">شمارشگر</string>
     <string name="select_activity">انتخاب فعالیت</string>
     <string name="show_all">نمایش همه</string>
     <string name="first_entry_acheivement">اولین ورودی</string>
@@ -106,7 +106,7 @@
     <string name="wednesday">چهارشنبه</string>
     <string name="thursday">پنجشنبه</string>
     <string name="friday">جمعه</string>
-    <string name="average_mood">میانگین احوال</string>
+    <string name="average_mood">میانگین احساسات</string>
     <string name="keep">نگه داشتن</string>
     <string name="enter_pin">پین جدید را وارد کنید</string>
     <string name="confirm_pin">پین جدید را دوباره وارد کنید</string>
