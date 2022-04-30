@@ -1,6 +1,5 @@
 package com.iranmobiledev.moodino.ui.calendar
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -58,6 +57,9 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
 
         binding.mainToolbar.initialize(this)
 
+        viewModel.getEntries().observe(viewLifecycleOwner){
+            println("enties= ${it.size}")
+        }
     }
 
     private fun bringDate(jdn: Jdn, highlight: Boolean= true, monthChange: Boolean= true

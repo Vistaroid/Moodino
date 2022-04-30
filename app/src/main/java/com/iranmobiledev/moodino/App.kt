@@ -40,7 +40,7 @@ class App : Application() , KoinComponent{
         val modules = module {
             viewModel { EntryViewModel(get(), get()) }
             viewModel { EntryDetailViewModel(get(), get()) }
-            viewModel { CalendarViewModel() }
+            viewModel { CalendarViewModel(get()) }
             viewModel { PinLockViewModel(get()) }
             viewModel {StatsFragmentViewModel(get())}
             factory  <EntryRepository> { EntryRepositoryImpl(database.getEntryDao)}
