@@ -33,7 +33,7 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:padding="16dp"
-                       android:text="Days in a Row"
+                       android:text="@string/days_in_row"
                        android:textAlignment="viewStart"
                        app:layout_constraintStart_toStartOf="parent"
                        app:layout_constraintTop_toTopOf="parent" />
@@ -126,7 +126,7 @@
                                    android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
                                    android:layout_gravity="center"
-                                   android:text="Mon" />
+                                   android:text="@string/mon" />
                            </LinearLayout>
 
 
@@ -159,7 +159,7 @@
                                    android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
                                    android:layout_gravity="center"
-                                   android:text="Tue" />
+                                   android:text="@string/tue" />
                            </LinearLayout>
 
 
@@ -193,7 +193,7 @@
                                    android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
                                    android:layout_gravity="center"
-                                   android:text="Wed" />
+                                   android:text="@string/wed" />
 
                            </LinearLayout>
 
@@ -228,7 +228,7 @@
                                    android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
                                    android:layout_gravity="center"
-                                   android:text="Tue" />
+                                   android:text="@string/tue" />
 
                            </LinearLayout>
 
@@ -262,7 +262,7 @@
                                    android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
                                    android:layout_gravity="center"
-                                   android:text="Fri" />
+                                   android:text="@string/fri" />
                            </LinearLayout>
 
                            <FrameLayout
@@ -323,11 +323,19 @@
                            app:tint="@color/gold" />
 
                        <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="16dp"
+                           android:text="@string/longest_chain" />
+                       <Space
+                           android:layout_width="@dimen/_8mdp"
+                           android:layout_height="wrap_content"/>
+                       <TextView
                            android:id="@+id/longestChainTextView"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:layout_marginTop="16dp"
-                           android:text="Longest chain: 0" />
+                           android:text="10"/>
                    </LinearLayout>
 
                </androidx.constraintlayout.widget.ConstraintLayout>
@@ -355,7 +363,7 @@
                        style="@style/cardHeaderTextStyle"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:text="Mood Chart"
+                       android:text="@string/mood_chart"
                        android:textAlignment="viewStart"
                        android:paddingBottom="10dp"
                        app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
@@ -488,10 +496,10 @@
                        android:background="@drawable/round_corner_rectangle"
                        android:drawableEnd="@drawable/ic_dropdown"
                        android:drawableTint="@color/pink"
-                       android:hint="Select Activity"
+                       android:hint="@string/select_activity"
                        android:paddingStart="12dp"
-                       android:paddingEnd="12dp"
                        android:textSize="12sp"
+                       android:paddingEnd="12dp"
                        app:layout_constraintBottom_toBottomOf="parent"
                        app:layout_constraintEnd_toEndOf="parent"
                        app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout"
@@ -523,7 +531,7 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:paddingBottom="10dp"
-                       android:text="Achievements"
+                       android:text="@string/achievements"
                        android:textAlignment="viewStart"
                        app:layout_constraintStart_toStartOf="parent"
                        app:layout_constraintTop_toTopOf="parent" />
@@ -545,7 +553,7 @@
                        android:layout_height="wrap_content"
                        app:FirstStarTint="@color/pink"
                        app:Icon="@drawable/ic_book"
-                       app:Name="Going String"
+                       app:Name="@string/first_note"
                        app:SecondStarTint="@color/gray"
                        app:ThirdStarTint="@color/gray"
                        app:layout_constraintEnd_toStartOf="@+id/customViewAchievement2"
@@ -559,7 +567,7 @@
                        android:layout_height="wrap_content"
                        app:FirstStarTint="@color/pink"
                        app:Icon="@drawable/ic_camera_for_achievements"
-                       app:Name="Going String"
+                       app:Name="@string/first_entry_acheivement"
                        app:SecondStarTint="@color/gray"
                        app:ThirdStarTint="@color/gray"
                        app:layout_constraintEnd_toStartOf="@+id/customViewAchievement3"
@@ -573,7 +581,7 @@
                        android:layout_height="wrap_content"
                        app:FirstStarTint="@color/pink"
                        app:Icon="@drawable/ic_library"
-                       app:Name="Going String"
+                       app:Name="@string/a_week_with_us"
                        app:SecondStarTint="@color/gray"
                        app:ThirdStarTint="@color/gray"
                        app:layout_constraintEnd_toEndOf="parent"
@@ -598,7 +606,7 @@
                        android:layout_width="wrap_content"
                        android:layout_height="24dp"
                        android:layout_marginTop="16dp"
-                       android:text="3 out of 20"
+                       android:text="3-20"
                        app:layout_constraintBottom_toBottomOf="parent"
                        app:layout_constraintStart_toStartOf="parent"
                        app:layout_constraintTop_toBottomOf="@id/dividerAchievement" />
@@ -608,7 +616,7 @@
                        android:layout_height="wrap_content"
                        android:layout_marginRight="4dp"
                        android:backgroundTint="@color/white"
-                       android:text="SHOW ALL"
+                       android:text="@string/show_all"
                        android:textColor="@color/pink"
                        android:textSize="12sp"
                        app:layout_constraintBottom_toBottomOf="@+id/totalAchievementsTextView"
@@ -641,7 +649,7 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:paddingBottom="10dp"
-                       android:text="Mood Count"
+                       android:text="@string/mood_count"
                        app:layout_constraintStart_toStartOf="parent"
                        app:layout_constraintTop_toTopOf="parent" />
 

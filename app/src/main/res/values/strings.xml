@@ -52,6 +52,28 @@
     <string name="system_mode">System Default</string>
     <string name="cancel">Cancel</string>
 
+
+    <!--stats fragment-->
+    <string name="days_in_row">Days In a Row</string>
+    <string name="mood_chart">Mood Chart</string>
+    <string name="achievements">Achievements</string>
+    <string name="mood_count">Mood Count</string>
+    <string name="select_activity">Select Activity</string>
+    <string name="longest_chain">Longest Chain</string>
+    <string name="show_all">Show All</string>
+    <string name="first_entry_acheivement">First Entry</string>
+    <string name="a_week_with_us">A Week With Us</string>
+    <string name="first_note">First Note</string>
+
+    <!--week days for days in a row-->
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+
     <!--calendars-->
     <string name="shamsi_calendar">Persian Calendar</string>
     <string name="shamsi_calendar_short">Persian</string>

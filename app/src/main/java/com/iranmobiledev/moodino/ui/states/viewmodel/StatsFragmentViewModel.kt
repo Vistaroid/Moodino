@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.compose.ui.text.toLowerCase
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
@@ -37,7 +38,7 @@ class StatsFragmentViewModel(
     private val _lineChartEntries = MutableLiveData<List<Entry>>(listOf(Entry(1f, 2f)))
     private val _lineChartDates = MutableLiveData<List<Int>>(listOf(10))
     private val pieChartEntries = mutableListOf<PieEntry>()
-    private val _weekDays = MutableLiveData<ArrayList<String>>()
+    private val _weekDays = MutableLiveData<ArrayList<Int>>()
     private val _isEnoughEntries: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     private val _longestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     private val _latestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
@@ -54,7 +55,7 @@ class StatsFragmentViewModel(
         get() = _latestChainLiveData
     val lastFiveDaysStatus: LiveData<List<Boolean>>
         get() = _lastFiveDaysStatus
-    val weekDays: LiveData<ArrayList<String>>
+    val weekDays: LiveData<ArrayList<Int>>
         get() = _weekDays
 
     fun initDaysInRow() {
@@ -247,13 +248,19 @@ class StatsFragmentViewModel(
 
     @SuppressLint("NewApi")
     private fun getFiveDaysAsWeekDays() {
-        var days = arrayListOf<String>()
+        var days = arrayListOf<Int>()
         val today = LocalDate.now()
         for (i in 0..4) {
             val date = today.minusDays(i.toLong())
-            val weekDayName = date.dayOfWeek.name.slice(0..2).toLowerCase()
-            val formatedWeekDay = weekDayName.replaceFirstChar { it.uppercase() }
-            days.add(formatedWeekDay)
+            when(date.dayOfWeek.value){
+                1 -> days.add(R.string.sat)
+                2 -> days.add(R.string.sun)
+                3 -> days.add(R.string.mon)
+                4 -> days.add(R.string.tue)
+                5 -> days.add(R.string.wed)
+                6 -> days.add(R.string.thu)
+                7 -> days.add(R.string.fri)
+            }
         }
 
         days.reverse()
