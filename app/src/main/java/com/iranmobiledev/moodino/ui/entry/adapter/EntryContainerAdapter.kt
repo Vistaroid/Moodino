@@ -29,18 +29,18 @@ class EntryContainerAdapter(
         @SuppressLint("SetTextI18n")
         fun bind(entries: List<Entry>) {
             val persianDate = PersianDate()
-            persianDate.grgMonth = entries[0].date?.month!!
+            persianDate.shMonth = entries[0].date?.month!!
             entryListDate.text = PersianDateFormat.format(
                 persianDate,
                 "j F",
-                PersianDateFormat.PersianDateNumberCharacter.ENGLISH
+                PersianDateFormat.PersianDateNumberCharacter.FARSI
             )
 
             entryRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             val entryAdapter = EntryAdapter(
                 entryEventListener,
-                entries as MutableList<Entry>, context!!
+                entries as MutableList<Entry>, context
             )
             entryRecyclerView.adapter = entryAdapter
             entryRecyclerView.itemAnimator = null
