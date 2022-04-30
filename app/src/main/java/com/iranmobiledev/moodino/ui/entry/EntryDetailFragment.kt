@@ -1,12 +1,13 @@
 package com.iranmobiledev.moodino.ui.entry
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
@@ -37,22 +38,31 @@ class EntryDetailFragment : BaseFragment(),
         savedInstanceState: Bundle?
     ): View {
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
+        setupUtil()
         setupClicks()
         return binding.root
     }
+
+    private fun setupUtil() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
+    }
+
     private fun setupClicks() {
         binding.saveLayout.setOnClickListener(saveOnClick)
         binding.saveEntryFab.setOnClickListener(saveOnClick)
         binding.selectImageLayout.setOnClickListener {
             createPhotoSelectorDialog()
         }
+
     }
-    private fun navigateToEntryFragment(){
+
+    private fun navigateToEntryFragment() {
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
             .navigate(R.id.action_entryDetailFragment_to_entriesFragment, Bundle().apply {
                 putParcelable("entry", entry)
             })
     }
+
     private fun setupPhotoDialog(): PickSetup {
         return PickSetup().apply {
             cameraIcon = R.drawable.ic_camera
@@ -73,11 +83,19 @@ class EntryDetailFragment : BaseFragment(),
             }
         }.show(parentFragmentManager)
     }
+
     private val saveOnClick = View.OnClickListener {
         binding.noteEt.text?.let {
             entry.note = it.toString()
         }
         entryDetailViewModel.addEntry(entry)
         navigateToEntryFragment()
+    }
+
+    private val onBackPressed = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_entryDetailFragment_to_addEntryFragment)
+            initialFromBackPress = true
+        }
     }
 }

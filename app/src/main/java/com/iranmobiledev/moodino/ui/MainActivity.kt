@@ -16,8 +16,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import saman.zamani.persiandate.PersianDate
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
 import com.iranmobiledev.moodino.utlis.setupWithNavController
@@ -134,5 +132,6 @@ class MainActivity : BaseActivity() {
         binding. bottomAppBar.performHide(true)
         binding.bottomNavigationView.visibility= View.GONE
     }
+
 }
 

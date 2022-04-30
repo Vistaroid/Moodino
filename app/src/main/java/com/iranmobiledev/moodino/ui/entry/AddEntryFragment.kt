@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
@@ -15,12 +16,11 @@ import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
 import com.iranmobiledev.moodino.utlis.*
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
-
-class AddEntryFragment() : BaseFragment() {
+var initialFromBackPress = false
+class AddEntryFragment : BaseFragment() {
 
     private lateinit var binding: AddEntryFragmentBinding
     private var persianDate: PersianDate = PersianDate()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +33,7 @@ class AddEntryFragment() : BaseFragment() {
     }
 
     private fun setupUi() {
+        binding.continueButton.visibility = if(initialFromBackPress) View.VISIBLE else View.GONE
         binding.dateTv.text = getDate()
         binding.timeTv.text = getTime()
     }
@@ -94,4 +95,8 @@ class AddEntryFragment() : BaseFragment() {
         return PersianDateFormat.format(persianDate, "H:i")
     }
 
+    override fun onStop() {
+        super.onStop()
+        initialFromBackPress = false
+    }
 }
