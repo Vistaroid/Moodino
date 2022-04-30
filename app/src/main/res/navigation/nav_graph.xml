@@ -24,7 +24,8 @@
         <action
             android:id="@+id/action_entriesFragment_to_addEntryFragment"
             app:destination="@id/addEntryFragment"
-            app:enterAnim="@anim/enter_anim_from_bottom"/>
+            app:enterAnim="@anim/enter_anim_from_bottom"
+            app:popExitAnim="@anim/exit_anim_from_top"/>
         <action
             android:id="@+id/action_entriesFragment_to_emptyStateFragment"
             app:destination="@id/emptyStateFragment"
@@ -75,6 +76,11 @@
             app:popUpTo="@id/entriesFragment"
             app:popUpToInclusive="true"
             />
+        <action
+            android:id="@+id/action_entryDetailFragment_to_addEntryFragment"
+            app:destination="@id/addEntryFragment"
+            app:popUpTo="@id/addEntryFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/emptyStateFragment"

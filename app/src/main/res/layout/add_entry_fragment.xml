@@ -128,7 +128,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/goToUpFragment"
+        android:id="@+id/continueButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
@@ -137,7 +137,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/gray"
-        app:srcCompat="@drawable/ic_arrow_right" />
+        app:srcCompat="@drawable/ic_arrow_right"
+        android:visibility="gone"/>
 
     <TextView
 
@@ -145,7 +146,7 @@
         android:layout_height="wrap_content"
         android:text="@string/continue_text"
         android:textColor="?colorPrimary"
-        app:layout_constraintEnd_toEndOf="@+id/goToUpFragment"
-        app:layout_constraintStart_toStartOf="@+id/goToUpFragment"
-        app:layout_constraintTop_toBottomOf="@+id/goToUpFragment" />
+        app:layout_constraintEnd_toEndOf="@+id/continueButton"
+        app:layout_constraintStart_toStartOf="@+id/continueButton"
+        app:layout_constraintTop_toBottomOf="@+id/continueButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
