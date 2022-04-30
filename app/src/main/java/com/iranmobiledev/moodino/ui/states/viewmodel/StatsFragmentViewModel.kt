@@ -224,11 +224,11 @@ class StatsFragmentViewModel(
             println("entry123 ${entry.date!!.day}")
             val x = entries.indexOf(entry) + 1.toFloat()
             val y = when (entry.title) {
-                "RAD" -> 5f
-                "GOOD" -> 4f
-                "MEH" -> 3f
-                "BAD" -> 2f
-                "AWFUL" -> 1f
+                R.string.rad -> 5f
+                R.string.good -> 4f
+                R.string.meh -> 3f
+                R.string.bad -> 2f
+                R.string.awful -> 1f
                 else -> {
                     3f
                 }
