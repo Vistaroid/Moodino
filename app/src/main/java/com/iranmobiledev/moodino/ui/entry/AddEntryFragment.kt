@@ -45,7 +45,7 @@ class AddEntryFragment() : BaseFragment() {
     private fun setupClicks() {
         val entry = Entry()
         val bundle = Bundle()
-        entry.date = EntryDate(persianDate.grgYear, persianDate.grgMonth, persianDate.grgDay)
+        entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         entry.time = EntryTime(
             PersianDateFormat.format(persianDate, "H"),
             PersianDateFormat.format(persianDate, "i")
@@ -76,6 +76,9 @@ class AddEntryFragment() : BaseFragment() {
             entry.title = RAD
             entry.icon = R.drawable.emoji_rad
             navigateToEntryDetailFragment(bundle)
+        }
+        binding.closeFragment.setOnClickListener {
+            requireActivity().onBackPressed()
         }
     }
 

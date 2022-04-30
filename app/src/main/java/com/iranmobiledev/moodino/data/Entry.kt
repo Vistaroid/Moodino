@@ -3,6 +3,7 @@ package com.iranmobiledev.moodino.data
 import android.os.Parcelable
 import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
@@ -15,7 +16,7 @@ import kotlinx.android.parcel.Parcelize
 data class Entry(
     @PrimaryKey(autoGenerate = true)
     var id : Int? = null,
-    var title : String = "",
+    @StringRes var title : Int = -1,
     var note : String = "",
     var activities : List<Activity> = ArrayList(),
     var photoPath : String = "",

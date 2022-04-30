@@ -34,14 +34,14 @@ class EntryAdapter(
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry) {
             binding.entryItem = entry
-         //   entryIcon.setImageResource(entry.icon)
+            entryIcon.setImageResource(entry.icon)
             moreIcon.setOnClickListener {
                 makePopupMenu(entry, it)
             }
             setTitleColor(entry.title)
         }
-        private fun setTitleColor(title: String) {
-            when(title){
+        private fun setTitleColor(titleId: Int) {
+            when(titleId){
                 RAD -> entryTitle.setTextColor(ColorArray.rad)
                 GOOD -> entryTitle.setTextColor(ColorArray.good)
                 MEH -> entryTitle.setTextColor(ColorArray.meh)

@@ -1,12 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Moodino</string>
-    <string name="let_s_pick_up_where_you_left_off">Let\'s pick up where you left off.</string>
-    <string name="how_are_you">How are you?</string>
-    <string name="rad">rad</string>
-    <string name="good">good</string>
-    <string name="meh">meh</string>
-    <string name="bad">bad</string>
-    <string name="awful">awful</string>
+    <string name="let_s_pick_up_where_you_left_off">بیا از جایی که متوقف شدی، شروع کنیم!</string>
+    <string name="how_are_you">حالت چطوره؟</string>
+    <string name="rad">عالی</string>
+    <string name="good">خوب</string>
+    <string name="meh">بیخیال</string>
+    <string name="bad">بد</string>
+    <string name="awful">خیلی بد</string>
     <string name="goals">Goals</string>
     <string name="weekly_report">Weekly Report</string>
     <string name="monthly_report">Monthly Report</string>
@@ -27,13 +28,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="date">YESTERDAY, MARCH 5</string>
     <string name="time">22:30</string>
-    <string name="note">Note</string>
-    <string name="continue_text">continue</string>
-    <string name="save">save</string>
-    <string name="what_have_you_been_up_to">What have you been up to?</string>
-    <string name="add_note">Add note</string>
-    <string name="photo">Photo</string>
-    <string name="tap_to_add_photo">Tap to Add Photo</string>
+    <string name="note">یادداشت</string>
+    <string name="continue_text">ادامه</string>
+    <string name="save">ذخیره</string>
+    <string name="what_have_you_been_up_to">امروز چیکار کردی؟</string>
+    <string name="add_note">افزودن یادداشت</string>
+    <string name="photo">عکس</string>
+    <string name="tap_to_add_photo">افزودن عکس</string>
     <string name="social">social</string>
     <string name="activityItemText">calendar</string>
     <string name="take_photo">Take Photo</string>
@@ -94,12 +95,12 @@
     <string name="active_pin_lock">PIN Lock Is Active</string>
     <string name="b1">b1</string>
     <string name="b2">b2</string>
-    <string name="dialogMainText">Delete loving memory?</string>
-    <string name="dialogSubText">This is your life we are talking about. Do you want to delete a part of it?</string>
-    <string name="dialogDeleteText">DELETE</string>
-    <string name="dialogCancelText">CANCEL</string>
-    <string name="entries">entries</string>
-    <string name="statsStr">stats</string>
-    <string name="calenderStr">calender</string>
-    <string name="moreStr">more</string>
+    <string name="dialogMainText">حذف خاطره؟</string>
+    <string name="dialogSubText">این بخشی از خاطرات شماست، واقعا میخوای حذفش کنی؟</string>
+    <string name="dialogDeleteText">حذف</string>
+    <string name="dialogCancelText">بیخیال</string>
+    <string name="entries">خاطرات</string>
+    <string name="statsStr">آمار</string>
+    <string name="calenderStr">تقویم</string>
+    <string name="moreStr">بیشتر</string>
 </resources>
