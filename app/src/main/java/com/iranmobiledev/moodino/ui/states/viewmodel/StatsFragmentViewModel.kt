@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.Log
+import androidx.annotation.IntegerRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.text.toLowerCase
 import androidx.core.content.ContextCompat
@@ -102,14 +103,14 @@ class StatsFragmentViewModel(
 
         for (date in reversedDate) {
             val nextDateAsLocalDate =
-                LocalDate.of(date.year, date.month, date.day).minusDays(1)
+                LocalDate.of(Integer.parseInt(date.year), Integer.parseInt(date.month), Integer.parseInt(date.day)).minusDays(1)
 
             if (date != reversedDate.last()) {
                 val nextDateElement = reversedDate[reversedDate.indexOf(date) + 1]
                 val nextDate = LocalDate.of(
-                    nextDateElement.year,
-                    nextDateElement.month,
-                    nextDateElement.day
+                    Integer.parseInt(nextDateElement.year),
+                    Integer.parseInt(nextDateElement.month),
+                    Integer.parseInt(nextDateElement.day)
                 )
                 if (nextDateAsLocalDate == nextDate) {
                     latestChain++
@@ -130,14 +131,14 @@ class StatsFragmentViewModel(
 
         for (date in dates) {
             val nextDateAsLocalDate =
-                LocalDate.of(date.year, date.month, date.day).plusDays(1)
+                LocalDate.of(Integer.parseInt(date.year), Integer.parseInt(date.month), Integer.parseInt(date.day)).plusDays(1)
             if (date != dates.last()) {
                 val nextDateElement = dates[dates.indexOf(date) + 1]
                 val nextDate =
                     LocalDate.of(
-                        nextDateElement.year,
-                        nextDateElement.month,
-                        nextDateElement.day
+                        Integer.parseInt(nextDateElement.year),
+                        Integer.parseInt(nextDateElement.month),
+                        Integer.parseInt(nextDateElement.day)
                     )
                 if (nextDateAsLocalDate == nextDate) {
                     chainLength++
@@ -234,7 +235,7 @@ class StatsFragmentViewModel(
                     3f
                 }
             }
-            entriesDaysNumber.add(entry.date!!.day)
+            entriesDaysNumber.add(Integer.parseInt(entry.date!!.day))
             entriesPieChart.add(
                 Entry(x, y)
             )
@@ -282,7 +283,7 @@ class StatsFragmentViewModel(
         for(i in 0..4){
             val date = LocalDate.now().minusDays(i.toLong())
 
-                if (entryDates.contains(EntryDate(date.year,date.monthValue,date.dayOfMonth))){
+                if (entryDates.contains(EntryDate(date.year.toString(),date.monthValue.toString(),date.dayOfMonth.toString()))){
                     lastFiveDayStatus.add(true)
                 }else{
                     lastFiveDayStatus.add(false)
@@ -337,20 +338,20 @@ class StatsFragmentViewModel(
     object Mock {
 
         val mockEntries = listOf<com.iranmobiledev.moodino.data.Entry>(
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 1)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 2)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 3)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 18)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 19)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 20)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 24)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 25)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 26)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 27)),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "1")),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "2")),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "3")),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "18")),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "19")),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "20")),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "24")),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "25")),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "26")),
+            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "27")),
         )
     }
 
-    fun getEntriesForPieChart():
+    private fun getEntriesForPieChart():
             MutableList<PieEntry> {
         return pieChartEntries
     }
