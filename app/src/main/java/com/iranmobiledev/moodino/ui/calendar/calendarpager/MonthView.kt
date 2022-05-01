@@ -6,8 +6,10 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.*
 import io.github.persiancalendar.calendar.AbstractDate
+import java.security.KeyStore
 
 class MonthView(context: Context, attributeSet: AttributeSet): RecyclerView(context,attributeSet) {
 
@@ -22,6 +24,10 @@ class MonthView(context: Context, attributeSet: AttributeSet): RecyclerView(cont
         daysAdapter= DaysAdapter(context, sharedDayViewData, calendarPager)
         adapter= daysAdapter
         addCelSpacing()
+    }
+
+    fun setEntries(entries: List<Entry>?){
+        daysAdapter?.setEntries(entries)
     }
 
     private fun addCelSpacing(){
@@ -41,6 +47,7 @@ class MonthView(context: Context, attributeSet: AttributeSet): RecyclerView(cont
     private var monthName = ""
 
     fun bind(monthStartJdn: Jdn, monthStartDate: AbstractDate) {
+        monthStartDate
         val monthLength = mainCalendar.getMonthLength(monthStartDate.year, monthStartDate.month)
         monthName = language.my.format(monthStartDate.monthName, formatNumber(monthStartDate.year))
         contentDescription = monthName

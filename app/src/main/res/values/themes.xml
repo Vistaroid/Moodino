@@ -23,6 +23,8 @@
         <item name="colorCurrentDay">@color/gray</item>
         <item name="colorTextDayName">@color/gray_dark_500</item>
         <item name="colorTextDaySelected">@color/white</item>
+        <item name="colorTextDayHaveEntry">@color/white</item>
+        <item name="colorDayHaveEntryDefault">@color/white</item>
         <item name="colorMonthSwitch">@color/gray</item>
 
     </style>
@@ -37,6 +39,8 @@
     <attr name="colorCurrentDay" format="reference"/>
     <attr name="colorTextDayName" format="reference"/>
     <attr name="colorTextDaySelected" format="reference"/>
+    <attr name="colorTextDayHaveEntry" format="reference"/>
+    <attr name="colorDayHaveEntryDefault" format="reference"/>
     <attr name="colorMonthSwitch" format="reference"/>
 
 </resources>

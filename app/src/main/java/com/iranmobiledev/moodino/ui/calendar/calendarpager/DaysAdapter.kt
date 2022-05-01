@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.calendar.calendarpager
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
+import com.iranmobiledev.moodino.data.Entry
 
 class DaysAdapter(private val context: Context,private val sharedDayViewData: SharedDayViewData,
                private val calendarPager: CalendarPager?): RecyclerView.Adapter<DaysAdapter.ViewHolder>() {
@@ -14,6 +16,7 @@ class DaysAdapter(private val context: Context,private val sharedDayViewData: Sh
     var startingDayOfWeek = 0
     var weekOfYearStart: Int = 0
     var weeksCount: Int = 0
+    private var entries: List<Entry>?= null
 
     private var selectedDay = -1
 
@@ -29,6 +32,13 @@ class DaysAdapter(private val context: Context,private val sharedDayViewData: Sh
         if (isShowWeekOfYearEnabled) selectedDay += selectedDay / 7 + 1
 
         notifyItemChanged(selectedDay)
+    }
+
+    // set entries for one day for sample 1401/2/10
+    @SuppressLint("NotifyDataSetChanged")
+    fun setEntries(entries: List<Entry>?){
+        this.entries= entries
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -127,7 +137,7 @@ class DaysAdapter(private val context: Context,private val sharedDayViewData: Sh
 //                        context, day, isToday, EventsStore.empty(),
 //                        withZodiac = isToday, withOtherCalendars = false, withTitle = true
 //                    ) else dayOfMonth.toString()
-
+                    dayView.entries= entries
                     dayView.isVisible = true
                 } else {
                     setEmpty()
@@ -141,6 +151,4 @@ class DaysAdapter(private val context: Context,private val sharedDayViewData: Sh
         }
 
     }
-
-
 }

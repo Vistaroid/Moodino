@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
+import com.iranmobiledev.moodino.data.Entry
 import kotlin.math.min
 
 class DayView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
@@ -21,10 +22,13 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
     private var header = ""
 
     var sharedDayViewData: SharedDayViewData? = null
+    var entries: List<Entry>?= null
+    private var dayHaveEntry: Boolean= false
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         val shared = sharedDayViewData ?: return
+       // val entries= entries
 
         val radius = min(width, height) / 2f
         drayCircle(canvas, shared, radius) // background circle if is needed
@@ -34,9 +38,16 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
     }
 
     private fun drayCircle(canvas: Canvas?, shared: SharedDayViewData, radius: Float) {
-        if (dayIsSelected) canvas?.drawCircle(
-            width / 2f, height / 2f, radius, shared.selectedPaint
-        )
+//        if (dayIsSelected) canvas?.drawCircle(
+//            width / 2f, height / 2f, radius, shared.selectedPaint
+//        )
+        if (!entries.isNullOrEmpty()){
+            val list= entries?.filter { it.date?.day.toString() == text }
+            if (!list.isNullOrEmpty()){
+                dayHaveEntry= true
+                canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint(list[0].title) )
+            }
+        }
 
         if (today) canvas?.drawCircle(
             width / 2f, height / 2f, radius, shared.todayPaint
@@ -48,7 +59,8 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
         val textPaint = when {
             jdn != null -> when {
              //   holiday -> shared.dayOfMonthNumberTextHolidayPaint
-                dayIsSelected -> shared.dayOfMonthNumberTextSelectedPaint
+               // dayIsSelected -> shared.dayOfMonthNumberTextSelectedPaint
+                dayHaveEntry -> shared.haveEntryTextPaint
                 else /*!dayIsSelected*/ -> shared.dayOfMonthNumberTextPaint
             }
             isWeekNumber -> shared.weekNumberTextPaint
