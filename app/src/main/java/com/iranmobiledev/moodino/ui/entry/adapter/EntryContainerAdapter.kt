@@ -11,17 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.listener.EmptyStateListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
 class EntryContainerAdapter(
-    private val context: Context,
+    private var context: Context,
     private var entries: MutableList<MutableList<Entry>>,
-    private val entryEventListener: EntryEventLister
-) :
-    RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+    private var entryEventListener: EntryEventLister
+) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+
     private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
+    private var emptyStateEventListener: EmptyStateListener? = null
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val entryListDate = itemView.findViewById<TextView>(R.id.entryListDate)
         private val entryRecyclerView = itemView.findViewById<RecyclerView>(R.id.entryRv)
@@ -38,18 +41,34 @@ class EntryContainerAdapter(
 
             entryRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            entryRecyclerView.itemAnimator = null
+
+            var repeated = false
+            entryAdapters.forEach {
+                if (it.entries[0].date == entries[0].date) {
+                    entryRecyclerView.adapter = it
+                    repeated = true
+                }
+            }
+            if (!repeated)
+                makeNewAdapter(entries as MutableList<Entry>)
+            println("entries size container adapter: ${entries.size}")
+        }
+
+        private fun makeNewAdapter(entries: MutableList<Entry>) {
             val entryAdapter = EntryAdapter(
                 entryEventListener,
-                entries as MutableList<Entry>, context
+                entries, context
             )
             entryRecyclerView.adapter = entryAdapter
-            entryRecyclerView.itemAnimator = null
             entryAdapters.add(entryAdapter)
         }
     }
-    fun setEntries(entries: List<List<Entry>>){
+
+    fun setEntries(entries: List<List<Entry>>) {
         this.entries = entries as MutableList<MutableList<Entry>>
     }
+
     fun addEntry(entry: Entry) {
         var found = false
         entryAdapters.forEach {
@@ -59,10 +78,11 @@ class EntryContainerAdapter(
             }
         }
         if (!found || entryAdapters.size == 0) {
-            entryAdapters.add(0, EntryAdapter(entryEventListener, mutableListOf(entry), context!!))
+            entryAdapters.add(0, EntryAdapter(entryEventListener, mutableListOf(entry), context))
             notifyItemInserted(0)
         }
     }
+
     fun removeItem(entry: Entry) {
         entryAdapters.forEach {
             if (it.entries.contains(entry)) {
@@ -71,11 +91,19 @@ class EntryContainerAdapter(
             checkItemsToBeNotEmpty()
         }
     }
+
     private fun checkItemsToBeNotEmpty() {
+
         entries.forEachIndexed { index, list ->
             if (list.size == 0) {
                 entries.removeAt(index)
                 notifyItemRemoved(index)
+            }
+
+            entryAdapters.forEachIndexed { index, entryAdapter ->
+                if (entryAdapter.entries.size == 0)
+                    entryAdapters.removeAt(index)
+
             }
         }
     }
@@ -91,7 +119,20 @@ class EntryContainerAdapter(
     }
 
     override fun getItemCount(): Int {
+        emptyStateEventListener!!.emptyStateVisibility(entries.size == 0)
         return entries.size
+    }
+
+    fun create(
+        context: Context,
+        entriesList: MutableList<MutableList<Entry>>,
+        entryEventListener: EntryEventLister,
+        emptyStateEventListener: EmptyStateListener
+    ) {
+        this.context = context
+        entries = entriesList
+        this.emptyStateEventListener = emptyStateEventListener
+        this.entryEventListener = entryEventListener
     }
 }
 
