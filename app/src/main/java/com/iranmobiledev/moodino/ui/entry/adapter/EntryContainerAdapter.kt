@@ -29,7 +29,7 @@ class EntryContainerAdapter(
         @SuppressLint("SetTextI18n")
         fun bind(entries: List<Entry>) {
             val persianDate = PersianDate()
-            persianDate.shMonth = entries[0].date?.month!!
+            persianDate.shMonth = Integer.parseInt(entries[0].date?.month!!)
             entryListDate.text = PersianDateFormat.format(
                 persianDate,
                 "j F",

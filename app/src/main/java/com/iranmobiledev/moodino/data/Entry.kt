@@ -27,9 +27,9 @@ data class Entry(
 
 @Parcelize
 data class EntryDate(
-    val year : Int,
-    val month : Int,
-    val day : Int,
+    val year : String,
+    val month : String,
+    val day : String,
 ) : Parcelable
 
 @Parcelize
