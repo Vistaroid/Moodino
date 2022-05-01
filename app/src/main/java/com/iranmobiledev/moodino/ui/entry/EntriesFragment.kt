@@ -68,7 +68,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister,EmptyStateListener, Cha
         recyclerView = binding.entriesContainerRv
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        adapter = EntryContainerAdapter(requireContext(), mutableListOf(), this)
+        adapter = EntryContainerAdapter(requireContext(), mutableListOf(), this, this)
         recyclerView.adapter = adapter
     }
     private fun setupObserver() {

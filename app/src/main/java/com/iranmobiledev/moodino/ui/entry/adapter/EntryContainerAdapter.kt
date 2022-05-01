@@ -19,11 +19,11 @@ import saman.zamani.persiandate.PersianDateFormat
 class EntryContainerAdapter(
     private var context: Context,
     private var entries: MutableList<MutableList<Entry>>,
-    private var entryEventListener: EntryEventLister
+    private var entryEventListener: EntryEventLister,
+    private var emptyStateEventListener: EmptyStateListener
 ) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
 
     private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
-    private var emptyStateEventListener: EmptyStateListener? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val entryListDate = itemView.findViewById<TextView>(R.id.entryListDate)
@@ -119,7 +119,7 @@ class EntryContainerAdapter(
     }
 
     override fun getItemCount(): Int {
-        emptyStateEventListener!!.emptyStateVisibility(entries.size == 0)
+        emptyStateEventListener.emptyStateVisibility(entries.size == 0)
         return entries.size
     }
 

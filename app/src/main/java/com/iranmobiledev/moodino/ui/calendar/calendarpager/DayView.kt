@@ -6,6 +6,7 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.utlis.entry_util.toPersian
 import kotlin.math.min
 
 class DayView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
@@ -42,7 +43,7 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
 //            width / 2f, height / 2f, radius, shared.selectedPaint
 //        )
         if (!entries.isNullOrEmpty()){
-            val list= entries?.filter { it.date?.day.toString() == text }
+            val list= entries?.filter { it.date?.toPersian()?.day == text }
             if (!list.isNullOrEmpty()){
                 dayHaveEntry= true
                 canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint(list[0].title) )
