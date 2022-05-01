@@ -2,11 +2,11 @@ package com.iranmobiledev.moodino.utlis.entry_util
 
 import com.iranmobiledev.moodino.data.EntryDate
 
-fun EntryDate.toPersian(entryDate: EntryDate): EntryDate {
+fun EntryDate.toPersian(): EntryDate {
     return EntryDate(
-        getPersianNumber(entryDate.year),
-        getPersianNumber(entryDate.month),
-        getPersianNumber(entryDate.day)
+        getPersianNumber(year),
+        getPersianNumber(month),
+        getPersianNumber(day)
     )
 }
 
