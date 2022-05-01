@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
 import androidx.activity.viewModels
+
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -65,7 +67,7 @@ class MainActivity : BaseActivity() {
             navController.navigate(R.id.addEntryFragment, bundle)
         }
 
-        binding.otherDayButton.setOnClickListener{
+        binding.otherDayButton.setOnClickListener {
         }
     }
 
@@ -105,9 +107,9 @@ class MainActivity : BaseActivity() {
         return currentNavController?.value?.navigateUp() ?: false
     }
 
-    private fun setFragmentDestinationChangeListener(){
-        navController.addOnDestinationChangedListener { controller , destination , arguments ->
-            when(destination.id){
+    private fun setFragmentDestinationChangeListener() {
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
                 R.id.entriesFragment -> showBottomNav()
                 R.id.statsFragment -> showBottomNav()
                 R.id.calenderFragment -> showBottomNav()
@@ -117,21 +119,20 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun showBottomNav(){
+    private fun showBottomNav() {
         binding.fab.show()
         binding.fab.isClickable = true
         binding.bottomAppBar.visibility = View.VISIBLE
         binding.bottomAppBar.performShow()
-        binding.bottomNavigationView.visibility= View.VISIBLE
+        binding.bottomNavigationView.visibility = View.VISIBLE
     }
 
-    private fun hideBottomNav(){
+    private fun hideBottomNav() {
         binding.fab.hide()
         binding.fab.isClickable = false
         binding.bottomAppBar.visibility = View.GONE
-        binding. bottomAppBar.performHide(true)
-        binding.bottomNavigationView.visibility= View.GONE
+        binding.bottomAppBar.performHide(true)
+        binding.bottomNavigationView.visibility = View.GONE
     }
-
 }
 

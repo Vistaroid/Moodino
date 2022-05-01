@@ -11,7 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
+import com.iranmobiledev.moodino.listener.EmptyStateListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
@@ -48,10 +50,11 @@ class EntryAdapter(
                 BAD -> entryTitle.setTextColor(ColorArray.bad)
                 AWFUL -> entryTitle.setTextColor(ColorArray.awful)
             }
+            println("entries size adapter: ${entries.size}")
+
         }
+
     }
-
-
 
     private fun makePopupMenu(witchEntry: Entry, view: View){
         val popupMenu = PopupMenu(context, view)
@@ -81,5 +84,7 @@ class EntryAdapter(
         holder.bind(entries[position])
     }
 
-    override fun getItemCount(): Int = entries.size
+    override fun getItemCount(): Int {
+        return entries.size
+    }
 }
