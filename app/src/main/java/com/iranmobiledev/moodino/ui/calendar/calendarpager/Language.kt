@@ -17,6 +17,7 @@ enum class Language(val code: String, val nativeName: String) {
 
   companion object{
       val PERSIAN_DIGITS= charArrayOf('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹')
+     // val English_DIGITS= charArrayOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
 
       // These are special cases and new ones should be translated in strings.xml of the language
       private val persianCalendarMonths = listOf12Items(

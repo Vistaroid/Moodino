@@ -23,6 +23,7 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
 
     var sharedDayViewData: SharedDayViewData? = null
     var entries: List<Entry>?= null
+    private var dayHaveEntry: Boolean= false
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -41,7 +42,11 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
 //            width / 2f, height / 2f, radius, shared.selectedPaint
 //        )
         if (!entries.isNullOrEmpty()){
-            canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint )
+            val list= entries?.filter { it.date?.day.toString() == text }
+            if (!list.isNullOrEmpty()){
+                dayHaveEntry= true
+                canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint(list[0].title) )
+            }
         }
 
         if (today) canvas?.drawCircle(
@@ -55,7 +60,7 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
             jdn != null -> when {
              //   holiday -> shared.dayOfMonthNumberTextHolidayPaint
                // dayIsSelected -> shared.dayOfMonthNumberTextSelectedPaint
-                !entries.isNullOrEmpty() -> shared.haveEntryTextPaint
+                dayHaveEntry -> shared.haveEntryTextPaint
                 else /*!dayIsSelected*/ -> shared.dayOfMonthNumberTextPaint
             }
             isWeekNumber -> shared.weekNumberTextPaint

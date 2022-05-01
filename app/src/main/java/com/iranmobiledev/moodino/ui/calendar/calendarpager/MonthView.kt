@@ -26,17 +26,8 @@ class MonthView(context: Context, attributeSet: AttributeSet): RecyclerView(cont
         addCelSpacing()
     }
 
-    // set Entries for one month for sample (ordibehesht)
     fun setEntries(entries: List<Entry>?){
-        //fetch entries for per day
-        if (!entries.isNullOrEmpty()){
-            val distinctList= entries.distinctBy { it.date?.day }
-            val sortedList= entries.sortedBy { it.date?.day }
-            for(item in distinctList){
-                val list= sortedList.filter { it.date?.day == item.date?.day }
-                item.date?.day?.let { daysAdapter?.setEntries(it,list) }
-            }
-        }
+        daysAdapter?.setEntries(entries)
     }
 
     private fun addCelSpacing(){

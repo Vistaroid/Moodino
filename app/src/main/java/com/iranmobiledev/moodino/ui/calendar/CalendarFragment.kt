@@ -14,8 +14,12 @@ import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthPositionGlobal
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbarItemClickListener
 import io.github.persiancalendar.calendar.AbstractDate
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -87,7 +91,10 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
 
     private fun updateToolbar(binding: FragmentCalendarBinding, date: AbstractDate) {
         viewModel.entries.observe(viewLifecycleOwner){
-            binding.calendarPager.setEntries(it)
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(200)
+                    binding.calendarPager.setEntries(it)
+                }
         }
 
    //       binding.mainToolbar.setMonthName(date)

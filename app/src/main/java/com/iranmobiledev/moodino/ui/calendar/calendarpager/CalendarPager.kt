@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.calendar.calendarpager
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
@@ -27,7 +28,7 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
             baseJdn, -applyOffset(viewPager.currentItem)
         )
 
-    private var pagerAdapter: PagerAdapter?= null
+    private var pagerAdapter: PagerAdapter? = null
 
     fun setSelectedDay(
         jdn: Jdn, highlight: Boolean = true, monthChange: Boolean = true,
@@ -43,7 +44,7 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
         refresh()
     }
 
-    fun setEntries(entries: List<Entry>){
+    fun setEntries(entries: List<Entry>?) {
         pagerAdapter?.setEntries(entries)
     }
 
@@ -56,35 +57,36 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
     // Package API, to be rewritten with viewPager.adapter.notifyItemChanged()
     private fun addViewHolder(vh: PagerAdapter.ViewHolder) = pagesViewHolders.add(WeakReference(vh))
 
- //   private val monthsLimit = 5000 // this should be an even number
+    //   private val monthsLimit = 5000 // this should be an even number
 
-   // private fun applyOffset(position: Int) = monthsLimit / 2 - position
+    // private fun applyOffset(position: Int) = monthsLimit / 2 - position
     private fun applyOffset(position: Int) = monthLimit / 2 - position
 
     private val viewPager = ViewPager2(context)
     private var selectedJdn: Jdn? = null
 
     init {
-        pagerAdapter= PagerAdapter()
+        pagerAdapter = PagerAdapter()
         viewPager.adapter = pagerAdapter
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) = refresh()
 
         })
         addView(viewPager)
-    //    viewPager.setCurrentItem(applyOffset(0), false)
+        //    viewPager.setCurrentItem(applyOffset(0), false)
         viewPager.setCurrentItem(monthPositionGlobal, true)
-        viewPager.isUserInputEnabled= false
+        viewPager.isUserInputEnabled = false
     }
 
     inner class PagerAdapter : RecyclerView.Adapter<PagerAdapter.ViewHolder>() {
 
-        private var entries: List<Entry>?= null
+        private var entries: List<Entry>? = null
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view= FragmentMonthBinding.inflate(parent.context.layoutInflater, parent, false)
+            val view = FragmentMonthBinding.inflate(parent.context.layoutInflater, parent, false)
             return ViewHolder(view)
         }
+
         override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(position)
 
         override fun getItemCount() = monthLimit
@@ -93,9 +95,10 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
             context, resources.getDimension(R.dimen.grid_calendar_height) / 7 - 4.5.sp
         )
 
-        fun setEntries(entries: List<Entry>){
-            this.entries= entries
-            notifyItemChanged(monthPositionGlobal)
+        @SuppressLint("NotifyDataSetChanged")
+        fun setEntries(entries: List<Entry>?) {
+            this.entries = entries
+            notifyDataSetChanged()
         }
 
         inner class ViewHolder(val binding: FragmentMonthBinding) :
@@ -146,11 +149,12 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
                 binding.monthView.bind(monthStartJdn, monthStartDate)
 
                 binding.monthView.setEntries(entries)
+                entries = null
 
                 pageRefresh = { isEventsModification: Boolean, jdn: Jdn? ->
                     if (viewPager.currentItem == position) {
                         if (isEventsModification && jdn != null) {
-                           // binding.monthView.initializeMonthEvents()
+                            // binding.monthView.initializeMonthEvents()
                             onDayClicked(jdn)
                         } else {
                             onMonthSelected()
@@ -169,14 +173,13 @@ class CalendarPager(context: Context, attrs: AttributeSet? = null) : FrameLayout
         }
     }
 
-    fun clickOnNextMonth(){
+    fun clickOnNextMonth() {
         viewPager.setCurrentItem(viewPager.currentItem + 1, true)
     }
 
-    fun clickOnPreviousMonth(){
+    fun clickOnPreviousMonth() {
         viewPager.setCurrentItem(viewPager.currentItem - 1, true)
     }
-
 
 
 }

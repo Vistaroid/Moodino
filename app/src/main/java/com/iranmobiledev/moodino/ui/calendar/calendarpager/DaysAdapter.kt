@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.calendar.calendarpager
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
@@ -34,16 +35,16 @@ class DaysAdapter(private val context: Context,private val sharedDayViewData: Sh
     }
 
     // set entries for one day for sample 1401/2/10
-    fun setEntries(position: Int,entries: List<Entry>?){
+    @SuppressLint("NotifyDataSetChanged")
+    fun setEntries(entries: List<Entry>?){
         this.entries= entries
-        notifyItemChanged(position)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewHolder= ViewHolder(DayView(parent.context).also {
             it.layoutParams= sharedDayViewData.layoutParams
             it.sharedDayViewData= sharedDayViewData
-            it.entries= entries
         })
        return viewHolder
     }
@@ -136,9 +137,8 @@ class DaysAdapter(private val context: Context,private val sharedDayViewData: Sh
 //                        context, day, isToday, EventsStore.empty(),
 //                        withZodiac = isToday, withOtherCalendars = false, withTitle = true
 //                    ) else dayOfMonth.toString()
-
-                    dayView.isVisible = true
                     dayView.entries= entries
+                    dayView.isVisible = true
                 } else {
                     setEmpty()
                 }

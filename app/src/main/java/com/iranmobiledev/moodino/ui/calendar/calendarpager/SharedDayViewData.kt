@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Paint
 import android.view.ViewGroup
 import com.iranmobiledev.moodino.R
-import com.iranmobiledev.moodino.utlis.ColorArray
+import com.iranmobiledev.moodino.utlis.*
 
 class SharedDayViewData(context: Context,height: Float) {
 
@@ -19,10 +19,27 @@ class SharedDayViewData(context: Context,height: Float) {
 //        addShadowIfNeeded(it)
     }
 
-    val haveEntryPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
-        it.style= Paint.Style.FILL
-        it.color= ColorArray.good // context.resolveColor(R.attr.colorSelectDay)
+//    val haveEntryPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
+//        it.style= Paint.Style.FILL
+//        it.color= ColorArray.good // context.resolveColor(R.attr.colorSelectDay)
+////        addShadowIfNeeded(it)
+//    }
+
+    private val colorDayHaveEntryDefault= context.resolveColor(R.attr.colorDayHaveEntryDefault)
+    fun haveEntryPaint(titleId: Int): Paint  {
+        val paint= Paint(Paint.ANTI_ALIAS_FLAG).also {
+            it.style= Paint.Style.FILL
+            it.color=  when(titleId){
+                RAD -> ColorArray.rad
+                GOOD -> ColorArray.good
+                MEH -> ColorArray.meh
+                BAD -> ColorArray.bad
+                AWFUL -> ColorArray.awful
+                else -> colorDayHaveEntryDefault
+            }
 //        addShadowIfNeeded(it)
+        }
+       return paint
     }
 
     val todayPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
