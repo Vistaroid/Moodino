@@ -32,7 +32,6 @@ class StatsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initDayInRowCard()
         initLineChartCard()
-        initPieChartCard()
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -40,11 +39,11 @@ class StatsFragment : BaseFragment() {
 
         model.initDaysInRow()
 
-        model.longestChainLiveData.observe(viewLifecycleOwner){
+        model.longestChainLiveData.observe(viewLifecycleOwner) {
             binding.longestChainTextView.text = it.toString()
         }
 
-        model.latestChainLiveData.observe(viewLifecycleOwner){
+        model.latestChainLiveData.observe(viewLifecycleOwner) {
             binding.daysInRowNumberTextView.text = it.toString()
         }
 
@@ -72,23 +71,23 @@ class StatsFragment : BaseFragment() {
             binding.firstDayIV
         )
 
-        model.weekDays.observe(viewLifecycleOwner){ weekDays ->
+        model.weekDays.observe(viewLifecycleOwner) { weekDays ->
             for (textView in daysTextView) {
-                textView.text= resources.getString(weekDays[daysTextView.indexOf(textView)])
+                textView.text = resources.getString(weekDays[daysTextView.indexOf(textView)])
             }
         }
 
 
         //change style of week days depend on status of is entry added or not
-        model.lastFiveDaysStatus.observe(viewLifecycleOwner){
+        model.lastFiveDaysStatus.observe(viewLifecycleOwner) {
             daysContainer.forEach { view ->
                 val currentStatus = it[daysContainer.indexOf(view)]
-                if (currentStatus){
+                if (currentStatus) {
                     view.background = resources.getDrawable(R.drawable.primary_circle_shape)
                     daysIcon[daysContainer.indexOf(view)].apply {
                         setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
                     }
-                }else{
+                } else {
                     view.background = resources.getDrawable(R.drawable.circle_shape)
                     daysIcon[daysContainer.indexOf(view)].apply {
                         setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
@@ -101,15 +100,8 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun initLineChartCard() {
-//
-//        model.lineChartEntries.observe(viewLifecycleOwner){
-//            model.isEnoughEntries.observe(viewLifecycleOwner){ isEnough ->
-//                if (isEnough){
-//                    model.initLineChart(binding.moodsLineChart,it,requireContext())
-//                }
-//            }
-//        }
+        model.lineChartEntries.observe(viewLifecycleOwner) {
+            model.initLineChart(binding.moodsLineChart, it, requireContext())
+        }
     }
-
-    private fun initPieChartCard() {}
 }

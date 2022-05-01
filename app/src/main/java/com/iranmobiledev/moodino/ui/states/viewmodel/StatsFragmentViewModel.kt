@@ -154,7 +154,6 @@ class StatsFragmentViewModel(
     }
 
     fun initLineChart(lineChart: LineChart, entries: List<Entry>, context: Context) {
-
         viewModelScope.launch {
             entryRepository.getAll().collectLatest {
                 launch {
@@ -174,7 +173,7 @@ class StatsFragmentViewModel(
             circleHoleColor = (Color.WHITE)
             setCircleColor(Color.RED);
             valueTextColor = Color.WHITE
-            valueTextSize = 0f
+            valueTextSize = 1f
         }
 
         //getting xAxis for customizing
@@ -183,18 +182,13 @@ class StatsFragmentViewModel(
             position = XAxis.XAxisPosition.BOTTOM
             gridColor = Color.WHITE
             textColor = Color.GRAY
-            granularity = 1f
-            axisMinimum = 1f
+            setDrawAxisLine(false)
+
         }
 
         //getting xAxis for customizing
         val yAxis = lineChart.axisLeft
         yAxis.apply {
-            valueFormatter = object : ValueFormatter() {
-                override fun getFormattedValue(value: Float, axis: AxisBase): String {
-                    return _lineChartDates.value?.get(value.toInt()).toString() ?: "1"
-                }
-            }
             gridColor = Color.WHITE
             textColor = Color.WHITE
             axisLineColor = Color.WHITE
@@ -217,13 +211,12 @@ class StatsFragmentViewModel(
         }
     }
 
-    private fun getEntriesForLineChart(entries: List<com.iranmobiledev.moodino.data.Entry>) {
+    private fun getEntriesForLineChart(entries1: List<com.iranmobiledev.moodino.data.Entry>) {
+        val entries = Mock.mockEntries
         val entriesDaysNumber: MutableList<Int> = mutableListOf()
         val entriesPieChart: MutableList<Entry> = mutableListOf()
 
         for (entry in entries) {
-            println("entry123 ${entry.date!!.day}")
-            val x = entries.indexOf(entry) + 1.toFloat()
             val y = when (entry.title) {
                 R.string.rad -> 5f
                 R.string.good -> 4f
@@ -234,6 +227,8 @@ class StatsFragmentViewModel(
                     3f
                 }
             }
+
+            val x = entry.date!!.day.toFloat()
             entriesDaysNumber.add(entry.date!!.day)
             entriesPieChart.add(
                 Entry(x, y)
@@ -252,7 +247,7 @@ class StatsFragmentViewModel(
         val today = LocalDate.now()
         for (i in 0..4) {
             val date = today.minusDays(i.toLong())
-            when(date.dayOfWeek.value){
+            when (date.dayOfWeek.value) {
                 1 -> days.add(R.string.sat)
                 2 -> days.add(R.string.sun)
                 3 -> days.add(R.string.mon)
@@ -279,14 +274,14 @@ class StatsFragmentViewModel(
     fun getLastFiveDaysStatus(entryDates: List<EntryDate>) {
         val lastFiveDayStatus = mutableListOf<Boolean>()
 
-        for(i in 0..4){
+        for (i in 0..4) {
             val date = LocalDate.now().minusDays(i.toLong())
 
-                if (entryDates.contains(EntryDate(date.year,date.monthValue,date.dayOfMonth))){
-                    lastFiveDayStatus.add(true)
-                }else{
-                    lastFiveDayStatus.add(false)
-                }
+            if (entryDates.contains(EntryDate(date.year, date.monthValue, date.dayOfMonth))) {
+                lastFiveDayStatus.add(true)
+            } else {
+                lastFiveDayStatus.add(false)
+            }
         }
 
         _lastFiveDaysStatus.postValue(lastFiveDayStatus)
@@ -336,17 +331,36 @@ class StatsFragmentViewModel(
 
     object Mock {
 
-        val mockEntries = listOf<com.iranmobiledev.moodino.data.Entry>(
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 1)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 2)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 3)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 18)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 19)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 20)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 24)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 25)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 26)),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate(2022, 4, 27)),
+        val mockEntries = listOf(
+//            com.iranmobiledev.moodino.data.Entry(title = R.string.rad,date = EntryDate(2022, 4, 1)),
+//            com.iranmobiledev.moodino.data.Entry(title = R.string.good,date = EntryDate(2022, 4, 2)),
+//            com.iranmobiledev.moodino.data.Entry(title = R.string.rad,date = EntryDate(2022, 4, 3)),
+//            com.iranmobiledev.moodino.data.Entry(title = R.string.bad,date = EntryDate(2022, 4, 18)),
+//            com.iranmobiledev.moodino.data.Entry(title = R.string.meh,date = EntryDate(2022, 4, 19)),
+            com.iranmobiledev.moodino.data.Entry(
+                title = R.string.awful,
+                date = EntryDate(2022, 4, 23)
+            ),
+            com.iranmobiledev.moodino.data.Entry(
+                title = R.string.bad,
+                date = EntryDate(2022, 4, 24)
+            ),
+            com.iranmobiledev.moodino.data.Entry(
+                title = R.string.meh,
+                date = EntryDate(2022, 4, 25)
+            ),
+            com.iranmobiledev.moodino.data.Entry(
+                title = R.string.awful,
+                date = EntryDate(2022, 4, 25)
+            ),
+            com.iranmobiledev.moodino.data.Entry(
+                title = R.string.rad,
+                date = EntryDate(2022, 4, 25)
+            ),
+            com.iranmobiledev.moodino.data.Entry(
+                title = R.string.rad,
+                date = EntryDate(2022, 4, 27)
+            ),
         )
     }
 

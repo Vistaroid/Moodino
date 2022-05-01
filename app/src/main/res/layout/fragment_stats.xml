@@ -393,6 +393,7 @@
                        tools:layout_editor_absoluteY="26dp">
 
                        <LinearLayout
+                           android:gravity="left"
                            android:layout_width="match_parent"
                            android:layout_height="match_parent"
                            android:layout_marginRight="15dp"
@@ -448,13 +449,18 @@
                                android:src="@drawable/ic_very_bad_outlined"
                                app:tint="@color/awful_color" />
 
+                           <View
+                               android:layout_width="match_parent"
+                               android:layout_height="1dp"
+                               android:background="#9A9F9F9F" />
+
                        </LinearLayout>
 
                        <com.github.mikephil.charting.charts.LineChart
                            android:id="@+id/moodsLineChart"
-                           android:layout_width="310dp"
+                           android:layout_width="match_parent"
                            android:layout_height="180dp"
-                           android:layout_marginStart="25dp"
+                           android:layout_marginLeft="16dp"
                            android:background="#00FFFFFF" />
 
                    </FrameLayout>
