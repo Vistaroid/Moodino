@@ -69,6 +69,10 @@ class EntryDetailFragment : BaseFragment(),
             galleryIcon = R.drawable.ic_gallery
             buttonOrientation = LinearLayout.HORIZONTAL
             isSystemDialog = false
+            title = getString(R.string.choose)
+            cancelText = getString(R.string.cancel)
+            galleryButtonText = getString(R.string.galleyTxt)
+            cameraButtonText = getString(R.string.cameraTxt)
             width = 500
             height = 500
         }

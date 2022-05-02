@@ -116,11 +116,14 @@
     <string name="b1">b1</string>
     <string name="b2">b2</string>
     <string name="dialogMainText">حذف خاطره؟</string>
-    <string name="dialogSubText">این بخشی از خاطرات شماست، واقعا میخوای حذفش کنی؟</string>
+    <string name="dialogSubText">این بخشی از خاطرات شماست،\n واقعا میخوای حذفش کنی؟</string>
     <string name="dialogDeleteText">حذف</string>
     <string name="dialogCancelText">بیخیال</string>
     <string name="entries">خاطرات</string>
     <string name="statsStr">آمار</string>
     <string name="calenderStr">تقویم</string>
     <string name="moreStr">بیشتر</string>
+    <string name="galleyTxt">گالری</string>
+    <string name="cameraTxt">دوربین</string>
+    <string name="choose">انتخاب کنید</string>
 </resources>
