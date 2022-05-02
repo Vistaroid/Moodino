@@ -23,7 +23,7 @@
             android:background="@color/blue_light">
 
             <TextView
-                android:id="@+id/entryListDate"
+                android:id="@+id/entriesDateTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

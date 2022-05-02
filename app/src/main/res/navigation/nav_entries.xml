@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_entry"
+    app:startDestination="@id/entriesFragment">
+
+    <action
+        android:id="@+id/action_entryDetailFragment_to_addEntryFragment"
+        app:destination="@id/addEntryFragment"
+        app:popUpTo="@id/addEntryFragment"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/entryDetailFragment"
+        android:name="com.iranmobiledev.moodino.ui.entry.EntryDetailFragment"
+        tools:layout="@layout/entry_detail_fragment"
+        android:label="EntryDetailFragment">
+        <action
+            android:id="@+id/action_entryDetailFragment_to_entriesFragment"
+            app:destination="@id/entriesFragment"
+            app:popUpTo="@id/entriesFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_entryDetailFragment_to_addEntryFragment"
+            app:destination="@id/addEntryFragment"
+            app:popUpTo="@id/addEntryFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+    <action
+        android:id="@+id/action_entriesFragment_to_addEntryFragment"
+        app:destination="@id/addEntryFragment"
+        app:enterAnim="@anim/enter_anim_from_bottom"
+        app:popExitAnim="@anim/exit_anim_from_top" />
+    <fragment
+        android:id="@+id/entriesFragment"
+        android:name="com.iranmobiledev.moodino.ui.entry.EntriesFragment"
+        tools:layout="@layout/fragment_entries"
+        android:label="fragment_entries">
+        <action
+            android:id="@+id/action_entriesFragment_to_addEntryFragment"
+            app:destination="@id/addEntryFragment"
+            app:enterAnim="@anim/enter_anim_from_bottom"
+            app:popExitAnim="@anim/exit_anim_from_top" />
+    </fragment>
+    <action
+        android:id="@+id/action_entryDetailFragment_to_entriesFragment"
+        app:destination="@id/entriesFragment"
+        app:popUpTo="@id/entriesFragment"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/addEntryFragment"
+        android:name="com.iranmobiledev.moodino.ui.entry.AddEntryFragment"
+        tools:layout="@layout/add_entry_fragment"
+        android:label="AddEntryFragment">
+        <action
+            android:id="@+id/action_addEntryFragment_to_entryDetailFragment"
+            app:destination="@id/entryDetailFragment"
+            app:enterAnim="@anim/enter_anim_from_bottom"
+            app:popExitAnim="@anim/exit_anim_from_top" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_addEntryFragment_to_entryDetailFragment"
+        app:destination="@id/entryDetailFragment"
+        app:enterAnim="@anim/enter_anim_from_bottom"
+        app:popExitAnim="@anim/exit_anim_from_top" />
+</navigation>
