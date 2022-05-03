@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
@@ -16,13 +19,11 @@ import com.iranmobiledev.moodino.listener.EntryEventLister
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
-class EntryContainerAdapter(
-    private var context: Context,
-    private var entries: MutableList<MutableList<Entry>>,
-    private var entryEventListener: EntryEventLister,
-    private var emptyStateEventListener: EmptyStateListener
-) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
-
+class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+    private lateinit var context: Context
+    private lateinit var entryEventListener: EntryEventLister
+    private lateinit var emptyStateEventListener: EmptyStateListener
+    private lateinit var entries: MutableList<MutableList<Entry>>
     private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,27 +32,30 @@ class EntryContainerAdapter(
 
         @SuppressLint("SetTextI18n")
         fun bind(entries: List<Entry>) {
-            val persianDate = PersianDate()
-            persianDate.shMonth = Integer.parseInt(entries[0].date?.month!!)
-            entryListDate.text = PersianDateFormat.format(
-                persianDate,
-                "j F",
-                PersianDateFormat.PersianDateNumberCharacter.FARSI
-            )
+            if (entries.isNotEmpty()) {
 
-            entryRecyclerView.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            entryRecyclerView.itemAnimator = null
+                val persianDate = PersianDate()
+                persianDate.shMonth = Integer.parseInt(entries[0].date?.month!!)
+                entryListDate.text = PersianDateFormat.format(
+                    persianDate,
+                    "j F",
+                    PersianDateFormat.PersianDateNumberCharacter.FARSI
+                )
 
-            var repeated = false
-            entryAdapters.forEach {
-                if (it.entries[0].date == entries[0].date) {
-                    entryRecyclerView.adapter = it
-                    repeated = true
+                entryRecyclerView.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                entryRecyclerView.itemAnimator = null
+
+                var repeated = false
+                entryAdapters.forEach {
+                    if (it.entries[0].date == entries[0].date) {
+                        entryRecyclerView.adapter = it
+                        repeated = true
+                    }
                 }
+                if (!repeated)
+                    makeNewAdapter(entries as MutableList<Entry>)
             }
-            if (!repeated)
-                makeNewAdapter(entries as MutableList<Entry>)
         }
 
         private fun makeNewAdapter(entries: MutableList<Entry>) {
@@ -124,14 +128,14 @@ class EntryContainerAdapter(
 
     fun create(
         context: Context,
-        entriesList: MutableList<MutableList<Entry>>,
         entryEventListener: EntryEventLister,
-        emptyStateEventListener: EmptyStateListener
-    ) {
+        emptyStateEventListener: EmptyStateListener,
+        entries: MutableList<MutableList<Entry>>,
+    ){
         this.context = context
-        entries = entriesList
-        this.emptyStateEventListener = emptyStateEventListener
         this.entryEventListener = entryEventListener
+        this.emptyStateEventListener = emptyStateEventListener
+        this.entries = entries
     }
 }
 

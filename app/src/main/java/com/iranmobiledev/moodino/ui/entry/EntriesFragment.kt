@@ -1,17 +1,11 @@
 package com.iranmobiledev.moodino.ui.entry
 
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
@@ -26,27 +20,23 @@ import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import io.github.persiancalendar.calendar.AbstractDate
 import com.iranmobiledev.moodino.utlis.EmptyStateEnum
-import kotlinx.coroutines.flow.flow
-import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 
 
-class EntriesFragment : BaseFragment(), EntryEventLister,EmptyStateListener, ChangeCurrentMonth, KoinComponent {
+class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, ChangeCurrentMonth,
+    KoinComponent {
 
     private lateinit var binding: FragmentEntriesBinding
     private lateinit var recyclerView: RecyclerView
     private val viewModel: EntryViewModel by viewModel()
     private lateinit var adapter: EntryContainerAdapter
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
-
     override fun onStart() {
         super.onStart()
         val entry = arguments?.getParcelable<Entry>("entry")
         entry?.let {
-
             adapter.addEntry(it)
-
         }
         arguments?.clear()
     }
@@ -60,27 +50,39 @@ class EntriesFragment : BaseFragment(), EntryEventLister,EmptyStateListener, Cha
         setupUi()
         setupClicks()
         setupObserver()
+        println("fragment is : $savedInstanceState")
+        parentFragmentManager.saveFragmentInstanceState(this)
         return binding.root
     }
 
     private fun setupUi() {
+        adapter = EntryContainerAdapter(
+            requireContext(),
+            this,
+            this,
+            mutableListOf()
+        )
         binding.mainToolbar.initialize(this)
         recyclerView = binding.entriesContainerRv
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        adapter = EntryContainerAdapter(requireContext(), mutableListOf(), this, this)
         recyclerView.adapter = adapter
     }
+
     private fun setupObserver() {
-        viewModel.getEntries().observe(viewLifecycleOwner){
+        viewModel.getEntries().observe(viewLifecycleOwner) {
             adapter.setEntries(it)
             adapter.notifyDataSetChanged()
         }
     }
+
     private fun setupClicks() {
         binding.addEntryCardView.setOnClickListener {}
+
     }
+
     private fun deleteEntry(entry: Entry) {
+
         val dialog = makeDialog(
             mainText = R.string.dialogMainText,
             subText = R.string.dialogSubText,
@@ -101,10 +103,13 @@ class EntriesFragment : BaseFragment(), EntryEventLister,EmptyStateListener, Cha
             }
         })
         dialog.show(childFragmentManager, null)
+
     }
+
     override fun changeCurrentMonth(date: AbstractDate) {
         Toast.makeText(context, date.year.toString() + date.monthName, Toast.LENGTH_SHORT).show()
     }
+
     override fun emptyStateVisibility(mustShow: Boolean) {
         when (mustShow) {
             true -> {
@@ -121,10 +126,12 @@ class EntriesFragment : BaseFragment(), EntryEventLister,EmptyStateListener, Cha
             }
         }
     }
+
     override fun delete(entry: Entry): Boolean {
         deleteEntry(entry)
         return true
     }
+
     override fun onStop() {
         emptyStateEnum = EmptyStateEnum.INVISIBLE
         super.onStop()

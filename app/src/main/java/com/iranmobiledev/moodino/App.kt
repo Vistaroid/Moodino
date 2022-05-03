@@ -47,6 +47,7 @@ class App : Application() , KoinComponent{
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
             factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(SharedPref.create(this@App))) }
             single <ImageLoadingService>{ GlideImageLoader() }
+            single { EntryContainerAdapter() }
         }
 
         startKoin {

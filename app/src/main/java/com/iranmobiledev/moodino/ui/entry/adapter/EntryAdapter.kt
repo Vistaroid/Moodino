@@ -19,6 +19,7 @@ import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
 
 
+
 class EntryAdapter(
     private val entryEventLister: EntryEventLister,
     val entries: MutableList<Entry>,
