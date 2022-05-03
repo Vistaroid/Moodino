@@ -139,7 +139,10 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state.xml" value="0.27291666666666664" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/entry_detail_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.13272543059777103" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.25" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_more.xml" value="0.13272543059777103" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.13272543059777103" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity.xml" value="0.5" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity_container.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_entry.xml" value="0.33" />

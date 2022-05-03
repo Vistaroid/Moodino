@@ -36,7 +36,7 @@ class EntryDetailFragment : BaseFragment(),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
         setupUtil()
         setupClicks()

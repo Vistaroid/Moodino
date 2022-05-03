@@ -25,7 +25,6 @@ class StatsFragment : BaseFragment() {
     ): View {
         binding = FragmentStatsBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

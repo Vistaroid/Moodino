@@ -31,6 +31,8 @@ class MainActivity : BaseActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
 
+
+
     override fun onStop() {
         EventBus.getDefault().unregister(this)
         super.onStop()
