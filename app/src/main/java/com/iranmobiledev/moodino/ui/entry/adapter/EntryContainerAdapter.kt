@@ -2,7 +2,6 @@ package com.iranmobiledev.moodino.ui.entry.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,13 +22,14 @@ class EntryContainerAdapter(
     RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
     private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val entryListDate = itemView.findViewById<TextView>(R.id.entryListDate)
+        private val entryListDate = itemView.findViewById<TextView>(R.id.entriesDateTitle)
         private val entryRecyclerView = itemView.findViewById<RecyclerView>(R.id.entryRv)
 
         @SuppressLint("SetTextI18n")
         fun bind(entries: List<Entry>) {
             val persianDate = PersianDate()
-            persianDate.shMonth = entries[0].date?.month!!
+            persianDate.shMonth = Integer.parseInt(entries[0].date?.month!!)
+            persianDate.shDay = Integer.parseInt(entries[0].date?.day!!)
             entryListDate.text = PersianDateFormat.format(
                 persianDate,
                 "j F",

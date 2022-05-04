@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView_more">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar_more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background"
         app:elevation="0dp">
         
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_more"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
 
@@ -30,6 +33,7 @@
     </com.google.android.material.appbar.AppBarLayout>
   
     <ScrollView
+        android:id="@+id/scrollView_more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">

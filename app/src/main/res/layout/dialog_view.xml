@@ -35,7 +35,8 @@
             android:layout_width="@dimen/_40mdp"
             android:layout_height="@dimen/_40mdp"
             android:layout_gravity="center"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_delete"/>
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
@@ -49,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        tools:text="Delete loving memory?" />
+        tools:text="@string/dialogMainText" />
 
     <TextView
         android:id="@+id/subTextDialog"
@@ -62,7 +63,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainTextDialog"
-        tools:text="This is your life we are talking\n about. Do you want to delete a\n part of it?" />
+        tools:text="@string/dialogSubText"
+        android:layout_marginStart="@dimen/_16mdp"
+        android:layout_marginEnd="@dimen/_16mdp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/rightButton"

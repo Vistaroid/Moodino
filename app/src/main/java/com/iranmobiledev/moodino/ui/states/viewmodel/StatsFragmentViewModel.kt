@@ -120,7 +120,7 @@ class StatsFragmentViewModel(
 
         for (date in reversedDate) {
             val nextDateAsLocalDate =
-                LocalDate.of(date.year, date.month, date.day).minusDays(1)
+                LocalDate.of(Integer.parseInt(date.year), Integer.parseInt(date.month), Integer.parseInt(date.day)).minusDays(1)
 
             if (date == reversedDate.first()) latestChain = 1
 
@@ -176,7 +176,7 @@ class StatsFragmentViewModel(
                     3f
                 }
             }
-
+            
             val x = entry.date!!.day.toFloat()
             entriesDaysNumber.add(entry.date!!.day)
             entriesPieChart.add(
