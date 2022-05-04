@@ -3,20 +3,14 @@ package com.iranmobiledev.moodino.ui.states.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
-import androidx.annotation.IntegerRes
-import androidx.annotation.StringRes
-import androidx.compose.ui.text.toLowerCase
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.formatter.ValueFormatter
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.EntryDate
@@ -26,8 +20,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import saman.zamani.persiandate.PersianDate
 import java.time.LocalDate
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -35,6 +29,7 @@ class StatsFragmentViewModel(
     private val entryRepository: EntryRepository
 ) : BaseViewModel() {
 
+    val TAG = "viewmodelStats"
 
     private val _lineChartEntries = MutableLiveData<List<Entry>>(listOf(Entry(1f, 2f)))
     private val _lineChartDates = MutableLiveData<List<Int>>(listOf(10))
@@ -60,7 +55,6 @@ class StatsFragmentViewModel(
         get() = _weekDays
 
     fun initDaysInRow() {
-
         viewModelScope.launch {
             entryRepository.getAll().collectLatest { entries ->
 
@@ -72,7 +66,7 @@ class StatsFragmentViewModel(
                     }
                 }
 
-                //Adding week days name to days in a row card
+                //Adding week days name to daysInRow card
                 launch {
                     getFiveDaysAsWeekDays()
                 }
@@ -80,6 +74,7 @@ class StatsFragmentViewModel(
                 val dates = withContext(Dispatchers.IO) {
                     getDatesFromEntries(entries)
                 }
+
                 launch {
                     getLongestChainFromDates(dates)
                 }
@@ -96,66 +91,50 @@ class StatsFragmentViewModel(
     }
 
     @SuppressLint("NewApi")
+    private fun getLongestChainFromDates(datesList: List<EntryDate>) {
+        val reversedDates = datesList.reversed()
+        var chainLengthMax = 0
+        var chainLength = 1
+
+        for (date in reversedDates) {
+            val nextDateAsLocalDate = LocalDate.of(date.year, date.month, date.day).minusDays(1)
+            val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
+            val nextDate = LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
+
+            if (nextDateAsLocalDate == nextDate) {
+                chainLength++
+            } else {
+                if (chainLength > chainLengthMax) chainLengthMax = chainLength
+                chainLength = 0
+            }
+
+        }
+        _longestChainLiveData.postValue(chainLengthMax)
+    }
+
+    @SuppressLint("NewApi")
     private fun getLatestChain(dates: List<EntryDate>) {
 
         val reversedDate = dates.reversed()
-        var latestChain = 1
+        var latestChain = 0
 
         for (date in reversedDate) {
             val nextDateAsLocalDate =
                 LocalDate.of(Integer.parseInt(date.year), Integer.parseInt(date.month), Integer.parseInt(date.day)).minusDays(1)
 
+            if (date == reversedDate.first()) latestChain = 1
+
             if (date != reversedDate.last()) {
                 val nextDateElement = reversedDate[reversedDate.indexOf(date) + 1]
-                val nextDate = LocalDate.of(
-                    Integer.parseInt(nextDateElement.year),
-                    Integer.parseInt(nextDateElement.month),
-                    Integer.parseInt(nextDateElement.day)
-                )
-                if (nextDateAsLocalDate == nextDate) {
-                    latestChain++
+                val nextDate = LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
 
-                } else {
-                    break
-                }
+                if (nextDateAsLocalDate == nextDate) latestChain++ else break
             }
         }
         _latestChainLiveData.postValue(latestChain)
     }
 
-    @SuppressLint("NewApi")
-    private fun getLongestChainFromDates(dates: List<EntryDate>) {
-
-        var chainLengthMax = 0
-        var chainLength = 1
-
-        for (date in dates) {
-            val nextDateAsLocalDate =
-                LocalDate.of(Integer.parseInt(date.year), Integer.parseInt(date.month), Integer.parseInt(date.day)).plusDays(1)
-            if (date != dates.last()) {
-                val nextDateElement = dates[dates.indexOf(date) + 1]
-                val nextDate =
-                    LocalDate.of(
-                        Integer.parseInt(nextDateElement.year),
-                        Integer.parseInt(nextDateElement.month),
-                        Integer.parseInt(nextDateElement.day)
-                    )
-                if (nextDateAsLocalDate == nextDate) {
-                    chainLength++
-                } else {
-                    if (chainLengthMax <= chainLength) {
-                        chainLengthMax = chainLength
-                    }
-                    chainLength = 1
-                }
-            }
-        }
-
-        _longestChainLiveData.postValue(chainLengthMax)
-    }
-
-    fun initLineChart(lineChart: LineChart, entries: List<Entry>, context: Context) {
-
+    fun initLineChart(entries: List<Entry>, context: Context) {
         viewModelScope.launch {
             entryRepository.getAll().collectLatest {
                 launch {
@@ -175,47 +154,11 @@ class StatsFragmentViewModel(
             circleHoleColor = (Color.WHITE)
             setCircleColor(Color.RED);
             valueTextColor = Color.WHITE
-            valueTextSize = 0f
+            valueTextSize = 1f
         }
 
-        //getting xAxis for customizing
-        val xAxis = lineChart.xAxis
-        xAxis.apply {
-            position = XAxis.XAxisPosition.BOTTOM
-            gridColor = Color.WHITE
-            textColor = Color.GRAY
-            granularity = 1f
-            axisMinimum = 1f
-        }
 
-        //getting xAxis for customizing
-        val yAxis = lineChart.axisLeft
-        yAxis.apply {
-            valueFormatter = object : ValueFormatter() {
-                override fun getFormattedValue(value: Float, axis: AxisBase): String {
-                    return _lineChartDates.value?.get(value.toInt()).toString() ?: "1"
-                }
-            }
-            gridColor = Color.WHITE
-            textColor = Color.WHITE
-            axisLineColor = Color.WHITE
-            granularity = 1f
-            setAxisMaxValue(5f)
-        }
-
-        //converting dataset to line in the chart
-        val lineData = LineData(dataSet)
-
-        //adding line to chart and some customizing for chartView
-        lineChart.apply {
-            data = lineData
-            invalidate()
-            description.isEnabled = false
-            legend.isEnabled = false
-            axisRight.isEnabled = false
-            setPinchZoom(false)
-            setTouchEnabled(false)
-        }
+        LineData(dataSet)
     }
 
     private fun getEntriesForLineChart(entries: List<com.iranmobiledev.moodino.data.Entry>) {
@@ -223,8 +166,6 @@ class StatsFragmentViewModel(
         val entriesPieChart: MutableList<Entry> = mutableListOf()
 
         for (entry in entries) {
-            println("entry123 ${entry.date!!.day}")
-            val x = entries.indexOf(entry) + 1.toFloat()
             val y = when (entry.title) {
                 R.string.rad -> 5f
                 R.string.good -> 4f
@@ -235,7 +176,9 @@ class StatsFragmentViewModel(
                     3f
                 }
             }
-            entriesDaysNumber.add(Integer.parseInt(entry.date!!.day))
+            
+            val x = entry.date!!.day.toFloat()
+            entriesDaysNumber.add(entry.date!!.day)
             entriesPieChart.add(
                 Entry(x, y)
             )
@@ -250,17 +193,16 @@ class StatsFragmentViewModel(
     @SuppressLint("NewApi")
     private fun getFiveDaysAsWeekDays() {
         var days = arrayListOf<Int>()
-        val today = LocalDate.now()
         for (i in 0..4) {
-            val date = today.minusDays(i.toLong())
-            when(date.dayOfWeek.value){
-                1 -> days.add(R.string.sat)
-                2 -> days.add(R.string.sun)
-                3 -> days.add(R.string.mon)
-                4 -> days.add(R.string.tue)
-                5 -> days.add(R.string.wed)
-                6 -> days.add(R.string.thu)
-                7 -> days.add(R.string.fri)
+            val date = PersianDate.today().addDay(-i.toLong())
+            when (date.dayOfWeek()) {
+                0 -> days.add(R.string.sat)
+                1 -> days.add(R.string.sun)
+                2 -> days.add(R.string.mon)
+                3 -> days.add(R.string.tue)
+                4 -> days.add(R.string.wed)
+                5 -> days.add(R.string.thu)
+                6 -> days.add(R.string.fri)
             }
         }
 
@@ -280,14 +222,13 @@ class StatsFragmentViewModel(
     fun getLastFiveDaysStatus(entryDates: List<EntryDate>) {
         val lastFiveDayStatus = mutableListOf<Boolean>()
 
-        for(i in 0..4){
-            val date = LocalDate.now().minusDays(i.toLong())
-
-                if (entryDates.contains(EntryDate(date.year.toString(),date.monthValue.toString(),date.dayOfMonth.toString()))){
-                    lastFiveDayStatus.add(true)
-                }else{
-                    lastFiveDayStatus.add(false)
-                }
+        for (i in 0..4) {
+            val date = PersianDate.today().addDay(-i.toLong())
+            if (entryDates.contains(EntryDate(date.shYear, date.shMonth, date.shDay))) {
+                lastFiveDayStatus.add(true)
+            } else {
+                lastFiveDayStatus.add(false)
+            }
         }
 
         _lastFiveDaysStatus.postValue(lastFiveDayStatus)
@@ -335,23 +276,7 @@ class StatsFragmentViewModel(
 
     }
 
-    object Mock {
-
-        val mockEntries = listOf<com.iranmobiledev.moodino.data.Entry>(
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "1")),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "2")),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "3")),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "18")),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "19")),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "20")),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "24")),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "25")),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "26")),
-            com.iranmobiledev.moodino.data.Entry(date = EntryDate("2022", "4", "27")),
-        )
-    }
-
-    private fun getEntriesForPieChart():
+    fun getEntriesForPieChart():
             MutableList<PieEntry> {
         return pieChartEntries
     }
@@ -362,5 +287,28 @@ class StatsFragmentViewModel(
         }
     }
 
+    val datesMock = listOf<EntryDate>(
+        EntryDate(1401,2,2),
+        EntryDate(1401,2,3),
+        EntryDate(1401,2,4),
+        EntryDate(1401,2,5),
+        EntryDate(1401,2,8),
+        EntryDate(1401,2,9),
+        EntryDate(1401,2,10),
+        EntryDate(1401,2,11),
+        EntryDate(1401,2,12),
+        EntryDate(1401,2,13),
+        EntryDate(1401,2,18),
+        EntryDate(1401,2,19),
+        EntryDate(1401,2,20),
+        EntryDate(1401,2,21),
+        EntryDate(1401,2,22),
+        EntryDate(1401,2,23),
+        EntryDate(1401,2,24),
+        EntryDate(1401,2,25),
+        EntryDate(1401,2,26),
+        EntryDate(1401,2,27),
+        EntryDate(1401,2,28),
+    )
 
 }
