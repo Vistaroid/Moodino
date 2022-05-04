@@ -124,4 +124,7 @@
     <string name="statsStr">stats</string>
     <string name="calenderStr">calender</string>
     <string name="moreStr">more</string>
+    <string name="galleyTxt">Galley</string>
+    <string name="cameraTxt">Camera</string>
+    <string name="choose">Choose</string>
 </resources>
