@@ -3,6 +3,7 @@ package com.iranmobiledev.moodino.ui.states.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -136,7 +137,7 @@ class StatsFragmentViewModel(
         _latestChainLiveData.postValue(latestChain)
     }
 
-    fun initLineChart(entries: List<Entry>, context: Context) {
+    fun initLineChart() {
         viewModelScope.launch {
             entryRepository.getAll().collectLatest {
                 launch {
@@ -144,23 +145,6 @@ class StatsFragmentViewModel(
                 }
             }
         }
-
-        //create dataSet from entries and customizing it
-        var dataSet = LineDataSet(entries, "moods")
-        dataSet.apply {
-            color = Color.RED
-            lineWidth = 2f
-            highLightColor = R.color.pink
-            setDrawFilled(true)
-            fillDrawable = ContextCompat.getDrawable(context, R.drawable.chart_gradient)
-            circleHoleColor = (Color.WHITE)
-            setCircleColor(Color.RED);
-            valueTextColor = Color.WHITE
-            valueTextSize = 1f
-        }
-
-
-        LineData(dataSet)
     }
 
     private fun getEntriesForLineChart(entries: List<com.iranmobiledev.moodino.data.Entry>) {
@@ -186,6 +170,11 @@ class StatsFragmentViewModel(
             )
         }
 
+
+
+        entriesDaysNumber.forEach {
+            Log.d(TAG, "getEntriesForLineChart: $it")
+        }
 
         _lineChartDates.postValue(entriesDaysNumber.toList())
         _lineChartEntries.postValue(entriesPieChart.toList())
