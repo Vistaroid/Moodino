@@ -10,23 +10,52 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.listener.EmptyStateListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
-class EntryContainerAdapter(
-    private val context: Context,
-    private var entries: MutableList<MutableList<Entry>>,
-    private val entryEventListener: EntryEventLister
-) :
-    RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+
+var lastAdapters : MutableList<EntryAdapter> = mutableListOf()
+class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+    private lateinit var context: Context
+    private lateinit var entryEventListener: EntryEventLister
+    private lateinit var emptyStateEventListener: EmptyStateListener
+    private lateinit var entries: MutableList<MutableList<Entry>>
     private val entryAdapters: MutableList<EntryAdapter> = mutableListOf()
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val entryListDate = itemView.findViewById<TextView>(R.id.entriesDateTitle)
         private val entryRecyclerView = itemView.findViewById<RecyclerView>(R.id.entryRv)
 
         @SuppressLint("SetTextI18n")
         fun bind(entries: List<Entry>) {
+            if (entries.isNotEmpty()) {
+                updateListeners()
+                setupUi(entries)
+                setupNestedAdapter(entries)
+            }
+        }
+
+        private fun updateListeners() {
+            entryAdapters.forEach {
+                it.entryEventLister = entryEventListener
+            }
+        }
+
+        private fun setupNestedAdapter(entries: List<Entry>) {
+            var repeated = false
+            entryAdapters.forEach {
+                if (it.entries[0].date == entries[0].date) {
+                    entryRecyclerView.adapter = it
+                    repeated = true
+                }
+            }
+            if (!repeated)
+                makeNewAdapter(entries as MutableList<Entry>)
+        }
+
+        private fun setupUi(entries: List<Entry>){
             val persianDate = PersianDate()
             persianDate.shMonth = entries[0].date?.month!!
             persianDate.shDay = entries[0].date?.day!!
@@ -38,18 +67,25 @@ class EntryContainerAdapter(
 
             entryRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            entryRecyclerView.itemAnimator = null
+        }
+        private fun makeNewAdapter(entries: MutableList<Entry>) {
             val entryAdapter = EntryAdapter(
                 entryEventListener,
-                entries as MutableList<Entry>, context
+                entries, context
             )
             entryRecyclerView.adapter = entryAdapter
-            entryRecyclerView.itemAnimator = null
             entryAdapters.add(entryAdapter)
+            lastAdapters = entryAdapters
         }
     }
-    fun setEntries(entries: List<List<Entry>>){
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setEntries(entries: List<List<Entry>>) {
         this.entries = entries as MutableList<MutableList<Entry>>
+        notifyDataSetChanged()
     }
+
     fun addEntry(entry: Entry) {
         var found = false
         entryAdapters.forEach {
@@ -59,10 +95,11 @@ class EntryContainerAdapter(
             }
         }
         if (!found || entryAdapters.size == 0) {
-            entryAdapters.add(0, EntryAdapter(entryEventListener, mutableListOf(entry), context!!))
+            entryAdapters.add(0, EntryAdapter(entryEventListener, mutableListOf(entry), context))
             notifyItemInserted(0)
         }
     }
+
     fun removeItem(entry: Entry) {
         entryAdapters.forEach {
             if (it.entries.contains(entry)) {
@@ -71,13 +108,21 @@ class EntryContainerAdapter(
             checkItemsToBeNotEmpty()
         }
     }
+
+    @SuppressLint("NotifyDataSetChanged")
     private fun checkItemsToBeNotEmpty() {
-        entries.forEachIndexed { index, list ->
-            if (list.size == 0) {
-                entries.removeAt(index)
-                notifyItemRemoved(index)
+
+        entries.forEachIndexed { index1, list ->
+//            if (list.size == 0) {
+//                entries.removeAt(index1)
+//                notifyItemRemoved(index1)
+//            }
+            entryAdapters.forEachIndexed { index2, entryAdapter ->
+                if (entryAdapter.entries.size == 0)
+                    entryAdapters.removeAt(index2)
             }
         }
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -91,7 +136,20 @@ class EntryContainerAdapter(
     }
 
     override fun getItemCount(): Int {
+        emptyStateEventListener.emptyStateVisibility(entries.size == 0)
         return entries.size
+    }
+
+    fun create(
+        context: Context,
+        entryEventListener: EntryEventLister,
+        emptyStateEventListener: EmptyStateListener,
+        entries: MutableList<MutableList<Entry>>,
+    ){
+        this.context = context
+        this.entryEventListener = entryEventListener
+        this.emptyStateEventListener = emptyStateEventListener
+        this.entries = entries
     }
 }
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.states.StatsFragment"
     android:id="@+id/rootView_states">
+
    <ScrollView
        android:id="@+id/scrollView_states"
        android:layout_width="match_parent"

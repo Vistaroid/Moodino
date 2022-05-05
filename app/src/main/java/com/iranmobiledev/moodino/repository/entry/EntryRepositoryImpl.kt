@@ -5,7 +5,7 @@ import com.iranmobiledev.moodino.database.EntryDao
 import kotlinx.coroutines.flow.Flow
 
 class EntryRepositoryImpl(private val entryDao: EntryDao) : EntryRepository {
-    override suspend fun add(entry: Entry): Long {
+    override fun add(entry: Entry): Long {
         return entryDao.add(entry)
     }
 
@@ -13,7 +13,7 @@ class EntryRepositoryImpl(private val entryDao: EntryDao) : EntryRepository {
         return entryDao.update(entry)
     }
 
-    override suspend fun delete(entry: Entry): Int {
+    override fun delete(entry: Entry): Int {
         return entryDao.delete(entry)
     }
 
