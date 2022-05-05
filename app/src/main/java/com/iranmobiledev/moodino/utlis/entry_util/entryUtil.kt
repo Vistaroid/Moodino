@@ -1,17 +1,19 @@
 package com.iranmobiledev.moodino.utlis.entry_util
 
 import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.PersianEntryDate
 
-fun EntryDate.toPersian(): EntryDate {
-    return EntryDate(
+fun EntryDate.toPersian(): PersianEntryDate {
+    return PersianEntryDate(
         getPersianNumber(year),
         getPersianNumber(month),
         getPersianNumber(day)
     )
 }
 
-fun getPersianNumber(number: String): String {
-    return number
+fun getPersianNumber(number: Int): String {
+    val numberString = number.toString()
+    return numberString
         .replace("0", "۰")
         .replace("1", "۱")
         .replace("2", "۲")

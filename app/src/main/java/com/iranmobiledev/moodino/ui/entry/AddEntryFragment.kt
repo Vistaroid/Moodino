@@ -46,7 +46,7 @@ class AddEntryFragment : BaseFragment() {
     private fun setupClicks() {
         val entry = Entry()
         val bundle = Bundle()
-        entry.date = EntryDate(persianDate.shYear.toString(), persianDate.shMonth.toString(), persianDate.shDay.toString())
+        entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         entry.time = EntryTime(
             PersianDateFormat.format(persianDate, "H"),
             PersianDateFormat.format(persianDate, "i")

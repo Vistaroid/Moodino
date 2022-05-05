@@ -99,7 +99,8 @@ class StatsFragmentViewModel(
         for (date in reversedDates) {
             val nextDateAsLocalDate = LocalDate.of(date.year, date.month, date.day).minusDays(1)
             val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
-            val nextDate = LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
+            val nextDate =
+                LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
 
             if (nextDateAsLocalDate == nextDate) {
                 chainLength++
@@ -120,13 +121,14 @@ class StatsFragmentViewModel(
 
         for (date in reversedDate) {
             val nextDateAsLocalDate =
-                LocalDate.of(Integer.parseInt(date.year), Integer.parseInt(date.month), Integer.parseInt(date.day)).minusDays(1)
+                LocalDate.of(date.year,date.month,date.day).minusDays(1)
 
             if (date == reversedDate.first()) latestChain = 1
 
             if (date != reversedDate.last()) {
                 val nextDateElement = reversedDate[reversedDate.indexOf(date) + 1]
-                val nextDate = LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
+                val nextDate =
+                    LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
 
                 if (nextDateAsLocalDate == nextDate) latestChain++ else break
             }
@@ -176,7 +178,7 @@ class StatsFragmentViewModel(
                     3f
                 }
             }
-            
+
             val x = entry.date!!.day.toFloat()
             entriesDaysNumber.add(entry.date!!.day)
             entriesPieChart.add(
@@ -288,27 +290,27 @@ class StatsFragmentViewModel(
     }
 
     val datesMock = listOf<EntryDate>(
-        EntryDate(1401,2,2),
-        EntryDate(1401,2,3),
-        EntryDate(1401,2,4),
-        EntryDate(1401,2,5),
-        EntryDate(1401,2,8),
-        EntryDate(1401,2,9),
-        EntryDate(1401,2,10),
-        EntryDate(1401,2,11),
-        EntryDate(1401,2,12),
-        EntryDate(1401,2,13),
-        EntryDate(1401,2,18),
-        EntryDate(1401,2,19),
-        EntryDate(1401,2,20),
-        EntryDate(1401,2,21),
-        EntryDate(1401,2,22),
-        EntryDate(1401,2,23),
-        EntryDate(1401,2,24),
-        EntryDate(1401,2,25),
-        EntryDate(1401,2,26),
-        EntryDate(1401,2,27),
-        EntryDate(1401,2,28),
+        EntryDate(1401, 2, 2),
+        EntryDate(1401, 2, 3),
+        EntryDate(1401, 2, 4),
+        EntryDate(1401, 2, 5),
+        EntryDate(1401, 2, 8),
+        EntryDate(1401, 2, 9),
+        EntryDate(1401, 2, 10),
+        EntryDate(1401, 2, 11),
+        EntryDate(1401, 2, 12),
+        EntryDate(1401, 2, 13),
+        EntryDate(1401, 2, 18),
+        EntryDate(1401, 2, 19),
+        EntryDate(1401, 2, 20),
+        EntryDate(1401, 2, 21),
+        EntryDate(1401, 2, 22),
+        EntryDate(1401, 2, 23),
+        EntryDate(1401, 2, 24),
+        EntryDate(1401, 2, 25),
+        EntryDate(1401, 2, 26),
+        EntryDate(1401, 2, 27),
+        EntryDate(1401, 2, 28),
     )
 
 }
