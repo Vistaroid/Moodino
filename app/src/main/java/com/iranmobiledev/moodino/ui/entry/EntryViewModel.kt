@@ -48,9 +48,7 @@ class EntryViewModel(
         return listOfEntries
     }
     fun deleteEntry(entry: Entry) {
-        viewModelScope.launch(Dispatchers.IO + CoroutineName("deleteCoroutine")) {
             entryRepository.delete(entry)
-        }
     }
 
     fun updateEntry(entry: Entry) {

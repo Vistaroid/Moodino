@@ -36,7 +36,7 @@ class EntryDetailFragment : BaseFragment(),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
         setupUtil()
         setupClicks()
@@ -57,8 +57,7 @@ class EntryDetailFragment : BaseFragment(),
     }
 
     private fun navigateToEntryFragment() {
-        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
-            .navigate(R.id.action_entryDetailFragment_to_entriesFragment, Bundle().apply {
+        findNavController().navigate(R.id.action_entryDetailFragment_to_entriesFragment, Bundle().apply {
                 putParcelable("entry", entry)
             })
     }

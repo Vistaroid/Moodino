@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
@@ -20,17 +21,15 @@ import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import io.github.persiancalendar.calendar.AbstractDate
 import com.iranmobiledev.moodino.utlis.EmptyStateEnum
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
-
-
 class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, ChangeCurrentMonth,
     KoinComponent {
-
     private lateinit var binding: FragmentEntriesBinding
     private lateinit var recyclerView: RecyclerView
     private val viewModel: EntryViewModel by viewModel()
-    private lateinit var adapter: EntryContainerAdapter
+    private val adapter: EntryContainerAdapter by inject()
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
     override fun onStart() {
         super.onStart()
@@ -50,15 +49,12 @@ class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, Ch
         setupUi()
         setupClicks()
         setupObserver()
-        println("fragment is : $savedInstanceState")
-        parentFragmentManager.saveFragmentInstanceState(this)
         return binding.root
     }
 
     private fun setupUi() {
-        adapter = EntryContainerAdapter(
-            requireContext(),
-            this,
+        adapter.create(
+            requireContext().applicationContext, this,
             this,
             mutableListOf()
         )
@@ -70,9 +66,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, Ch
     }
 
     private fun setupObserver() {
+        viewModel.getEntries().value?.let { adapter.setEntries(it) }
         viewModel.getEntries().observe(viewLifecycleOwner) {
             adapter.setEntries(it)
-            adapter.notifyDataSetChanged()
         }
     }
 
@@ -82,7 +78,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, Ch
     }
 
     private fun deleteEntry(entry: Entry) {
-
+        lifecycleScope.launchWhenResumed { showDeleteDialog(entry) }
+    }
+    private fun showDeleteDialog(entry : Entry){
         val dialog = makeDialog(
             mainText = R.string.dialogMainText,
             subText = R.string.dialogSubText,
@@ -102,8 +100,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, Ch
                 }
             }
         })
-        dialog.show(childFragmentManager, null)
-
+        dialog.show(parentFragmentManager, null)
     }
 
     override fun changeCurrentMonth(date: AbstractDate) {
@@ -116,12 +113,14 @@ class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, Ch
                 if (emptyStateEnum == EmptyStateEnum.INVISIBLE) {
                     showEmptyState(mustShow)
                     emptyStateEnum = EmptyStateEnum.VISIBLE
+                    binding.addEntryCardView.visibility = View.GONE
                 }
             }
             false -> {
                 if (emptyStateEnum == EmptyStateEnum.VISIBLE) {
                     showEmptyState(mustShow)
                     emptyStateEnum = EmptyStateEnum.INVISIBLE
+                    binding.addEntryCardView.visibility = View.VISIBLE
                 }
             }
         }

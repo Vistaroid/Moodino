@@ -3,6 +3,7 @@ package com.iranmobiledev.moodino.base
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -75,16 +76,16 @@ interface BaseView {
         when (mustShow) {
             true -> {
                 viewGroup?.let { emptyStateContainer ->
-                    var emptyStateView = emptyStateContainer.findViewById<ConstraintLayout>(R.id.emptyStateView)
+                    var emptyStateView = emptyStateContainer.findViewById<LinearLayout>(R.id.emptyStateView)
                     if(emptyStateView == null){
-                        emptyStateView = LayoutInflater.from(viewContext).inflate(R.layout.empty_state, mRootView, false) as ConstraintLayout?
+                        emptyStateView = LayoutInflater.from(viewContext).inflate(R.layout.empty_state, mRootView, false) as LinearLayout?
                         emptyStateContainer.addView(emptyStateView)
                     }
                 }
             }
             false -> {
                 viewGroup?.let { emptyStateContainer ->
-                    var emptyStateView = emptyStateContainer.findViewById<ConstraintLayout>(R.id.emptyStateView)
+                    var emptyStateView = emptyStateContainer.findViewById<LinearLayout>(R.id.emptyStateView)
                     if(emptyStateView != null){
                         emptyStateContainer.removeView(emptyStateView)
                     }

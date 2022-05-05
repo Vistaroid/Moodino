@@ -26,9 +26,6 @@
             app:destination="@id/addEntryFragment"
             app:enterAnim="@anim/enter_anim_from_bottom"
             app:popExitAnim="@anim/exit_anim_from_top"/>
-        <action
-            android:id="@+id/action_entriesFragment_to_anotherFragment"
-            app:destination="@id/anotherFragment" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"

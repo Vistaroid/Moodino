@@ -17,8 +17,6 @@ class EntryDetailViewModel(
 ) : BaseViewModel() {
 
     fun addEntry(entry: Entry) {
-        viewModelScope.launch(Dispatchers.IO) {
-            entryRepository.add(entry)
-        }
+        entryRepository.add(entry)
     }
 }

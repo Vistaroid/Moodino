@@ -21,11 +21,15 @@ import org.koin.core.component.KoinComponent
 
 
 class EntryAdapter(
-    private val entryEventLister: EntryEventLister,
+    var entryEventLister: EntryEventLister,
     val entries: MutableList<Entry>,
     private val context: Context
 ) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
 
+
+    init {
+        println("entry listener : $entryEventLister")
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -51,8 +55,6 @@ class EntryAdapter(
                 BAD -> entryTitle.setTextColor(ColorArray.bad)
                 AWFUL -> entryTitle.setTextColor(ColorArray.awful)
             }
-            println("entries size adapter: ${entries.size}")
-
         }
 
     }
@@ -69,22 +71,18 @@ class EntryAdapter(
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
         return ViewHolder(view)
     }
-
     fun remove(entry: Entry) {
         val index = entries.indexOf(entry)
         entries.remove(entry)
         notifyItemRemoved(index)
     }
-
     fun add(entry: Entry) {
         entries.add(0, entry)
         notifyItemInserted(0)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(entries[position])
     }
-
     override fun getItemCount(): Int {
         return entries.size
     }
