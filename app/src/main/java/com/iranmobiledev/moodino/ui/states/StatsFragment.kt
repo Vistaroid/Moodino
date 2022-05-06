@@ -22,6 +22,7 @@ import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.formatNumber
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.ChartValueFormatter
+import com.iranmobiledev.moodino.utlis.ColorArray
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -140,13 +141,13 @@ class StatsFragment : BaseFragment() {
 
     private fun customizeLineChart(dataSet: LineDataSet) {
         dataSet.apply {
-            color = Color.RED
+            color = ColorArray.rad
             lineWidth = 2f
-            highLightColor = R.color.pink
+            highLightColor = R.color.primary
             setDrawFilled(true)
             fillDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.chart_gradient)
             circleHoleColor = (Color.WHITE)
-            setCircleColor(Color.RED);
+            setCircleColor(ColorArray.rad);
             valueTextColor = Color.WHITE
             valueTextSize = 1f
         }
@@ -168,6 +169,7 @@ class StatsFragment : BaseFragment() {
             }
 
             axisLeft.apply {
+                setDrawLabels(false)
                 gridColor = Color.WHITE
                 textColor = Color.WHITE
                 axisLineColor = Color.WHITE
