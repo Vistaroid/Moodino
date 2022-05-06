@@ -468,50 +468,50 @@
                    </FrameLayout>
 
 
-                   <LinearLayout
-                       android:layout_width="100dp"
-                       android:layout_height="36dp"
-                       android:layout_marginTop="12dp"
-                       android:background="@drawable/round_corner_rectangle"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintStart_toStartOf="parent"
+<!--                   <LinearLayout-->
+<!--                       android:layout_width="100dp"-->
+<!--                       android:layout_height="36dp"-->
+<!--                       android:layout_marginTop="12dp"-->
+<!--                       android:background="@drawable/round_corner_rectangle"-->
+<!--                       app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                       app:layout_constraintStart_toStartOf="parent"-->
 
-                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout">
+<!--                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout">-->
 
-                       <ImageButton
-                           android:id="@+id/ineChartImageButton"
-                           android:layout_width="50dp"
-                           android:layout_height="match_parent"
-                           android:background="@drawable/round_corner_rectangle"
-                           android:backgroundTint="@color/primary"
-                           android:src="@drawable/ic_line_chart"
-                           app:tint="@color/white" />
+<!--                       <ImageButton-->
+<!--                           android:id="@+id/ineChartImageButton"-->
+<!--                           android:layout_width="50dp"-->
+<!--                           android:layout_height="match_parent"-->
+<!--                           android:background="@drawable/round_corner_rectangle"-->
+<!--                           android:backgroundTint="@color/primary"-->
+<!--                           android:src="@drawable/ic_line_chart"-->
+<!--                           app:tint="@color/white" />-->
 
-                       <ImageButton
-                           android:id="@+id/barChartImageButton"
-                           android:layout_width="50dp"
-                           android:layout_height="match_parent"
-                           android:layout_gravity="center"
-                           android:backgroundTint="@color/white"
-                           android:src="@drawable/ic_bar_chart"
-                           app:tint="@color/primary" />
-                   </LinearLayout>
+<!--                       <ImageButton-->
+<!--                           android:id="@+id/barChartImageButton"-->
+<!--                           android:layout_width="50dp"-->
+<!--                           android:layout_height="match_parent"-->
+<!--                           android:layout_gravity="center"-->
+<!--                           android:backgroundTint="@color/white"-->
+<!--                           android:src="@drawable/ic_bar_chart"-->
+<!--                           app:tint="@color/primary" />-->
+<!--                   </LinearLayout>-->
 
-                   <EditText
-                       android:id="@+id/selectActivityEditText"
-                       android:layout_width="170dp"
-                       android:layout_height="36dp"
-                       android:background="@drawable/round_corner_rectangle"
-                       android:drawableEnd="@drawable/ic_dropdown"
-                       android:drawableTint="@color/primary"
-                       android:hint="@string/select_activity"
-                       android:paddingStart="12dp"
-                       android:textSize="12sp"
-                       android:paddingEnd="12dp"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout"
-                       app:layout_constraintVertical_bias="1.0" />
+<!--                   <EditText-->
+<!--                       android:id="@+id/selectActivityEditText"-->
+<!--                       android:layout_width="170dp"-->
+<!--                       android:layout_height="36dp"-->
+<!--                       android:background="@drawable/round_corner_rectangle"-->
+<!--                       android:drawableEnd="@drawable/ic_dropdown"-->
+<!--                       android:drawableTint="@color/primary"-->
+<!--                       android:hint="@string/select_activity"-->
+<!--                       android:paddingStart="12dp"-->
+<!--                       android:textSize="12sp"-->
+<!--                       android:paddingEnd="12dp"-->
+<!--                       app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                       app:layout_constraintEnd_toEndOf="parent"-->
+<!--                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout"-->
+<!--                       app:layout_constraintVertical_bias="1.0" />-->
                </androidx.constraintlayout.widget.ConstraintLayout>
            </com.google.android.material.card.MaterialCardView>
 

@@ -21,8 +21,8 @@
 
         <ImageView
             android:id="@+id/achievementIcon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="4dp"
             android:src="@drawable/ic_book" />
@@ -65,6 +65,7 @@
         android:id="@+id/achievementName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="10sp"
         android:layout_gravity="center_horizontal"
         android:text="Going String" />
 </LinearLayout>

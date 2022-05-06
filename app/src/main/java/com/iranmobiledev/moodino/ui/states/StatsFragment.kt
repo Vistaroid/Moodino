@@ -156,7 +156,7 @@ class StatsFragment : BaseFragment() {
             description.isEnabled = false
             legend.isEnabled = false
             axisRight.isEnabled = false
-            setPinchZoom(true)
+            setPinchZoom(false)
             setTouchEnabled(true)
 
             xAxis.apply {
