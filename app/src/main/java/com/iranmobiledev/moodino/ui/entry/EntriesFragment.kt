@@ -24,13 +24,16 @@ import com.iranmobiledev.moodino.utlis.EmptyStateEnum
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
+
 class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, ChangeCurrentMonth,
     KoinComponent {
+
     private lateinit var binding: FragmentEntriesBinding
     private lateinit var recyclerView: RecyclerView
     private val viewModel: EntryViewModel by viewModel()
     private val adapter: EntryContainerAdapter by inject()
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
+
     override fun onStart() {
         super.onStart()
         val entry = arguments?.getParcelable<Entry>("entry")
@@ -64,23 +67,19 @@ class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, Ch
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         recyclerView.adapter = adapter
     }
-
     private fun setupObserver() {
-        viewModel.getEntries().value?.let { adapter.setEntries(it) }
         viewModel.getEntries().observe(viewLifecycleOwner) {
-            adapter.setEntries(it)
+            adapter.setData(it)
         }
     }
-
     private fun setupClicks() {
         binding.addEntryCardView.setOnClickListener {}
 
     }
-
     private fun deleteEntry(entry: Entry) {
         lifecycleScope.launchWhenResumed { showDeleteDialog(entry) }
     }
-    private fun showDeleteDialog(entry : Entry){
+    private fun showDeleteDialog(entry: Entry) {
         val dialog = makeDialog(
             mainText = R.string.dialogMainText,
             subText = R.string.dialogSubText,
@@ -102,11 +101,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, Ch
         })
         dialog.show(parentFragmentManager, null)
     }
-
     override fun changeCurrentMonth(date: AbstractDate) {
         Toast.makeText(context, date.year.toString() + date.monthName, Toast.LENGTH_SHORT).show()
     }
-
     override fun emptyStateVisibility(mustShow: Boolean) {
         when (mustShow) {
             true -> {
@@ -125,12 +122,10 @@ class EntriesFragment : BaseFragment(), EntryEventLister, EmptyStateListener, Ch
             }
         }
     }
-
     override fun delete(entry: Entry): Boolean {
         deleteEntry(entry)
         return true
     }
-
     override fun onStop() {
         emptyStateEnum = EmptyStateEnum.INVISIBLE
         super.onStop()

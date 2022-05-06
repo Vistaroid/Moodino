@@ -11,25 +11,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
-import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
-import com.iranmobiledev.moodino.listener.EmptyStateListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
 
 
 
-class EntryAdapter(
+class ChildRecyclerView(
     var entryEventLister: EntryEventLister,
     val entries: MutableList<Entry>,
     private val context: Context
-) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
-
-
-    init {
-        println("entry listener : $entryEventLister")
-    }
+) : RecyclerView.Adapter<ChildRecyclerView.ViewHolder>(), KoinComponent {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -72,9 +65,17 @@ class EntryAdapter(
         return ViewHolder(view)
     }
     fun remove(entry: Entry) {
-        val index = entries.indexOf(entry)
-        entries.remove(entry)
-        notifyItemRemoved(index)
+//        if(entries.contains(entry)){
+//            val index = entries.indexOf(entry)
+//            entries.remove(entry)
+//            notifyItemRemoved(index)
+//        }
+        val entryInList = entries.find {
+            it == entry
+        }
+        entryInList?.let {
+            entries.remove(entry)
+        }
     }
     fun add(entry: Entry) {
         entries.add(0, entry)
