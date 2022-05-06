@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
+import com.iranmobiledev.moodino.data.RecyclerViewData
 
 
 class MainActivityViewModel() : BaseViewModel() {
@@ -106,4 +107,6 @@ class MainActivityViewModel() : BaseViewModel() {
             start()
         }
     }
+
+
 }

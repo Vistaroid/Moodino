@@ -9,27 +9,21 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
-import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
-import com.iranmobiledev.moodino.listener.EmptyStateListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
 
 
 
-class EntryAdapter(
+class ChildRecyclerView(
     var entryEventLister: EntryEventLister,
     val entries: MutableList<Entry>,
     private val context: Context
-) : RecyclerView.Adapter<EntryAdapter.ViewHolder>(), KoinComponent {
-
-
-    init {
-        println("entry listener : $entryEventLister")
-    }
+) : RecyclerView.Adapter<ChildRecyclerView.ViewHolder>(), KoinComponent {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -37,9 +31,13 @@ class EntryAdapter(
         private val entryIcon: ImageView = binding.EntryIcon
         private val moreIcon: ImageView = binding.moreIcon
         private val entryTitle : TextView = binding.entryTitle
+        private val entryImageContainer : MaterialCardView = binding.imageContainer
+        private val entryNote : TextView = binding.entryNote
+        private val activityRv : RecyclerView = binding.activityRv
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry) {
+            itemsVisibility(entry)
             binding.entryItem = entry
             entryIcon.setImageResource(entry.icon)
             moreIcon.setOnClickListener {
@@ -47,6 +45,16 @@ class EntryAdapter(
             }
             setTitleColor(entry.title)
         }
+
+        private fun itemsVisibility(entry: Entry) {
+            if(entry.note.isNotEmpty())
+                entryNote.visibility = View.VISIBLE
+            if(entry.photoPath.isNotEmpty())
+                entryImageContainer.visibility = View.VISIBLE
+            if(entry.activities.isNotEmpty())
+                activityRv.visibility = View.VISIBLE
+        }
+
         private fun setTitleColor(titleId: Int) {
             when(titleId){
                 RAD -> entryTitle.setTextColor(ColorArray.rad)
@@ -72,9 +80,14 @@ class EntryAdapter(
         return ViewHolder(view)
     }
     fun remove(entry: Entry) {
-        val index = entries.indexOf(entry)
-        entries.remove(entry)
-        notifyItemRemoved(index)
+        val entryInList = entries.find {
+            it == entry
+        }
+        entryInList?.let {
+            val index = entries.indexOf(entry)
+            entries.remove(entry)
+            notifyItemRemoved(index)
+        }
     }
     fun add(entry: Entry) {
         entries.add(0, entry)

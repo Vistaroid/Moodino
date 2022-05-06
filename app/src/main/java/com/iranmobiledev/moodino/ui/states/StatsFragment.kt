@@ -30,7 +30,6 @@ class StatsFragment : BaseFragment() {
     private lateinit var daysTextView: ArrayList<TextView>
     private lateinit var daysIcon: ArrayList<ImageView>
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

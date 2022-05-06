@@ -23,15 +23,10 @@ import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
 import com.iranmobiledev.moodino.utlis.setupWithNavController
 
 class MainActivity : BaseActivity() {
-
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val viewModel: MainActivityViewModel by viewModels()
-
-
     private var currentNavController: LiveData<NavController>? = null
-
-
 
     override fun onStop() {
         EventBus.getDefault().unregister(this)

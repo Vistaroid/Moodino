@@ -22,11 +22,11 @@
         android:layout_gravity="center">
 
         <LinearLayout
-            android:id="@+id/item_veryHappy"
+            android:id="@+id/radItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/item_happy"
+            app:layout_constraintEnd_toStartOf="@+id/goodItem"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -48,13 +48,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/item_nothing"
+            android:id="@+id/mehItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/item_sad"
+            app:layout_constraintEnd_toStartOf="@+id/badItem"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/item_happy"
+            app:layout_constraintStart_toEndOf="@+id/goodItem"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -74,13 +74,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/item_sad"
+            android:id="@+id/badItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/item_verySad"
+            app:layout_constraintEnd_toStartOf="@+id/awfulItem"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/item_nothing"
+            app:layout_constraintStart_toEndOf="@+id/mehItem"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -100,13 +100,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/item_verySad"
+            android:id="@+id/awfulItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/item_sad"
+            app:layout_constraintStart_toEndOf="@+id/badItem"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -126,13 +126,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/item_happy"
+            android:id="@+id/goodItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/item_nothing"
+            app:layout_constraintEnd_toStartOf="@+id/mehItem"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/item_veryHappy"
+            app:layout_constraintStart_toEndOf="@+id/radItem"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView

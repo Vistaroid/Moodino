@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.base
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
@@ -81,14 +82,15 @@ interface BaseView {
                         emptyStateView = LayoutInflater.from(viewContext).inflate(R.layout.empty_state, mRootView, false) as LinearLayout?
                         emptyStateContainer.addView(emptyStateView)
                     }
+                    else
+                        emptyStateView.visibility = View.VISIBLE
                 }
             }
             false -> {
                 viewGroup?.let { emptyStateContainer ->
                     var emptyStateView = emptyStateContainer.findViewById<LinearLayout>(R.id.emptyStateView)
-                    if(emptyStateView != null){
-                        emptyStateContainer.removeView(emptyStateView)
-                    }
+                    if(emptyStateView != null)
+                        emptyStateView.visibility = View.GONE
                 }
             }
         }
