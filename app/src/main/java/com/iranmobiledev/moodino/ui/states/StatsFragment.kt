@@ -81,6 +81,7 @@ class StatsFragment : BaseFragment() {
             binding.longestChainTextView.text = ": $it"
         }
         model.latestChainLiveData.observe(viewLifecycleOwner) {
+            Log.d(TAG, "initDayInRowCard: $it")
             binding.daysInRowNumberTextView.text = it.toString()
         }
 

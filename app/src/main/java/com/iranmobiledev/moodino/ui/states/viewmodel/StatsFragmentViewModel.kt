@@ -33,7 +33,6 @@ class StatsFragmentViewModel(
     private val _lineChartDates = MutableLiveData<List<Int>>(listOf(10))
     private val pieChartEntries = mutableListOf<PieEntry>()
     private val _weekDays = MutableLiveData<ArrayList<Int>>()
-    private val _isEnoughEntries: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     private val _longestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     private val _latestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     private val _lastFiveDaysStatus: MutableLiveData<List<Boolean>> =
@@ -41,8 +40,6 @@ class StatsFragmentViewModel(
 
     val lineChartEntries: LiveData<List<Entry>>
         get() = _lineChartEntries
-    val isEnoughEntries: LiveData<Boolean>
-        get() = _isEnoughEntries
     val longestChainLiveData: LiveData<Int>
         get() = _longestChainLiveData
     val latestChainLiveData: LiveData<Int>
@@ -55,14 +52,6 @@ class StatsFragmentViewModel(
     fun initDaysInRow() {
         viewModelScope.launch {
             entryRepository.getAll().collectLatest { entries ->
-
-                launch {
-                    if (entries.size > 3) {
-                        _isEnoughEntries.postValue(true)
-                    } else {
-                        _isEnoughEntries.postValue(false)
-                    }
-                }
 
                 //Adding week days name to daysInRow card
                 launch {
@@ -90,23 +79,35 @@ class StatsFragmentViewModel(
 
     @SuppressLint("NewApi")
     private fun getLongestChainFromDates(datesList: List<EntryDate>) {
-        val reversedDates = datesList.reversed()
+        val reversedDates = datesList.distinct().reversed()
         var chainLengthMax = 0
         var chainLength = 1
 
         for (date in reversedDates) {
             val nextDateAsLocalDate = LocalDate.of(date.year, date.month, date.day).minusDays(1)
-            val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
-            val nextDate =
-                LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
-
-            if (nextDateAsLocalDate == nextDate) {
-                chainLength++
+            if (date != reversedDates.last()) {
+                val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
+                val nextDate =
+                    LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
+                if (nextDateAsLocalDate == nextDate) {
+                    if (reversedDates.size <= 2) {
+                        chainLengthMax++
+                    } else {
+                        chainLength++
+                    }
+                } else {
+                    if (chainLength >= chainLengthMax) {
+                        chainLengthMax = chainLength
+                    }
+                    chainLength = 0
+                }
             } else {
-                if (chainLength > chainLengthMax) chainLengthMax = chainLength
-                chainLength = 0
+                if (LocalDate.of(date.year, date.month, date.day)
+                        .minusDays(1) == nextDateAsLocalDate
+                ) {
+                    chainLengthMax++
+                }
             }
-
         }
         _longestChainLiveData.postValue(chainLengthMax)
     }
@@ -114,10 +115,11 @@ class StatsFragmentViewModel(
     @SuppressLint("NewApi")
     private fun getLatestChain(dates: List<EntryDate>) {
 
-        val reversedDate = dates.reversed()
+        val reversedDate = dates.distinct().reversed()
         var latestChain = 0
 
         for (date in reversedDate) {
+
             val nextDateAsLocalDate =
                 LocalDate.of(date.year, date.month, date.day).minusDays(1)
 
@@ -148,7 +150,7 @@ class StatsFragmentViewModel(
         var entriesLineChart: MutableList<Entry> = mutableListOf()
         val entriesDaysNumber: MutableList<Int> = mutableListOf()
         val optimizedLineChartEntries = mutableListOf<Entry>()
-        
+
         for (entry in entries) {
             val y = getYFromEntry(entry)
             val x = getXFromEntry(entry)
@@ -156,14 +158,14 @@ class StatsFragmentViewModel(
             entriesLineChart.add(Entry(x, y))
         }
 
-        
-        
-        optimizeEntries(entriesLineChart,optimizedLineChartEntries)
-        
+
+
+        optimizeEntries(entriesLineChart, optimizedLineChartEntries)
+
         optimizedLineChartEntries.forEach {
             Log.d(TAG, "getEntriesForLineChart: $it")
         }
-        
+
         _lineChartEntries.postValue(optimizedLineChartEntries)
         _lineChartDates.postValue(entriesDaysNumber.toList())
     }
@@ -171,25 +173,25 @@ class StatsFragmentViewModel(
     private fun optimizeEntries(
         entries: MutableList<Entry>,
         optimizedLineChartEntries: MutableList<Entry>
-    ){
-        if(entries.size == 0){
-           return
+    ) {
+        if (entries.size == 0) {
+            return
         }
 
         val first = entries[0]
         val filtered = entries.filter { it.x == first.x }
         optimizedLineChartEntries.add(getNewChartEntry(filtered))
         val notFiltered = entries.filterNot { it.x == first.x }
-        
+
         optimizeEntries(notFiltered as MutableList<Entry>, optimizedLineChartEntries)
     }
 
-    private fun getNewChartEntry(filteredList : List<Entry>) : Entry{
+    private fun getNewChartEntry(filteredList: List<Entry>): Entry {
         var sum = 0f
         filteredList.forEach {
             sum += it.y
         }
-        val averageY = sum/filteredList.size.toFloat()
+        val averageY = sum / filteredList.size.toFloat()
         return Entry(filteredList[0].x, averageY)
     }
 
