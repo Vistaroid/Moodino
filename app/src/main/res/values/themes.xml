@@ -4,10 +4,10 @@
     <style name="Theme.Moodino" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
 
-        <item name="colorPrimary">@color/turquoise</item>
+        <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/turquoise</item>
+        <item name="colorSecondary">@color/primary</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>

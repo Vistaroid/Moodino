@@ -3,13 +3,11 @@ package com.iranmobiledev.moodino.ui.states.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import androidx.core.content.ContextCompat
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
@@ -35,7 +33,6 @@ class StatsFragmentViewModel(
     private val _lineChartDates = MutableLiveData<List<Int>>(listOf(10))
     private val pieChartEntries = mutableListOf<PieEntry>()
     private val _weekDays = MutableLiveData<ArrayList<Int>>()
-    private val _isEnoughEntries: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     private val _longestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     private val _latestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     private val _lastFiveDaysStatus: MutableLiveData<List<Boolean>> =
@@ -43,8 +40,6 @@ class StatsFragmentViewModel(
 
     val lineChartEntries: LiveData<List<Entry>>
         get() = _lineChartEntries
-    val isEnoughEntries: LiveData<Boolean>
-        get() = _isEnoughEntries
     val longestChainLiveData: LiveData<Int>
         get() = _longestChainLiveData
     val latestChainLiveData: LiveData<Int>
@@ -57,14 +52,6 @@ class StatsFragmentViewModel(
     fun initDaysInRow() {
         viewModelScope.launch {
             entryRepository.getAll().collectLatest { entries ->
-
-                launch {
-                    if (entries.size > 3) {
-                        _isEnoughEntries.postValue(true)
-                    } else {
-                        _isEnoughEntries.postValue(false)
-                    }
-                }
 
                 //Adding week days name to daysInRow card
                 launch {
@@ -92,23 +79,35 @@ class StatsFragmentViewModel(
 
     @SuppressLint("NewApi")
     private fun getLongestChainFromDates(datesList: List<EntryDate>) {
-        val reversedDates = datesList.reversed()
+        val reversedDates = datesList.distinct().reversed()
         var chainLengthMax = 0
         var chainLength = 1
 
         for (date in reversedDates) {
             val nextDateAsLocalDate = LocalDate.of(date.year, date.month, date.day).minusDays(1)
-            val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
-            val nextDate =
-                LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
-
-            if (nextDateAsLocalDate == nextDate) {
-                chainLength++
+            if (date != reversedDates.last()) {
+                val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
+                val nextDate =
+                    LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
+                if (nextDateAsLocalDate == nextDate) {
+                    if (reversedDates.size <= 2) {
+                        chainLengthMax++
+                    } else {
+                        chainLength++
+                    }
+                } else {
+                    if (chainLength >= chainLengthMax) {
+                        chainLengthMax = chainLength
+                    }
+                    chainLength = 0
+                }
             } else {
-                if (chainLength > chainLengthMax) chainLengthMax = chainLength
-                chainLength = 0
+                if (LocalDate.of(date.year, date.month, date.day)
+                        .minusDays(1) == nextDateAsLocalDate
+                ) {
+                    chainLengthMax++
+                }
             }
-
         }
         _longestChainLiveData.postValue(chainLengthMax)
     }
@@ -116,12 +115,13 @@ class StatsFragmentViewModel(
     @SuppressLint("NewApi")
     private fun getLatestChain(dates: List<EntryDate>) {
 
-        val reversedDate = dates.reversed()
+        val reversedDate = dates.distinct().reversed()
         var latestChain = 0
 
         for (date in reversedDate) {
+
             val nextDateAsLocalDate =
-                LocalDate.of(date.year,date.month,date.day).minusDays(1)
+                LocalDate.of(date.year, date.month, date.day).minusDays(1)
 
             if (date == reversedDate.first()) latestChain = 1
 
@@ -136,7 +136,7 @@ class StatsFragmentViewModel(
         _latestChainLiveData.postValue(latestChain)
     }
 
-    fun initLineChart(entries: List<Entry>, context: Context) {
+    fun initLineChart() {
         viewModelScope.launch {
             entryRepository.getAll().collectLatest {
                 launch {
@@ -144,52 +144,72 @@ class StatsFragmentViewModel(
                 }
             }
         }
-
-        //create dataSet from entries and customizing it
-        var dataSet = LineDataSet(entries, "moods")
-        dataSet.apply {
-            color = Color.RED
-            lineWidth = 2f
-            highLightColor = R.color.pink
-            setDrawFilled(true)
-            fillDrawable = ContextCompat.getDrawable(context, R.drawable.chart_gradient)
-            circleHoleColor = (Color.WHITE)
-            setCircleColor(Color.RED);
-            valueTextColor = Color.WHITE
-            valueTextSize = 1f
-        }
-
-
-        LineData(dataSet)
     }
 
     private fun getEntriesForLineChart(entries: List<com.iranmobiledev.moodino.data.Entry>) {
+        var entriesLineChart: MutableList<Entry> = mutableListOf()
         val entriesDaysNumber: MutableList<Int> = mutableListOf()
-        val entriesPieChart: MutableList<Entry> = mutableListOf()
+        val optimizedLineChartEntries = mutableListOf<Entry>()
 
         for (entry in entries) {
-            val y = when (entry.title) {
-                R.string.rad -> 5f
-                R.string.good -> 4f
-                R.string.meh -> 3f
-                R.string.bad -> 2f
-                R.string.awful -> 1f
-                else -> {
-                    3f
-                }
-            }
-
-            val x = entry.date!!.day.toFloat()
+            val y = getYFromEntry(entry)
+            val x = getXFromEntry(entry)
             entriesDaysNumber.add(entry.date!!.day)
-            entriesPieChart.add(
-                Entry(x, y)
-            )
+            entriesLineChart.add(Entry(x, y))
         }
 
 
-        _lineChartDates.postValue(entriesDaysNumber.toList())
-        _lineChartEntries.postValue(entriesPieChart.toList())
 
+        optimizeEntries(entriesLineChart, optimizedLineChartEntries)
+
+        optimizedLineChartEntries.forEach {
+            Log.d(TAG, "getEntriesForLineChart: $it")
+        }
+
+        _lineChartEntries.postValue(optimizedLineChartEntries)
+        _lineChartDates.postValue(entriesDaysNumber.toList())
+    }
+
+    private fun optimizeEntries(
+        entries: MutableList<Entry>,
+        optimizedLineChartEntries: MutableList<Entry>
+    ) {
+        if (entries.size == 0) {
+            return
+        }
+
+        val first = entries[0]
+        val filtered = entries.filter { it.x == first.x }
+        optimizedLineChartEntries.add(getNewChartEntry(filtered))
+        val notFiltered = entries.filterNot { it.x == first.x }
+
+        optimizeEntries(notFiltered as MutableList<Entry>, optimizedLineChartEntries)
+    }
+
+    private fun getNewChartEntry(filteredList: List<Entry>): Entry {
+        var sum = 0f
+        filteredList.forEach {
+            sum += it.y
+        }
+        val averageY = sum / filteredList.size.toFloat()
+        return Entry(filteredList[0].x, averageY)
+    }
+
+    private fun getXFromEntry(entry: com.iranmobiledev.moodino.data.Entry): Float {
+        return entry.date!!.day.toFloat()
+    }
+
+    private fun getYFromEntry(entry: com.iranmobiledev.moodino.data.Entry): Float {
+        return when (entry.title) {
+            R.string.rad -> 5f
+            R.string.good -> 4f
+            R.string.meh -> 3f
+            R.string.bad -> 2f
+            R.string.awful -> 1f
+            else -> {
+                3f
+            }
+        }
     }
 
     @SuppressLint("NewApi")

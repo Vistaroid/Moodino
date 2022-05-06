@@ -404,7 +404,7 @@
                            <ImageView
                                android:layout_width="24dp"
                                android:layout_height="30dp"
-                               android:src="@drawable/ic_very_happy_outlined"
+                               android:src="@drawable/emoji_rad"
                                app:tint="@color/rad_color" />
 
                            <View
@@ -415,7 +415,7 @@
                            <ImageView
                                android:layout_width="22dp"
                                android:layout_height="32dp"
-                               android:src="@drawable/ic_happy_outlined"
+                               android:src="@drawable/emoji_good"
                                app:tint="@color/good_color" />
 
                            <View
@@ -426,7 +426,7 @@
                            <ImageView
                                android:layout_width="22dp"
                                android:layout_height="34dp"
-                               android:src="@drawable/ic_nothing_outlined"
+                               android:src="@drawable/emoji_meh"
                                app:tint="@color/meh_color" />
 
                            <View
@@ -437,7 +437,7 @@
                            <ImageView
                                android:layout_width="22dp"
                                android:layout_height="34dp"
-                               android:src="@drawable/ic_bad_outlined"
+                               android:src="@drawable/emoji_bad"
                                app:tint="@color/bad_color" />
 
                            <View
@@ -448,7 +448,7 @@
                            <ImageView
                                android:layout_width="22dp"
                                android:layout_height="32dp"
-                               android:src="@drawable/ic_very_bad_outlined"
+                               android:src="@drawable/emoji_awful"
                                app:tint="@color/awful_color" />
 
                            <View
@@ -468,50 +468,50 @@
                    </FrameLayout>
 
 
-                   <LinearLayout
-                       android:layout_width="100dp"
-                       android:layout_height="36dp"
-                       android:layout_marginTop="12dp"
-                       android:background="@drawable/round_corner_rectangle"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintStart_toStartOf="parent"
+<!--                   <LinearLayout-->
+<!--                       android:layout_width="100dp"-->
+<!--                       android:layout_height="36dp"-->
+<!--                       android:layout_marginTop="12dp"-->
+<!--                       android:background="@drawable/round_corner_rectangle"-->
+<!--                       app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                       app:layout_constraintStart_toStartOf="parent"-->
 
-                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout">
+<!--                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout">-->
 
-                       <ImageButton
-                           android:id="@+id/ineChartImageButton"
-                           android:layout_width="50dp"
-                           android:layout_height="match_parent"
-                           android:background="@drawable/round_corner_rectangle"
-                           android:backgroundTint="@color/pink"
-                           android:src="@drawable/ic_line_chart"
-                           app:tint="@color/white" />
+<!--                       <ImageButton-->
+<!--                           android:id="@+id/ineChartImageButton"-->
+<!--                           android:layout_width="50dp"-->
+<!--                           android:layout_height="match_parent"-->
+<!--                           android:background="@drawable/round_corner_rectangle"-->
+<!--                           android:backgroundTint="@color/primary"-->
+<!--                           android:src="@drawable/ic_line_chart"-->
+<!--                           app:tint="@color/white" />-->
 
-                       <ImageButton
-                           android:id="@+id/barChartImageButton"
-                           android:layout_width="50dp"
-                           android:layout_height="match_parent"
-                           android:layout_gravity="center"
-                           android:backgroundTint="@color/white"
-                           android:src="@drawable/ic_bar_chart"
-                           app:tint="@color/pink" />
-                   </LinearLayout>
+<!--                       <ImageButton-->
+<!--                           android:id="@+id/barChartImageButton"-->
+<!--                           android:layout_width="50dp"-->
+<!--                           android:layout_height="match_parent"-->
+<!--                           android:layout_gravity="center"-->
+<!--                           android:backgroundTint="@color/white"-->
+<!--                           android:src="@drawable/ic_bar_chart"-->
+<!--                           app:tint="@color/primary" />-->
+<!--                   </LinearLayout>-->
 
-                   <EditText
-                       android:id="@+id/selectActivityEditText"
-                       android:layout_width="170dp"
-                       android:layout_height="36dp"
-                       android:background="@drawable/round_corner_rectangle"
-                       android:drawableEnd="@drawable/ic_dropdown"
-                       android:drawableTint="@color/pink"
-                       android:hint="@string/select_activity"
-                       android:paddingStart="12dp"
-                       android:textSize="12sp"
-                       android:paddingEnd="12dp"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout"
-                       app:layout_constraintVertical_bias="1.0" />
+<!--                   <EditText-->
+<!--                       android:id="@+id/selectActivityEditText"-->
+<!--                       android:layout_width="170dp"-->
+<!--                       android:layout_height="36dp"-->
+<!--                       android:background="@drawable/round_corner_rectangle"-->
+<!--                       android:drawableEnd="@drawable/ic_dropdown"-->
+<!--                       android:drawableTint="@color/primary"-->
+<!--                       android:hint="@string/select_activity"-->
+<!--                       android:paddingStart="12dp"-->
+<!--                       android:textSize="12sp"-->
+<!--                       android:paddingEnd="12dp"-->
+<!--                       app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                       app:layout_constraintEnd_toEndOf="parent"-->
+<!--                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout"-->
+<!--                       app:layout_constraintVertical_bias="1.0" />-->
                </androidx.constraintlayout.widget.ConstraintLayout>
            </com.google.android.material.card.MaterialCardView>
 
@@ -559,7 +559,7 @@
                        android:id="@+id/customViewAchievement"
                        android:layout_width="100dp"
                        android:layout_height="wrap_content"
-                       app:FirstStarTint="@color/pink"
+                       app:FirstStarTint="@color/primary"
                        app:Icon="@drawable/ic_book"
                        app:Name="@string/first_note"
                        app:SecondStarTint="@color/gray"
@@ -573,7 +573,7 @@
                        android:id="@+id/customViewAchievement2"
                        android:layout_width="100dp"
                        android:layout_height="wrap_content"
-                       app:FirstStarTint="@color/pink"
+                       app:FirstStarTint="@color/primary"
                        app:Icon="@drawable/ic_camera_for_achievements"
                        app:Name="@string/first_entry_acheivement"
                        app:SecondStarTint="@color/gray"
@@ -587,7 +587,7 @@
                        android:id="@+id/customViewAchievement3"
                        android:layout_width="100dp"
                        android:layout_height="wrap_content"
-                       app:FirstStarTint="@color/pink"
+                       app:FirstStarTint="@color/primary"
                        app:Icon="@drawable/ic_library"
                        app:Name="@string/a_week_with_us"
                        app:SecondStarTint="@color/gray"
@@ -625,7 +625,7 @@
                        android:layout_marginRight="4dp"
                        android:backgroundTint="@color/white"
                        android:text="@string/show_all"
-                       android:textColor="@color/pink"
+                       android:textColor="@color/primary"
                        android:textSize="12sp"
                        app:layout_constraintBottom_toBottomOf="@+id/totalAchievementsTextView"
                        app:layout_constraintEnd_toEndOf="parent"
