@@ -21,6 +21,7 @@ import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.formatNumber
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
+import com.iranmobiledev.moodino.utlis.ChartValueFormatter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -160,6 +161,8 @@ class StatsFragment : BaseFragment() {
                 position = XAxis.XAxisPosition.BOTTOM
                 gridColor = Color.WHITE
                 textColor = Color.GRAY
+                valueFormatter = ChartValueFormatter()
+                granularity = 1f
                 setDrawAxisLine(false)
             }
 
