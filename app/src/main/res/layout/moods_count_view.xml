@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
+    android:orientation="horizontal"
+    android:weightSum="5"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+        android:id="@+id/rad"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+        android:id="@+id/good"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+        android:id="@+id/meh"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+        android:id="@+id/bad"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
+        android:id="@+id/awful"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

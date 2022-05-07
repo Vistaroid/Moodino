@@ -8,11 +8,12 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 
-class MoodCountDayView(context: Context, attr: AttributeSet): View(context, attr) {
+class MoodCountDayView(context: Context, attr: AttributeSet?): View(context, attr) {
 
     private val textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val rectPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val text: Int= defaultText
+    private var text: Int= defaultText
+
 
     init {
         textPaint.also {
@@ -20,6 +21,20 @@ class MoodCountDayView(context: Context, attr: AttributeSet): View(context, attr
             it.textAlign= Paint.Align.CENTER
             it.textSize= 36f
         }
+        rectPaint.color= defaultColor
+    }
+
+
+    fun setData(number: Int?, color: Int?){
+        this.text= number?: defaultText
+        textPaint.color= color?: defaultColor
+        rectPaint.color= color?: defaultColor
+        postInvalidate()
+    }
+
+    fun refresh(){
+        this.text= defaultText
+        textPaint.color= defaultColor
         rectPaint.color= defaultColor
     }
 
@@ -40,7 +55,6 @@ class MoodCountDayView(context: Context, attr: AttributeSet): View(context, attr
 
     private fun drawText(canvas: Canvas){
         canvas.drawText(text.toString(),  width/2f,  height/2f, textPaint)
-
     }
 
     private fun drawRec(canvas: Canvas){

@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.FragmentCalendarBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthPositionGlobal
-import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbarItemClickListener
+import com.iranmobiledev.moodino.utlis.*
 import io.github.persiancalendar.calendar.AbstractDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +23,8 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
-    private lateinit var binding : FragmentCalendarBinding
+class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
+    private lateinit var binding: FragmentCalendarBinding
     private val viewModel: CalendarViewModel by viewModel()
 
     override fun onCreateView(
@@ -40,11 +40,15 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         binding.calendarPager.also {
-           it.onDayClicked= { jdn -> bringDate(jdn, monthChange= false)}
-         //  it.onDayLongClicked= ::
-           it.setSelectedDay(Jdn(viewModel.selectedMonth.value), highlight = false, smoothScroll = false)
+            it.onDayClicked = { jdn -> bringDate(jdn, monthChange = false) }
 
-           it.onMonthSelected = { viewModel.changeSelectedMonth(it.selectedMonth) }
+            it.setSelectedDay(
+                Jdn(viewModel.selectedMonth.value),
+                highlight = false,
+                smoothScroll = false
+            )
+
+            it.onMonthSelected = { viewModel.changeSelectedMonth(it.selectedMonth) }
         }
 
         viewModel.selectedMonth
@@ -57,57 +61,30 @@ class CalendarFragment : BaseFragment(),MainToolbarItemClickListener {
             bringDate(Jdn.today(), monthChange = false, highlight = false)
         }
 
-//        binding.appBar.let { appBar ->
-//            appBar.toolbar.setupMenuNavigation()
-//            appBar.root.hideToolbarBottomShadow()
-//        }
-
         binding.mainToolbar.initialize(this)
 
         viewModel.fetchEntries()
-//        viewModel.entries.observe(viewLifecycleOwner){
-//            println("enties= ${it.size}")
-//        }
     }
 
-    private fun bringDate(jdn: Jdn, highlight: Boolean= true, monthChange: Boolean= true
-                          , smoothScroll: Boolean= true){
-        binding.calendarPager.setSelectedDay(jdn,highlight,monthChange,smoothScroll)
-
-        val isToday= Jdn.today() == jdn
+    private fun bringDate(
+        jdn: Jdn,
+        highlight: Boolean = true,
+        monthChange: Boolean = true,
+        smoothScroll: Boolean = true
+    ) {
+        binding.calendarPager.setSelectedDay(jdn, highlight, monthChange, smoothScroll)
         viewModel.changeSelectedDay(jdn)
-
-        // a11y
-//        if (isTalkBackEnabled && !isToday && monthChange) Snackbar.make(
-//            binding.root ?: return,
-//            getA11yDaySummary(
-//                context ?: return, jdn, false, EventsStore.empty(),
-//                withZodiac = true, withOtherCalendars = true, withTitle = true
-//            ),
-//            Snackbar.LENGTH_SHORT
-//        ).show()
 
     }
 
     private fun updateToolbar(binding: FragmentCalendarBinding, date: AbstractDate) {
-        viewModel.entries.observe(viewLifecycleOwner){
-                CoroutineScope(Dispatchers.Main).launch {
-                    delay(200)
-                    binding.calendarPager.setEntries(it)
-                }
+        viewModel.entries.observe(viewLifecycleOwner) {
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(200)
+                binding.calendarPager.setEntries(it)
+                binding.moodCountView.setEntries(it)
+            }
         }
-
-   //       binding.mainToolbar.setMonthName(date)
-   //     binding.mainToolbar.title.text= date.monthName  + " "+ date.year
-//        val toolbar = binding.appBar.toolbar
-//        val secondaryCalendar = secondaryCalendar
-//        if (secondaryCalendar == null) {
-//            toolbar.title = date.monthName
-//            toolbar.subtitle = formatNumber(date.year)
-//        } else {
-//            toolbar.title = language.my.format(date.monthName, formatNumber(date.year))
-//            toolbar.subtitle = monthFormatForSecondaryCalendar(date, secondaryCalendar)
-//        }
     }
 
     override fun clickOnAdBtn() {
