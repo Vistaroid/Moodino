@@ -60,13 +60,6 @@
         <entry key="..\:/Moodino/app/src/main/res/layout/view_more_item.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/layout/year_in_pixels_card.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/menu/botton_nav.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/chart_gradient.xml" value="0.211" />
-        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/emoji_awful.xml" value="0.211" />
-        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/outlined_circle.xml" value="0.211" />
-        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/primary_circle_shape.xml" value="0.211" />
-        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/achievement_icon.xml" value="0.1" />
-        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/add_entry_fragment.xml" value="0.259375" />
-        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/emoji_item.xml" value="0.259375" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.259375" />
         <entry key="..\:/Users/SamGostar/StudioProjects/moodinoo/app/src/main/res/drawable/circle_shape.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/moodinoo/app/src/main/res/drawable/ic_checked.xml" value="0.211" />
@@ -106,6 +99,7 @@
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/item_entry_container.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/main_toolbar.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/mood_chart_card.xml" value="0.125" />
+        <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/moods_count_view.xml" value="0.11182432432432432" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/toolbar.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/view_toolbar.xml" value="0.17239583333333333" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_add.xml" value="0.202" />

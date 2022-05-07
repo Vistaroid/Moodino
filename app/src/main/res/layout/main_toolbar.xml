@@ -14,6 +14,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:gravity="center"
         android:padding="5dp"
+        android:layoutDirection="ltr"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
