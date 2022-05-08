@@ -3,66 +3,58 @@ package com.iranmobiledev.moodino.ui.entry
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.data.RecyclerViewData
 import com.iranmobiledev.moodino.repository.activity.ActivityRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class EntryViewModel(
     private val entryRepository: EntryRepository,
     private val activityRepository: ActivityRepository
 ) : BaseViewModel() {
-    private val entriesLiveData = MutableLiveData<List<List<Entry>>>()
 
+    private val entries = MutableLiveData<List<RecyclerViewData>>()
 
     init {
         fetchEntries()
     }
 
     private fun fetchEntries() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             entryRepository.getAll().collect{
-                entriesLiveData.postValue(makeListFromEntries(it as MutableList<Entry>))
-                println("size123 of lsit is ${it.size}")
+                entries.value = makeListFromEntries(it as MutableList<Entry>, mutableListOf())
             }
+        }
+    }
 
-        }
+    private fun makeListFromEntries(entries: MutableList<Entry>, sortedList : MutableList<RecyclerViewData>): List<RecyclerViewData> {
+        if(entries.size == 0)
+            return sortedList
+        val data = RecyclerViewData(mutableListOf())
+        val filtered = entries.filter { it.date == entries[0].date }
+        val notFiltered = entries.filterNot { it.date == entries[0].date }
+        data.entries = filtered
+        sortedList.add(0, data)
+        return makeListFromEntries(notFiltered as MutableList<Entry>, sortedList)
     }
-    private fun makeListFromEntries(entries: MutableList<Entry>): List<List<Entry>> {
-        val listOfEntries = ArrayList<ArrayList<Entry>>()
-        entries.forEach { entry ->
-            val filteredList = entries.filter { it.date == entry.date }
-            if (!listOfEntries.contains(filteredList))
-                listOfEntries.add(0, filteredList as ArrayList<Entry>)
-        }
-        return listOfEntries
-    }
+
     fun deleteEntry(entry: Entry) {
-        viewModelScope.launch(Dispatchers.IO + CoroutineName("deleteCoroutine")) {
-            entryRepository.delete(entry)
-        }
+        entryRepository.delete(entry)
     }
 
     fun updateEntry(entry: Entry) {
         entryRepository.update(entry)
     }
 
-    fun getEntries(): LiveData<List<List<Entry>>> {
-        return entriesLiveData
-    }
-
     fun addActivity(activity: Activity): Long {
         return activityRepository.add(activity)
     }
-
+    fun getEntries() : LiveData<List<RecyclerViewData>> {
+        return entries
+    }
 }

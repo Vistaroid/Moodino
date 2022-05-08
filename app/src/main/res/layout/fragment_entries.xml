@@ -3,68 +3,84 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/rootView_entries">
-
-    <com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbar
-        android:id="@+id/main_toolbar"
-        app:layout_constraintTop_toTopOf="parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/contentContainer_entries"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView_entries"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbar
+            android:id="@+id/main_toolbar"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/addEntryCardView"
-                style="@style/CardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="?colorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/_12mdp">
+            android:layout_height="wrap_content"/>
 
-                <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/main_toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/addEntryCardView"
+                    style="@style/CardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="@dimen/_12mdp"
+                    app:cardBackgroundColor="?colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:layout_width="@dimen/_40mdp"
-                        android:layout_height="@dimen/_40mdp"
-                        app:srcCompat="@drawable/ic_add" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="14dp"
-                        android:text="@string/let_s_pick_up_where_you_left_off"
-                        android:textAppearance="?textAppearanceHeadline6"
-                        android:textColor="?colorOnPrimary"
-                        android:textSize="@dimen/_13font_mdp"/>
-                </LinearLayout>
+                        android:layout_gravity="start"
+                        android:orientation="horizontal">
 
-            </com.google.android.material.card.MaterialCardView>
+                        <ImageView
+                            android:layout_width="@dimen/_40mdp"
+                            android:layout_height="@dimen/_40mdp"
+                            app:srcCompat="@drawable/ic_add" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/entriesContainerRv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addEntryCardView"
-                android:paddingBottom="@dimen/_100mdp"
-                android:clipToPadding="false"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="14dp"
+                            android:text="@string/let_s_pick_up_where_you_left_off"
+                            android:textAppearance="?textAppearanceHeadline6"
+                            android:textColor="?colorOnPrimary"
+                            android:textSize="@dimen/_13font_mdp"/>
+                    </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/entriesContainerRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingBottom="@dimen/_100mdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/addEntryCardView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/emptyStateContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_52mdp">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

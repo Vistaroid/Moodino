@@ -34,6 +34,7 @@ class AddEntryFragment : BaseFragment() {
 
     private fun setupUi() {
         binding.continueButton.visibility = if(initialFromBackPress) View.VISIBLE else View.GONE
+        binding.include.emojiesTitle.visibility = View.GONE
         binding.dateTv.text = getDate()
         binding.timeTv.text = getTime()
     }
@@ -53,27 +54,27 @@ class AddEntryFragment : BaseFragment() {
         )
         bundle.putParcelable("entry", entry)
 
-        binding.include.itemNothing.setOnClickListener {
+        binding.include.mehItem.setOnClickListener {
             entry.icon = R.drawable.emoji_meh
             entry.title = MEH
             navigateToEntryDetailFragment(bundle)
         }
-        binding.include.itemHappy.setOnClickListener {
+        binding.include.goodItem.setOnClickListener {
             entry.icon = R.drawable.emoji_good
             entry.title = GOOD
             navigateToEntryDetailFragment(bundle)
         }
-        binding.include.itemSad.setOnClickListener{
+        binding.include.badItem.setOnClickListener{
             entry.icon = R.drawable.emoji_bad
             entry.title = BAD
             navigateToEntryDetailFragment(bundle)
         }
-        binding.include.itemVerySad.setOnClickListener {
+        binding.include.awfulItem.setOnClickListener {
             entry.icon = R.drawable.emoji_awful
             entry.title = AWFUL
             navigateToEntryDetailFragment(bundle)
         }
-        binding.include.itemVeryHappy.setOnClickListener {
+        binding.include.radItem.setOnClickListener {
             entry.title = RAD
             entry.icon = R.drawable.emoji_rad
             navigateToEntryDetailFragment(bundle)
