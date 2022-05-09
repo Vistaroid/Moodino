@@ -66,40 +66,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"/>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:orientation="horizontal"
-                    android:weightSum="5"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp">
-
-                    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
-                        android:id="@+id/vary_happy"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-
-                    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
-                        android:id="@+id/happy"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-                    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
-                        android:id="@+id/normal"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-                    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
-                        android:id="@+id/sad"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-                    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountDayView
-                        android:id="@+id/very_sad"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
+               <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
+                   android:id="@+id/moodCountView"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>

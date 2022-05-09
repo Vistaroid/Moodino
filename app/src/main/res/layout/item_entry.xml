@@ -58,11 +58,12 @@
             android:text="@{entryItem.time.hour+`:`+entryItem.time.minutes}"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/activityRv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
-            app:layout_constraintTop_toBottomOf="@+id/entryTitle"/>
+            app:layout_constraintTop_toBottomOf="@+id/entryTitle"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/entryNote"
@@ -74,9 +75,8 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-            android:visibility="@{entryItem.note.length() > 0 ? View.VISIBLE : View.GONE}"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/activityRv"
+            android:visibility="gone"/>
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/imageContainer"
             android:layout_width="0dp"
@@ -88,7 +88,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
             app:layout_constraintTop_toBottomOf="@+id/entryNote"
-            android:visibility="@{entryItem.photoPath.length() > 0 ? View.VISIBLE : View.GONE}">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/entryImage"

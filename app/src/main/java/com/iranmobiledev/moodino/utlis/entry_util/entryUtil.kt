@@ -25,4 +25,3 @@ fun getPersianNumber(number: Int): String {
         .replace("8", "۸")
         .replace("9", "۹");
 }
-

@@ -10,13 +10,19 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
-import com.iranmobiledev.moodino.databinding.DaysInARowCardBinding
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.formatNumber
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
+import com.iranmobiledev.moodino.utlis.ChartValueFormatter
+import com.iranmobiledev.moodino.utlis.ColorArray
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -29,7 +35,6 @@ class StatsFragment : BaseFragment() {
     private lateinit var daysContainer: ArrayList<FrameLayout>
     private lateinit var daysTextView: ArrayList<TextView>
     private lateinit var daysIcon: ArrayList<ImageView>
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +69,6 @@ class StatsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initDayInRowCard()
         initLineChartCard()
     }
@@ -77,11 +81,25 @@ class StatsFragment : BaseFragment() {
             binding.longestChainTextView.text = ": $it"
         }
         model.latestChainLiveData.observe(viewLifecycleOwner) {
+            Log.d(TAG, "initDayInRowCard: $it")
             binding.daysInRowNumberTextView.text = it.toString()
         }
 
         setupWeekDays()
         setupDaysStatus()
+    }
+
+
+    private fun initLineChartCard() {
+        model.initLineChart()
+        model.lineChartEntries.observe(viewLifecycleOwner){
+            val dataSet = setupLineChart(it)
+            customizeLineChart(dataSet)
+            binding.moodsLineChart.apply {
+                notifyDataSetChanged()
+                invalidate()
+            }
+        }
     }
 
     private fun setupWeekDays() {
@@ -113,32 +131,44 @@ class StatsFragment : BaseFragment() {
         }
     }
 
-    private fun initLineChartCard() {
-        model.lineChartEntries.observe(viewLifecycleOwner) {
-            model.initLineChart(it, requireContext())
-        }
-
-        customizeLineChart()
+    private fun setupLineChart(entries: List<Entry>): LineDataSet {
+        var dataSet = LineDataSet(entries, "moods")
+        var data = LineData(dataSet)
+        binding.moodsLineChart.data = data
+        return dataSet
     }
 
-    private fun customizeLineChart() {
+    private fun customizeLineChart(dataSet: LineDataSet) {
+        dataSet.apply {
+            color = ColorArray.rad
+            lineWidth = 2f
+            highLightColor = R.color.primary
+            setDrawFilled(true)
+            fillDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.chart_gradient)
+            circleHoleColor = (Color.WHITE)
+            setCircleColor(ColorArray.rad);
+            valueTextColor = Color.WHITE
+            valueTextSize = 1f
+        }
+
         binding.moodsLineChart.apply {
-            data = lineData
-            invalidate()
             description.isEnabled = false
             legend.isEnabled = false
             axisRight.isEnabled = false
-            setPinchZoom(true)
+            setPinchZoom(false)
             setTouchEnabled(true)
 
             xAxis.apply {
                 position = XAxis.XAxisPosition.BOTTOM
                 gridColor = Color.WHITE
                 textColor = Color.GRAY
+                valueFormatter = ChartValueFormatter()
+                granularity = 1f
                 setDrawAxisLine(false)
             }
 
             axisLeft.apply {
+                setDrawLabels(false)
                 gridColor = Color.WHITE
                 textColor = Color.WHITE
                 axisLineColor = Color.WHITE

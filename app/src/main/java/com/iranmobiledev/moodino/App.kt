@@ -15,11 +15,13 @@ import com.iranmobiledev.moodino.repository.more.MoreRepository
 import com.iranmobiledev.moodino.repository.more.MoreRepositoryImpl
 import com.iranmobiledev.moodino.repository.more.source.MoreLocalDataSource
 import com.iranmobiledev.moodino.ui.MainActivity
+import com.iranmobiledev.moodino.ui.MainActivityViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
+import com.iranmobiledev.moodino.utlis.EmptyStateEnum
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.iranmobiledev.moodino.utlis.SharedPref
@@ -30,7 +32,7 @@ import org.koin.core.component.get
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-class App : Application() , KoinComponent{
+class App : Application(), KoinComponent {
     override fun onCreate() {
         super.onCreate()
 
@@ -38,15 +40,17 @@ class App : Application() , KoinComponent{
         SharedPref.create(this)
 
         val modules = module {
+            viewModel { MainActivityViewModel() }
             viewModel { EntryViewModel(get(), get()) }
             viewModel { EntryDetailViewModel(get(), get()) }
             viewModel { CalendarViewModel(get()) }
             viewModel { PinLockViewModel(get()) }
-            viewModel {StatsFragmentViewModel(get())}
-            factory  <EntryRepository> { EntryRepositoryImpl(database.getEntryDao)}
-            factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
-            factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(SharedPref.create(this@App))) }
-            single <ImageLoadingService>{ GlideImageLoader() }
+            viewModel { StatsFragmentViewModel(get()) }
+            factory<EntryRepository> { EntryRepositoryImpl(database.getEntryDao) }
+            factory<ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
+            factory<MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(SharedPref.create(this@App))) }
+            single<ImageLoadingService> { GlideImageLoader() }
+            single { EntryContainerAdapter() }
         }
 
         startKoin {
@@ -54,16 +58,37 @@ class App : Application() , KoinComponent{
             modules(modules)
         }
 
-        val sharedPref : SharedPreferences = SharedPref.create(this)
+        val sharedPref: SharedPreferences = SharedPref.create(this)
         val firstEnter = sharedPref.getBoolean("first_enter", false)
-        if(!firstEnter)
+        if (!firstEnter)
             makeDefaultActivities()
     }
 
     private fun makeDefaultActivities() {
-        val viewModel : EntryViewModel = get()
-        viewModel.addActivity(Activity(id = null, image = R.drawable.ic_arrow_bottom,title = "achievement", category = "CT"))
-        viewModel.addActivity(Activity(id = null, image = R.drawable.ic_arrow_bottom,title = "achievement", category = "CT"))
-        viewModel.addActivity(Activity(id = null, image = R.drawable.ic_arrow_bottom,title = "achievement", category = "CT"))
+        val viewModel: EntryViewModel = get()
+        viewModel.addActivity(
+            Activity(
+                id = null,
+                image = R.drawable.ic_arrow_bottom,
+                title = "achievement",
+                category = "CT"
+            )
+        )
+        viewModel.addActivity(
+            Activity(
+                id = null,
+                image = R.drawable.ic_arrow_bottom,
+                title = "achievement",
+                category = "CT"
+            )
+        )
+        viewModel.addActivity(
+            Activity(
+                id = null,
+                image = R.drawable.ic_arrow_bottom,
+                title = "achievement",
+                category = "CT"
+            )
+        )
     }
 }

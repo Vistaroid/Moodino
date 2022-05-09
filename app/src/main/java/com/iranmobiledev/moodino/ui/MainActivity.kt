@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.viewModels
+
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -23,12 +25,11 @@ import saman.zamani.persiandate.PersianDate
 class MainActivity : BaseActivity() {
 
     private val TAG = "mainActivity"
+
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var fabItems: ArrayList<LinearLayout>
     private val viewModel: MainActivityViewModel by viewModels()
-
-
     private var currentNavController: LiveData<NavController>? = null
 
     override fun onStop() {
@@ -143,6 +144,5 @@ class MainActivity : BaseActivity() {
         binding.bottomAppBar.performHide(true)
         binding.bottomNavigationView.visibility = View.GONE
     }
-
 }
 
