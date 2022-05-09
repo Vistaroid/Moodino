@@ -25,4 +25,14 @@
         <attr name="ThirdStarTint" format="color"/>
         <attr name="Name" format="string"/>
     </declare-styleable>
+    
+    <declare-styleable name="EmptyStateView">
+        <attr name="animation" format="reference"/>
+        <attr name="contentText" format="string"/>
+        <attr name="icon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="EmojiView">
+        <attr name="text" format="string"/>
+    </declare-styleable>
 </resources>

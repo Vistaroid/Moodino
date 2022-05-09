@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/emojies_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_12mdp"
+            android:text="@string/how_are_you"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14mdp"
+            android:visibility="gone"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:id="@+id/radItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/goodItem"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{clickListener}">
+
+                <ImageView
+                    android:id="@+id/radImage"
+                    android:layout_width="@dimen/_40mdp"
+                    android:layout_height="@dimen/_40mdp"
+                    app:srcCompat="@drawable/emoji_rad" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/rad"
+                    android:textColor="@color/rad_color"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mehItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/badItem"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/goodItem"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{clickListener}">
+
+                <ImageView
+                    android:id="@+id/mehImage"
+                    android:layout_width="@dimen/_40mdp"
+                    android:layout_height="@dimen/_40mdp"
+                    app:srcCompat="@drawable/emoji_meh" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/meh"
+                    android:textColor="@color/meh_color"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/badItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/awfulItem"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/mehItem"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{clickListener}">
+
+                <ImageView
+                    android:id="@+id/badImage"
+                    android:layout_width="@dimen/_40mdp"
+                    android:layout_height="@dimen/_40mdp"
+                    app:srcCompat="@drawable/emoji_bad" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/bad"
+                    android:textColor="@color/bad_color"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/awfulItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/badItem"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{clickListener}">
+
+                <ImageView
+                    android:id="@+id/awfulImage"
+                    android:layout_width="@dimen/_40mdp"
+                    android:layout_height="@dimen/_40mdp"
+                    app:srcCompat="@drawable/emoji_awful" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/awful"
+                    android:textColor="@color/awful_color"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/goodItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/mehItem"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/radItem"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{clickListener}">
+
+                <ImageView
+                    android:id="@+id/goodImage"
+                    android:layout_width="@dimen/_40mdp"
+                    android:layout_height="@dimen/_40mdp"
+                    app:srcCompat="@drawable/emoji_good" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/good"
+                    android:textColor="@color/good_color"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</layout>
