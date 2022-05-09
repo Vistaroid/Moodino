@@ -10,14 +10,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.*
-import com.iranmobiledev.moodino.databinding.EmojiItemBinding
 import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.listener.DialogEventListener
+import com.iranmobiledev.moodino.listener.EmptyStateOnClickListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
-import com.iranmobiledev.moodino.ui.MainActivityViewModel
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
@@ -31,15 +31,13 @@ import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
 class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
-    KoinComponent {
+    KoinComponent, EmptyStateOnClickListener {
 
     private lateinit var binding: FragmentEntriesBinding
-    private lateinit var emptyStateBinding: EmojiItemBinding
     private lateinit var recyclerView: RecyclerView
     private val viewModel: EntryViewModel by viewModel()
     private val adapter: EntryContainerAdapter by inject()
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,11 +45,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEntriesBinding.inflate(inflater, container, false)
-        emptyStateBinding = EmojiItemBinding.inflate(inflater, container, false)
         setupUi()
         setupObserver()
         setupClicks()
-        setupEmptyStateClicks()
         return binding.root
     }
 
@@ -69,52 +65,21 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
     private fun setupObserver() {
         viewModel.getEntries().observe(viewLifecycleOwner) {
-            if(it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE)
-                showEmptyState(true)
-            else if(it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE)
-                showEmptyState(false)
+            if (it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE)
+                binding.emptyStateView.visibility = View.VISIBLE
+            else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE)
+                binding.emptyStateView.visibility = View.GONE
             adapter.setData(it)
         }
     }
 
-    private fun setupClicks() {
-        binding.addEntryCardView.setOnClickListener {}
+    override fun onResume() {
+        super.onResume()
+        binding.emptyStateView.emojis.setEmptyStateOnClickListener(this@EntriesFragment)
     }
 
-    private fun setupEmptyStateClicks() {
-        val persianDate = PersianDate()
-        val entry = Entry(
-            date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay),
-            time = EntryTime(
-                PersianDateFormat.format(persianDate, "H"),
-                PersianDateFormat.format(persianDate, "i")
-            )
-        )
-        emptyStateBinding.radItem.setOnClickListener {
-            entry.icon = R.drawable.emoji_rad
-            entry.title = RAD
-            navigateToEntryDetail(entry)
-        }
-        emptyStateBinding.goodItem.setOnClickListener {
-            entry.icon = R.drawable.emoji_good
-            entry.title = GOOD
-            navigateToEntryDetail(entry)
-        }
-        emptyStateBinding.mehItem.setOnClickListener {
-            entry.icon = R.drawable.emoji_meh
-            entry.title = MEH
-            navigateToEntryDetail(entry)
-        }
-        emptyStateBinding.badItem.setOnClickListener {
-            entry.icon = R.drawable.emoji_bad
-            entry.title = BAD
-            navigateToEntryDetail(entry)
-        }
-        emptyStateBinding.awfulItem.setOnClickListener {
-            entry.icon = R.drawable.emoji_awful
-            entry.title = AWFUL
-            navigateToEntryDetail(entry)
-        }
+    private fun setupClicks() {
+        binding.addEntryCardView.setOnClickListener {}
     }
 
     private fun navigateToEntryDetail(entry: Entry) {
@@ -158,5 +123,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     override fun delete(entry: Entry): Boolean {
         deleteEntry(entry)
         return true
+    }
+
+    override fun onEmptyStateItemClicked(v: Int) {
+        Toast.makeText(context, "Hi", Toast.LENGTH_SHORT).show()
     }
 }

@@ -119,7 +119,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/emoji_item"
+        layout="@layout/emoji_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

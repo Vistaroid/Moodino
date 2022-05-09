@@ -8,8 +8,6 @@ import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.iranmobiledev.moodino.R
@@ -64,52 +62,5 @@ interface BaseView {
         @StringRes cancelText: Int = -1,
     ): MoodinoDialog {
         return MoodinoDialog(mainText, subText, icon, deleteText, cancelText)
-    }
-
-    /**
-     * @author MohammadJavad Khoshneshin
-     * @param mustShow empty state should show or not
-     * for using this feature you should have a view group with id '@id/emptyStateContainer'
-     * this is meaning that you wanna use empty state view in this view group.
-     */
-    fun showEmptyState(mustShow: Boolean) {
-        val viewGroup = getEmptyStateViewGroup()
-        when (mustShow) {
-            true -> {
-                viewGroup?.let { emptyStateContainer ->
-                    var emptyStateView = emptyStateContainer.findViewById<LinearLayout>(R.id.emptyStateView)
-                    if(emptyStateView == null){
-                        emptyStateView = LayoutInflater.from(viewContext).inflate(R.layout.empty_state, mRootView, false) as LinearLayout?
-                        emptyStateContainer.addView(emptyStateView)
-                    }
-                    else
-                        emptyStateView.visibility = View.VISIBLE
-                }
-            }
-            false -> {
-                viewGroup?.let { emptyStateContainer ->
-                    var emptyStateView = emptyStateContainer.findViewById<LinearLayout>(R.id.emptyStateView)
-                    if(emptyStateView != null)
-                        emptyStateView.visibility = View.GONE
-                }
-            }
-        }
-    }
-
-    /**
-     * @return returns to you empty state view group you were set the id '@id/emptyStateContainer'
-     */
-    private fun getEmptyStateViewGroup(): ViewGroup? {
-        println("mRootView $mRootView")
-        var emptyStateContainer: ViewGroup? = null
-
-            if(mRootView?.id == R.id.emptyStateContainer)
-                emptyStateContainer = mRootView
-            else{
-                mRootView?.let {
-                    emptyStateContainer = it.findViewById(R.id.emptyStateContainer)
-                }
-            }
-        return emptyStateContainer
     }
 }

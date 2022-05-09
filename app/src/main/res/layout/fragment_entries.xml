@@ -73,14 +73,15 @@
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/emptyStateContainer"
+    <com.iranmobiledev.moodino.ui.view.EmptyStateView
+        android:id="@+id/emptyStateView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/_52mdp">
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:visibility="gone"
+        app:animation="@raw/empty_state_animation"
+        app:activeEmoji="true"
+        app:icon="@drawable/ic_hand_down"
+        android:layout_marginTop="@dimen/_50mdp"
+        app:contentText="@string/let_s_add_first_entry_tap_the_big_plus_button"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
