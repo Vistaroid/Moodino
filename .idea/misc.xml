@@ -60,7 +60,21 @@
         <entry key="..\:/Moodino/app/src/main/res/layout/view_more_item.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/layout/year_in_pixels_card.xml" value="0.20863616930312098" />
         <entry key="..\:/Moodino/app/src/main/res/menu/botton_nav.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/chart_gradient.xml" value="0.211" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/emoji_awful.xml" value="0.211" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_add_round_corner.xml" value="0.211" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_back_arrow.xml" value="0.211" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_calendar.xml" value="0.211" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_timer.xml" value="0.211" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/outlined_circle.xml" value="0.211" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/primary_circle_shape.xml" value="0.211" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/achievement_icon.xml" value="0.1" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/activity_main.xml" value="0.259375" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/add_entry_fragment.xml" value="0.259375" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/emoji_item.xml" value="0.259375" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/fab_circle_menu.xml" value="0.264" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.259375" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/menu/bottom_nav.xml" value="0.1" />
         <entry key="..\:/Users/SamGostar/StudioProjects/moodinoo/app/src/main/res/drawable/circle_shape.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/moodinoo/app/src/main/res/drawable/ic_checked.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/moodinoo/app/src/main/res/drawable/ic_cross.xml" value="0.211" />
@@ -99,6 +113,7 @@
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/item_entry_container.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/main_toolbar.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/mood_chart_card.xml" value="0.125" />
+        <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/moods_count_view.xml" value="0.11182432432432432" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/toolbar.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/view_toolbar.xml" value="0.17239583333333333" />
         <entry key="..\:/android projects/MoodinoProject/app/src/main/res/drawable/ic_add.xml" value="0.202" />
@@ -137,24 +152,20 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/dialog_change_language.xml" value="0.25181159420289856" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/dialog_view.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/emoji_item.xml" value="0.2513586956521739" />
-        <entry key="..\:/project team/Moodino/app/src/main/res/layout/emoji_view.xml" value="0.2821557971014493" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empry_state_fragment.xml" value="0.2513586956521739" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state.xml" value="0.27291666666666664" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.25" />
-        <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state_view.xml" value="0.25" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state_view.xml" value="0.21467391304347827" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/entry_detail_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.13272543059777103" />
-        <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.22" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_more.xml" value="0.13272543059777103" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.13272543059777103" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity.xml" value="0.5" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity_container.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_entry.xml" value="0.33" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_entry_container.xml" value="0.2513586956521739" />
-        <entry key="..\:/project team/Moodino/app/src/main/res/layout/main_toolbar.xml" value="0.15443840579710144" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/select_photo_dialog.xml" value="0.22" />
-        <entry key="..\:/project team/Moodino/app/src/main/res/layout/test.xml" value="0.27291666666666664" />
-        <entry key="..\:/project team/Moodino/app/src/main/res/layout/view_more_item.xml" value="0.15443840579710144" />
         <entry key="..\:/project team/Moodino/app/src/main/res/menu/bottom_nav.xml" value="0.27291666666666664" />
         <entry key="..\:/project team/Moodino/app/src/main/res/menu/popup_menu.xml" value="0.27291666666666664" />
         <entry key="app/src/main/res/drawable/background_gradiant.xml" value="0.124" />

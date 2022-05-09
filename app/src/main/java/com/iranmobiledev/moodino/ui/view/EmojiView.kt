@@ -15,12 +15,24 @@ class EmojiView(context: Context, attributeSet: AttributeSet?) :
 
     private var emptyStateOnClickListener: EmptyStateOnClickListener? = null
 
+    var radItem : ViewGroup
+    var goodItem : ViewGroup
+    var mehItem : ViewGroup
+    var badItem : ViewGroup
+    var awfulItem : ViewGroup
+
     init {
         val inflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = EmojiViewBinding.inflate(inflater, this, true)
         val attr = context.obtainStyledAttributes(attributeSet, R.styleable.EmojiView)
         val text = attr.getString(R.styleable.EmojiView_text)
+
+        radItem = view.radItem
+        goodItem = view.goodItem
+        mehItem = view.mehItem
+        badItem = view.badItem
+        awfulItem = view.awfulItem
 
         if(!text.isNullOrEmpty()){
             view.emojiesTitle.visibility = View.VISIBLE
