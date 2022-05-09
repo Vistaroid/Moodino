@@ -66,16 +66,16 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private fun setupObserver() {
         viewModel.getEntries().observe(viewLifecycleOwner) {
             if (it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE)
-                binding.emptyStateView.visibility = View.VISIBLE
+                binding.emptyStateContainer.visibility = View.VISIBLE
             else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE)
-                binding.emptyStateView.visibility = View.GONE
+                binding.emptyStateContainer.visibility = View.GONE
             adapter.setData(it)
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.emptyStateView.emojis.setEmptyStateOnClickListener(this@EntriesFragment)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.emojisView.setEmptyStateOnClickListener(this)
     }
 
     private fun setupClicks() {

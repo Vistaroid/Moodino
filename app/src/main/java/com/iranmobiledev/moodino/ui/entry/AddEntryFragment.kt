@@ -34,7 +34,6 @@ class AddEntryFragment : BaseFragment() {
 
     private fun setupUi() {
         binding.continueButton.visibility = if(initialFromBackPress) View.VISIBLE else View.GONE
-        binding.include.emojiesTitle.visibility = View.GONE
         binding.dateTv.text = getDate()
         binding.timeTv.text = getTime()
     }

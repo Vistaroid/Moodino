@@ -72,16 +72,36 @@
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
-
-    <com.iranmobiledev.moodino.ui.view.EmptyStateView
-        android:id="@+id/emptyStateView"
+    <LinearLayout
+        android:id="@+id/emptyStateContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="gone"
-        app:animation="@raw/empty_state_animation"
-        app:activeEmoji="true"
-        app:icon="@drawable/ic_hand_down"
-        android:layout_marginTop="@dimen/_50mdp"
-        app:contentText="@string/let_s_add_first_entry_tap_the_big_plus_button"/>
+        android:background="@color/background"
+        android:layout_marginTop="@dimen/_50mdp">
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/emojisCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_16mdp"
+            app:cardElevation="@dimen/_4mdp"
+            android:layout_marginStart="@dimen/_16mdp"
+            android:layout_marginEnd="@dimen/_16mdp"
+            android:layout_marginTop="@dimen/_12mdp"
+            android:layout_gravity="center_horizontal">
+            <com.iranmobiledev.moodino.ui.view.EmojiView
+                android:id="@+id/emojisView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.card.MaterialCardView>
+        <com.iranmobiledev.moodino.ui.view.EmptyStateView
+            android:id="@+id/emptyStateView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:animation="@raw/empty_state_animation"
+            app:icon="@drawable/ic_hand_down"
+            app:contentText="@string/let_s_add_first_entry_tap_the_big_plus_button"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

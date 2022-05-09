@@ -19,7 +19,13 @@ class EmojiView(context: Context, attributeSet: AttributeSet?) :
         val inflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = EmojiViewBinding.inflate(inflater, this, true)
+        val attr = context.obtainStyledAttributes(attributeSet, R.styleable.EmojiView)
+        val text = attr.getString(R.styleable.EmojiView_text)
 
+        if(!text.isNullOrEmpty()){
+            view.emojiesTitle.visibility = View.VISIBLE
+            view.emojiesTitle.text = text
+        }
         view.clickListener = OnClickListener {
             emptyStateOnClickListener?.onEmptyStateItemClicked(it.id)
         }

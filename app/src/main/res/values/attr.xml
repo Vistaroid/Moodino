@@ -27,9 +27,12 @@
     </declare-styleable>
     
     <declare-styleable name="EmptyStateView">
-        <attr name="activeEmoji" format="boolean"/>
         <attr name="animation" format="reference"/>
         <attr name="contentText" format="string"/>
         <attr name="icon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="EmojiView">
+        <attr name="text" format="string"/>
     </declare-styleable>
 </resources>

@@ -16,13 +16,11 @@ class EmptyStateView(context: Context, attributeSet: AttributeSet?) :
     LinearLayout(context, attributeSet) {
     private var view: ViewGroup? = null
     private var binding: EmptyStateViewBinding
-    var emojis : EmojiView
+
 
     init {
         view = inflate(context, R.layout.empty_state_view, this) as ViewGroup
         binding = EmptyStateViewBinding.inflate(context.layoutInflater)
-
-        emojis = EmojiView(context, null)
 
         val animationView = binding.emptyStateAnimation
         animationView.setAnimation(R.raw.empty_state_animation)
@@ -33,9 +31,6 @@ class EmptyStateView(context: Context, attributeSet: AttributeSet?) :
 
         attributeSet?.let {
             val attr = context.obtainStyledAttributes(it, R.styleable.EmptyStateView)
-            val activeEmoji = attr.getBoolean(R.styleable.EmptyStateView_activeEmoji, false)
-            if(activeEmoji)
-                view?.findViewById<EmojiView>(R.id.emojisView)?.visibility = View.VISIBLE
 
             val animation = attr.getResourceId(
                 R.styleable.EmptyStateView_animation,
