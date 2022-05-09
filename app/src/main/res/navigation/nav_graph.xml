@@ -28,7 +28,9 @@
             app:popExitAnim="@anim/exit_anim_from_top"/>
         <action
             android:id="@+id/action_entriesFragment_to_entryDetailFragment"
-            app:destination="@id/entryDetailFragment" />
+            app:destination="@id/entryDetailFragment"
+            app:enterAnim="@anim/enter_anim_from_bottom"
+            app:popExitAnim="@anim/exit_anim_from_top"/>
     </fragment>
     <fragment
         android:id="@+id/statsFragment"

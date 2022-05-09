@@ -126,6 +126,40 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun onEmptyStateItemClicked(v: Int) {
-        Toast.makeText(context, "Hi", Toast.LENGTH_SHORT).show()
+        val entry = Entry()
+        val persianDate = PersianDateObj.persianDate
+        entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
+        entry.time = EntryTime(
+            PersianDateFormat.format(persianDate, "H"),
+            PersianDateFormat.format(persianDate, "i")
+        )
+
+        when(v){
+            binding.emojisView.radItem.id -> {
+                entry.title = RAD
+                entry.icon = R.drawable.emoji_rad
+                navigateToEntryDetail(entry)
+            }
+            binding.emojisView.goodItem.id -> {
+                entry.icon = R.drawable.emoji_good
+                entry.title = GOOD
+                navigateToEntryDetail(entry)
+            }
+            binding.emojisView.mehItem.id -> {
+                entry.icon = R.drawable.emoji_meh
+                entry.title = MEH
+                navigateToEntryDetail(entry)
+            }
+            binding.emojisView.badItem.id -> {
+                entry.icon = R.drawable.emoji_bad
+                entry.title = BAD
+                navigateToEntryDetail(entry)
+            }
+            binding.emojisView.awfulItem.id -> {
+                entry.icon = R.drawable.emoji_awful
+                entry.title = AWFUL
+                navigateToEntryDetail(entry)
+            }
+        }
     }
 }

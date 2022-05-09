@@ -93,7 +93,8 @@
             <com.iranmobiledev.moodino.ui.view.EmojiView
                 android:id="@+id/emojisView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                app:text="@string/how_are_you"/>
         </com.google.android.material.card.MaterialCardView>
         <com.iranmobiledev.moodino.ui.view.EmptyStateView
             android:id="@+id/emptyStateView"
