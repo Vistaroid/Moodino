@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainFragmentConianer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".ui.MainActivity"
-    android:id="@+id/mainFragmentConianer">
+    tools:context=".ui.MainActivity">
 
     <fragment
         android:id="@+id/fragmentContainerView"
@@ -17,6 +16,7 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
@@ -25,8 +25,8 @@
         android:background="@color/primary"
         app:backgroundTint="@color/primary"
         app:fabCradleMargin="0dp"
-        app:fabCradleRoundedCornerRadius="0dp"
-        >
+        app:fabCradleRoundedCornerRadius="0dp">
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -40,81 +40,96 @@
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/app_name"
-        android:foreground="@drawable/custom_add_button_background"
-        android:src="@drawable/ic_add_round_corner"
-        app:tint="?colorPrimary"
-        app:backgroundTint="#FFFFFF"
-        app:elevation="10dp"
-        app:fabCustomSize="70dp"
-        app:layout_anchor="@id/bottomAppBar"
-        app:maxImageSize="@dimen/_20mdp"
-
-        />
 
     <LinearLayout
-        android:id="@+id/fabMenu"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="25dp"
-        android:layout_gravity="bottom|center_horizontal">
+        android:id="@+id/anotherDay_linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/yesterday_button"
+        <ImageButton
+            android:id="@+id/anotherDay_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/circle_shape"
+            android:backgroundTint="@color/bad_color"
+            android:src="@drawable/ic_calendar"
+            app:tint="@color/white" />
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableTop="@drawable/ic_back_arrow"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:drawableTint="@color/white"
-            android:paddingTop="16dp"
-            android:textSize="10sp"
-            android:paddingBottom="8dp"
-            android:background="@drawable/round_left_corner_rectangle"
-            android:backgroundTint="@color/green"
-            android:textColor="@color/white"
-            android:text="yesterday"
-            />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/today_button"
-            android:background="@drawable/rectangle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableTop="@drawable/ic_time"
-            android:drawableTint="@color/white"
-            android:paddingTop="16dp"
-            android:textSize="10sp"
-            android:backgroundTint="@color/primary"
-            android:textColor="@color/white"
-            android:paddingBottom="8dp"
-            android:text="today"
-            />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/otherDay_button"
-            android:background="@drawable/round_right_corner_rectangle"
-            android:layout_width="wrap_content"
-            android:textSize="10sp"
-
-            android:backgroundTint="@color/orange"
-            android:layout_height="match_parent"
-            android:drawableTop="@drawable/ic_calendar"
-            android:drawableTint="@color/white"
-            android:paddingTop="16dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@color/white"
-            android:paddingBottom="8dp"
-            android:text="yesterday"
-            />
-
+            android:layout_height="wrap_content"
+            android:text="Another day"
+            android:textStyle="bold" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/today_linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/today_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/circle_shape"
+            android:backgroundTint="@color/rad_color"
+            android:src="@drawable/ic_timer"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/yesterday_linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/yesterday_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/circle_shape"
+            android:backgroundTint="@color/awful_color"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yesterday"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/white"
+        android:foreground="@drawable/outlined_circle"
+        android:src="@drawable/ic_add_round_corner"
+        app:fabCustomSize="68dp"
+        app:tint="@color/rad_color" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

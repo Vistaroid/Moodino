@@ -1,110 +1,99 @@
 package com.iranmobiledev.moodino.ui
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
-import android.content.Context
 import android.view.View
-import android.view.ViewGroup
-import android.view.animation.AnimationUtils
+import android.view.animation.*
 import android.widget.LinearLayout
-import com.iranmobiledev.moodino.R
+import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
+import androidx.lifecycle.MutableLiveData
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.RecyclerViewData
 
 
 class MainActivityViewModel() : BaseViewModel() {
 
-    var extended = false
+    var isMenuOpen = MutableLiveData(false)
 
-    fun actionFab(menuFab: LinearLayout, view: View, context: MainActivity,rotateIcon:Boolean = false) {
-        if(rotateIcon) {
-            rotateFab(view, context)
-        }
+    fun actionMenu(menuItems: ArrayList<LinearLayout>) {
+        if (isMenuOpen.value == false) openMenu(menuItems) else closeMenu(menuItems)
+    }
 
-        if (extended) {
-            hideMenuFab(menuFab)
-        } else {
-            showMenuFab(context,menuFab)
+    private fun closeMenu(views: ArrayList<LinearLayout>) {
+        isMenuOpen.postValue(false)
+
+
+        views.forEach {
+            it.animate()
+                .translationX(0f)
+                .translationY(0f)
+                .setInterpolator(LinearInterpolator())
+                .withEndAction {
+                    it.visibility = View.GONE
+                }
+                .start()
+
         }
     }
 
-    private fun showMenuFab(context: MainActivity, menuFab: LinearLayout) {
-        extendFab(menuFab, true, 40f, -200f)
+    private fun openMenu(views: ArrayList<LinearLayout>) {
+        isMenuOpen.postValue(true)
+        views.forEach {
 
-        //convert dp to pixel
-        val scale: Float = context.resources.displayMetrics.density
-        val widthToDp = (290f * scale + 0.5f)
+            it.visibility = View.VISIBLE
 
-        //increase width animated
-        val anim = ValueAnimator.ofInt(menuFab.measuredWidth, widthToDp.toInt())
-        anim.addUpdateListener { valueAnimator ->
-            val value = valueAnimator.animatedValue as Int
-            val layoutParams: ViewGroup.LayoutParams = menuFab.layoutParams
-            layoutParams.width = value
-            menuFab.layoutParams = layoutParams
-        }
-        anim.duration = 500
-        anim.start()
+            //vertical animation
+            val springAnim = SpringAnimation(it, SpringAnimation.TRANSLATION_Y)
+            val springForce = SpringForce()
 
-        extended = true
-    }
-
-    private fun hideMenuFab(menuFab: LinearLayout) {
-            closeFab(menuFab, true, 0f, 0f)
-
-            //increase width animated
-            val anim = ValueAnimator.ofInt(menuFab.measuredWidth, 0)
-            anim.addUpdateListener { valueAnimator ->
-                val value = valueAnimator.animatedValue as Int
-                val layoutParams: ViewGroup.LayoutParams = menuFab.layoutParams
-                layoutParams.width = value
-                menuFab.layoutParams = layoutParams
+            springForce.finalPosition = when (it) {
+                views[0], views[2] -> -160f
+                views[1] -> -265f
+                else -> {
+                    160f
+                }
             }
-            anim.duration = 50
-            anim.start()
+            springAnim.spring = springForce
+            springForce.stiffness = SpringForce.STIFFNESS_LOW
+            springForce.dampingRatio = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
+            springAnim.start()
 
-        extended = false
-    }
+            //horizontal animation
+            when (it) {
+                views[0] -> {
+                    it.translationX = 0f
+                    it.animate()
+                        .translationX(-210f)
+                        .setInterpolator(LinearInterpolator())
+                        .start()
+                }
 
-    fun rotateFab(view: View?, context: Context) {
-        if (!extended) {
-            val rotateFab = AnimationUtils.loadAnimation(
-                context,
-                R.anim.rotate_fab_animation
-            )
-            rotateFab.fillAfter = true
-            view?.startAnimation(rotateFab)
-        } else {
-            val unRotateFab = AnimationUtils.loadAnimation(
-                context,
-                R.anim.unrotate_fab_animation
-            )
-            unRotateFab.fillAfter = true
-            view?.startAnimation(unRotateFab)
+                views[2] -> {
+                    it.translationX = 0f
+                    it.animate()
+                        .translationX(210f)
+                        .setInterpolator(LinearInterpolator())
+                        .start()
+                }
+            }
         }
     }
 
-    private fun extendFab(view: LinearLayout, x1: Boolean, x: Float, y: Float) {
-        ObjectAnimator.ofFloat(view, "translationX", x).apply {
-            duration = 220
-            start()
-        }
-
-        ObjectAnimator.ofFloat(view, "translationY", y).apply {
-            duration = 220
-            start()
-        }
-    }
-
-    private fun closeFab(view: LinearLayout, x1: Boolean, x: Float, y: Float) {
-        ObjectAnimator.ofFloat(view, "translationX", x).apply {
-            duration = 220
-            start()
-        }
-
-        ObjectAnimator.ofFloat(view, "translationY", y).apply {
-            duration = 220
-            start()
+    fun actionFab(fab: FloatingActionButton) {
+        val springAnim = SpringAnimation(fab, SpringAnimation.ROTATION)
+        val springForce = SpringForce()
+        if (isMenuOpen.value == false){
+            springForce.finalPosition = 180f
+            springAnim.spring = springForce
+            springForce.dampingRatio = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
+            springForce.stiffness = SpringForce.STIFFNESS_VERY_LOW
+            springAnim.start()
+        }else{
+            springForce.finalPosition = 0f
+            springAnim.spring = springForce
+            springForce.stiffness = SpringForce.STIFFNESS_VERY_LOW
+            springForce.dampingRatio = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
+            springAnim.start()
         }
     }
 

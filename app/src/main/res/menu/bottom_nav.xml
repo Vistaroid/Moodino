@@ -9,6 +9,7 @@
         android:icon="@drawable/ic_chart"/>
 
     <item android:title=""
+        android:enabled="false"
         android:id="@+id/placeHolder" />
 
     <item android:title="@string/calenderStr"
