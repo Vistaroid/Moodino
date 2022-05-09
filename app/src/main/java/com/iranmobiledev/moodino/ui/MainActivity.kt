@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
@@ -13,15 +14,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
-import org.greenrobot.eventbus.EventBus
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
 import com.iranmobiledev.moodino.utlis.setupWithNavController
+import org.greenrobot.eventbus.EventBus
+import saman.zamani.persiandate.PersianDate
+
 
 class MainActivity : BaseActivity() {
 
     private val TAG = "mainActivity"
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var fabItems: ArrayList<LinearLayout>
     private val viewModel: MainActivityViewModel by viewModels()
 
 
@@ -36,9 +40,29 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         initGlobal(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        fabItems = arrayListOf(
+            binding.yesterdayLinearlayout,
+            binding.todayLinearlayout,
+            binding.anotherDayLinearlayout
+        )
         setContentView(binding.root)
         setupUi()
         onFabClickListener()
+        onFabItemsClickListener()
+    }
+
+    private fun onFabItemsClickListener() {
+
+        binding.todayButton.setOnClickListener {
+            val bundle = Bundle()
+            fabItems.forEach {
+                it.visibility = View.GONE
+            }
+            navController.navigate(R.id.addEntryFragment, bundle)
+        }
+
+        binding.yesterdayButton.setOnClickListener {}
+        binding.anotherDayButton.setOnClickListener {}
     }
 
     private fun setupUi() {
@@ -50,14 +74,11 @@ class MainActivity : BaseActivity() {
 
     private fun onFabClickListener() {
 
-        val menuItems = arrayListOf(
-            binding.yesterdayButtonButton,
-            binding.todayButton,
-            binding.anotherDayButton
-        )
-
+        fabItems.forEach {
+            it.visibility = View.GONE
+        }
         binding.fabMenu.setOnClickListener {
-            viewModel.actionMenu(menuItems)
+            viewModel.actionMenu(fabItems)
             viewModel.actionFab(binding.fabMenu)
         }
     }
@@ -69,9 +90,6 @@ class MainActivity : BaseActivity() {
         if (savedInstanceState != null) {
             super.onRestoreInstanceState(savedInstanceState)
         }
-        // Now that BottomNavigationBar has restored its instance state
-        // and its selectedItemId, we can proceed with setting up the
-        // BottomNavigationBar with Navigation
         setupBottomNavigationBar()
     }
 
@@ -111,16 +129,16 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showBottomNav() {
-//        binding.fab.show()
-//        binding.fab.isClickable = true
+        binding.fabMenu.show()
+        binding.fabMenu.isClickable = true
         binding.bottomAppBar.visibility = View.VISIBLE
         binding.bottomAppBar.performShow()
         binding.bottomNavigationView.visibility = View.VISIBLE
     }
 
     private fun hideBottomNav() {
-//        binding.fab.hide()
-//        binding.fab.isClickable = false
+        binding.fabMenu.hide()
+        binding.fabMenu.isClickable = false
         binding.bottomAppBar.visibility = View.GONE
         binding.bottomAppBar.performHide(true)
         binding.bottomNavigationView.visibility = View.GONE

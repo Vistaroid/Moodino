@@ -1,7 +1,8 @@
 package com.iranmobiledev.moodino.ui
 
+import android.view.View
 import android.view.animation.*
-import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import androidx.lifecycle.MutableLiveData
@@ -11,26 +12,35 @@ import com.iranmobiledev.moodino.base.BaseViewModel
 
 class MainActivityViewModel() : BaseViewModel() {
 
-    private var isMenuOpen = MutableLiveData(false)
+    var isMenuOpen = MutableLiveData(false)
 
-    fun actionMenu(menuItems: ArrayList<ImageButton>) {
+    fun actionMenu(menuItems: ArrayList<LinearLayout>) {
         if (isMenuOpen.value == false) openMenu(menuItems) else closeMenu(menuItems)
     }
 
-    private fun closeMenu(views: ArrayList<ImageButton>) {
+    private fun closeMenu(views: ArrayList<LinearLayout>) {
         isMenuOpen.postValue(false)
+
+
         views.forEach {
             it.animate()
                 .translationX(0f)
                 .translationY(0f)
                 .setInterpolator(LinearInterpolator())
+                .withEndAction {
+                    it.visibility = View.GONE
+                }
                 .start()
+
         }
     }
 
-    private fun openMenu(views: ArrayList<ImageButton>) {
+    private fun openMenu(views: ArrayList<LinearLayout>) {
         isMenuOpen.postValue(true)
         views.forEach {
+
+            it.visibility = View.VISIBLE
+
             //vertical animation
             val springAnim = SpringAnimation(it, SpringAnimation.TRANSLATION_Y)
             val springForce = SpringForce()
