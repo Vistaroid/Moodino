@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="menus">
+        <item>@drawable/ic_calendar</item>
+        <item>@drawable/ic_time</item>
+        <item>@drawable/ic_back_arrow</item>
+    </array>
+
+    <array name="menu_back_colors">
+        <item>@color/good_color</item>
+        <item>@color/rad_color</item>
+        <item>@color/awful_color</item>
+    </array>
+
+</resources>

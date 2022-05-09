@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.ui
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
@@ -12,16 +13,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
-import saman.zamani.persiandate.PersianDate
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
 import com.iranmobiledev.moodino.utlis.setupWithNavController
 
 class MainActivity : BaseActivity() {
 
+    private val TAG = "mainActivity"
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val viewModel: MainActivityViewModel by viewModels()
@@ -40,7 +38,7 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupUi()
-        setupClicks()
+        onFabClickListener()
     }
 
     private fun setupUi() {
@@ -50,22 +48,17 @@ class MainActivity : BaseActivity() {
         setFragmentDestinationChangeListener()
     }
 
-    private fun setupClicks() {
-        binding.fab.setOnClickListener { it ->
-            viewModel.actionFab(binding.fabMenu, it, this, true)
-        }
+    private fun onFabClickListener() {
 
-        binding.todayButton.setOnClickListener {
-            CoroutineScope(Dispatchers.Main).launch {
-                viewModel.actionFab(binding.fabMenu, it, MainActivity())
-            }
-            val bundle = Bundle()
-            val persianDate = PersianDate()
-            //TODO send date from bundle
-            navController.navigate(R.id.addEntryFragment, bundle)
-        }
+        val menuItems = arrayListOf(
+            binding.yesterdayButtonButton,
+            binding.todayButton,
+            binding.anotherDayButton
+        )
 
-        binding.otherDayButton.setOnClickListener{
+        binding.fabMenu.setOnClickListener {
+            viewModel.actionMenu(menuItems)
+            viewModel.actionFab(binding.fabMenu)
         }
     }
 
@@ -105,9 +98,9 @@ class MainActivity : BaseActivity() {
         return currentNavController?.value?.navigateUp() ?: false
     }
 
-    private fun setFragmentDestinationChangeListener(){
-        navController.addOnDestinationChangedListener { controller , destination , arguments ->
-            when(destination.id){
+    private fun setFragmentDestinationChangeListener() {
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
                 R.id.entriesFragment -> showBottomNav()
                 R.id.statsFragment -> showBottomNav()
                 R.id.calenderFragment -> showBottomNav()
@@ -117,20 +110,20 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun showBottomNav(){
-        binding.fab.show()
-        binding.fab.isClickable = true
+    private fun showBottomNav() {
+//        binding.fab.show()
+//        binding.fab.isClickable = true
         binding.bottomAppBar.visibility = View.VISIBLE
         binding.bottomAppBar.performShow()
-        binding.bottomNavigationView.visibility= View.VISIBLE
+        binding.bottomNavigationView.visibility = View.VISIBLE
     }
 
-    private fun hideBottomNav(){
-        binding.fab.hide()
-        binding.fab.isClickable = false
+    private fun hideBottomNav() {
+//        binding.fab.hide()
+//        binding.fab.isClickable = false
         binding.bottomAppBar.visibility = View.GONE
-        binding. bottomAppBar.performHide(true)
-        binding.bottomNavigationView.visibility= View.GONE
+        binding.bottomAppBar.performHide(true)
+        binding.bottomNavigationView.visibility = View.GONE
     }
 
 }
