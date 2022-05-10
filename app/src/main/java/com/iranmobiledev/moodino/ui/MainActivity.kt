@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -30,6 +31,7 @@ class MainActivity : BaseActivity() {
     private lateinit var navController: NavController
     private lateinit var fabItems: ArrayList<LinearLayout>
     private val viewModel: MainActivityViewModel by viewModels()
+    private var animationDuration: Long = 0
     private var currentNavController: LiveData<NavController>? = null
 
     override fun onStop() {
@@ -50,6 +52,9 @@ class MainActivity : BaseActivity() {
         setupUi()
         onFabClickListener()
         onFabItemsClickListener()
+
+        animationDuration = resources.getInteger(
+            android.R.integer.config_shortAnimTime).toLong()
     }
 
     private fun onFabItemsClickListener() {
@@ -73,6 +78,7 @@ class MainActivity : BaseActivity() {
         setFragmentDestinationChangeListener()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun onFabClickListener() {
 
         fabItems.forEach {
@@ -81,6 +87,15 @@ class MainActivity : BaseActivity() {
         binding.fabMenu.setOnClickListener {
             viewModel.actionMenu(fabItems)
             viewModel.actionFab(binding.fabMenu)
+            viewModel.crossFade(binding.dimLayout,animationDuration)
+
+            viewModel.isMenuOpen.observe(this){
+                binding.dimLayout.apply {
+                    setOnTouchListener { view, motionEvent ->
+                        return@setOnTouchListener it == true
+                    }
+                }
+            }
         }
     }
 
@@ -94,14 +109,10 @@ class MainActivity : BaseActivity() {
         setupBottomNavigationBar()
     }
 
-    /**
-     * Called on first creation and when restoring state.
-     */
+
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         val navGraphIds = listOf(R.navigation.nav_graph)
-
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
@@ -109,7 +120,6 @@ class MainActivity : BaseActivity() {
             containerId = R.id.nav_graph,
             intent = intent
         )
-
         currentNavController = controller
     }
 

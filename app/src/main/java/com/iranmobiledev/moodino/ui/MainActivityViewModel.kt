@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui
 
+import android.util.Log
 import android.view.View
 import android.view.animation.*
 import android.widget.LinearLayout
@@ -13,6 +14,7 @@ import com.iranmobiledev.moodino.data.RecyclerViewData
 
 class MainActivityViewModel() : BaseViewModel() {
 
+    val TAG = "mainActivityViewModel"
     var isMenuOpen = MutableLiveData(false)
 
     fun actionMenu(menuItems: ArrayList<LinearLayout>) {
@@ -21,8 +23,6 @@ class MainActivityViewModel() : BaseViewModel() {
 
     private fun closeMenu(views: ArrayList<LinearLayout>) {
         isMenuOpen.postValue(false)
-
-
         views.forEach {
             it.animate()
                 .translationX(0f)
@@ -82,18 +82,43 @@ class MainActivityViewModel() : BaseViewModel() {
     fun actionFab(fab: FloatingActionButton) {
         val springAnim = SpringAnimation(fab, SpringAnimation.ROTATION)
         val springForce = SpringForce()
-        if (isMenuOpen.value == false){
+        if (isMenuOpen.value == false) {
             springForce.finalPosition = 180f
             springAnim.spring = springForce
             springForce.dampingRatio = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
             springForce.stiffness = SpringForce.STIFFNESS_VERY_LOW
             springAnim.start()
-        }else{
+        } else {
             springForce.finalPosition = 0f
             springAnim.spring = springForce
             springForce.stiffness = SpringForce.STIFFNESS_VERY_LOW
             springForce.dampingRatio = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
             springAnim.start()
+        }
+    }
+
+    fun crossFade(dimLayout: LinearLayout, animationDuration: Long) {
+        Log.d(TAG, "crossFade: value ${isMenuOpen.value}")
+        when (isMenuOpen.value) {
+            false -> {
+                dimLayout.apply {
+                    alpha = 0f
+                    visibility = View.VISIBLE
+                    animate()
+                        .alpha(1f)
+                        .duration = animationDuration
+                }
+            }
+
+            true -> {
+                dimLayout.apply {
+                    alpha = 1f
+                    visibility = View.VISIBLE
+                    animate()
+                        .alpha(0f)
+                        .duration = animationDuration
+                }
+            }
         }
     }
 
