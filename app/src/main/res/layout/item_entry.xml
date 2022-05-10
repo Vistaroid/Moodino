@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="entryItem"
             type="com.iranmobiledev.moodino.data.Entry" />
@@ -101,12 +100,14 @@
 
         <ImageView
             android:id="@+id/moreIcon"
-            android:layout_width="@dimen/_25mdp"
-            android:layout_height="@dimen/_25mdp"
+            android:layout_width="@dimen/_30mdp"
+            android:layout_height="@dimen/_30mdp"
             app:layout_constraintBottom_toBottomOf="@+id/entryTimeTv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/entryTimeTv"
             android:src="@drawable/ic_more"
-            android:layout_marginEnd="@dimen/_12mdp"/>
+            android:layout_marginEnd="@dimen/_12mdp"
+            android:padding="@dimen/_3mdp"
+            android:background="?selectableItemBackgroundBorderless"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

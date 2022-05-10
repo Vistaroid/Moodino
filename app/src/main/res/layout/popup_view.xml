@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/_5mdp"
+    app:cardCornerRadius="@dimen/_12mdp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/editTv"
+            android:layout_width="@dimen/_150mdp"
+            android:layout_height="wrap_content"
+            android:text="@string/edit"
+            android:textSize="@dimen/_15mdp"
+            android:paddingTop="@dimen/_7mdp"
+            android:paddingBottom="@dimen/_7mdp"
+            android:paddingStart="@dimen/_10mdp"
+            android:paddingEnd="@dimen/_5mdp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?selectableItemBackground"/>
+        <TextView
+            android:id="@+id/deleteTv"
+            android:layout_width="@dimen/_150mdp"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:textSize="@dimen/_15mdp"
+            android:paddingTop="@dimen/_7mdp"
+            android:paddingBottom="@dimen/_7mdp"
+            android:paddingStart="@dimen/_10mdp"
+            android:paddingEnd="@dimen/_5mdp"
+            android:textColor="@android:color/holo_red_light"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?selectableItemBackground"/>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
