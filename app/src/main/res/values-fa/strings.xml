@@ -65,6 +65,11 @@
     <string name="a_week_with_us">یک هفته با ما</string>
     <string name="first_note">اولین یادداشت</string>
 
+    <!-- fab menu -->
+    <string name="today">امروز</string>
+    <string name="yesterday">دیروز</string>
+    <string name="otherDay">روز دیگر</string>
+
     <!--week days for days in a row-->
     <string name="sat">ش</string>
     <string name="sun">ی</string>

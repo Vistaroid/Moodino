@@ -52,6 +52,10 @@
     <string name="system_mode">System Default</string>
     <string name="cancel">Cancel</string>
 
+    <!-- fab menu -->
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="otherDay">Other Day</string>
 
     <!--stats fragment-->
     <string name="days_in_row">Days In a Row</string>
