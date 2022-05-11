@@ -33,5 +33,5 @@
     <color name="red_light">#FBD1D5</color>
     <color name="turquoise_dark">#29B391</color>
     <color name="turquoise_light">#D2F1E9</color>
-
+    <color name="shadow">#ACACAC</color>
 </resources>

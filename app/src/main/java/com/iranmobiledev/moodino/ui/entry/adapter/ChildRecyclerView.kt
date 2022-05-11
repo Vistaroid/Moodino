@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.PopupMenu
+import com.iranmobiledev.moodino.utlis.HalinoPopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -18,7 +18,6 @@ import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
 import saman.zamani.persiandate.PersianDate
-
 
 class ChildRecyclerView(
     private var entryEventLister: EntryEventLister,
@@ -38,6 +37,7 @@ class ChildRecyclerView(
         private val entryImageContainer: MaterialCardView = binding.imageContainer
         private val entryNote: TextView = binding.entryNote
         private val activityRv: RecyclerView = binding.activityRv
+
         private val spacer: View = binding.spacer
         private val entryDate: TextView = binding.entryDate
         private val entryViewGroup : ViewGroup = binding.entryViewGroup
@@ -56,6 +56,7 @@ class ChildRecyclerView(
         }
 
         private fun itemsVisibility(entry: Entry) {
+
             if (entries.size != 1)
                 entryDate.visibility = View.GONE
             else
@@ -111,13 +112,30 @@ class ChildRecyclerView(
     }
 
     private fun makePopupMenu(witchEntry: Entry, view: View) {
-        val popupMenu = PopupMenu(context, view)
-        popupMenu.inflate(R.menu.popup_menu)
-        popupMenu.setOnMenuItemClickListener { menuItem ->
+//        val layoutInflater =
+//            view.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        val popupView = layoutInflater.inflate(R.layout.popup_view, null)
+//        val popupWindow = PopupWindow(
+//            popupView,
+//            ViewGroup.LayoutParams.WRAP_CONTENT,
+//            ViewGroup.LayoutParams.WRAP_CONTENT
+//        )
+        val moodinoPopup = HalinoPopupMenu(view,R.layout.popup_view)
+        val contentView = moodinoPopup.getContentView()
+        val popupWindow = moodinoPopup.getPopupWindow()
+
+        popupWindow.isOutsideTouchable = true
+        popupWindow.elevation = 15f
+        popupWindow.animationStyle = R.anim.popup_window
+        popupWindow.showAsDropDown(view)
+
+        val deleteTv = contentView.findViewById<TextView>(R.id.deleteTv)
+        deleteTv.setOnClickListener {
             entryEventLister.delete(witchEntry)
+            popupWindow.dismiss()
         }
-        popupMenu.show()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
