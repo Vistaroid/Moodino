@@ -17,8 +17,21 @@ class MainActivityViewModel() : BaseViewModel() {
     val TAG = "mainActivityViewModel"
     var isMenuOpen = MutableLiveData(false)
 
-    fun actionMenu(menuItems: ArrayList<LinearLayout>) {
-        if (isMenuOpen.value == false) openMenu(menuItems) else closeMenu(menuItems)
+    fun actionMenu(
+        menuItems: ArrayList<LinearLayout>,
+        fab: FloatingActionButton,
+        dimLayout: LinearLayout,
+        animationDuration: Long
+    ) {
+        if (isMenuOpen.value == false) {
+            openMenu(menuItems)
+            actionFab(fab)
+            crossFade(dimLayout, animationDuration)
+        } else {
+            closeMenu(menuItems)
+            actionFab(fab)
+            crossFade(dimLayout, animationDuration)
+        }
     }
 
     private fun closeMenu(views: ArrayList<LinearLayout>) {
@@ -79,7 +92,7 @@ class MainActivityViewModel() : BaseViewModel() {
         }
     }
 
-    fun actionFab(fab: FloatingActionButton) {
+    private fun actionFab(fab: FloatingActionButton) {
         val springAnim = SpringAnimation(fab, SpringAnimation.ROTATION)
         val springForce = SpringForce()
         if (isMenuOpen.value == false) {
@@ -97,7 +110,7 @@ class MainActivityViewModel() : BaseViewModel() {
         }
     }
 
-    fun crossFade(dimLayout: LinearLayout, animationDuration: Long) {
+    private fun crossFade(dimLayout: LinearLayout, animationDuration: Long) {
         Log.d(TAG, "crossFade: value ${isMenuOpen.value}")
         when (isMenuOpen.value) {
             false -> {

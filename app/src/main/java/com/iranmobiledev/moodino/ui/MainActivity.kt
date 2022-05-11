@@ -54,7 +54,8 @@ class MainActivity : BaseActivity() {
         onFabItemsClickListener()
 
         animationDuration = resources.getInteger(
-            android.R.integer.config_shortAnimTime).toLong()
+            android.R.integer.config_shortAnimTime
+        ).toLong()
     }
 
     private fun onFabItemsClickListener() {
@@ -64,11 +65,16 @@ class MainActivity : BaseActivity() {
             fabItems.forEach {
                 it.visibility = View.GONE
             }
+            viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
             navController.navigate(R.id.addEntryFragment, bundle)
         }
 
-        binding.yesterdayButton.setOnClickListener {}
-        binding.anotherDayButton.setOnClickListener {}
+        binding.yesterdayButton.setOnClickListener {
+            viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+        }
+        binding.anotherDayButton.setOnClickListener {
+            viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+        }
     }
 
     private fun setupUi() {
@@ -80,19 +86,18 @@ class MainActivity : BaseActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun onFabClickListener() {
-
         fabItems.forEach {
             it.visibility = View.GONE
         }
-        binding.fabMenu.setOnClickListener {
-            viewModel.actionMenu(fabItems)
-            viewModel.actionFab(binding.fabMenu)
-            viewModel.crossFade(binding.dimLayout,animationDuration)
 
-            viewModel.isMenuOpen.observe(this){
+        binding.fabMenu.setOnClickListener {
+            viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+            viewModel.isMenuOpen.observe(this@MainActivity) { isOpen ->
                 binding.dimLayout.apply {
-                    setOnTouchListener { view, motionEvent ->
-                        return@setOnTouchListener it == true
+                    setOnTouchListener {
+                            _, _ ->
+                        if (isOpen) viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+                        return@setOnTouchListener isOpen == true
                     }
                 }
             }
