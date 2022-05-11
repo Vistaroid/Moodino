@@ -91,26 +91,31 @@ class AddEntryFragment : BaseFragment(), EmptyStateOnClickListener {
             binding.emojiViewAddEntry.radItem.id -> {
                 entry.title = RAD
                 entry.icon = R.drawable.emoji_rad
+                entry.type = 5
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.goodItem.id -> {
                 entry.icon = R.drawable.emoji_good
                 entry.title = GOOD
+                entry.type = 4
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.mehItem.id -> {
                 entry.icon = R.drawable.emoji_meh
                 entry.title = MEH
+                entry.type = 3
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.badItem.id -> {
                 entry.icon = R.drawable.emoji_bad
                 entry.title = BAD
+                entry.type = 2
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.awfulItem.id -> {
                 entry.icon = R.drawable.emoji_awful
                 entry.title = AWFUL
+                entry.type = 1
                 navigateToEntryDetailFragment(bundle)
             }
         }

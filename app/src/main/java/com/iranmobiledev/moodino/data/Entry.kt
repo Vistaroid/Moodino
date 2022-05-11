@@ -23,7 +23,8 @@ data class Entry(
     var photoPath : String = "",
     @DrawableRes var icon : Int = 0,
     var date : EntryDate? = null,
-    var time : EntryTime? = null
+    var time : EntryTime? = null,
+    var type : Int = -1
 ) : Parcelable
 
 @Parcelize

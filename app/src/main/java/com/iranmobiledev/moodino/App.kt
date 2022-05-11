@@ -21,10 +21,7 @@ import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
-import com.iranmobiledev.moodino.utlis.EmptyStateEnum
-import com.iranmobiledev.moodino.utlis.GlideImageLoader
-import com.iranmobiledev.moodino.utlis.ImageLoadingService
-import com.iranmobiledev.moodino.utlis.SharedPref
+import com.iranmobiledev.moodino.utlis.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.component.KoinComponent
@@ -37,7 +34,6 @@ class App : Application(), KoinComponent {
         super.onCreate()
 
         val database = AppDatabase.getAppDatabase(this)
-        SharedPref.create(this)
 
         val modules = module {
             viewModel { MainActivityViewModel() }
@@ -48,9 +44,10 @@ class App : Application(), KoinComponent {
             viewModel { StatsFragmentViewModel(get()) }
             factory<EntryRepository> { EntryRepositoryImpl(database.getEntryDao) }
             factory<ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
-            factory<MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(SharedPref.create(this@App))) }
+            factory<MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(get())) }
             single<ImageLoadingService> { GlideImageLoader() }
             single { EntryContainerAdapter() }
+            single { applicationContext.getSharedPreferences("sharedPref", MODE_PRIVATE) }
         }
 
         startKoin {
@@ -58,7 +55,10 @@ class App : Application(), KoinComponent {
             modules(modules)
         }
 
-        val sharedPref: SharedPreferences = SharedPref.create(this)
+        val sharedPref: SharedPreferences = get()
+        //TODO should change here
+        sharedPref.edit().putInt(LANGUAGE,1).apply()
+
         val firstEnter = sharedPref.getBoolean("first_enter", false)
         if (!firstEnter)
             makeDefaultActivities()

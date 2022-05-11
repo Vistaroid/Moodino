@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/entriesLable"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30mdp"
             android:background="@color/blue_light">
@@ -28,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/date"
-                android:textColor="@color/blue"
+                android:textColor="@color/blue_dark"
                 android:textSize="@dimen/_10mdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +39,7 @@
                 android:textStyle="bold"/>
 
             <ImageView
+                android:id="@+id/lableCircle"
                 android:layout_width="@dimen/_13mdp"
                 android:layout_height="@dimen/_13mdp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -44,14 +47,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_circle"
                 android:layout_marginStart="30dp"
-                app:tint="@color/blue" />
+                app:tint="@color/blue_dark"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/entryRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6mdp"
-            android:paddingBottom="@dimen/_24mdp"
-            android:clipToPadding="false"/>
+            />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

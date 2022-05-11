@@ -16,7 +16,6 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
@@ -40,14 +39,22 @@
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
+    <LinearLayout
+        android:id="@+id/dim_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#831C1C1C"
+        android:visibility="gone"
+        android:orientation="vertical" />
+
 
     <LinearLayout
         android:id="@+id/anotherDay_linearlayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="16dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ImageButton
@@ -64,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Another day"
+            android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -73,8 +81,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="16dp"
-        android:gravity="center"
         android:focusable="true"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ImageButton
@@ -91,6 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Today"
+            android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -117,9 +126,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Yesterday"
+            android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_menu"

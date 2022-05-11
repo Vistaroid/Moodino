@@ -4,8 +4,6 @@
     <color name="primary">#15B790</color>
     <color name="green">#79CD3C</color>
     <color name="orange">#FF8B3E</color>
-    <color name="blue">#62A2C0</color>
-    <color name="blue_light">#CFEDFF</color>
     <color name="pink_light">#EC625B</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
@@ -23,4 +21,17 @@
     <color name="awful_color">#EB4961</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="gray_light">#EFEFEF</color>
+
+    <!-- lable color-->
+    <color name="blue_dark">#62A2C0</color>
+    <color name="blue_light">#CFEDFF</color>
+    <color name="green_dark">#81B631</color>
+    <color name="green_light">#E5F3D2</color>
+    <color name="orange_dark">#E08E34</color>
+    <color name="orange_light">#FEE8D0</color>
+    <color name="red_dark">#D9223E</color>
+    <color name="red_light">#FBD1D5</color>
+    <color name="turquoise_dark">#29B391</color>
+    <color name="turquoise_light">#D2F1E9</color>
+
 </resources>

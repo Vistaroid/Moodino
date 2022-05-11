@@ -12,6 +12,7 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
+import com.iranmobiledev.moodino.utlis.ENTRY
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
@@ -58,7 +59,7 @@ class EntryDetailFragment : BaseFragment(),
 
     private fun navigateToEntryFragment() {
         findNavController().navigate(R.id.action_entryDetailFragment_to_entriesFragment, Bundle().apply {
-                putParcelable("entry", entry)
+                putParcelable(ENTRY, entry)
             })
     }
 

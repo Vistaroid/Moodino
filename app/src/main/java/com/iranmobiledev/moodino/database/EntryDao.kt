@@ -18,7 +18,7 @@ interface EntryDao {
     @Delete
     fun delete(entry : Entry) : Int
 
-    @Query("SELECT * FROM table_entry")
+    @Query("SELECT * FROM table_entry ORDER BY id DESC")
     fun getAll() : Flow<List<Entry>>
 
 }

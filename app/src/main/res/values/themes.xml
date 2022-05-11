@@ -19,7 +19,7 @@
         <item name="android:fontFamily">@font/shabnam_medium</item>
         <!--  Calendar Color-->
         <item name="colorTextDay">@color/gray_dark_700</item>
-        <item name="colorSelectDay">@color/blue</item>
+        <item name="colorSelectDay">@color/blue_dark</item>
         <item name="colorCurrentDay">@color/gray</item>
         <item name="colorTextDayName">@color/gray_dark_500</item>
         <item name="colorTextDaySelected">@color/white</item>
