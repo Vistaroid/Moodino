@@ -22,4 +22,5 @@
     <color name="bad_color">#D69048</color>
     <color name="awful_color">#EB4961</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="gray_light">#EFEFEF</color>
 </resources>

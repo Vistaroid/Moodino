@@ -20,11 +20,12 @@
             android:id="@+id/EntryIcon"
             android:layout_width="@dimen/_40mdp"
             android:layout_height="@dimen/_40mdp"
+            android:layout_margin="@dimen/_12mdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="@dimen/_12mdp"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <View
+            android:id="@+id/spacer"
             android:layout_width="@dimen/_2mdp"
             android:layout_height="0dp"
             android:background="@color/silver"
@@ -32,7 +33,8 @@
             app:layout_constraintStart_toStartOf="@+id/EntryIcon"
             app:layout_constraintTop_toBottomOf="@+id/EntryIcon"
             app:layout_constraintBottom_toBottomOf="@id/imageContainer"
-            android:layout_marginTop="@dimen/_8mdp"/>
+            android:layout_marginTop="@dimen/_8mdp"
+            />
 
         <TextView
             android:id="@+id/entryTitle"
@@ -40,8 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12mdp"
-            android:text="@{entryItem.title}"
             android:textSize="@dimen/_15mdp"
+            android:text="@{entryItem.title}"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintBottom_toBottomOf="@+id/EntryIcon"
             app:layout_constraintStart_toEndOf="@+id/EntryIcon"
@@ -63,7 +65,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
             app:layout_constraintTop_toBottomOf="@+id/entryTitle"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            />
 
         <TextView
             android:id="@+id/entryNote"
@@ -72,7 +75,6 @@
             android:layout_marginTop="@dimen/_10mdp"
             android:layout_marginEnd="@dimen/_12mdp"
             android:text="@{entryItem.note}"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
             app:layout_constraintTop_toBottomOf="@+id/activityRv"
@@ -96,7 +98,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 bind:loadImageUrl="@{entryItem.photoPath}"
-                tools:background="?colorPrimary"/>
+                tools:background="?colorPrimary" />
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView

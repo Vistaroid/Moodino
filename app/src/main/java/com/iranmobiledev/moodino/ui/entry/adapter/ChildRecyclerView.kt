@@ -34,9 +34,11 @@ class ChildRecyclerView(
         private val entryImageContainer : MaterialCardView = binding.imageContainer
         private val entryNote : TextView = binding.entryNote
         private val activityRv : RecyclerView = binding.activityRv
-
+        private val spacer : View = binding.spacer
         @SuppressLint("ResourceType", "SetTextI18n")
-        fun bind(entry: Entry) {
+        fun bind(entry: Entry, index: Int) {
+            if(index == 0)
+                spacer.visibility = View.GONE
             itemsVisibility(entry)
             binding.entryItem = entry
             entryIcon.setImageResource(entry.icon)
@@ -94,7 +96,7 @@ class ChildRecyclerView(
         notifyItemInserted(0)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(entries[position])
+        holder.bind(entries[position], position)
     }
     override fun getItemCount(): Int {
         return entries.size
