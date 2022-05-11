@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -30,6 +31,7 @@ class MainActivity : BaseActivity() {
     private lateinit var navController: NavController
     private lateinit var fabItems: ArrayList<LinearLayout>
     private val viewModel: MainActivityViewModel by viewModels()
+    private var animationDuration: Long = 0
     private var currentNavController: LiveData<NavController>? = null
 
     override fun onStop() {
@@ -50,6 +52,10 @@ class MainActivity : BaseActivity() {
         setupUi()
         onFabClickListener()
         onFabItemsClickListener()
+
+        animationDuration = resources.getInteger(
+            android.R.integer.config_shortAnimTime
+        ).toLong()
     }
 
     private fun onFabItemsClickListener() {
@@ -59,11 +65,16 @@ class MainActivity : BaseActivity() {
             fabItems.forEach {
                 it.visibility = View.GONE
             }
+            viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
             navController.navigate(R.id.addEntryFragment, bundle)
         }
 
-        binding.yesterdayButton.setOnClickListener {}
-        binding.anotherDayButton.setOnClickListener {}
+        binding.yesterdayButton.setOnClickListener {
+            viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+        }
+        binding.anotherDayButton.setOnClickListener {
+            viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+        }
     }
 
     private fun setupUi() {
@@ -73,14 +84,23 @@ class MainActivity : BaseActivity() {
         setFragmentDestinationChangeListener()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun onFabClickListener() {
-
         fabItems.forEach {
             it.visibility = View.GONE
         }
+
         binding.fabMenu.setOnClickListener {
-            viewModel.actionMenu(fabItems)
-            viewModel.actionFab(binding.fabMenu)
+            viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+            viewModel.isMenuOpen.observe(this@MainActivity) { isOpen ->
+                binding.dimLayout.apply {
+                    setOnTouchListener {
+                            _, _ ->
+                        if (isOpen) viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+                        return@setOnTouchListener isOpen == true
+                    }
+                }
+            }
         }
     }
 
@@ -94,14 +114,10 @@ class MainActivity : BaseActivity() {
         setupBottomNavigationBar()
     }
 
-    /**
-     * Called on first creation and when restoring state.
-     */
+
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         val navGraphIds = listOf(R.navigation.nav_graph)
-
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
@@ -109,7 +125,6 @@ class MainActivity : BaseActivity() {
             containerId = R.id.nav_graph,
             intent = intent
         )
-
         currentNavController = controller
     }
 
