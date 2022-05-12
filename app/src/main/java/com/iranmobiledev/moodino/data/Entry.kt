@@ -7,6 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.iranmobiledev.moodino.utlis.EmojiValue
 import kotlinx.android.parcel.Parcelize
 
 
@@ -23,7 +24,8 @@ data class Entry(
     var photoPath : String = "",
     @DrawableRes var icon : Int = 0,
     var date : EntryDate? = null,
-    var time : EntryTime? = null
+    var time : EntryTime? = null,
+    var emojiValue: Float= EmojiValue.MEH  // value is between 1 to 5
 ) : Parcelable
 
 @Parcelize

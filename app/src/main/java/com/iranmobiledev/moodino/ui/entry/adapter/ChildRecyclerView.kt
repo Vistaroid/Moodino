@@ -43,7 +43,7 @@ class ChildRecyclerView(
             moreIcon.setOnClickListener {
                 makePopupMenu(entry, it)
             }
-            setTitleColor(entry.title)
+            setTitleColor(entry)
         }
 
         private fun itemsVisibility(entry: Entry) {
@@ -55,13 +55,13 @@ class ChildRecyclerView(
                 activityRv.visibility = View.VISIBLE
         }
 
-        private fun setTitleColor(titleId: Int) {
-            when(titleId){
-                RAD -> entryTitle.setTextColor(ColorArray.rad)
-                GOOD -> entryTitle.setTextColor(ColorArray.good)
-                MEH -> entryTitle.setTextColor(ColorArray.meh)
-                BAD -> entryTitle.setTextColor(ColorArray.bad)
-                AWFUL -> entryTitle.setTextColor(ColorArray.awful)
+        private fun setTitleColor(entry: Entry) {
+            when(entry.emojiValue){
+                EmojiValue.RAD -> entryTitle.setTextColor(ColorArray.rad)
+                EmojiValue.GOOD -> entryTitle.setTextColor(ColorArray.good)
+                EmojiValue.MEH -> entryTitle.setTextColor(ColorArray.meh)
+                EmojiValue.BAD -> entryTitle.setTextColor(ColorArray.bad)
+                EmojiValue.AWFUL -> entryTitle.setTextColor(ColorArray.awful)
             }
         }
 

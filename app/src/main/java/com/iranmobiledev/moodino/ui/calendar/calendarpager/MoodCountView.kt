@@ -21,12 +21,12 @@ class MoodCountView(context: Context, attr: AttributeSet): LinearLayoutCompat(co
             val distinctList = entries.distinctBy { it.title }
             distinctList.forEach { item ->
                 val list = entries.filter { it.title == item.title }
-                when (item.title) {
-                    RAD -> binding.rad.setData(list.size, ColorArray.rad)
-                    GOOD -> binding.good.setData(list.size, ColorArray.good)
-                    MEH -> binding.meh.setData(list.size, ColorArray.meh)
-                    BAD -> binding.bad.setData(list.size, ColorArray.bad)
-                    AWFUL -> binding.awful.setData(list.size, ColorArray.awful)
+                when (item.emojiValue) {
+                    EmojiValue.AWFUL -> binding.rad.setData(list.size, ColorArray.rad)
+                    EmojiValue.BAD -> binding.good.setData(list.size, ColorArray.good)
+                    EmojiValue.MEH -> binding.meh.setData(list.size, ColorArray.meh)
+                    EmojiValue.GOOD -> binding.bad.setData(list.size, ColorArray.bad)
+                    EmojiValue.RAD -> binding.awful.setData(list.size, ColorArray.awful)
                 }
             }
         } else {

@@ -65,8 +65,11 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
 
         viewModel.fetchEntries()
 
-        Moods.RAD
-        RAD
+        val emoji= EmojiFactory.create(requireContext()).getEmoji(1f)
+            emoji.image
+            emoji.title
+            emoji.image
+            emoji.color
     }
 
     private fun bringDate(

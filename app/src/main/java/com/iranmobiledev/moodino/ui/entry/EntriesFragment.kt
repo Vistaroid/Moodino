@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.*
@@ -136,28 +135,28 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
         when(v){
             binding.emojisView.radItem.id -> {
-                entry.title = RAD
+                entry.emojiValue = EmojiValue.RAD
                 entry.icon = R.drawable.emoji_rad
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.goodItem.id -> {
                 entry.icon = R.drawable.emoji_good
-                entry.title = GOOD
+                entry.emojiValue = EmojiValue.GOOD
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.mehItem.id -> {
                 entry.icon = R.drawable.emoji_meh
-                entry.title = MEH
+                entry.emojiValue = EmojiValue.MEH
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.badItem.id -> {
                 entry.icon = R.drawable.emoji_bad
-                entry.title = BAD
+                entry.emojiValue = EmojiValue.BAD
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.awfulItem.id -> {
                 entry.icon = R.drawable.emoji_awful
-                entry.title = AWFUL
+                entry.emojiValue = EmojiValue.AWFUL
                 navigateToEntryDetail(entry)
             }
         }
