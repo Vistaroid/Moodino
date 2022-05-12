@@ -2,10 +2,16 @@ package com.iranmobiledev.moodino.utlis
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.DialogViewBinding
@@ -22,6 +28,25 @@ class MoodinoDialog(
 
     private var dialogEventListener: DialogEventListener? = null
     private lateinit var binding: DialogViewBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+//        if (getDialog() != null && getDialog().getWindow() != null) {
+//            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+//        }
+        dialog?.let { mDialog ->
+            mDialog.window?.let { window ->
+                window.setBackgroundDrawableResource(R.drawable.dialog_background)
+            }
+
+        }
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogViewBinding.inflate(layoutInflater)
