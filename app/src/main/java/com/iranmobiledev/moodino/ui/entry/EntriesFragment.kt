@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.ui.entry
 
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private val viewModel: EntryViewModel by viewModel()
     private val adapter: EntryContainerAdapter by inject()
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
+    private val sharePref : SharedPreferences by inject()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,9 +57,11 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private fun setupUi() {
         adapter.create(
             requireContext().applicationContext, this,
-            mutableListOf()
+            mutableListOf(),
+            sharePref.getInt(LANGUAGE, 1)
         )
         binding.mainToolbar.initialize(this)
+        binding.addEntryCardView.visibility = View.GONE
         recyclerView = binding.entriesContainerRv
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -69,10 +74,23 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                 binding.emptyStateContainer.visibility = View.VISIBLE
             else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE)
                 binding.emptyStateContainer.visibility = View.GONE
+            addEntryCardViewVisibilityCheck(it)
             adapter.setData(it)
         }
     }
-
+    private fun addEntryCardViewVisibilityCheck(entries : List<RecyclerViewData>){
+        val persianDate = PersianDateObj.persianDate
+        val today = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
+        var found = false
+        entries.forEach {
+            if(it.entries[0].date == today){
+                found = true
+                binding.addEntryCardView.visibility = View.GONE
+            }
+        }
+        if(!found)
+            binding.addEntryCardView.visibility = View.VISIBLE
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.emojisView.setEmptyStateOnClickListener(this)
@@ -138,26 +156,31 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             binding.emojisView.radItem.id -> {
                 entry.title = RAD
                 entry.icon = R.drawable.emoji_rad
+                entry.type = 5
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.goodItem.id -> {
                 entry.icon = R.drawable.emoji_good
                 entry.title = GOOD
+                entry.type = 4
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.mehItem.id -> {
                 entry.icon = R.drawable.emoji_meh
                 entry.title = MEH
+                entry.type = 3
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.badItem.id -> {
                 entry.icon = R.drawable.emoji_bad
                 entry.title = BAD
+                entry.type = 2
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.awfulItem.id -> {
                 entry.icon = R.drawable.emoji_awful
                 entry.title = AWFUL
+                entry.type = 1
                 navigateToEntryDetail(entry)
             }
         }
