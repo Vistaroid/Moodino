@@ -64,6 +64,9 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
         binding.mainToolbar.initialize(this)
 
         viewModel.fetchEntries()
+
+        Moods.RAD
+        RAD
     }
 
     private fun bringDate(

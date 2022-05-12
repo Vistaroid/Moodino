@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="emoji_title">
+        <item>@string/awful</item>
+        <item>@string/bad</item>
+        <item>@string/meh</item>
+        <item>@string/good</item>
+        <item>@string/rad</item>
+    </string-array>
+
+    <integer-array name="emoji_simple">
+        <item>@drawable/emoji_awful</item>
+        <item>@drawable/emoji_bad</item>
+        <item>@drawable/emoji_meh</item>
+        <item>@drawable/emoji_good</item>
+        <item>@drawable/emoji_rad</item>
+    </integer-array>
+
+    <integer-array name="emoji_child">
+        <item>@drawable/emoji_awful</item>
+        <item>@drawable/emoji_bad</item>
+        <item>@drawable/emoji_meh</item>
+        <item>@drawable/emoji_good</item>
+        <item>@drawable/emoji_rad</item>
+    </integer-array>
+
+</resources>

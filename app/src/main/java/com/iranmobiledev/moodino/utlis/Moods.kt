@@ -7,6 +7,44 @@ import com.iranmobiledev.moodino.R
  * for charts
  */
 
+data class Emoji(
+    private val value: Float,
+    private val title: String,
+    private val image: Int
+)
+
+enum class EmojiType{
+    SIMPLE,
+    CHILD
+}
+
+interface EmojiInterface{
+    fun getEmoji(): Emoji
+}
+
+class SimpleEmoji: EmojiInterface{
+    override fun getEmoji(): Emoji {
+        TODO("Not yet implemented")
+    }
+}
+
+class ChileEmoji: EmojiInterface{
+    override fun getEmoji(): Emoji {
+        TODO("Not yet implemented")
+    }
+}
+
+
+object EmojiFactory{
+
+    fun getEmoji(type: EmojiType): EmojiInterface{
+     return when(type){
+          EmojiType.SIMPLE -> SimpleEmoji()
+          EmojiType.CHILD -> ChileEmoji()
+      }
+    }
+}
+
 object Moods {
     val AWFUL = 1f
     val BAD = 2f
