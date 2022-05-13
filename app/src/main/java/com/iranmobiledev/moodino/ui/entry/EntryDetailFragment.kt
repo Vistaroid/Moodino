@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.utlis.ENTRY
+import com.iranmobiledev.moodino.utlis.EMOJI_VALUE
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
+import com.iranmobiledev.moodino.utlis.SHOULD_NAVIGATE
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -98,7 +99,10 @@ class EntryDetailFragment : BaseFragment(),
 
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            findNavController().navigate(R.id.action_entryDetailFragment_to_addEntryFragment)
+            findNavController().navigate(R.id.action_entryDetailFragment_to_addEntryFragment, Bundle().apply {
+                putBoolean(SHOULD_NAVIGATE, false)
+                putInt(EMOJI_VALUE, entry.emojiValue)
+            })
             initialFromBackPress = true
         }
     }

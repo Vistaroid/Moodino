@@ -34,5 +34,6 @@
 
     <declare-styleable name="EmojiView">
         <attr name="text" format="string"/>
+        <attr name="isSelectable" format="boolean"/>
     </declare-styleable>
 </resources>

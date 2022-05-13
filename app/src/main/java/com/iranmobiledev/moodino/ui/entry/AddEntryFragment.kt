@@ -1,11 +1,9 @@
 package com.iranmobiledev.moodino.ui.entry
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -26,6 +24,26 @@ class AddEntryFragment : BaseFragment(), EmptyStateOnClickListener {
 
     private lateinit var binding: AddEntryFragmentBinding
     private var persianDate: PersianDate = PersianDateObj.persianDate
+    private val entry = Entry()
+    private var canNavigate = true
+
+    override fun onStart() {
+        super.onStart()
+        canNavigate = arguments?.getBoolean(SHOULD_NAVIGATE, true)!!
+        val emojiValue = arguments?.getInt(EMOJI_VALUE)
+        emojiValue?.let { setEntryType(it) }
+    }
+
+    private fun setEntryType(emojiValue : Int) {
+        when(emojiValue){
+            1 -> setEntryAsAwful()
+            2 -> setEntryAsBad()
+            3 -> setEntryAsMeh()
+            4 -> setEntryAsGood()
+            5 -> setEntryAsRad()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,7 +96,6 @@ class AddEntryFragment : BaseFragment(), EmptyStateOnClickListener {
     }
 
     override fun onEmptyStateItemClicked(v: Int) {
-        val entry = Entry()
         val bundle = Bundle()
         entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         entry.time = EntryTime(
@@ -89,36 +106,61 @@ class AddEntryFragment : BaseFragment(), EmptyStateOnClickListener {
 
         when (v) {
             binding.emojiViewAddEntry.radItem.id -> {
-                entry.title = RAD
-                entry.icon = R.drawable.emoji_rad
-                entry.type = 5
+                setEntryAsRad()
+                if(canNavigate)
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.goodItem.id -> {
-                entry.icon = R.drawable.emoji_good
-                entry.title = GOOD
-                entry.type = 4
+                setEntryAsGood()
+                if(canNavigate)
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.mehItem.id -> {
-                entry.icon = R.drawable.emoji_meh
-                entry.title = MEH
-                entry.type = 3
+                setEntryAsMeh()
+                if(canNavigate)
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.badItem.id -> {
-                entry.icon = R.drawable.emoji_bad
-                entry.title = BAD
-                entry.type = 2
+                setEntryAsBad()
+                if(canNavigate)
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.awfulItem.id -> {
-                entry.icon = R.drawable.emoji_awful
-                entry.title = AWFUL
-                entry.type = 1
+                setEntryAsAwful()
+                if(canNavigate)
                 navigateToEntryDetailFragment(bundle)
             }
         }
+    }
+
+    private fun setEntryAsAwful() {
+        entry.icon = R.drawable.emoji_awful
+        entry.title = AWFUL
+        entry.emojiValue = 1
+    }
+
+    private fun setEntryAsBad() {
+        entry.icon = R.drawable.emoji_meh
+        entry.title = MEH
+        entry.emojiValue = 3
+    }
+
+    private fun setEntryAsMeh() {
+        entry.icon = R.drawable.emoji_meh
+        entry.title = MEH
+        entry.emojiValue = 3
+    }
+
+    private fun setEntryAsGood() {
+        entry.icon = R.drawable.emoji_good
+        entry.title = GOOD
+        entry.emojiValue = 4
+    }
+
+    private fun setEntryAsRad() {
+        entry.title = RAD
+        entry.icon = R.drawable.emoji_rad
+        entry.emojiValue = 5
     }
 
     private val onBackPress = object : OnBackPressedCallback(true){
