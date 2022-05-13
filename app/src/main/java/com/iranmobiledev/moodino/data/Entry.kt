@@ -1,9 +1,7 @@
 package com.iranmobiledev.moodino.data
 
 import android.os.Parcelable
-import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -24,7 +22,7 @@ data class Entry(
     @DrawableRes var icon : Int = 0,
     var date : EntryDate? = null,
     var time : EntryTime? = null,
-    var type : Int = -1
+    var emojiValue : Int = 3
 ) : Parcelable
 
 @Parcelize

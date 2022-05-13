@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.*
@@ -24,11 +23,9 @@ import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.*
 import io.github.persiancalendar.calendar.AbstractDate
-import kotlinx.coroutines.delay
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
-import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
 class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
@@ -156,31 +153,31 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             binding.emojisView.radItem.id -> {
                 entry.title = RAD
                 entry.icon = R.drawable.emoji_rad
-                entry.type = 5
+                entry.emojiValue = 5
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.goodItem.id -> {
                 entry.icon = R.drawable.emoji_good
                 entry.title = GOOD
-                entry.type = 4
+                entry.emojiValue = 4
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.mehItem.id -> {
                 entry.icon = R.drawable.emoji_meh
                 entry.title = MEH
-                entry.type = 3
+                entry.emojiValue = 3
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.badItem.id -> {
                 entry.icon = R.drawable.emoji_bad
                 entry.title = BAD
-                entry.type = 2
+                entry.emojiValue = 2
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.awfulItem.id -> {
                 entry.icon = R.drawable.emoji_awful
                 entry.title = AWFUL
-                entry.type = 1
+                entry.emojiValue = 1
                 navigateToEntryDetail(entry)
             }
         }
