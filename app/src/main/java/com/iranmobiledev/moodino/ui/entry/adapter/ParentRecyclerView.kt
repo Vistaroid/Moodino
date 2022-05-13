@@ -116,7 +116,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         private fun setupLableColor(data: RecyclerViewData): Int {
             var sum = 0
             data.entries.forEach {
-                sum += it.type
+                sum += it.emojiValue
             }
             return sum / data.entries.size
         }

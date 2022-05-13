@@ -1,11 +1,9 @@
 package com.iranmobiledev.moodino.ui.entry
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -91,31 +89,31 @@ class AddEntryFragment : BaseFragment(), EmptyStateOnClickListener {
             binding.emojiViewAddEntry.radItem.id -> {
                 entry.title = RAD
                 entry.icon = R.drawable.emoji_rad
-                entry.type = 5
+                entry.emojiValue = 5
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.goodItem.id -> {
                 entry.icon = R.drawable.emoji_good
                 entry.title = GOOD
-                entry.type = 4
+                entry.emojiValue = 4
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.mehItem.id -> {
                 entry.icon = R.drawable.emoji_meh
                 entry.title = MEH
-                entry.type = 3
+                entry.emojiValue = 3
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.badItem.id -> {
                 entry.icon = R.drawable.emoji_bad
                 entry.title = BAD
-                entry.type = 2
+                entry.emojiValue = 2
                 navigateToEntryDetailFragment(bundle)
             }
             binding.emojiViewAddEntry.awfulItem.id -> {
                 entry.icon = R.drawable.emoji_awful
                 entry.title = AWFUL
-                entry.type = 1
+                entry.emojiValue = 1
                 navigateToEntryDetailFragment(bundle)
             }
         }

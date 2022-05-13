@@ -7,14 +7,6 @@ import com.iranmobiledev.moodino.R
  * for charts
  */
 
-object Moods {
-    val AWFUL = 1f
-    val BAD = 2f
-    val MEH = 3f
-    val GOOD = 4f
-    val RAD  = 5f
-}
-
 const val AWFUL = R.string.awful
 const val BAD = R.string.bad
 const val MEH = R.string.meh
