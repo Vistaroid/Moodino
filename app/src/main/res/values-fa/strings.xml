@@ -126,4 +126,7 @@
     <string name="galleyTxt">گالری</string>
     <string name="cameraTxt">دوربین</string>
     <string name="choose">انتخاب کنید</string>
+    <string name="its_time_to_play_memories">وقتشه یکم خاطره بازی کنیم.</string>
+    <string name="it_was_first_entry_lets_make_some_other">این از اولیش\nوقتشه خاطرات بیشتری اضافه کنی.</string>
+
 </resources>

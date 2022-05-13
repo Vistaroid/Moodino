@@ -67,6 +67,15 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
     private fun setupObserver() {
         viewModel.getEntries().observe(viewLifecycleOwner) {
+            val item = it.find { x ->
+                x.entries.size > 1
+            }
+            if(it.isNotEmpty())
+               binding.bottomTextContainer.visibility = View.VISIBLE
+            if(item == null)
+                binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
+            else
+                binding.bottomText.setText(R.string.its_time_to_play_memories)
             if (it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE)
                 binding.emptyStateContainer.visibility = View.VISIBLE
             else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE)
