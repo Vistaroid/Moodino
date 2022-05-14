@@ -22,7 +22,7 @@
                 android:text="@string/more"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_15font_mdp"
+                android:textSize="15sp"
                 android:layout_gravity="center"/>
             
         </com.google.android.material.appbar.MaterialToolbar>
@@ -76,20 +76,21 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_20mdp"
+                android:layout_height="20dp"
                 android:background="@color/background"/>
 
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
+                android:id="@+id/btn_more_reminder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:ItemMore_title="@string/timer"
+                app:ItemMore_title="@string/reminder"
                 app:ItemMore_icon="@drawable/ic_timer"
                 android:clickable="true" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_20mdp"
+                android:layout_height="20dp"
                 android:background="@color/background"/>
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
@@ -129,7 +130,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_20mdp"
+                android:layout_height="20dp"
                 android:background="@color/background"/>
 
 
@@ -142,7 +143,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_20mdp"
+                android:layout_height="20dp"
                 android:background="@color/background"/>
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore

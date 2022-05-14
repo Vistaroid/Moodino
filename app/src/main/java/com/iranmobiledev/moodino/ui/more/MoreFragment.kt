@@ -8,15 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.BottomNavState
 import com.iranmobiledev.moodino.databinding.FragmentMoreBinding
 import com.iranmobiledev.moodino.ui.more.activities.ActivitiesActivity
-import com.iranmobiledev.moodino.ui.more.pinLock.PinLockActivity
+import com.iranmobiledev.moodino.ui.more.pinLock.PinLockFragment
 import org.greenrobot.eventbus.EventBus
 
 class MoreFragment : BaseFragment() {
@@ -45,7 +43,7 @@ class MoreFragment : BaseFragment() {
         }
 
         binding.btnMorePinLock.setOnClickListener {
-            requireActivity().startActivity(Intent(requireContext() , PinLockActivity::class.java))
+            findNavController().navigate(R.id.action_moreFragment_to_pinLockFragment)
         }
 
         binding.btnMoreColorMode.setOnClickListener {
@@ -54,6 +52,10 @@ class MoreFragment : BaseFragment() {
 
         binding.btnMoreLanguage.setOnClickListener {
             changeLanguage()
+        }
+
+        binding.btnMoreReminder.setOnClickListener {
+            findNavController().navigate(R.id.action_moreFragment_to_reminderFragment)
         }
     }
 

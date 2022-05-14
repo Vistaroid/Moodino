@@ -134,19 +134,29 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/select_photo_dialog.xml" value="0.22" />
         <entry key="..\:/project team/Moodino/app/src/main/res/menu/popup_menu.xml" value="0.27291666666666664" />
         <entry key="app/src/main/res/drawable/background_gradiant.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/background_ovel.xml" value="0.1185" />
         <entry key="app/src/main/res/drawable/background_pinlock.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/ic_back_arrow.xml" value="0.1185" />
         <entry key="app/src/main/res/drawable/ic_baseline_backspace_24.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_img_dont_locke.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_img_locked.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_lock_active.xml" value="0.1185" />
+        <entry key="app/src/main/res/drawable/ic_timer.xml" value="0.1185" />
         <entry key="app/src/main/res/layout/achievement_icon.xml" value="0.21784420289855072" />
+        <entry key="app/src/main/res/layout/achievements_card.xml" value="0.11930091185410334" />
         <entry key="app/src/main/res/layout/activity_pin_lock.xml" value="0.13611914915879084" />
         <entry key="app/src/main/res/layout/dialog_change_language.xml" value="0.11930091185410334" />
         <entry key="app/src/main/res/layout/dialog_change_mode.xml" value="0.11930091185410334" />
         <entry key="app/src/main/res/layout/dialog_pin_lock.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/dialog_view.xml" value="0.21784420289855072" />
+        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_pin_lock.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/fragment_reminder.xml" value="0.21784420289855072" />
+        <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.11930091185410334" />
+        <entry key="app/src/main/res/layout/fragment_timer.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/select_photo_dialog.xml" value="0.21784420289855072" />
+        <entry key="app/src/main/res/layout/view_more_item.xml" value="0.11930091185410334" />
       </map>
     </option>
   </component>

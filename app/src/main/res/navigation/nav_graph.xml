@@ -45,6 +45,13 @@
         android:name="com.iranmobiledev.moodino.ui.more.MoreFragment"
         android:label="fragment_more"
         tools:layout="@layout/fragment_more">
+        <action
+            android:id="@+id/action_moreFragment_to_reminderFragment"
+            app:destination="@id/reminderFragment" />
+
+        <action
+            android:id="@+id/action_moreFragment_to_pinLockFragment"
+            app:destination="@id/pinLockFragment" />
     </fragment>
     <fragment
         android:id="@+id/addEntryFragment"
@@ -77,5 +84,13 @@
         android:name="com.iranmobiledev.moodino.ui.entry.EmptyStateFragment"
         android:label="EmptyStateFragment"
         tools:layout="@layout/empty_state_fragment"/>
+    <fragment
+        android:id="@+id/reminderFragment"
+        android:name="com.iranmobiledev.moodino.ui.more.timer.ReminderFragment"
+        android:label="ReminderFragment" />
+    <fragment
+        android:id="@+id/pinLockFragment"
+        android:name="com.iranmobiledev.moodino.ui.more.pinLock.PinLockFragment"
+        android:label="PinLockFragment" />
 
 </navigation>

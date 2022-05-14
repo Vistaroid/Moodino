@@ -18,6 +18,7 @@
     <string name="change_color">Change Colors</string>
     <string name="color_mode">Color Mode</string>
     <string name="pin_lock">PIN Lock</string>
+    <string name="reminder">Reminder</string>
     <string name="start_week">Start of the Week</string>
     <string name="language">Language</string>
     <string name="backup_restore">Backup and Restore</string>
@@ -92,5 +93,7 @@
     <string name="error_pin">PIN lock not match</string>
     <string name="not_active_pin_lock">PIN Lock Not Active</string>
     <string name="active_pin_lock">PIN Lock Is Active</string>
+    <string name="add_reminder">Add Reminder</string>
+    <string name="add_reminder_success">Add Reminder Successed</string>
 
 </resources>

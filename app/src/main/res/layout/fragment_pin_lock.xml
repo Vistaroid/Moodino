@@ -5,20 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.more.pinLock.PinLockActivity"
     android:background="@color/background">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
-        app:elevation="@dimen/_4mdp">
+        app:elevation="4dp">
 
-        <com.iranmobiledev.moodino.ui.view.MoodinoToolBar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/pinLock_toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:ToolBar_title="@string/pin_lock"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/pin_lock"
+            app:navigationIcon="@drawable/ic_back_arrow"
+            app:navigationIconTint="@color/pink"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -32,11 +33,11 @@
 
         <ImageView
             android:id="@+id/iv_pinlock"
-            android:layout_width="@dimen/_70mdp"
-            android:layout_height="@dimen/_70mdp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:src="@drawable/ic_img_dont_locke"
             android:scaleType="fitXY"
-            android:layout_marginTop="@dimen/_25mdp"
+            android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
@@ -45,9 +46,9 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="@dimen/_15font_mdp"
+            android:textSize="15sp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_20mdp"/>
+            android:layout_marginTop="20dp"/>
 
 
         <RadioGroup
@@ -55,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/_35mdp"
+            android:layout_marginTop="35dp"
             android:background="@color/white">
 
             <RadioButton
@@ -63,27 +64,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Allow Fingerprint Access"
-                android:textSize="@dimen/_13font_mdp"
-                android:layout_marginStart="@dimen/_20mdp"
-                android:layout_marginEnd="@dimen/_20mdp"/>
+                android:textSize="13sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"/>
 
             <RadioButton
                 android:id="@+id/rb_pinlock_PINLock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Only PIN Lock Access"
-                android:textSize="@dimen/_13font_mdp"
-                android:layout_marginStart="@dimen/_20mdp"
-                android:layout_marginEnd="@dimen/_20mdp"/>
+                android:textSize="13sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"/>
 
             <RadioButton
                 android:id="@+id/rb_pinlock_off"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Off"
-                android:textSize="@dimen/_13font_mdp"
-                android:layout_marginStart="@dimen/_20mdp"
-                android:layout_marginEnd="@dimen/_20mdp"/>
+                android:textSize="13sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"/>
 
         </RadioGroup>
 
@@ -96,11 +97,11 @@
         android:layout_height="wrap_content"
         android:text="Active Pin Lock"
         android:layout_gravity="bottom"
-        android:layout_marginStart="@dimen/_10mdp"
-        android:layout_marginEnd="@dimen/_10mdp"
-        android:layout_marginBottom="@dimen/_5mdp"
-        android:padding="@dimen/_10mdp"
-        app:cornerRadius="@dimen/_10mdp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:padding="10dp"
+        app:cornerRadius="10dp"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
