@@ -13,6 +13,8 @@ import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.utlis.ENTRY
+import com.iranmobiledev.moodino.utlis.EmojiFactory
+import com.iranmobiledev.moodino.utlis.EmojiInterface
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
@@ -39,9 +41,22 @@ class EntryDetailFragment : BaseFragment(),
         savedInstanceState: Bundle?
     ): View {
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
+        setupUi(EmojiFactory.create(requireContext()))
         setupUtil()
         setupClicks()
         return binding.root
+    }
+
+    private fun setupUi(emojiFactory: EmojiInterface) {
+        val icon = when(entry.emojiValue){
+            1 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
+            2 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
+            3 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
+            4 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
+            5 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
+            else -> null
+        }
+        icon?.let { binding.entryiconDetail.setImageResource(it.image) }
     }
 
     private fun setupUtil() {

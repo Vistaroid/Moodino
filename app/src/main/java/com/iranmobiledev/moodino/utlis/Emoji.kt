@@ -22,17 +22,17 @@ data class Emoji(
 private class SimpleEmoji(private val context: Context): EmojiInterface{
     override fun getEmoji(value: Float): Emoji {
         return when (value) {
-            EmojiValue.AWFUL -> Emoji(value, context.getString(R.string.awful), R.drawable.emoji_awful, R.color.awful_color
+            EmojiValue.AWFUL -> Emoji(value, context.getString(R.string.awful), R.drawable.emoji_awful, ColorArray.awful
             )
-            EmojiValue.BAD -> Emoji(value, context.getString(R.string.bad), R.drawable.emoji_bad, R.color.bad_color
+            EmojiValue.BAD -> Emoji(value, context.getString(R.string.bad), R.drawable.emoji_bad, ColorArray.bad
             )
-            EmojiValue.MEH -> Emoji(value, context.getString(R.string.meh), R.drawable.emoji_meh, R.color.meh_color
+            EmojiValue.MEH -> Emoji(value, context.getString(R.string.meh), R.drawable.emoji_meh, ColorArray.meh
             )
-            EmojiValue.GOOD -> Emoji(value, context.getString(R.string.good), R.drawable.emoji_good, R.color.good_color
+            EmojiValue.GOOD -> Emoji(value, context.getString(R.string.good), R.drawable.emoji_good, ColorArray.good
             )
-            EmojiValue.RAD -> Emoji(value, context.getString(R.string.rad), R.drawable.emoji_rad, R.color.rad_color
+            EmojiValue.RAD -> Emoji(value, context.getString(R.string.rad), R.drawable.emoji_rad, ColorArray.rad
             )
-            else -> Emoji(value, context.getString(R.string.meh), R.drawable.emoji_meh, R.color.meh_color
+            else -> Emoji(value, context.getString(R.string.meh), R.drawable.emoji_meh, ColorArray.meh
             )
         }
     }

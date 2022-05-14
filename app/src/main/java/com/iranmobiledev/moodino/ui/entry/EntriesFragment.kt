@@ -160,32 +160,22 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
         when(v){
             binding.emojisView.radItem.id -> {
-                entry.title = RAD
-                entry.icon = R.drawable.emoji_rad
                 entry.emojiValue = 5
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.goodItem.id -> {
-                entry.icon = R.drawable.emoji_good
-                entry.title = GOOD
                 entry.emojiValue = 4
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.mehItem.id -> {
-                entry.icon = R.drawable.emoji_meh
-                entry.title = MEH
                 entry.emojiValue = 3
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.badItem.id -> {
-                entry.icon = R.drawable.emoji_bad
-                entry.title = BAD
                 entry.emojiValue = 2
                 navigateToEntryDetail(entry)
             }
             binding.emojisView.awfulItem.id -> {
-                entry.icon = R.drawable.emoji_awful
-                entry.title = AWFUL
                 entry.emojiValue = 1
                 navigateToEntryDetail(entry)
             }
