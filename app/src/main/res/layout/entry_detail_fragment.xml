@@ -25,7 +25,7 @@
                     app:tint="?colorPrimary"/>
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/entryicon_detail"
                     android:layout_width="@dimen/_16mdp"
                     android:layout_height="@dimen/_16mdp"
                     app:layout_constraintBottom_toBottomOf="@id/backIv"

@@ -29,7 +29,7 @@ class ChildRecyclerView(
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+        private val emojiFactory = EmojiFactory.create(context)
         private val binding: ItemEntryBinding = ItemEntryBinding.bind(itemView)
         private val entryIcon: ImageView = binding.EntryIcon
         private val moreIcon: ImageView = binding.moreIcon
@@ -44,19 +44,19 @@ class ChildRecyclerView(
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry, index: Int) {
-            if (index == entries.size - 1)
-                spacer.visibility = View.GONE
-            itemsVisibility(entry)
+            val emoji = emojiFactory.getEmoji(entry.emojiValue.toFloat())
             binding.entryItem = entry
-            entryIcon.setImageResource(entry.icon)
-
+            itemsVisibility(entry, index)
+            entryIcon.setImageResource(emoji.image)
             entryViewGroup.setOnClickListener { makePopupMenu(entry, moreIcon) }
             moreIcon.setOnClickListener { makePopupMenu(entry, it) }
-            setTitleColor(entry.title)
+            entryTitle.text = emoji.title
+            entryTitle.setTextColor(emoji.color)
         }
 
-        private fun itemsVisibility(entry: Entry) {
-
+        private fun itemsVisibility(entry: Entry, index: Int) {
+            if (index == entries.size - 1)
+                spacer.visibility = View.GONE
             if (entries.size != 1)
                 entryDate.visibility = View.GONE
             else
@@ -99,27 +99,9 @@ class ChildRecyclerView(
             return persianDateFormat(language, pattern = "j F")
         }
 
-        private fun setTitleColor(titleId: Int) {
-            when (titleId) {
-                RAD -> entryTitle.setTextColor(ColorArray.rad)
-                GOOD -> entryTitle.setTextColor(ColorArray.good)
-                MEH -> entryTitle.setTextColor(ColorArray.meh)
-                BAD -> entryTitle.setTextColor(ColorArray.bad)
-                AWFUL -> entryTitle.setTextColor(ColorArray.awful)
-            }
-        }
-
     }
 
     private fun makePopupMenu(witchEntry: Entry, view: View) {
-//        val layoutInflater =
-//            view.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//        val popupView = layoutInflater.inflate(R.layout.popup_view, null)
-//        val popupWindow = PopupWindow(
-//            popupView,
-//            ViewGroup.LayoutParams.WRAP_CONTENT,
-//            ViewGroup.LayoutParams.WRAP_CONTENT
-//        )
         val moodinoPopup = HalinoPopupMenu(view,R.layout.popup_view)
         val contentView = moodinoPopup.getContentView()
         val popupWindow = moodinoPopup.getPopupWindow()
