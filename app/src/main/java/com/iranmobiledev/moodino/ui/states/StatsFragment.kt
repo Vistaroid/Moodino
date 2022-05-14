@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -22,8 +23,7 @@ import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.formatNumber
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
-import com.iranmobiledev.moodino.utlis.ChartValueFormatter
-import com.iranmobiledev.moodino.utlis.ColorArray
+import com.iranmobiledev.moodino.utlis.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -71,8 +71,38 @@ class StatsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        model.getEntries()
         initDayInRowCard()
         initLineChartCard()
+        initPieChartCard()
+    }
+
+    private fun initPieChartCard() {
+        setupMoodsCount()
+        model.initPieChart(binding.moodCountPieChart, requireContext())
+    }
+
+    private fun setupMoodsCount() {
+        model.entries.observe(viewLifecycleOwner) { entries ->
+            if (!entries.isNullOrEmpty()) {
+                val distinctList = entries.distinctBy { it.title }
+                distinctList.forEach { item ->
+                    val list = entries.filter { it.title == item.title }
+                    when (item.title) {
+                        RAD -> binding.moodCountVeryHappy.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                        GOOD -> binding.moodCountHappy.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                        MEH -> binding.moodCountNothing.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                        BAD -> binding.moodCountBad.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                        AWFUL -> binding.moodCountVeryBad.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                    }
+                }
+            }
+        }
     }
 
     private fun initDayInRowCard() {
@@ -94,7 +124,7 @@ class StatsFragment : BaseFragment() {
 
     private fun initLineChartCard() {
         model.initLineChart()
-        model.lineChartEntries.observe(viewLifecycleOwner){
+        model.lineChartEntries.observe(viewLifecycleOwner) {
             val dataSet = setupLineChart(it)
             customizeLineChart(dataSet)
             binding.moodsLineChart.apply {

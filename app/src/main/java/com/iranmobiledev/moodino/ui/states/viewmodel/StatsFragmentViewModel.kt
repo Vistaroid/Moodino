@@ -6,14 +6,16 @@ import android.graphics.Color
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
-import com.iranmobiledev.moodino.utlis.ColorArray
+import com.iranmobiledev.moodino.utlis.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -29,8 +31,9 @@ class StatsFragmentViewModel(
 
     val TAG = "viewmodelStats"
 
-    private val _lineChartEntries = MutableLiveData<List<Entry>>(listOf(Entry(1f, 2f)))
-    private val _lineChartDates = MutableLiveData<List<Int>>(listOf(10))
+    private val _entries = MutableLiveData(listOf<com.iranmobiledev.moodino.data.Entry>())
+    private val _lineChartEntries = MutableLiveData(listOf(Entry(1f, 2f)))
+    private val _lineChartDates = MutableLiveData(listOf(10))
     private val pieChartEntries = mutableListOf<PieEntry>()
     private val _weekDays = MutableLiveData<ArrayList<Int>>()
     private val _longestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
@@ -46,12 +49,22 @@ class StatsFragmentViewModel(
         get() = _latestChainLiveData
     val lastFiveDaysStatus: LiveData<List<Boolean>>
         get() = _lastFiveDaysStatus
+    val entries: LiveData<List<com.iranmobiledev.moodino.data.Entry>>
+        get() = _entries
     val weekDays: LiveData<ArrayList<Int>>
         get() = _weekDays
 
-    fun initDaysInRow() {
+    fun getEntries() {
         viewModelScope.launch {
             entryRepository.getAll().collectLatest { entries ->
+                _entries.postValue(entries)
+            }
+        }
+    }
+
+    fun initDaysInRow() {
+        viewModelScope.launch {
+            _entries.asFlow().collectLatest{ entries ->
 
                 //Adding week days name to daysInRow card
                 launch {
@@ -138,7 +151,7 @@ class StatsFragmentViewModel(
 
     fun initLineChart() {
         viewModelScope.launch {
-            entryRepository.getAll().collectLatest {
+            _entries.asFlow().collectLatest {
                 launch {
                     getEntriesForLineChart(it)
                 }

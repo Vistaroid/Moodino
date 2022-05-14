@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.ui.calendar.calendarpager
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.iranmobiledev.moodino.data.Entry
@@ -20,6 +21,7 @@ class MoodCountView(context: Context, attr: AttributeSet): LinearLayoutCompat(co
         if (!entries.isNullOrEmpty()) {
             val distinctList = entries.distinctBy { it.title }
             distinctList.forEach { item ->
+                Log.d("calendarcount", "getEntriesCount: $item")
                 val list = entries.filter { it.title == item.title }
                 when (item.title) {
                     RAD -> binding.rad.setData(list.size, ColorArray.rad)
