@@ -12,17 +12,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.formatNumber
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
-import com.iranmobiledev.moodino.utlis.ChartValueFormatter
-import com.iranmobiledev.moodino.utlis.ColorArray
+import com.iranmobiledev.moodino.utlis.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -35,6 +31,7 @@ class StatsFragment : BaseFragment() {
     private lateinit var daysContainer: ArrayList<FrameLayout>
     private lateinit var daysTextView: ArrayList<TextView>
     private lateinit var daysIcon: ArrayList<ImageView>
+    private lateinit var a: MoodCountView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,8 +66,96 @@ class StatsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        model.getEntries()
         initDayInRowCard()
         initLineChartCard()
+        initPieChartCard()
+    }
+
+    private fun initPieChartCard() {
+        setupMoodsCount()
+
+        val colors = arrayListOf<Int>(ColorArray.rad,ColorArray.good,ColorArray.meh,ColorArray.bad,ColorArray.awful)
+
+        val pieChart = binding.moodCountPieChart
+
+        val moodsCount = mutableListOf(
+            PieEntry(0f, ""),
+            PieEntry(0f, ""),
+            PieEntry(0f, ""),
+            PieEntry(0f, ""),
+            PieEntry(0f, "")
+        )
+
+        model.entries.observe(viewLifecycleOwner) { entries ->
+
+            var countSum = 0
+
+            if (!entries.isNullOrEmpty()) {
+                val distinctList = entries.distinctBy { it.title }
+                distinctList.forEach { item ->
+                    val list = entries.filter { it.title == item.title }
+                    countSum += list.size
+                    when (item.title) {
+                        RAD -> moodsCount[0] = PieEntry(list.size.toFloat(), "")
+                        GOOD -> moodsCount[1] = PieEntry(list.size.toFloat(), "")
+                        MEH -> moodsCount[2] = PieEntry(list.size.toFloat(), "")
+                        BAD -> moodsCount[3] = PieEntry(list.size.toFloat(), "")
+                        AWFUL -> moodsCount[4] = PieEntry(list.size.toFloat(), "")
+                    }
+                }
+            }
+
+            val dataSet = PieDataSet(moodsCount, null)
+            dataSet.apply {
+                setColors(colors)
+            }
+
+
+            val pieData = PieData(dataSet)
+            pieData.apply {
+                setDrawValues(true)
+                setValueTextSize(0f)
+                setValueTextColor(Color.TRANSPARENT)
+            }
+
+            pieChart.apply {
+                data = pieData
+                description.isEnabled = false
+                isDrawHoleEnabled = true
+                holeRadius = 48f
+                setDrawEntryLabels(false)
+                legend.isEnabled = false
+                centerText = countSum.toString()
+                setCenterTextColor(Color.GRAY)
+                setCenterTextSize(24f)
+                notifyDataSetChanged()
+                invalidate()
+            }
+        }
+    }
+
+    private fun setupMoodsCount() {
+        model.entries.observe(viewLifecycleOwner) { entries ->
+            if (!entries.isNullOrEmpty()) {
+                val distinctList = entries.distinctBy { it.title }
+                distinctList.forEach { item ->
+                    val list = entries.filter { it.title == item.title }
+                    when (item.title) {
+                        RAD -> binding.moodCountVeryHappy.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                        GOOD -> binding.moodCountHappy.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                        MEH -> binding.moodCountNothing.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                        BAD -> binding.moodCountBad.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                        AWFUL -> binding.moodCountVeryBad.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                            list.size.toString()
+                    }
+                }
+            }
+        }
     }
 
     private fun initDayInRowCard() {
@@ -92,7 +177,7 @@ class StatsFragment : BaseFragment() {
 
     private fun initLineChartCard() {
         model.initLineChart()
-        model.lineChartEntries.observe(viewLifecycleOwner){
+        model.lineChartEntries.observe(viewLifecycleOwner) {
             val dataSet = setupLineChart(it)
             customizeLineChart(dataSet)
             binding.moodsLineChart.apply {
@@ -126,7 +211,6 @@ class StatsFragment : BaseFragment() {
                         setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
                     }
                 }
-
             }
         }
     }

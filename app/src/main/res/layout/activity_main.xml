@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Another day"
+            android:text="@string/otherDay"
             android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
@@ -98,7 +98,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today"
+            android:text="@string/today"
             android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
@@ -125,7 +125,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yesterday"
+            android:text="@string/yesterday"
             android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>

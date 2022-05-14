@@ -10,5 +10,5 @@ object ColorArray {
     val meh = ColorTemplate.rgb("#5B91AD")
     val rad = ColorTemplate.rgb("#2DAA8A")
 
-    val colors = mutableListOf(awful, good, bad, meh, rad)
+    val colors = mutableListOf(rad, good, meh, bad, awful)
 }
