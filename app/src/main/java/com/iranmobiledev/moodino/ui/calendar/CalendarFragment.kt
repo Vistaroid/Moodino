@@ -64,6 +64,7 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
         binding.mainToolbar.initialize(this)
 
         viewModel.fetchEntries()
+
     }
 
     private fun bringDate(
