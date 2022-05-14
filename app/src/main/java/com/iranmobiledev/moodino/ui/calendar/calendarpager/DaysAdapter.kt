@@ -71,7 +71,7 @@ class DaysAdapter(private val context: Context,private val sharedDayViewData: Sh
             val jdn = itemDayView.jdn ?: return
             calendarPager?.let { it.onDayClicked(jdn) }
             selectDay(itemDayView.dayOfMonth)
-            Toast.makeText(v.context, jdn.dayOfWeekName + " " + itemDayView.dayOfMonth , Toast.LENGTH_SHORT).show()
+            //Toast.makeText(v.context, jdn.dayOfWeekName + " " + itemDayView.dayOfMonth , Toast.LENGTH_SHORT).show()
         }
 
 //        override fun onLongClick(v: View): Boolean {

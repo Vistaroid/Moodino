@@ -81,8 +81,9 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
         viewModel.entries.observe(viewLifecycleOwner) {
             CoroutineScope(Dispatchers.Main).launch {
                 delay(200)
-                binding.calendarPager.setEntries(it)
-                binding.moodCountView.setEntries(it)
+                val filterList= it.filter { it.date?.year == date.year && it.date?.month == date.month }
+                binding.calendarPager.setEntries(filterList)
+                binding.moodCountView.setEntries(filterList)
             }
         }
     }
