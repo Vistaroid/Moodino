@@ -126,6 +126,7 @@ class ChildRecyclerView(
 
         popupWindow.isOutsideTouchable = true
         popupWindow.elevation = 15f
+        popupWindow.isFocusable = true
         popupWindow.animationStyle = R.anim.popup_window
         popupWindow.showAsDropDown(view)
 

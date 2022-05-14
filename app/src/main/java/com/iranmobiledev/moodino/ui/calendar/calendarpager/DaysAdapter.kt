@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.ui.calendar.calendarpager
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.ui.calendar.CalendarFragmentDirections
+import com.iranmobiledev.moodino.utlis.DAY_OF_MONTH
 
 class DaysAdapter(private val context: Context,private val sharedDayViewData: SharedDayViewData,
                private val calendarPager: CalendarPager?): RecyclerView.Adapter<DaysAdapter.ViewHolder>() {
@@ -73,7 +75,7 @@ class DaysAdapter(private val context: Context,private val sharedDayViewData: Sh
             val jdn = itemDayView.jdn ?: return
             calendarPager?.let { it.onDayClicked(jdn) }
             selectDay(itemDayView.dayOfMonth)
-            v.findNavController().navigate(CalendarFragmentDirections.actionCalenderFragmentToDayEntriesFragment())
+            v.findNavController().navigate(CalendarFragmentDirections.actionCalenderFragmentToDayEntriesFragment(day = itemDayView.dayOfMonth))
             //Toast.makeText(v.context, jdn.dayOfWeekName + " " + itemDayView.dayOfMonth , Toast.LENGTH_SHORT).show()
         }
 

@@ -128,5 +128,6 @@
     <string name="choose">انتخاب کنید</string>
     <string name="its_time_to_play_memories">وقتشه یکم خاطره بازی کنیم.</string>
     <string name="it_was_first_entry_lets_make_some_other">این از اولیش\nوقتشه خاطرات بیشتری اضافه کنی.</string>
-
+    <string name="add_new_entry">افزودن خاطره جدید</string>
+    <string name="not_found">واسه امروز چیزی ثبت نکردی</string>
 </resources>
