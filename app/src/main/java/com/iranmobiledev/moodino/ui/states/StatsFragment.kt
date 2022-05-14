@@ -19,6 +19,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.formatNumber
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.ChartValueFormatter
@@ -35,6 +36,7 @@ class StatsFragment : BaseFragment() {
     private lateinit var daysContainer: ArrayList<FrameLayout>
     private lateinit var daysTextView: ArrayList<TextView>
     private lateinit var daysIcon: ArrayList<ImageView>
+    private lateinit var a: MoodCountView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -126,7 +128,6 @@ class StatsFragment : BaseFragment() {
                         setImageDrawable(resources.getDrawable(R.drawable.ic_cross))
                     }
                 }
-
             }
         }
     }

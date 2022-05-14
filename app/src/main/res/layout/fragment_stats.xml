@@ -2,791 +2,741 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView_states"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.states.StatsFragment"
-    android:id="@+id/rootView_states">
-
-   <ScrollView
-       android:id="@+id/scrollView_states"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-       <androidx.constraintlayout.widget.ConstraintLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
-
-           <com.google.android.material.card.MaterialCardView
-               android:id="@+id/daysInRowCard"
-               style="@style/CardViewStyleNoPadding"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintBottom_toTopOf="@+id/moodChartCard"
-               app:layout_constraintTop_toTopOf="parent"
-               app:cardElevation="4dp"
-               android:outlineSpotShadowColor="@color/shadow"
-               android:outlineAmbientShadowColor="@color/shadow">
-
-               <androidx.constraintlayout.widget.ConstraintLayout
-                   android:id="@+id/linearDays"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-
-                   <TextView
-                       android:id="@+id/daysInRowHeader"
-                       style="@style/cardHeaderTextStyle"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:padding="16dp"
-                       android:text="@string/days_in_row"
-                       android:textAlignment="viewStart"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toTopOf="parent" />
-
-                   <ImageButton
-                       android:id="@+id/moreImageButtonMoodChart"
-                       android:layout_width="24dp"
-                       android:layout_height="24dp"
-                       android:background="@color/white"
-                       android:src="@drawable/ic_more_outlined"
-                       app:layout_constraintBottom_toBottomOf="@+id/daysInRowHeader"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintHorizontal_bias="0.921"
-                       app:layout_constraintStart_toEndOf="@+id/daysInRowHeader"
-                       app:layout_constraintTop_toTopOf="parent"
-                       app:layout_constraintVertical_bias="0.514" />
-
-                   <ImageButton
-                       android:id="@+id/shareImageButton"
-                       android:layout_width="24dp"
-                       android:layout_height="24dp"
-                       android:layout_marginEnd="12dp"
-                       android:background="@color/white"
-                       android:src="@drawable/ic_share"
-                       app:layout_constraintBottom_toBottomOf="@+id/daysInRowHeader"
-                       app:layout_constraintEnd_toStartOf="@+id/moreImageButtonMoodChart"
-                       app:layout_constraintHorizontal_bias="0.941"
-                       app:layout_constraintStart_toEndOf="@+id/daysInRowHeader"
-                       app:layout_constraintTop_toTopOf="parent"
-                       app:layout_constraintVertical_bias="0.514"
-                       app:tint="@color/black" />
-
-                   <FrameLayout
-                       android:id="@+id/frameLayout"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:paddingBottom="16dp"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/daysInRowHeader"
-                       app:layout_constraintVertical_bias="0.0">
-
-                       <View
-                           android:id="@+id/view"
-                           android:layout_width="match_parent"
-                           android:layout_height="1dp"
-                           android:layout_gravity="center"
-                           android:layout_marginRight="16dp"
-                           android:layout_marginBottom="9dp"
-                           android:background="@color/gray"
-                           app:layout_constraintBottom_toBottomOf="parent"
-                           app:layout_constraintEnd_toEndOf="parent"
-                           app:layout_constraintTop_toBottomOf="@+id/daysInRowHeader" />
-
-                       <androidx.constraintlayout.widget.ConstraintLayout
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:layout_gravity="center"
-                           android:orientation="horizontal"
-                           app:layout_constraintBottom_toTopOf="@+id/view"
-                           app:layout_constraintEnd_toEndOf="parent"
-                           app:layout_constraintStart_toStartOf="parent"
-                           app:layout_constraintTop_toBottomOf="@+id/daysInRowHeader">
-
-                           <LinearLayout
-                               android:id="@+id/firstDay"
-                               android:layout_width="36dp"
-                               android:layout_height="wrap_content"
-                               android:orientation="vertical"
-                               app:layout_constraintEnd_toStartOf="@+id/secondDay"
-                               app:layout_constraintHorizontal_bias="0.5"
-                               app:layout_constraintStart_toStartOf="parent"
-                               app:layout_constraintTop_toTopOf="parent">
-
-                               <FrameLayout
-                                   android:id="@+id/firstDayFrameLayout"
-                                   android:layout_width="36dp"
-                                   android:layout_height="36dp"
-                                   android:background="@drawable/circle_shape">
-
-                                   <ImageView
-                                       android:id="@+id/firstDayIV"
-                                       android:layout_width="14dp"
-                                       android:layout_height="14dp"
-                                       android:layout_gravity="center"
-                                       android:src="@drawable/ic_cross" />
-                               </FrameLayout>
-
-                               <TextView
-                                   android:id="@+id/dayOneTextView"
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:layout_gravity="center"
-                                   android:text="@string/mon" />
-                           </LinearLayout>
-
-
-                           <LinearLayout
-                               android:id="@+id/secondDay"
-                               android:layout_width="36dp"
-                               android:layout_height="wrap_content"
-                               android:orientation="vertical"
-                               app:layout_constraintEnd_toStartOf="@+id/thirdDay"
-                               app:layout_constraintHorizontal_bias="0.5"
-                               app:layout_constraintStart_toEndOf="@+id/firstDay"
-                               app:layout_constraintTop_toTopOf="parent">
-
-                               <FrameLayout
-                                   android:id="@+id/secondDayFrameLayout"
-                                   android:layout_width="36dp"
-                                   android:layout_height="36dp"
-                                   android:background="@drawable/circle_shape">
-
-                                   <ImageView
-                                       android:id="@+id/secondDayIV"
-                                       android:layout_width="14dp"
-                                       android:layout_height="14dp"
-                                       android:layout_gravity="center"
-                                       android:src="@drawable/ic_cross" />
-                               </FrameLayout>
-
-                               <TextView
-                                   android:id="@+id/dayTwoTextView"
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:layout_gravity="center"
-                                   android:text="@string/tue" />
-                           </LinearLayout>
-
-
-                           <LinearLayout
-                               android:id="@+id/thirdDay"
-                               android:layout_width="36dp"
-                               android:layout_height="wrap_content"
-                               android:orientation="vertical"
-                               app:layout_constraintEnd_toStartOf="@+id/fourthDay"
-                               app:layout_constraintHorizontal_bias="0.5"
-                               app:layout_constraintStart_toEndOf="@+id/secondDay"
-                               app:layout_constraintTop_toTopOf="parent">
-
-                               <FrameLayout
-                                   android:id="@+id/thirdDayFrameLayout"
-                                   android:layout_width="36dp"
-                                   android:layout_height="36dp"
-                                   android:background="@drawable/circle_shape"
-                                   app:layout_constraintTop_toTopOf="parent">
-
-                                   <ImageView
-                                       android:id="@+id/thirdDayIV"
-                                       android:layout_width="14dp"
-                                       android:layout_height="14dp"
-                                       android:layout_gravity="center"
-                                       android:src="@drawable/ic_cross" />
-                               </FrameLayout>
-
-                               <TextView
-                                   android:id="@+id/dayThreeTextView"
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:layout_gravity="center"
-                                   android:text="@string/wed" />
-
-                           </LinearLayout>
-
-
-                           <LinearLayout
-                               android:id="@+id/fourthDay"
-                               android:layout_width="36dp"
-                               android:layout_height="wrap_content"
-                               android:orientation="vertical"
-                               app:layout_constraintEnd_toStartOf="@+id/fifthDay"
-                               app:layout_constraintHorizontal_bias="0.5"
-                               app:layout_constraintStart_toEndOf="@+id/thirdDay"
-                               app:layout_constraintTop_toTopOf="parent">
-
-                               <FrameLayout
-                                   android:id="@+id/fourthDayFrameLayout"
-                                   android:layout_width="36dp"
-                                   android:layout_height="36dp"
-                                   android:background="@drawable/circle_shape"
-                                   app:layout_constraintTop_toTopOf="parent">
-
-                                   <ImageView
-                                       android:id="@+id/fourthDayIV"
-                                       android:layout_width="14dp"
-                                       android:layout_height="14dp"
-                                       android:layout_gravity="center"
-                                       android:src="@drawable/ic_cross" />
-                               </FrameLayout>
-
-                               <TextView
-                                   android:id="@+id/dayFourTextView"
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:layout_gravity="center"
-                                   android:text="@string/tue" />
-
-                           </LinearLayout>
-
-
-                           <LinearLayout
-                               android:id="@+id/fifthDay"
-                               android:layout_width="36dp"
-                               android:layout_height="wrap_content"
-                               android:orientation="vertical"
-                               app:layout_constraintEnd_toStartOf="@+id/daysInRowNumberFramLayout"
-                               app:layout_constraintHorizontal_bias="0.5"
-                               app:layout_constraintStart_toEndOf="@+id/fourthDay"
-                               app:layout_constraintTop_toTopOf="parent">
-
-                               <FrameLayout
-                                   android:id="@+id/fifthDayFrameLayout"
-                                   android:layout_width="36dp"
-                                   android:layout_height="36dp"
-                                   android:background="@drawable/circle_shape">
-
-                                   <ImageView
-                                       android:id="@+id/fifthDayIV"
-                                       android:layout_width="14dp"
-                                       android:layout_height="14dp"
-                                       android:layout_gravity="center"
-                                       android:src="@drawable/ic_cross" />
-                               </FrameLayout>
-
-                               <TextView
-                                   android:id="@+id/dayFiveTextView"
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:layout_gravity="center"
-                                   android:text="@string/fri" />
-                           </LinearLayout>
-
-                           <FrameLayout
-                               android:id="@+id/daysInRowNumberFramLayout"
-                               android:layout_width="72dp"
-                               android:layout_height="36dp"
-                               android:background="@drawable/round_corner_rectangle"
-                               app:layout_constraintEnd_toEndOf="parent"
-                               app:layout_constraintHorizontal_bias="0.5"
-                               app:layout_constraintStart_toEndOf="@+id/fifthDay"
-                               app:layout_constraintTop_toTopOf="parent">
-
-                               <TextView
-                                   android:id="@+id/daysInRowNumberTextView"
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:layout_gravity="center_vertical|center_horizontal"
-                                   android:text="0"
-                                   android:textAlignment="center"
-                                   android:textSize="24dp" />
-                           </FrameLayout>
-                       </androidx.constraintlayout.widget.ConstraintLayout>
-                   </FrameLayout>
-
-                   <View
-                       android:id="@+id/view2"
-                       android:layout_width="match_parent"
-                       android:layout_height="1dp"
-                       android:layout_marginStart="20dp"
-                       android:layout_marginEnd="20dp"
-                       android:layout_marginBottom="20dp"
-                       android:background="@color/gray"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-                       app:layout_constraintVertical_bias="0.0" />
-
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_marginBottom="8dp"
-                       android:orientation="horizontal"
-                       android:paddingStart="20dp"
-                       android:paddingEnd="20dp"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintHorizontal_bias="0.0"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toTopOf="@+id/view2"
-                       app:layout_constraintVertical_bias="0.0">
-
-                       <ImageView
-                           android:layout_width="24dp"
-                           android:layout_height="24dp"
-                           android:layout_marginTop="16dp"
-                           android:layout_marginEnd="8dp"
-                           android:layout_marginBottom="8dp"
-                           android:src="@drawable/ic_cup"
-                           app:tint="@color/gold" />
-
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="16dp"
-                           android:text="@string/longest_chain" />
-                       <Space
-                           android:layout_width="@dimen/_8mdp"
-                           android:layout_height="wrap_content"/>
-                       <TextView
-                           android:id="@+id/longestChainTextView"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginTop="16dp"
-                           android:text="10"/>
-                   </LinearLayout>
-
-               </androidx.constraintlayout.widget.ConstraintLayout>
-           </com.google.android.material.card.MaterialCardView>
-
-
-           <com.google.android.material.card.MaterialCardView
-               android:id="@+id/moodChartCard"
-               style="@style/CardViewStyle"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:clipToPadding="false"
-               app:layout_constraintBottom_toTopOf="@+id/achievementsCard"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/daysInRowCard"
-               app:cardElevation="4dp"
-               android:outlineSpotShadowColor="@color/shadow"
-               android:outlineAmbientShadowColor="@color/shadow">
-
-               <androidx.constraintlayout.widget.ConstraintLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-
-                   <TextView
-                       android:id="@+id/moodChartHeader"
-                       style="@style/cardHeaderTextStyle"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="@string/mood_chart"
-                       android:textAlignment="viewStart"
-                       android:paddingBottom="10dp"
-                       app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toTopOf="parent" />
-
-                   <ImageButton
-                       android:id="@+id/shareImageButtonMoodChart"
-                       android:layout_width="24dp"
-                       android:layout_height="24dp"
-                       android:layout_marginEnd="4dp"
-                       android:background="@color/white"
-                       android:src="@drawable/ic_share"
-                       app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintTop_toTopOf="parent"
-                       app:layout_constraintVertical_bias="0.0"
-                       app:tint="@color/black" />
-
-                   <FrameLayout
-                       android:id="@+id/moodsLineChartLayout"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@id/moodChartHeader"
-                       tools:layout_editor_absoluteY="26dp">
-
-                       <LinearLayout
-                           android:gravity="left"
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:layout_marginRight="15dp"
-                           android:orientation="vertical">
-
-                           <ImageView
-                               android:layout_width="24dp"
-                               android:layout_height="30dp"
-                               android:src="@drawable/emoji_rad"
-                               app:tint="@color/rad_color" />
-
-                           <View
-                               android:layout_width="match_parent"
-                               android:layout_height="1dp"
-                               android:background="#9A9F9F9F" />
-
-                           <ImageView
-                               android:layout_width="22dp"
-                               android:layout_height="32dp"
-                               android:src="@drawable/emoji_good"
-                               app:tint="@color/good_color" />
-
-                           <View
-                               android:layout_width="match_parent"
-                               android:layout_height="1dp"
-                               android:background="#9A9F9F9F" />
-
-                           <ImageView
-                               android:layout_width="22dp"
-                               android:layout_height="34dp"
-                               android:src="@drawable/emoji_meh"
-                               app:tint="@color/meh_color" />
-
-                           <View
-                               android:layout_width="match_parent"
-                               android:layout_height="1dp"
-                               android:background="#9A9F9F9F" />
-
-                           <ImageView
-                               android:layout_width="22dp"
-                               android:layout_height="34dp"
-                               android:src="@drawable/emoji_bad"
-                               app:tint="@color/bad_color" />
-
-                           <View
-                               android:layout_width="match_parent"
-                               android:layout_height="1dp"
-                               android:background="#9A9F9F9F" />
-
-                           <ImageView
-                               android:layout_width="22dp"
-                               android:layout_height="32dp"
-                               android:src="@drawable/emoji_awful"
-                               app:tint="@color/awful_color" />
-
-                           <View
-                               android:layout_width="match_parent"
-                               android:layout_height="1dp"
-                               android:background="#9A9F9F9F" />
-
-                       </LinearLayout>
-
-                       <com.github.mikephil.charting.charts.LineChart
-                           android:id="@+id/moodsLineChart"
-                           android:layout_width="match_parent"
-                           android:layout_height="180dp"
-                           android:layout_marginLeft="16dp"
-                           android:background="#00FFFFFF" />
-
-                   </FrameLayout>
-
-
-<!--                   <LinearLayout-->
-<!--                       android:layout_width="100dp"-->
-<!--                       android:layout_height="36dp"-->
-<!--                       android:layout_marginTop="12dp"-->
-<!--                       android:background="@drawable/round_corner_rectangle"-->
-<!--                       app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                       app:layout_constraintStart_toStartOf="parent"-->
-
-<!--                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout">-->
-
-<!--                       <ImageButton-->
-<!--                           android:id="@+id/ineChartImageButton"-->
-<!--                           android:layout_width="50dp"-->
-<!--                           android:layout_height="match_parent"-->
-<!--                           android:background="@drawable/round_corner_rectangle"-->
-<!--                           android:backgroundTint="@color/primary"-->
-<!--                           android:src="@drawable/ic_line_chart"-->
-<!--                           app:tint="@color/white" />-->
-
-<!--                       <ImageButton-->
-<!--                           android:id="@+id/barChartImageButton"-->
-<!--                           android:layout_width="50dp"-->
-<!--                           android:layout_height="match_parent"-->
-<!--                           android:layout_gravity="center"-->
-<!--                           android:backgroundTint="@color/white"-->
-<!--                           android:src="@drawable/ic_bar_chart"-->
-<!--                           app:tint="@color/primary" />-->
-<!--                   </LinearLayout>-->
-
-<!--                   <EditText-->
-<!--                       android:id="@+id/selectActivityEditText"-->
-<!--                       android:layout_width="170dp"-->
-<!--                       android:layout_height="36dp"-->
-<!--                       android:background="@drawable/round_corner_rectangle"-->
-<!--                       android:drawableEnd="@drawable/ic_dropdown"-->
-<!--                       android:drawableTint="@color/primary"-->
-<!--                       android:hint="@string/select_activity"-->
-<!--                       android:paddingStart="12dp"-->
-<!--                       android:textSize="12sp"-->
-<!--                       android:paddingEnd="12dp"-->
-<!--                       app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                       app:layout_constraintEnd_toEndOf="parent"-->
-<!--                       app:layout_constraintTop_toBottomOf="@+id/moodsLineChartLayout"-->
-<!--                       app:layout_constraintVertical_bias="1.0" />-->
-               </androidx.constraintlayout.widget.ConstraintLayout>
-           </com.google.android.material.card.MaterialCardView>
-
-
-
-
-           <androidx.cardview.widget.CardView
-               android:id="@+id/achievementsCard"
-               style="@style/CardViewStyle"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="16dp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/moodChartCard"
-               app:cardElevation="4dp"
-               android:outlineSpotShadowColor="@color/shadow"
-               android:outlineAmbientShadowColor="@color/shadow">
-
-               <androidx.constraintlayout.widget.ConstraintLayout
-                   android:id="@+id/achievementsConstraintLayout"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent">
-
-                   <TextView
-                       android:id="@+id/achievementHeader"
-                       style="@style/cardHeaderTextStyle"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:paddingBottom="10dp"
-                       android:text="@string/achievements"
-                       android:textAlignment="viewStart"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toTopOf="parent" />
-
-                   <ImageButton
-                       android:id="@+id/moreImageButtonAchievement"
-                       android:layout_width="24dp"
-                       android:layout_height="24dp"
-                       android:background="@color/white"
-                       android:src="@drawable/ic_share"
-                       app:layout_constraintBottom_toBottomOf="@+id/achievementHeader"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintTop_toTopOf="@+id/achievementHeader"
-                       app:layout_constraintVertical_bias="0.0" />
-
-                   <com.iranmobiledev.moodino.ui.states.customView.CustomViewAchievement
-                       android:id="@+id/customViewAchievement"
-                       android:layout_width="100dp"
-                       android:layout_height="wrap_content"
-                       app:FirstStarTint="@color/primary"
-                       app:Icon="@drawable/ic_book"
-                       app:Name="@string/first_note"
-                       app:SecondStarTint="@color/gray"
-                       app:ThirdStarTint="@color/gray"
-                       app:layout_constraintEnd_toStartOf="@+id/customViewAchievement2"
-                       app:layout_constraintHorizontal_bias="0.5"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/achievementHeader" />
-
-                   <com.iranmobiledev.moodino.ui.states.customView.CustomViewAchievement
-                       android:id="@+id/customViewAchievement2"
-                       android:layout_width="100dp"
-                       android:layout_height="wrap_content"
-                       app:FirstStarTint="@color/primary"
-                       app:Icon="@drawable/ic_camera_for_achievements"
-                       app:Name="@string/first_entry_acheivement"
-                       app:SecondStarTint="@color/gray"
-                       app:ThirdStarTint="@color/gray"
-                       app:layout_constraintEnd_toStartOf="@+id/customViewAchievement3"
-                       app:layout_constraintHorizontal_bias="0.5"
-                       app:layout_constraintStart_toEndOf="@+id/customViewAchievement"
-                       app:layout_constraintTop_toBottomOf="@+id/achievementHeader" />
-
-                   <com.iranmobiledev.moodino.ui.states.customView.CustomViewAchievement
-                       android:id="@+id/customViewAchievement3"
-                       android:layout_width="100dp"
-                       android:layout_height="wrap_content"
-                       app:FirstStarTint="@color/primary"
-                       app:Icon="@drawable/ic_library"
-                       app:Name="@string/a_week_with_us"
-                       app:SecondStarTint="@color/gray"
-                       app:ThirdStarTint="@color/gray"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintHorizontal_bias="0.5"
-                       app:layout_constraintStart_toEndOf="@+id/customViewAchievement2"
-                       app:layout_constraintTop_toBottomOf="@+id/achievementHeader" />
-
-
-                   <View
-                       android:id="@+id/dividerAchievement"
-                       android:layout_width="match_parent"
-                       android:layout_height="1dp"
-                       android:layout_marginTop="10dp"
-                       android:background="@color/gray"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@id/customViewAchievement"
-                       tools:layout_editor_absoluteX="1dp" />
-
-                   <TextView
-                       android:id="@+id/totalAchievementsTextView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="24dp"
-                       android:layout_marginTop="16dp"
-                       android:text="3-20"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@id/dividerAchievement" />
-
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginRight="4dp"
-                       android:backgroundTint="@color/white"
-                       android:text="@string/show_all"
-                       android:textColor="@color/primary"
-                       android:textSize="12sp"
-                       app:layout_constraintBottom_toBottomOf="@+id/totalAchievementsTextView"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintTop_toTopOf="@+id/totalAchievementsTextView" />
-               </androidx.constraintlayout.widget.ConstraintLayout>
-           </androidx.cardview.widget.CardView>
-
-
-
-           <androidx.cardview.widget.CardView
-               android:id="@+id/moodCountPieChartCard"
-               style="@style/CardViewStyle"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="16dp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@id/achievementsCard"
-               app:cardElevation="4dp"
-               android:outlineSpotShadowColor="@color/shadow"
-               android:outlineAmbientShadowColor="@color/shadow">
-               <androidx.constraintlayout.widget.ConstraintLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   tools:layout_editor_absoluteX="20dp"
-                   tools:layout_editor_absoluteY="20dp">
-
-                   <TextView
-                       android:id="@+id/entryTimeTv"
-                       style="@style/cardHeaderTextStyle"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:paddingBottom="10dp"
-                       android:text="@string/mood_count"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toTopOf="parent" />
-
-                   <ImageView
-                       android:id="@+id/imageView6"
-                       android:layout_width="24dp"
-                       android:layout_height="24dp"
-                       android:src="@drawable/ic_share"
-                       app:layout_constraintBottom_toBottomOf="@+id/entryTimeTv"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintTop_toTopOf="@+id/entryTimeTv" />
-
-                   <com.github.mikephil.charting.charts.PieChart
-                       android:id="@+id/moodCountPieChart"
-                       android:layout_width="match_parent"
-                       android:layout_height="220dp"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/entryTimeTv" />
-
-                   <View
-                       android:layout_marginTop="10dp"
-                       android:id="@+id/pieChartDivider"
-                       android:layout_width="match_parent"
-                       android:layout_height="1dp"
-                       android:background="@color/gray"
-                       app:layout_constraintTop_toBottomOf="@id/moodCountPieChart"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintEnd_toEndOf="parent"/>
-
-                   <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
-                       android:id="@+id/moodCountVeryHappy"
-                       android:layout_width="50dp"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="10dp"
-                       app:MoodCount="2"
-                       app:MoodCountBackground="@drawable/circle_shape"
-                       app:MoodIcon="@drawable/emoji_rad"
-                       app:MoodTint="@color/rad_color"
-                       app:MoodName="@string/rad"
-                       app:layout_constraintEnd_toStartOf="@+id/moodCountHappy"
-                       app:layout_constraintHorizontal_bias="0.5"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
-
-
-                   <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
-                       android:id="@+id/moodCountHappy"
-                       android:layout_width="50dp"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="10dp"
-                       app:MoodCount="13"
-                       app:MoodCountBackground="@drawable/circle_shape"
-                       app:MoodIcon="@drawable/emoji_good"
-                       app:MoodTint="@color/good_color"
-                       app:layout_constraintEnd_toStartOf="@+id/moodCountNothing"
-                       app:layout_constraintHorizontal_bias="0.5"
-                       app:MoodName="@string/good"
-                       app:layout_constraintStart_toEndOf="@+id/moodCountVeryHappy"
-                       app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
-
-
-                   <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
-                       android:id="@+id/moodCountNothing"
-                       android:layout_width="50dp"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="10dp"
-                       app:MoodCount="2"
-                       app:MoodName="@string/meh"
-                       app:MoodCountBackground="@drawable/circle_shape"
-                       app:MoodIcon="@drawable/emoji_meh"
-                       app:MoodTint="@color/meh_color"
-                       app:layout_constraintEnd_toStartOf="@+id/moodCountBad"
-                       app:layout_constraintHorizontal_bias="0.5"
-                       app:layout_constraintStart_toEndOf="@+id/moodCountHappy"
-                       app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
-
-
-                   <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
-                       android:id="@+id/moodCountBad"
-                       android:layout_width="50dp"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="10dp"
-                       app:MoodCount="2"
-                       app:MoodName="@string/bad"
-                       app:MoodCountBackground="@drawable/circle_shape"
-                       app:MoodIcon="@drawable/emoji_bad"
-                       app:MoodTint="@color/bad_color"
-                       app:layout_constraintEnd_toStartOf="@+id/moodCountVeryBad"
-                       app:layout_constraintHorizontal_bias="0.5"
-                       app:layout_constraintStart_toEndOf="@+id/moodCountNothing"
-                       app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
-
-
-                   <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
-                       android:id="@+id/moodCountVeryBad"
-                       android:layout_width="50dp"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="10dp"
-                       app:MoodName="@string/awful"
-                       app:MoodCount="2"
-                       app:MoodCountBackground="@drawable/circle_shape"
-                       app:MoodIcon="@drawable/emoji_awful"
-                       app:MoodTint="@color/awful_color"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintHorizontal_bias="0.5"
-                       app:layout_constraintStart_toEndOf="@+id/moodCountBad"
-                       app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
-               </androidx.constraintlayout.widget.ConstraintLayout>
-           </androidx.cardview.widget.CardView>
-
-           <Space
-               android:id="@+id/spacer"
-               android:layout_width="match_parent"
-               android:layout_height="100dp"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/moodCountPieChartCard" />
-
-       </androidx.constraintlayout.widget.ConstraintLayout>
-   </ScrollView>
+    tools:context=".ui.states.StatsFragment">
+
+    <ScrollView
+        android:id="@+id/scrollView_states"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/daysInRowCard"
+                style="@style/CardViewStyleNoPadding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/shadow"
+                android:outlineSpotShadowColor="@color/shadow"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/moodChartCard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/linearDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/daysInRowHeader"
+                        style="@style/cardHeaderTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="@string/days_in_row"
+                        android:textAlignment="viewStart"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/moreImageButtonMoodChart"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@color/white"
+                        android:src="@drawable/ic_more_outlined"
+                        app:layout_constraintBottom_toBottomOf="@+id/daysInRowHeader"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.921"
+                        app:layout_constraintStart_toEndOf="@+id/daysInRowHeader"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.514" />
+
+                    <ImageButton
+                        android:id="@+id/shareImageButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@color/white"
+                        android:src="@drawable/ic_share"
+                        app:layout_constraintBottom_toBottomOf="@+id/daysInRowHeader"
+                        app:layout_constraintEnd_toStartOf="@+id/moreImageButtonMoodChart"
+                        app:layout_constraintHorizontal_bias="0.941"
+                        app:layout_constraintStart_toEndOf="@+id/daysInRowHeader"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.514"
+                        app:tint="@color/black" />
+
+                    <FrameLayout
+                        android:id="@+id/frameLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/daysInRowHeader"
+                        app:layout_constraintVertical_bias="0.0">
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="9dp"
+                            android:background="@color/gray"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/daysInRowHeader" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toTopOf="@+id/view"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/daysInRowHeader">
+
+                            <LinearLayout
+                                android:id="@+id/firstDay"
+                                android:layout_width="36dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toStartOf="@+id/secondDay"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <FrameLayout
+                                    android:id="@+id/firstDayFrameLayout"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:background="@drawable/circle_shape">
+
+                                    <ImageView
+                                        android:id="@+id/firstDayIV"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_cross" />
+                                </FrameLayout>
+
+                                <TextView
+                                    android:id="@+id/dayOneTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/mon" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/secondDay"
+                                android:layout_width="36dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toStartOf="@+id/thirdDay"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/firstDay"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <FrameLayout
+                                    android:id="@+id/secondDayFrameLayout"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:background="@drawable/circle_shape">
+
+                                    <ImageView
+                                        android:id="@+id/secondDayIV"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_cross" />
+                                </FrameLayout>
+
+                                <TextView
+                                    android:id="@+id/dayTwoTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/tue" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/thirdDay"
+                                android:layout_width="36dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toStartOf="@+id/fourthDay"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/secondDay"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <FrameLayout
+                                    android:id="@+id/thirdDayFrameLayout"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:background="@drawable/circle_shape"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <ImageView
+                                        android:id="@+id/thirdDayIV"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_cross" />
+                                </FrameLayout>
+
+                                <TextView
+                                    android:id="@+id/dayThreeTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/wed" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/fourthDay"
+                                android:layout_width="36dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toStartOf="@+id/fifthDay"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/thirdDay"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <FrameLayout
+                                    android:id="@+id/fourthDayFrameLayout"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:background="@drawable/circle_shape"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <ImageView
+                                        android:id="@+id/fourthDayIV"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_cross" />
+                                </FrameLayout>
+
+                                <TextView
+                                    android:id="@+id/dayFourTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/tue" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/fifthDay"
+                                android:layout_width="36dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toStartOf="@+id/daysInRowNumberFramLayout"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/fourthDay"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <FrameLayout
+                                    android:id="@+id/fifthDayFrameLayout"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:background="@drawable/circle_shape">
+
+                                    <ImageView
+                                        android:id="@+id/fifthDayIV"
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_cross" />
+                                </FrameLayout>
+
+                                <TextView
+                                    android:id="@+id/dayFiveTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/fri" />
+                            </LinearLayout>
+
+                            <FrameLayout
+                                android:id="@+id/daysInRowNumberFramLayout"
+                                android:layout_width="72dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/round_corner_rectangle"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/fifthDay"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/daysInRowNumberTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical|center_horizontal"
+                                    android:text="0"
+                                    android:textAlignment="center"
+                                    android:textSize="24dp" />
+                            </FrameLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </FrameLayout>
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/view2"
+                        app:layout_constraintVertical_bias="0.0">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:src="@drawable/ic_cup"
+                            app:tint="@color/gold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/longest_chain" />
+
+                        <Space
+                            android:layout_width="@dimen/_8mdp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/longestChainTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="10" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/moodChartCard"
+                style="@style/CardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:outlineAmbientShadowColor="@color/shadow"
+                android:outlineSpotShadowColor="@color/shadow"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/moodCountPieChartCard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/daysInRowCard">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/moodChartHeader"
+                        style="@style/cardHeaderTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:text="@string/mood_chart"
+                        android:textAlignment="viewStart"
+                        app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/shareImageButtonMoodChart"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@color/white"
+                        android:src="@drawable/ic_share"
+                        app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:tint="@color/black" />
+
+                    <FrameLayout
+                        android:id="@+id/moodsLineChartLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/moodChartHeader"
+                        tools:layout_editor_absoluteY="26dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="15dp"
+                            android:gravity="left"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/emoji_rad"
+                                app:tint="@color/rad_color" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#9A9F9F9F" />
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="32dp"
+                                android:src="@drawable/emoji_good"
+                                app:tint="@color/good_color" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#9A9F9F9F" />
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="34dp"
+                                android:src="@drawable/emoji_meh"
+                                app:tint="@color/meh_color" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#9A9F9F9F" />
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="34dp"
+                                android:src="@drawable/emoji_bad"
+                                app:tint="@color/bad_color" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#9A9F9F9F" />
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="32dp"
+                                android:src="@drawable/emoji_awful"
+                                app:tint="@color/awful_color" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#9A9F9F9F" />
+
+                        </LinearLayout>
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/moodsLineChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_marginLeft="16dp"
+                            android:background="#00FFFFFF" />
+
+                    </FrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/moodCountPieChartCard"
+                style="@style/CardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:outlineAmbientShadowColor="@color/shadow"
+                android:outlineSpotShadowColor="@color/shadow"
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/moodChartCard">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="20dp"
+                    tools:layout_editor_absoluteY="20dp">
+
+                    <TextView
+                        android:id="@+id/entryTimeTv"
+                        style="@style/cardHeaderTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:text="@string/mood_count"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_share"
+                        app:layout_constraintBottom_toBottomOf="@+id/entryTimeTv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/entryTimeTv" />
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/moodCountPieChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/entryTimeTv" />
+
+                    <View
+                        android:id="@+id/pieChartDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/moodCountPieChart" />
+
+                    <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
+                        android:id="@+id/moodCountVeryHappy"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:MoodCount="2"
+                        app:MoodCountBackground="@drawable/circle_shape"
+                        app:MoodIcon="@drawable/emoji_rad"
+                        app:MoodName="@string/rad"
+                        app:MoodTint="@color/rad_color"
+                        app:layout_constraintEnd_toStartOf="@+id/moodCountHappy"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+
+
+                    <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
+                        android:id="@+id/moodCountHappy"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:MoodCount="13"
+                        app:MoodCountBackground="@drawable/circle_shape"
+                        app:MoodIcon="@drawable/emoji_good"
+                        app:MoodName="@string/good"
+                        app:MoodTint="@color/good_color"
+                        app:layout_constraintEnd_toStartOf="@+id/moodCountNothing"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/moodCountVeryHappy"
+                        app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+
+
+                    <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
+                        android:id="@+id/moodCountNothing"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:MoodCount="2"
+                        app:MoodCountBackground="@drawable/circle_shape"
+                        app:MoodIcon="@drawable/emoji_meh"
+                        app:MoodName="@string/meh"
+                        app:MoodTint="@color/meh_color"
+                        app:layout_constraintEnd_toStartOf="@+id/moodCountBad"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/moodCountHappy"
+                        app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+
+
+                    <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
+                        android:id="@+id/moodCountBad"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:MoodCount="2"
+                        app:MoodCountBackground="@drawable/circle_shape"
+                        app:MoodIcon="@drawable/emoji_bad"
+                        app:MoodName="@string/bad"
+                        app:MoodTint="@color/bad_color"
+                        app:layout_constraintEnd_toStartOf="@+id/moodCountVeryBad"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/moodCountNothing"
+                        app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+
+                    <com.iranmobiledev.moodino.ui.states.customView.CustomViewMoodCount
+                        android:id="@+id/moodCountVeryBad"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:MoodCount="2"
+                        app:MoodCountBackground="@drawable/circle_shape"
+                        app:MoodIcon="@drawable/emoji_awful"
+                        app:MoodName="@string/awful"
+                        app:MoodTint="@color/awful_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/moodCountBad"
+                        app:layout_constraintTop_toBottomOf="@+id/pieChartDivider" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Space
+                android:id="@+id/spacer"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/moodCountPieChartCard" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/moodChartCard"-->
+    <!--        app:cardElevation="4dp"-->
+    <!--        android:outlineSpotShadowColor="@color/shadow"-->
+    <!--        android:outlineAmbientShadowColor="@color/shadow">-->
+
+    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--            android:id="@+id/achievementsConstraintLayout"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent">-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/achievementHeader"-->
+    <!--                style="@style/cardHeaderTextStyle"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:paddingBottom="10dp"-->
+    <!--                android:text="@string/achievements"-->
+    <!--                android:textAlignment="viewStart"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/moreImageButtonAchievement"-->
+    <!--                android:layout_width="24dp"-->
+    <!--                android:layout_height="24dp"-->
+    <!--                android:background="@color/white"-->
+    <!--                android:src="@drawable/ic_share"-->
+    <!--                app:layout_constraintBottom_toBottomOf="@+id/achievementHeader"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="@+id/achievementHeader"-->
+    <!--                app:layout_constraintVertical_bias="0.0" />-->
+
+    <!--            <com.iranmobiledev.moodino.ui.states.customView.CustomViewAchievement-->
+    <!--                android:id="@+id/customViewAchievement"-->
+    <!--                android:layout_width="100dp"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                app:FirstStarTint="@color/primary"-->
+    <!--                app:Icon="@drawable/ic_book"-->
+    <!--                app:Name="@string/first_note"-->
+    <!--                app:SecondStarTint="@color/gray"-->
+    <!--                app:ThirdStarTint="@color/gray"-->
+    <!--                app:layout_constraintEnd_toStartOf="@+id/customViewAchievement2"-->
+    <!--                app:layout_constraintHorizontal_bias="0.5"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toBottomOf="@+id/achievementHeader" />-->
+
+    <!--            <com.iranmobiledev.moodino.ui.states.customView.CustomViewAchievement-->
+    <!--                android:id="@+id/customViewAchievement2"-->
+    <!--                android:layout_width="100dp"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                app:FirstStarTint="@color/primary"-->
+    <!--                app:Icon="@drawable/ic_camera_for_achievements"-->
+    <!--                app:Name="@string/first_entry_acheivement"-->
+    <!--                app:SecondStarTint="@color/gray"-->
+    <!--                app:ThirdStarTint="@color/gray"-->
+    <!--                app:layout_constraintEnd_toStartOf="@+id/customViewAchievement3"-->
+    <!--                app:layout_constraintHorizontal_bias="0.5"-->
+    <!--                app:layout_constraintStart_toEndOf="@+id/customViewAchievement"-->
+    <!--                app:layout_constraintTop_toBottomOf="@+id/achievementHeader" />-->
+
+    <!--            <com.iranmobiledev.moodino.ui.states.customView.CustomViewAchievement-->
+    <!--                android:id="@+id/customViewAchievement3"-->
+    <!--                android:layout_width="100dp"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                app:FirstStarTint="@color/primary"-->
+    <!--                app:Icon="@drawable/ic_library"-->
+    <!--                app:Name="@string/a_week_with_us"-->
+    <!--                app:SecondStarTint="@color/gray"-->
+    <!--                app:ThirdStarTint="@color/gray"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintHorizontal_bias="0.5"-->
+    <!--                app:layout_constraintStart_toEndOf="@+id/customViewAchievement2"-->
+    <!--                app:layout_constraintTop_toBottomOf="@+id/achievementHeader" />-->
+
+
+    <!--            <View-->
+    <!--                android:id="@+id/dividerAchievement"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="1dp"-->
+    <!--                android:layout_marginTop="10dp"-->
+    <!--                android:background="@color/gray"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toBottomOf="@id/customViewAchievement"-->
+    <!--                tools:layout_editor_absoluteX="1dp" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/totalAchievementsTextView"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="24dp"-->
+    <!--                android:layout_marginTop="16dp"-->
+    <!--                android:text="3-20"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toBottomOf="@id/dividerAchievement" />-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginRight="4dp"-->
+    <!--                android:backgroundTint="@color/white"-->
+    <!--                android:text="@string/show_all"-->
+    <!--                android:textColor="@color/primary"-->
+    <!--                android:textSize="12sp"-->
+    <!--                app:layout_constraintBottom_toBottomOf="@+id/totalAchievementsTextView"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="@+id/totalAchievementsTextView" />-->
+    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--    </androidx.cardview.widget.CardView>-->
 </FrameLayout>
