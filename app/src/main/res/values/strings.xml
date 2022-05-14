@@ -127,4 +127,6 @@
     <string name="galleyTxt">Galley</string>
     <string name="cameraTxt">Camera</string>
     <string name="choose">Choose</string>
+    <string name="its_time_to_play_memories">Its time to play a memories.</string>
+    <string name="it_was_first_entry_lets_make_some_other">It was your first entry\nlets make some history.</string>
 </resources>
