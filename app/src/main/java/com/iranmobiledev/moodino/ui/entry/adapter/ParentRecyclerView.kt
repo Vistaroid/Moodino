@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
@@ -16,6 +17,7 @@ import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.RecyclerViewData
 import com.iranmobiledev.moodino.databinding.ItemEntryContainerBinding
 import com.iranmobiledev.moodino.listener.EntryEventLister
+import com.iranmobiledev.moodino.utlis.MyDiffUtil
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
@@ -23,7 +25,7 @@ import saman.zamani.persiandate.PersianDateFormat
 class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
     private lateinit var context: Context
     private lateinit var entryEventListener: EntryEventLister
-    private lateinit var data: MutableList<RecyclerViewData>
+    private lateinit var data: List<RecyclerViewData>
     private var language: Int = -1
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -124,8 +126,10 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<RecyclerViewData>) {
-        this.data = data as MutableList<RecyclerViewData>
-        notifyDataSetChanged()
+        val diffUtil = MyDiffUtil(this.data, data)
+        val diffResults = DiffUtil.calculateDiff(diffUtil)
+        this.data = data
+        diffResults.dispatchUpdatesTo(this)
     }
 
     fun addEntry(entry: Entry) {
@@ -134,7 +138,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         }
         findData?.adapter?.add(entry)
         if (findData == null) {
-            data.add(0, RecyclerViewData(mutableListOf(entry)))
+            //data.add(0, RecyclerViewData(mutableListOf(entry)))
             notifyItemInserted(0)
         }
     }
@@ -148,6 +152,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
             val index = data.indexOf(foundData)
             notifyItemRemoved(index)
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
