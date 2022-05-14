@@ -36,6 +36,7 @@ class MoodCountDayView(context: Context, attr: AttributeSet?): View(context, att
         this.text= defaultText
         textPaint.color= defaultColor
         rectPaint.color= defaultColor
+        postInvalidate()
     }
 
     companion object{
