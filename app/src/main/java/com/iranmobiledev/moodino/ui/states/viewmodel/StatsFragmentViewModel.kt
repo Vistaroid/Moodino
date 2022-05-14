@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.Log
+import android.widget.TextView
+import androidx.compose.runtime.withRunningRecomposer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
@@ -64,7 +66,7 @@ class StatsFragmentViewModel(
 
     fun initDaysInRow() {
         viewModelScope.launch {
-            _entries.asFlow().collectLatest{ entries ->
+            _entries.asFlow().collectLatest { entries ->
 
                 //Adding week days name to daysInRow card
                 launch {
@@ -171,14 +173,10 @@ class StatsFragmentViewModel(
             entriesLineChart.add(Entry(x, y))
         }
 
-
-
         optimizeEntries(entriesLineChart, optimizedLineChartEntries)
-
         optimizedLineChartEntries.forEach {
             Log.d(TAG, "getEntriesForLineChart: $it")
         }
-
         _lineChartEntries.postValue(optimizedLineChartEntries)
         _lineChartDates.postValue(entriesDaysNumber.toList())
     }
@@ -195,7 +193,6 @@ class StatsFragmentViewModel(
         val filtered = entries.filter { it.x == first.x }
         optimizedLineChartEntries.add(getNewChartEntry(filtered))
         val notFiltered = entries.filterNot { it.x == first.x }
-
         optimizeEntries(notFiltered as MutableList<Entry>, optimizedLineChartEntries)
     }
 
@@ -269,57 +266,8 @@ class StatsFragmentViewModel(
         _lastFiveDaysStatus.postValue(lastFiveDayStatus)
     }
 
-    fun initPieChart(pieChart: PieChart, context: Context) {
-        val entries = getEntriesForPieChart()
-        //mocked entries for chart
-        if (pieChartEntries.isEmpty()) {
+    fun initPieChart(pieChart: PieChart) {
 
-        }
-
-        val colors = arrayListOf<Int>()
-        for (color in ColorArray.colors) {
-            colors.add(color)
-        }
-
-        val dataSet = PieDataSet(entries, null)
-        dataSet.apply {
-            setColors(colors)
-        }
-
-
-        val pieData = PieData(dataSet)
-        pieData.apply {
-            setDrawValues(true)
-            setValueTextSize(0f)
-            setValueTextColor(Color.TRANSPARENT)
-
-        }
-
-        pieChart.apply {
-            data = pieData
-            description.isEnabled = false
-            isDrawHoleEnabled = true
-            holeRadius = 65f
-            setDrawEntryLabels(false)
-            isRotationEnabled = false
-            legend.isEnabled = false
-            centerText = "16"
-            setCenterTextColor(Color.GRAY)
-            setCenterTextSize(24f)
-            setDrawRoundedSlices(true)
-        }
-
-    }
-
-    fun getEntriesForPieChart():
-            MutableList<PieEntry> {
-        return pieChartEntries
-    }
-
-    fun setEntriesForPieChart(entriesList: MutableList<PieEntry>) {
-        entriesList.forEach {
-            pieChartEntries.add(it)
-        }
     }
 
     val datesMock = listOf<EntryDate>(
