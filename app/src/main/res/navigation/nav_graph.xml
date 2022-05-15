@@ -95,6 +95,11 @@
         android:id="@+id/dayEntriesFragment"
         android:name="com.iranmobiledev.moodino.ui.entry.DayEntriesFragment"
         android:label="fragment_day_entries"
-        tools:layout="@layout/fragment_day_entries" />
+        tools:layout="@layout/fragment_day_entries" >
+        <argument
+            android:name="day"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 
 </navigation>
