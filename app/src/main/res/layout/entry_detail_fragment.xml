@@ -77,8 +77,7 @@
                         android:layout_marginEnd="@dimen/_12mdp"
                         android:layoutDirection="ltr"
                         android:orientation="horizontal"
-                        android:layout_gravity="center"
-                        android:visibility="gone">
+                        android:layout_gravity="center">
 
                         <LinearLayout
                             android:id="@+id/date"

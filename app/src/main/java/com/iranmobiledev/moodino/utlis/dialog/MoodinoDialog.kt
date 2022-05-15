@@ -1,17 +1,13 @@
-package com.iranmobiledev.moodino.utlis
+package com.iranmobiledev.moodino.utlis.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.ui.graphics.Color
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.DialogViewBinding
