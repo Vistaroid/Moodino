@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.ui.calendar.CalendarFragmentDirections
-import com.iranmobiledev.moodino.utlis.DAY_OF_MONTH
 
 class DaysAdapter(private val context: Context,private val sharedDayViewData: SharedDayViewData,
                private val calendarPager: CalendarPager?): RecyclerView.Adapter<DaysAdapter.ViewHolder>() {

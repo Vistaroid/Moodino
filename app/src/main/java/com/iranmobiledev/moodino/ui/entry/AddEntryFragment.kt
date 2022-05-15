@@ -22,7 +22,7 @@ var initialFromBackPress = false
 class AddEntryFragment : BaseFragment(), EmojiClickListener {
 
     private lateinit var binding: AddEntryFragmentBinding
-    private var persianDate: PersianDate = PersianDateObj.persianDate
+    private var persianDate: PersianDate = PersianDate()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

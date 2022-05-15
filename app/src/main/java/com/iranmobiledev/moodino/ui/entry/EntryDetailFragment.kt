@@ -31,7 +31,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     private val imageLoader: ImageLoadingService by inject()
     private var entry = Entry()
     private var editMode = false
-
+    private val sharedPref : SharedPreferences by inject()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

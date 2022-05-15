@@ -29,8 +29,9 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     private lateinit var entryEventListener: EntryEventLister
     private lateinit var data: List<RecyclerViewData>
     private var language: Int = -1
-
+    var specifyDay = -1
     private val emptyStateVisibility = MutableLiveData<Boolean>()
+    var copyData = mutableListOf<RecyclerViewData>()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding: ItemEntryContainerBinding = ItemEntryContainerBinding.bind(itemView)
@@ -133,6 +134,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         val diffUtil = MyDiffUtil(this.data, data)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         this.data = data
+        copyData = data as MutableList<RecyclerViewData>
         diffResults.dispatchUpdatesTo(this)
     }
 
@@ -191,10 +193,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         data = data.filter {
             it.entries[0].date?.day == day
         } as MutableList<RecyclerViewData>
-        if(data.size == 0)
-            emptyStateVisibility.value = true
-        else
-            emptyStateVisibility.value = false
+        emptyStateVisibility.value = data.isEmpty()
         notifyDataSetChanged()
     }
 
