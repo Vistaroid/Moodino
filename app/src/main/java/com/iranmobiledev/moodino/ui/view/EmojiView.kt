@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.EmojiViewBinding
-import com.iranmobiledev.moodino.listener.EmptyStateOnClickListener
+import com.iranmobiledev.moodino.listener.EmojiClickListener
 
 class EmojiView(context: Context, attributeSet: AttributeSet?) :
     LinearLayout(context, attributeSet) {
 
-    private var emptyStateOnClickListener: EmptyStateOnClickListener? = null
+    private var emojiClickListener: EmojiClickListener? = null
 
     var radItem : ViewGroup
     var goodItem : ViewGroup
@@ -39,11 +39,11 @@ class EmojiView(context: Context, attributeSet: AttributeSet?) :
             view.emojiesTitle.text = text
         }
         view.clickListener = OnClickListener {
-            emptyStateOnClickListener?.onEmptyStateItemClicked(it.id)
+            emojiClickListener?.onEmojiItemClicked(it.id)
         }
     }
 
-    fun setEmptyStateOnClickListener(listener: EmptyStateOnClickListener) {
-        emptyStateOnClickListener = listener
+    fun setEmptyStateOnClickListener(listener: EmojiClickListener) {
+        emojiClickListener = listener
     }
 }

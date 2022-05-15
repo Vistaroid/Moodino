@@ -68,7 +68,103 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/timeDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12mdp"
+                        android:layout_marginTop="@dimen/_12mdp"
+                        android:layout_marginEnd="@dimen/_12mdp"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:id="@+id/date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView"
+                                android:layout_width="@dimen/_20mdp"
+                                android:layout_height="@dimen/_20mdp"
+                                android:layout_gravity="center_vertical"
+                                app:layout_constraintStart_toStartOf="@+id/textView"
+                                app:layout_constraintTop_toBottomOf="@+id/textView"
+                                app:srcCompat="@drawable/ic_calendar"
+                                app:tint="?colorPrimary" />
+
+                            <TextView
+                                android:id="@+id/dateTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/date"
+                                android:textColor="?colorPrimary"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                                app:layout_constraintStart_toEndOf="@+id/imageView"
+                                app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:rotation="180"
+                                app:srcCompat="@drawable/ic_arrow_bottom"
+                                app:tint="?colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="@dimen/_20mdp"
+                                android:layout_height="@dimen/_20mdp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="12dp"
+                                app:layout_constraintStart_toEndOf="@+id/dateTv"
+                                app:layout_constraintTop_toBottomOf="@+id/textView"
+                                app:srcCompat="@drawable/ic_time"
+                                app:tint="?colorPrimary" />
+
+                            <TextView
+                                android:id="@+id/timeTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/time"
+                                android:textColor="?colorPrimary"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:rotation="180"
+                                app:srcCompat="@drawable/ic_arrow_bottom"
+                                app:tint="?colorPrimary" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <com.iranmobiledev.moodino.ui.view.EmojiView
+                        android:id="@+id/emojiView_entryDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/_12mdp"/>
+
                     <TextView
+                        android:id="@+id/pageTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?textAppearanceHeadline6"

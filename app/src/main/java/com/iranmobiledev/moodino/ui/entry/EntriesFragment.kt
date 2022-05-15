@@ -17,7 +17,7 @@ import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.*
 import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.listener.DialogEventListener
-import com.iranmobiledev.moodino.listener.EmptyStateOnClickListener
+import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
@@ -31,7 +31,7 @@ import saman.zamani.persiandate.PersianDateFormat
 import kotlin.coroutines.CoroutineContext
 
 class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
-    KoinComponent, EmptyStateOnClickListener {
+    KoinComponent, EmojiClickListener {
 
     private lateinit var binding: FragmentEntriesBinding
     private lateinit var recyclerView: RecyclerView
@@ -118,10 +118,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         findNavController().navigate(R.id.action_entriesFragment_to_entryDetailFragment, bundle)
     }
 
-    private fun deleteEntry(entry: Entry) {
-        lifecycleScope.launchWhenResumed { showDeleteDialog(entry) }
-    }
-
     private fun showDeleteDialog(entry: Entry) {
         val dialog = makeDialog(
             mainText = R.string.dialogMainText,
@@ -149,13 +145,16 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         Toast.makeText(context, date.year.toString() + date.monthName, Toast.LENGTH_SHORT).show()
     }
 
-
+    override fun update(entry: Entry) {
+        val action = EntriesFragmentDirections.actionEntriesFragmentToEntryDetailFragment(edit = true, entry = entry)
+        findNavController().navigate(action)
+    }
     override fun delete(entry: Entry): Boolean {
-        deleteEntry(entry)
+        lifecycleScope.launchWhenResumed { showDeleteDialog(entry) }
         return true
     }
 
-    override fun onEmptyStateItemClicked(v: Int) {
+    override fun onEmojiItemClicked(emojiId: Int) {
         val entry = Entry()
         val persianDate = PersianDateObj.persianDate
         entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
@@ -164,7 +163,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             PersianDateFormat.format(persianDate, "i")
         )
 
-        when (v) {
+        when(emojiId){
             binding.emojisView.radItem.id -> {
                 entry.emojiValue = 5
                 navigateToEntryDetail(entry)

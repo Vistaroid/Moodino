@@ -19,4 +19,7 @@ class EntryDetailViewModel(
     fun addEntry(entry: Entry) {
         entryRepository.add(entry)
     }
+    fun update(entry: Entry){
+        entryRepository.update(entry)
+    }
 }
