@@ -1,7 +1,10 @@
 package com.iranmobiledev.moodino
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.SharedPreferences
+import android.os.Build
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.database.AppDatabase
 import com.iranmobiledev.moodino.database.EntryDao
@@ -20,8 +23,11 @@ import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
-import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
-import com.iranmobiledev.moodino.utlis.*
+
+import com.iranmobiledev.moodino.ui.more.timer.ReminderViewModel
+import com.iranmobiledev.moodino.utlis.GlideImageLoader
+import com.iranmobiledev.moodino.utlis.ImageLoadingService
+import com.iranmobiledev.moodino.utlis.LANGUAGE
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.component.KoinComponent
@@ -29,9 +35,18 @@ import org.koin.core.component.get
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-class App : Application(), KoinComponent {
+
+const val NOTIFICATION_ID = "MOODINO"
+
+class App : Application() , KoinComponent{
     override fun onCreate() {
         super.onCreate()
+
+        val notifiManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val channelNotifi = NotificationChannel(NOTIFICATION_ID , "notification sms" , NotificationManager.IMPORTANCE_HIGH)
+            notifiManager.createNotificationChannel(channelNotifi)
+        }
 
         val database = AppDatabase.getAppDatabase(this)
 
@@ -41,11 +56,12 @@ class App : Application(), KoinComponent {
             viewModel { EntryDetailViewModel(get(), get()) }
             viewModel { CalendarViewModel(get()) }
             viewModel { PinLockViewModel(get()) }
-            viewModel { StatsFragmentViewModel(get()) }
-            factory<EntryRepository> { EntryRepositoryImpl(database.getEntryDao) }
-            factory<ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
-            factory<MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(get())) }
-            single<ImageLoadingService> { GlideImageLoader() }
+
+            viewModel { ReminderViewModel(get()) }
+            factory <EntryRepository> { EntryRepositoryImpl(database.getEntryDao) }
+            factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
+            factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(get())) }
+            single <ImageLoadingService>{ GlideImageLoader() }
             single { EntryContainerAdapter() }
             single { applicationContext.getSharedPreferences("sharedPref", MODE_PRIVATE) }
         }
