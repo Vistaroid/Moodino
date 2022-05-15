@@ -117,7 +117,7 @@
             android:id="@+id/moreIcon"
             android:layout_width="@dimen/_25mdp"
             android:layout_height="@dimen/_25mdp"
-            android:src="@drawable/ic_more"
+            android:src="@drawable/ic_more_out_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/entryDate"
             android:layout_marginEnd="@dimen/_12mdp"

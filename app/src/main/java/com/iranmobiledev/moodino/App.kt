@@ -57,7 +57,7 @@ class App : Application(), KoinComponent {
 
         val sharedPref: SharedPreferences = get()
         //TODO should change here
-        sharedPref.edit().putInt(LANGUAGE,1).apply()
+        sharedPref.edit().putInt(LANGUAGE, PERSIAN).apply()
 
         val firstEnter = sharedPref.getBoolean("first_enter", false)
         if (!firstEnter)
