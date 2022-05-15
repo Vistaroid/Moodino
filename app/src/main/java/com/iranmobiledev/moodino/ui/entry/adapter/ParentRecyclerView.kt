@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
@@ -27,6 +29,8 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     private lateinit var entryEventListener: EntryEventLister
     private lateinit var data: List<RecyclerViewData>
     private var language: Int = -1
+
+    private val emptyStateVisibility = MutableLiveData<Boolean>()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding: ItemEntryContainerBinding = ItemEntryContainerBinding.bind(itemView)
@@ -162,6 +166,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if(specifyDay == -1)
         holder.bind(data[position])
     }
 
@@ -179,6 +184,22 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         this.entryEventListener = entryEventListener
         this.data = data as MutableList<RecyclerViewData>
         this.language = language
+        this.copyData = data
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    fun bindSpecificDay(day : Int){
+        data = data.filter {
+            it.entries[0].date?.day == day
+        } as MutableList<RecyclerViewData>
+        if(data.size == 0)
+            emptyStateVisibility.value = true
+        else
+            emptyStateVisibility.value = false
+        notifyDataSetChanged()
+    }
+
+    fun getEmptyStateLiveData() : LiveData<Boolean>{
+        return emptyStateVisibility
     }
 }
 

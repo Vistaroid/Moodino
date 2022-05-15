@@ -53,6 +53,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupUi() {
+        adapter.specifyDay = -1
         adapter.create(
             requireContext().applicationContext, this,
             mutableListOf(),
