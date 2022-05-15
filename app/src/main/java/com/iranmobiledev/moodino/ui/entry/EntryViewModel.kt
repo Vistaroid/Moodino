@@ -47,10 +47,6 @@ class EntryViewModel(
         entryRepository.delete(entry)
     }
 
-    fun updateEntry(entry: Entry) {
-        entryRepository.update(entry)
-    }
-
     fun addActivity(activity: Activity): Long {
         return activityRepository.add(activity)
     }

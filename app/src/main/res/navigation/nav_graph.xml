@@ -89,6 +89,13 @@
             app:destination="@id/addEntryFragment"
             app:popUpTo="@id/entryDetailFragment"
             app:popUpToInclusive="true"/>
+        <argument
+            android:name="edit"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="entry"
+            app:argType="com.iranmobiledev.moodino.data.Entry" />
 
     </fragment>
     <fragment

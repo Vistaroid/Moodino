@@ -112,8 +112,13 @@ class ChildRecyclerView(
         popupWindow.showAsDropDown(view)
 
         val deleteTv = contentView.findViewById<TextView>(R.id.deleteTv)
+        val editTv = contentView.findViewById<TextView>(R.id.editTv)
         deleteTv.setOnClickListener {
             entryEventLister.delete(witchEntry)
+            popupWindow.dismiss()
+        }
+        editTv.setOnClickListener {
+            entryEventLister.update(witchEntry)
             popupWindow.dismiss()
         }
     }

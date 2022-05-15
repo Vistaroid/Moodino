@@ -32,3 +32,18 @@ fun persianDateFormat(language: Int = 1, pattern: String = "Y F", date: PersianD
         else -> {""}
     }
 }
+fun getTime(persianDate: PersianDate = PersianDate()): String {
+    return PersianDateFormat.format(persianDate, "H:i")
+}
+fun getDate(date: PersianDate = PersianDate(), pattern: String = "Y F", language: Int = PERSIAN): String {
+    val type = when(language){
+        PERSIAN -> PersianDateFormat.PersianDateNumberCharacter.FARSI
+        ENGLISH -> PersianDateFormat.PersianDateNumberCharacter.ENGLISH
+        else -> PersianDateFormat.PersianDateNumberCharacter.FARSI
+    }
+    return PersianDateFormat.format(
+        date,
+        pattern,
+        type
+    )
+}
