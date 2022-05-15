@@ -1,9 +1,7 @@
 package com.iranmobiledev.moodino.ui.entry
 
 import android.content.SharedPreferences
-import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -153,13 +151,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
         }
     }
 
-    override fun onEmojiItemClicked(emojiId: Int) {
-        when (emojiId) {
-            binding.emojiViewEntryDetail.radItem.id -> entry.emojiValue = 5
-            binding.emojiViewEntryDetail.goodItem.id -> entry.emojiValue = 4
-            binding.emojiViewEntryDetail.mehItem.id -> entry.emojiValue = 3
-            binding.emojiViewEntryDetail.badItem.id -> entry.emojiValue = 2
-            binding.emojiViewEntryDetail.awfulItem.id -> entry.emojiValue = 1
-        }
+    override fun onEmojiItemClicked(emojiValue: Int) {
+        entry.emojiValue= emojiValue
     }
 }

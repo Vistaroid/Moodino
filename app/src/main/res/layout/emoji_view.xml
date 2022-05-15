@@ -7,7 +7,7 @@
             type="android.view.View.OnClickListener"/>
     </data>
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -38,14 +38,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/goodItem"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{clickListener}">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <com.iranmobiledev.moodino.ui.view.CustomEmojiView
                     android:id="@+id/radImage"
+                    android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    app:srcCompat="@drawable/emoji_rad" />
+                    android:background="@drawable/circle_bg"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/emoji_rad"
+                    android:tint="@color/rad_color"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,14 +68,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/badItem"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/goodItem"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{clickListener}">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <com.iranmobiledev.moodino.ui.view.CustomEmojiView
                     android:id="@+id/mehImage"
+                    android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    app:srcCompat="@drawable/emoji_meh" />
+                    android:background="@drawable/circle_bg"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/emoji_meh"
+                    android:tint="@color/meh_color" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -92,14 +98,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/awfulItem"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/mehItem"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{clickListener}">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <com.iranmobiledev.moodino.ui.view.CustomEmojiView
                     android:id="@+id/badImage"
+                    android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    app:srcCompat="@drawable/emoji_bad" />
+                    android:background="@drawable/circle_bg"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/emoji_bad"
+                    android:tint="@color/bad_color" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,14 +128,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/badItem"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{clickListener}">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <com.iranmobiledev.moodino.ui.view.CustomEmojiView
                     android:id="@+id/awfulImage"
+                    android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    app:srcCompat="@drawable/emoji_awful" />
+                    android:background="@drawable/circle_bg"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/emoji_awful"
+                    android:tint="@color/awful_color" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -146,14 +158,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/mehItem"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/radItem"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{clickListener}">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <com.iranmobiledev.moodino.ui.view.CustomEmojiView
                     android:id="@+id/goodImage"
+                    android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    app:srcCompat="@drawable/emoji_good" />
+                    android:background="@drawable/circle_bg"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/emoji_good"
+                    android:tint="@color/good_color" />
 
                 <TextView
                     android:layout_width="wrap_content"

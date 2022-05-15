@@ -156,7 +156,7 @@
                         </LinearLayout>
 
                     </LinearLayout>
-                    <com.iranmobiledev.moodino.ui.view.EmojiView
+                    <com.iranmobiledev.moodino.ui.view.EmojiViewGroup
                         android:id="@+id/emojiView_entryDetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
