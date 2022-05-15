@@ -1,17 +1,13 @@
 package com.iranmobiledev.moodino.base
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.iranmobiledev.moodino.R
-import com.iranmobiledev.moodino.utlis.MoodinoDialog
+import com.iranmobiledev.moodino.utlis.dialog.MoodinoDialog
 
 /**
  * All activities should extend this base activity

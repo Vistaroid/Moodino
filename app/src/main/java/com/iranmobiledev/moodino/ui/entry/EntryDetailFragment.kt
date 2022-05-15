@@ -13,17 +13,22 @@ import androidx.navigation.fragment.findNavController
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
+import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.utlis.*
+import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import saman.zamani.persiandate.PersianDate
+
 //TODO for edit mode should implement date and time set
-class EntryDetailFragment : BaseFragment(), EmojiClickListener,
+class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEventListener,
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
@@ -31,7 +36,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     private val imageLoader: ImageLoadingService by inject()
     private var entry = Entry()
     private var editMode = false
-    private val sharedPref : SharedPreferences by inject()
+    private val sharedPref: SharedPreferences by inject()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,7 +69,18 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     }
 
     private fun setupEditMode() {
+        val persianDate = PersianDate()
+        setupDate()
+        binding.pageTitle.visibility = View.GONE
+        binding.timeDate.visibility = View.VISIBLE
+        binding.emojiViewEntryDetail.visibility = View.VISIBLE
+        binding.noteEt.setText(entry.note)
+        if (entry.photoPath.isNotEmpty())
+            binding.entryImageContainer.visibility = View.VISIBLE
+        imageLoader.load(requireContext(), entry.photoPath, binding.entryImage)
+    }
 
+    private fun setupDate() {
         val persianDate = PersianDate()
         entry.date?.let {
             persianDate.shDay = it.day
@@ -75,17 +91,9 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
             persianDate.hour = Integer.parseInt(it.hour)
             persianDate.minute = Integer.parseInt(it.minutes)
         }
-
-        binding.pageTitle.visibility = View.GONE
-        binding.timeDate.visibility = View.VISIBLE
-        binding.emojiViewEntryDetail.visibility = View.VISIBLE
         binding.timeTv.text = getTime(persianDate)
         binding.dateTv.text =
             getDate(pattern = "j F Y", date = persianDate)
-        binding.noteEt.setText(entry.note)
-        if (entry.photoPath.isNotEmpty())
-            binding.entryImageContainer.visibility = View.VISIBLE
-        imageLoader.load(requireContext(), entry.photoPath, binding.entryImage)
     }
 
     private fun setupUtil() {
@@ -99,7 +107,16 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
         binding.selectImageLayout.setOnClickListener {
             createPhotoSelectorDialog()
         }
-
+        binding.date.implementSpringAnimationTrait()
+        binding.date.setOnClickListener{
+            val persianDate = PersianDate()
+            entry.date?.let {
+                persianDate.shYear = it.year
+                persianDate.shMonth = it.month
+                persianDate.shDay = it.day
+            }
+            getPersianDialog(requireContext(),this,persianDate).show()
+        }
     }
 
     private fun navigateToEntryFragment() {
@@ -143,7 +160,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
         else entryDetailViewModel.addEntry(entry)
         navigateToEntryFragment()
     }
-
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             if (!editMode) {
@@ -161,5 +177,14 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
             binding.emojiViewEntryDetail.badItem.id -> entry.emojiValue = 2
             binding.emojiViewEntryDetail.awfulItem.id -> entry.emojiValue = 1
         }
+    }
+
+    override fun onDateSelected(persianPickerDate: PersianPickerDate) {
+        entry.date = EntryDate(
+            persianPickerDate.persianYear,
+            persianPickerDate.persianMonth,
+            persianPickerDate.persianDay
+        )
+        setupDate()
     }
 }
