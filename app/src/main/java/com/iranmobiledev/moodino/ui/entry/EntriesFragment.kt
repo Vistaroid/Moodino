@@ -27,6 +27,7 @@ import io.github.persiancalendar.calendar.AbstractDate
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
+import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import kotlin.coroutines.CoroutineContext
 
@@ -39,6 +40,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private val adapter: EntryContainerAdapter by inject()
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
     private val sharePref: SharedPreferences by inject()
+    private val persianDate = PersianDate()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,7 +92,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun addEntryCardViewVisibilityCheck(entries: List<RecyclerViewData>) {
-        val persianDate = PersianDateObj.persianDate
         val today = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         var found = false
         entries.forEach {
@@ -156,7 +157,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
     override fun onEmojiItemClicked(emojiId: Int) {
         val entry = Entry()
-        val persianDate = PersianDateObj.persianDate
         entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         entry.time = EntryTime(
             PersianDateFormat.format(persianDate, "H"),

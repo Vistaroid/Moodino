@@ -26,7 +26,7 @@ class ChildRecyclerView(
     private val language: Int
 ) : RecyclerView.Adapter<ChildRecyclerView.ViewHolder>(), KoinComponent {
 
-
+    private val persianDate = PersianDate()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val emojiFactory = EmojiFactory.create(context)
@@ -71,7 +71,6 @@ class ChildRecyclerView(
 
         private fun setEntryDate(entry: Entry) {
             entryDate.visibility = View.VISIBLE
-            val persianDate = PersianDateObj.persianDate
             val date = EntryDate(
                 persianDate.shYear,
                 persianDate.shMonth,
@@ -79,7 +78,7 @@ class ChildRecyclerView(
             )
             if (entry.date == date)
                 entryDate.text = todayStringDate(language)
-            else if (entry.date == yesterday(PersianDateObj.persianDate))
+            else if (entry.date == yesterday(persianDate))
                 entryDate.text = yesterdayStringDate(language)
         }
 
@@ -91,7 +90,6 @@ class ChildRecyclerView(
             )
         }
         private fun yesterdayStringDate(language: Int): String {
-            val persianDate = PersianDateObj.persianDate
             persianDate.shDay = persianDate.shDay-1
             return persianDateFormat(language,pattern = "j F", date = persianDate)
         }
