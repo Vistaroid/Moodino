@@ -50,11 +50,11 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
         if (editMode)
             setupEditMode()
         val icon = when (entry.emojiValue) {
-            1 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
-            2 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
-            3 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
-            4 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
-            5 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
+            1 -> emojiFactory.getEmoji(entry.emojiValue)
+            2 -> emojiFactory.getEmoji(entry.emojiValue)
+            3 -> emojiFactory.getEmoji(entry.emojiValue)
+            4 -> emojiFactory.getEmoji(entry.emojiValue)
+            5 -> emojiFactory.getEmoji(entry.emojiValue)
             else -> null
         }
         icon?.let { binding.entryiconDetail.setImageResource(it.image) }
