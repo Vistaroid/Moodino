@@ -210,16 +210,17 @@ class StatsFragmentViewModel(
     }
 
     private fun getYFromEntry(entry: com.iranmobiledev.moodino.data.Entry): Float {
-        return when (entry.title) {
-            R.string.rad -> 5f
-            R.string.good -> 4f
-            R.string.meh -> 3f
-            R.string.bad -> 2f
-            R.string.awful -> 1f
-            else -> {
-                3f
-            }
-        }
+        return entry.emojiValue.toFloat()
+//        return when (entry.title) {
+//            R.string.rad -> 5f
+//            R.string.good -> 4f
+//            R.string.meh -> 3f
+//            R.string.bad -> 2f
+//            R.string.awful -> 1f
+//            else -> {
+//                3f
+//            }
+//        }
     }
 
     @SuppressLint("NewApi")

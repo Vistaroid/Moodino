@@ -9,18 +9,18 @@ enum class EmojiType{
 }
 
 interface EmojiInterface{
-    fun getEmoji(value: Float): Emoji
+    fun getEmoji(value: Int): Emoji
 }
 
 data class Emoji(
-    val value: Float,
+    val value: Int,
     val title: String,
     val image: Int,  // drawable id
     val color: Int // color id
 )
 
 private class SimpleEmoji(private val context: Context): EmojiInterface{
-    override fun getEmoji(value: Float): Emoji {
+    override fun getEmoji(value: Int): Emoji {
         return when (value) {
             EmojiValue.AWFUL -> Emoji(value, context.getString(R.string.awful), R.drawable.emoji_awful, ColorArray.awful
             )
@@ -39,7 +39,7 @@ private class SimpleEmoji(private val context: Context): EmojiInterface{
 }
 
 private class ChildEmoji(private val context: Context): EmojiInterface{
-    override fun getEmoji(value: Float): Emoji {
+    override fun getEmoji(value: Int): Emoji {
         TODO("Not yet implemented")
     }
 }
@@ -56,9 +56,9 @@ object EmojiFactory{
 
 
 object EmojiValue{
-    const val AWFUL = 1f
-    const val BAD = 2f
-    const val MEH = 3f
-    const val GOOD = 4f
-    const val RAD  = 5f
+    const val AWFUL = 1
+    const val BAD = 2
+    const val MEH = 3
+    const val GOOD = 4
+    const val RAD  = 5
 }

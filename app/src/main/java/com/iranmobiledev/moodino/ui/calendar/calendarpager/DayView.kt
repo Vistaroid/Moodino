@@ -46,7 +46,7 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
             val list= entries?.filter { it.date?.toPersian()?.day.toString() == text }
             if (!list.isNullOrEmpty()){
                 dayHaveEntry= true
-                canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint(list[0].title) )
+                canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint(list[0].emojiValue) )
             }
         }
 
