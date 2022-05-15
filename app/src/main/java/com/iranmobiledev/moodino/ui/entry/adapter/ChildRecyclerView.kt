@@ -125,6 +125,7 @@ class ChildRecyclerView(
         return ViewHolder(view)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun remove(entry: Entry) {
         val entryInList = entries.find {
             it == entry
@@ -134,6 +135,8 @@ class ChildRecyclerView(
             entries.remove(entry)
             notifyItemRemoved(index)
         }
+        if(entries.size == 1 || entries.size == 0)
+            notifyDataSetChanged()
     }
 
     fun add(entry: Entry) {
