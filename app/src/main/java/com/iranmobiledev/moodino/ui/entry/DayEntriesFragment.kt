@@ -25,14 +25,26 @@ class DayEntriesFragment : BaseFragment(), KoinComponent {
     private lateinit var binding: FragmentDayEntriesBinding
     private val entryAdapter: EntryContainerAdapter by inject()
     private lateinit var viewModel: DayEntriesViewModel
+    private var day : Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding= FragmentDayEntriesBinding.inflate(inflater, container, false)
+        day = DayEntriesFragmentArgs.fromBundle(requireArguments()).day
         setUpUi()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        entryAdapter.getEmptyStateLiveData().observe(viewLifecycleOwner){
+            when(it){
+                true -> binding.emptyStateDayEntires.visibility = View.VISIBLE
+                false -> binding.emptyStateDayEntires.visibility = View.GONE
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -42,9 +54,15 @@ class DayEntriesFragment : BaseFragment(), KoinComponent {
     }
 
     private fun setUpUi(){
+        entryAdapter.bindSpecificDay(day)
         binding.recyclerView.apply {
             layoutManager= LinearLayoutManager(context, RecyclerView.VERTICAL, false )
             adapter= entryAdapter
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        entryAdapter.setData(entryAdapter.copyData)
     }
 }

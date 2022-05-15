@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import saman.zamani.persiandate.PersianDateFormat
+import kotlin.coroutines.CoroutineContext
 
 class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     KoinComponent, EmojiClickListener {
@@ -36,8 +38,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private val viewModel: EntryViewModel by viewModel()
     private val adapter: EntryContainerAdapter by inject()
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
-    private val sharePref : SharedPreferences by inject()
-
+    private val sharePref: SharedPreferences by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +53,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupUi() {
+        adapter.specifyDay = -1
         adapter.create(
             requireContext().applicationContext, this,
             mutableListOf(),
@@ -66,37 +68,41 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupObserver() {
-        viewModel.getEntries().observe(viewLifecycleOwner) {
-            val item = it.find { x ->
-                x.entries.size > 1
-            }
-            if(it.isNotEmpty())
-               binding.bottomTextContainer.visibility = View.VISIBLE
-            if(item == null)
-                binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
-            else
-                binding.bottomText.setText(R.string.its_time_to_play_memories)
-            if (it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE)
-                binding.emptyStateContainer.visibility = View.VISIBLE
-            else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE)
-                binding.emptyStateContainer.visibility = View.GONE
-            addEntryCardViewVisibilityCheck(it)
-            adapter.setData(it)
+        viewModel.getEntries().observe(viewLifecycleOwner){
+                val item = it.find { x ->
+                    x.entries.size > 1
+                }
+                if (it.isNotEmpty()) binding.bottomTextContainer.visibility = View.VISIBLE
+
+                if (item == null) binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
+                else binding.bottomText.setText(R.string.its_time_to_play_memories)
+
+                if (it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE) binding.emptyStateContainer.visibility =
+                    View.VISIBLE
+                else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE) binding.emptyStateContainer.visibility =
+                    View.GONE
+
+                addEntryCardViewVisibilityCheck(it)
+
+                adapter.setData(it)
         }
+
     }
-    private fun addEntryCardViewVisibilityCheck(entries : List<RecyclerViewData>){
+
+    private fun addEntryCardViewVisibilityCheck(entries: List<RecyclerViewData>) {
         val persianDate = PersianDateObj.persianDate
         val today = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         var found = false
         entries.forEach {
-            if(it.entries[0].date == today){
+            if (it.entries[0].date == today) {
                 found = true
                 binding.addEntryCardView.visibility = View.GONE
             }
         }
-        if(!found)
+        if (!found)
             binding.addEntryCardView.visibility = View.VISIBLE
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.emojisView.setEmptyStateOnClickListener(this)
@@ -180,4 +186,5 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             }
         }
     }
+
 }

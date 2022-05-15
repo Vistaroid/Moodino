@@ -1,6 +1,9 @@
 package com.iranmobiledev.moodino.ui.entry
 
+import android.content.SharedPreferences
+import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +58,9 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
             else -> null
         }
         icon?.let { binding.entryiconDetail.setImageResource(it.image) }
+        val language = sharedPref.getInt(LANGUAGE, PERSIAN)
+        if (language == PERSIAN)
+            binding.backIv.rotation = 180f
     }
 
     private fun setupEditMode() {
