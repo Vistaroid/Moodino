@@ -62,36 +62,15 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener {
         initialFromBackPress = false
     }
 
-    override fun onEmojiItemClicked(emojiId: Int) {
+    override fun onEmojiItemClicked(emojiValue: Int) {
         val entry = Entry()
         entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         entry.time = EntryTime(
             PersianDateFormat.format(persianDate, "H"),
             PersianDateFormat.format(persianDate, "i")
         )
-
-        when (emojiId) {
-            binding.emojiViewAddEntry.radItem.id -> {
-                entry.emojiValue = 5
-                navigateToEntryDetailFragment(entry)
-            }
-            binding.emojiViewAddEntry.goodItem.id -> {
-                entry.emojiValue = 4
-                navigateToEntryDetailFragment(entry)
-            }
-            binding.emojiViewAddEntry.mehItem.id -> {
-                entry.emojiValue = 3
-                navigateToEntryDetailFragment(entry)
-            }
-            binding.emojiViewAddEntry.badItem.id -> {
-                entry.emojiValue = 2
-                navigateToEntryDetailFragment(entry)
-            }
-            binding.emojiViewAddEntry.awfulItem.id -> {
-                entry.emojiValue = 1
-                navigateToEntryDetailFragment(entry)
-            }
-        }
+        entry.emojiValue= emojiValue
+        navigateToEntryDetailFragment(entry)
     }
 
     private val onBackPress = object : OnBackPressedCallback(true){

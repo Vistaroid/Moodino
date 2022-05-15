@@ -92,16 +92,16 @@ class StatsFragment : BaseFragment() {
             var countSum = 0
 
             if (!entries.isNullOrEmpty()) {
-                val distinctList = entries.distinctBy { it.title }
+                val distinctList = entries.distinctBy { it.emojiValue }
                 distinctList.forEach { item ->
-                    val list = entries.filter { it.title == item.title }
+                    val list = entries.filter { it.emojiValue == item.emojiValue }
                     countSum += list.size
-                    when (item.title) {
-                        RAD -> moodsCount[0] = PieEntry(list.size.toFloat(), "")
-                        GOOD -> moodsCount[1] = PieEntry(list.size.toFloat(), "")
-                        MEH -> moodsCount[2] = PieEntry(list.size.toFloat(), "")
-                        BAD -> moodsCount[3] = PieEntry(list.size.toFloat(), "")
-                        AWFUL -> moodsCount[4] = PieEntry(list.size.toFloat(), "")
+                    when (item.emojiValue) {
+                        EmojiValue.RAD -> moodsCount[0] = PieEntry(list.size.toFloat(), "")
+                        EmojiValue.GOOD -> moodsCount[1] = PieEntry(list.size.toFloat(), "")
+                        EmojiValue.MEH -> moodsCount[2] = PieEntry(list.size.toFloat(), "")
+                        EmojiValue.BAD -> moodsCount[3] = PieEntry(list.size.toFloat(), "")
+                        EmojiValue.AWFUL -> moodsCount[4] = PieEntry(list.size.toFloat(), "")
                     }
                 }
             }
@@ -138,19 +138,19 @@ class StatsFragment : BaseFragment() {
     private fun setupMoodsCount() {
         model.entries.observe(viewLifecycleOwner) { entries ->
             if (!entries.isNullOrEmpty()) {
-                val distinctList = entries.distinctBy { it.title }
+                val distinctList = entries.distinctBy { it.emojiValue }
                 distinctList.forEach { item ->
-                    val list = entries.filter { it.title == item.title }
-                    when (item.title) {
-                        RAD -> binding.moodCountVeryHappy.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                    val list = entries.filter { it.emojiValue == item.emojiValue }
+                    when (item.emojiValue) {
+                        EmojiValue.RAD -> binding.moodCountVeryHappy.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
                             list.size.toString()
-                        GOOD -> binding.moodCountHappy.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                        EmojiValue.GOOD -> binding.moodCountHappy.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
                             list.size.toString()
-                        MEH -> binding.moodCountNothing.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                        EmojiValue.MEH -> binding.moodCountNothing.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
                             list.size.toString()
-                        BAD -> binding.moodCountBad.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                        EmojiValue.BAD -> binding.moodCountBad.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
                             list.size.toString()
-                        AWFUL -> binding.moodCountVeryBad.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
+                        EmojiValue.AWFUL -> binding.moodCountVeryBad.view?.findViewById<TextView>(R.id.moodCountTextView)?.text =
                             list.size.toString()
                     }
                 }

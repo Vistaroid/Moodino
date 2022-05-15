@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +28,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
-import kotlin.coroutines.CoroutineContext
 
 class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     KoinComponent, EmojiClickListener {
@@ -155,36 +153,15 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         return true
     }
 
-    override fun onEmojiItemClicked(emojiId: Int) {
+    override fun onEmojiItemClicked(emojiValue: Int) {
         val entry = Entry()
         entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         entry.time = EntryTime(
             PersianDateFormat.format(persianDate, "H"),
             PersianDateFormat.format(persianDate, "i")
         )
-
-        when(emojiId){
-            binding.emojisView.radItem.id -> {
-                entry.emojiValue = 5
-                navigateToEntryDetail(entry)
-            }
-            binding.emojisView.goodItem.id -> {
-                entry.emojiValue = 4
-                navigateToEntryDetail(entry)
-            }
-            binding.emojisView.mehItem.id -> {
-                entry.emojiValue = 3
-                navigateToEntryDetail(entry)
-            }
-            binding.emojisView.badItem.id -> {
-                entry.emojiValue = 2
-                navigateToEntryDetail(entry)
-            }
-            binding.emojisView.awfulItem.id -> {
-                entry.emojiValue = 1
-                navigateToEntryDetail(entry)
-            }
-        }
+        entry.emojiValue= emojiValue
+        navigateToEntryDetail(entry)
     }
 
 }

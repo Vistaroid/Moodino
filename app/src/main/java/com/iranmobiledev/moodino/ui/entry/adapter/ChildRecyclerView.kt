@@ -44,7 +44,7 @@ class ChildRecyclerView(
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry, index: Int) {
-            val emoji = emojiFactory.getEmoji(entry.emojiValue.toFloat())
+            val emoji = emojiFactory.getEmoji(entry.emojiValue)
             binding.entryItem = entry
             itemsVisibility(entry, index)
             entryIcon.setImageResource(emoji.image)
