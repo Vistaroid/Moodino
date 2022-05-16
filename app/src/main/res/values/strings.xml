@@ -18,6 +18,7 @@
     <string name="change_color">Change Colors</string>
     <string name="color_mode">Color Mode</string>
     <string name="pin_lock">PIN Lock</string>
+    <string name="reminder">Reminder</string>
     <string name="start_week">Start of the Week</string>
     <string name="language">Language</string>
     <string name="backup_restore">Backup and Restore</string>
@@ -134,4 +135,7 @@
     <string name="its_time_to_play_memories">Its time to play a memories.</string>
     <string name="it_was_first_entry_lets_make_some_other">It was your first entry\nlets make some history.</string>
     <string name="add_new_entry">Add a new entry!</string>
+    <string name="add_reminder">Add Reminder</string>
+    <string name="add_reminder_success">Add Reminder Successed</string>
+
 </resources>

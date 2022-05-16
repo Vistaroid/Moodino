@@ -13,4 +13,8 @@ class MoreRepositoryImpl(private val moreLocalDataSource: MoreLocalDataSource) :
     override suspend fun setActivePINLock(active: Boolean) = moreLocalDataSource.setActivePINLock(active)
 
     override suspend fun setActiveFingerPrintLock(active: Boolean) = moreLocalDataSource.setActiveFingerPrintLock(active)
+
+    override suspend fun saveTimeReminder(time: String) = moreLocalDataSource.saveTimeReminder(time)
+
+    override fun getTimeReminder(): String = moreLocalDataSource.getTimeReminder()
 }

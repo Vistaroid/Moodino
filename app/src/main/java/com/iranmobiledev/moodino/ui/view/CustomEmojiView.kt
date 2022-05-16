@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.res.ResourcesCompat
 import com.iranmobiledev.moodino.R
 
 class CustomEmojiView(context: Context, attr: AttributeSet): AppCompatImageView(context,attr) {
@@ -25,6 +26,8 @@ class CustomEmojiView(context: Context, attr: AttributeSet): AppCompatImageView(
 
 
     init {
+        background= ResourcesCompat.getDrawable(resources,R.drawable.circle_bg,context.theme)
+        backgroundTintList= resources.getColorStateList(R.color.white,context.theme)
         bgTintColor= backgroundTintList
         tintColor= imageTintList
     }
