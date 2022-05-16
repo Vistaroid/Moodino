@@ -13,6 +13,7 @@
     <string name="monthly_report">گذارش ماهانه</string>
     <string name="photo_gallery">گالری عکس ها</string>
     <string name="achiement">دستاورد</string>
+    <string name="reminder">یادآور</string>
     <string name="timer">تایمر</string>
     <string name="edite_moods">اصلاح احساسات</string>
     <string name="edite_activity">اصلاح فعالیت</string>
@@ -133,6 +134,9 @@
     <string name="choose">انتخاب کنید</string>
     <string name="its_time_to_play_memories">وقتشه یکم خاطره بازی کنیم.</string>
     <string name="it_was_first_entry_lets_make_some_other">این از اولیش\nوقتشه خاطرات بیشتری اضافه کنی.</string>
+    <string name="add_new_entry">Add a new entry!</string>
+    <string name="add_reminder">افزودن یاداور</string>
+    <string name="add_reminder_success">یادآور با موفقیت تنظیم شد</string>
     <string name="add_new_entry">افزودن خاطره جدید</string>
     <string name="not_found">واسه امروز چیزی ثبت نکردی</string>
 </resources>
