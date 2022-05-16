@@ -1,9 +1,7 @@
 package com.iranmobiledev.moodino.ui.entry
 
 import android.content.SharedPreferences
-import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,11 +53,11 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialog
         if (editMode)
             setupEditMode()
         val icon = when (entry.emojiValue) {
-            1 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
-            2 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
-            3 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
-            4 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
-            5 -> emojiFactory.getEmoji(entry.emojiValue.toFloat())
+            1 -> emojiFactory.getEmoji(entry.emojiValue)
+            2 -> emojiFactory.getEmoji(entry.emojiValue)
+            3 -> emojiFactory.getEmoji(entry.emojiValue)
+            4 -> emojiFactory.getEmoji(entry.emojiValue)
+            5 -> emojiFactory.getEmoji(entry.emojiValue)
             else -> null
         }
         icon?.let { binding.entryiconDetail.setImageResource(it.image) }
@@ -169,14 +167,8 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialog
         }
     }
 
-    override fun onEmojiItemClicked(emojiId: Int) {
-        when (emojiId) {
-            binding.emojiViewEntryDetail.radItem.id -> entry.emojiValue = 5
-            binding.emojiViewEntryDetail.goodItem.id -> entry.emojiValue = 4
-            binding.emojiViewEntryDetail.mehItem.id -> entry.emojiValue = 3
-            binding.emojiViewEntryDetail.badItem.id -> entry.emojiValue = 2
-            binding.emojiViewEntryDetail.awfulItem.id -> entry.emojiValue = 1
-        }
+    override fun onEmojiItemClicked(emojiValue: Int) {
+        entry.emojiValue= emojiValue
     }
 
     override fun onDateSelected(persianPickerDate: PersianPickerDate) {
