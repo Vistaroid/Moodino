@@ -3,9 +3,6 @@ package com.iranmobiledev.moodino.utlis
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
-object PersianDateObj {
-    val persianDate = PersianDate()
-}
 
 /**
  * 1 : Persian
@@ -13,7 +10,7 @@ object PersianDateObj {
  * @return مثال : اردیبهشت 1400
  * doc : https://github.com/samanzamani/persianDate
  */
-fun persianDateFormat(language: Int = 1, pattern: String = "Y F", date: PersianDate = PersianDateObj.persianDate) : String{
+fun persianDateFormat(language: Int = 1, pattern: String = "Y F", date: PersianDate = PersianDate()) : String{
     return when(language){
         1 -> {
             PersianDateFormat.format(
@@ -31,4 +28,19 @@ fun persianDateFormat(language: Int = 1, pattern: String = "Y F", date: PersianD
         }
         else -> {""}
     }
+}
+fun getTime(persianDate: PersianDate = PersianDate()): String {
+    return PersianDateFormat.format(persianDate, "H:i")
+}
+fun getDate(date: PersianDate = PersianDate(), pattern: String = "Y F", language: Int = PERSIAN): String {
+    val type = when(language){
+        PERSIAN -> PersianDateFormat.PersianDateNumberCharacter.FARSI
+        ENGLISH -> PersianDateFormat.PersianDateNumberCharacter.ENGLISH
+        else -> PersianDateFormat.PersianDateNumberCharacter.FARSI
+    }
+    return PersianDateFormat.format(
+        date,
+        pattern,
+        type
+    )
 }

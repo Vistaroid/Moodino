@@ -96,6 +96,13 @@
             app:destination="@id/addEntryFragment"
             app:popUpTo="@id/entryDetailFragment"
             app:popUpToInclusive="true"/>
+        <argument
+            android:name="edit"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="entry"
+            app:argType="com.iranmobiledev.moodino.data.Entry" />
 
     </fragment>
 
@@ -103,7 +110,12 @@
         android:id="@+id/dayEntriesFragment"
         android:name="com.iranmobiledev.moodino.ui.entry.DayEntriesFragment"
         android:label="fragment_day_entries"
-        tools:layout="@layout/fragment_day_entries" />
+        tools:layout="@layout/fragment_day_entries" >
+        <argument
+            android:name="day"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 
     <fragment
         android:id="@+id/reminderFragment"

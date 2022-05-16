@@ -16,7 +16,7 @@ import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.*
 import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.listener.DialogEventListener
-import com.iranmobiledev.moodino.listener.EmptyStateOnClickListener
+import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
@@ -26,18 +26,19 @@ import io.github.persiancalendar.calendar.AbstractDate
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
+import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
 class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
-    KoinComponent, EmptyStateOnClickListener {
+    KoinComponent, EmojiClickListener {
 
     private lateinit var binding: FragmentEntriesBinding
     private lateinit var recyclerView: RecyclerView
     private val viewModel: EntryViewModel by viewModel()
     private val adapter: EntryContainerAdapter by inject()
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
-    private val sharePref : SharedPreferences by inject()
-
+    private val sharePref: SharedPreferences by inject()
+    private val persianDate = PersianDate()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +53,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupUi() {
+        adapter.specifyDay = -1
         adapter.create(
             requireContext().applicationContext, this,
             mutableListOf(),
@@ -66,37 +68,40 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupObserver() {
-        viewModel.getEntries().observe(viewLifecycleOwner) {
-            val item = it.find { x ->
-                x.entries.size > 1
-            }
-            if(it.isNotEmpty())
-               binding.bottomTextContainer.visibility = View.VISIBLE
-            if(item == null)
-                binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
-            else
-                binding.bottomText.setText(R.string.its_time_to_play_memories)
-            if (it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE)
-                binding.emptyStateContainer.visibility = View.VISIBLE
-            else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE)
-                binding.emptyStateContainer.visibility = View.GONE
-            addEntryCardViewVisibilityCheck(it)
-            adapter.setData(it)
+        viewModel.getEntries().observe(viewLifecycleOwner){
+                val item = it.find { x ->
+                    x.entries.size > 1
+                }
+                if (it.isNotEmpty()) binding.bottomTextContainer.visibility = View.VISIBLE
+
+                if (item == null) binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
+                else binding.bottomText.setText(R.string.its_time_to_play_memories)
+
+                if (it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE) binding.emptyStateContainer.visibility =
+                    View.VISIBLE
+                else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE) binding.emptyStateContainer.visibility =
+                    View.GONE
+
+                addEntryCardViewVisibilityCheck(it)
+
+                adapter.setData(it)
         }
+
     }
-    private fun addEntryCardViewVisibilityCheck(entries : List<RecyclerViewData>){
-        val persianDate = PersianDateObj.persianDate
+
+    private fun addEntryCardViewVisibilityCheck(entries: List<RecyclerViewData>) {
         val today = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         var found = false
         entries.forEach {
-            if(it.entries[0].date == today){
+            if (it.entries[0].date == today) {
                 found = true
                 binding.addEntryCardView.visibility = View.GONE
             }
         }
-        if(!found)
+        if (!found)
             binding.addEntryCardView.visibility = View.VISIBLE
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.emojisView.setEmptyStateOnClickListener(this)
@@ -110,10 +115,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         val bundle = Bundle()
         bundle.putParcelable("entry", entry)
         findNavController().navigate(R.id.action_entriesFragment_to_entryDetailFragment, bundle)
-    }
-
-    private fun deleteEntry(entry: Entry) {
-        lifecycleScope.launchWhenResumed { showDeleteDialog(entry) }
     }
 
     private fun showDeleteDialog(entry: Entry) {
@@ -143,42 +144,24 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         Toast.makeText(context, date.year.toString() + date.monthName, Toast.LENGTH_SHORT).show()
     }
 
-
+    override fun update(entry: Entry) {
+        val action = EntriesFragmentDirections.actionEntriesFragmentToEntryDetailFragment(edit = true, entry = entry)
+        findNavController().navigate(action)
+    }
     override fun delete(entry: Entry): Boolean {
-        deleteEntry(entry)
+        lifecycleScope.launchWhenResumed { showDeleteDialog(entry) }
         return true
     }
 
-    override fun onEmptyStateItemClicked(v: Int) {
+    override fun onEmojiItemClicked(emojiValue: Int) {
         val entry = Entry()
-        val persianDate = PersianDateObj.persianDate
         entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         entry.time = EntryTime(
             PersianDateFormat.format(persianDate, "H"),
             PersianDateFormat.format(persianDate, "i")
         )
-
-        when(v){
-            binding.emojisView.radItem.id -> {
-                entry.emojiValue = 5
-                navigateToEntryDetail(entry)
-            }
-            binding.emojisView.goodItem.id -> {
-                entry.emojiValue = 4
-                navigateToEntryDetail(entry)
-            }
-            binding.emojisView.mehItem.id -> {
-                entry.emojiValue = 3
-                navigateToEntryDetail(entry)
-            }
-            binding.emojisView.badItem.id -> {
-                entry.emojiValue = 2
-                navigateToEntryDetail(entry)
-            }
-            binding.emojisView.awfulItem.id -> {
-                entry.emojiValue = 1
-                navigateToEntryDetail(entry)
-            }
-        }
+        entry.emojiValue= emojiValue
+        navigateToEntryDetail(entry)
     }
+
 }

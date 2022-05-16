@@ -3,7 +3,7 @@
 
     <item android:title="@string/entries"
         android:id="@+id/entriesFragment"
-        android:icon="@drawable/ic_note"/>
+        android:icon="@drawable/ic_emoji"/>
     <item android:title="@string/statsStr"
         android:id="@+id/statsFragment"
         android:icon="@drawable/ic_chart"/>
@@ -17,6 +17,6 @@
         android:icon="@drawable/ic_calendar"/>
     <item android:title="@string/moreStr"
         android:id="@+id/moreFragment"
-        android:icon="@drawable/ic_more_with_border"/>
+        android:icon="@drawable/ic_more"/>
 
 </menu>

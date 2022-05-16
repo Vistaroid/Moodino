@@ -123,7 +123,7 @@
             app:cardCornerRadius="@dimen/_16mdp"
             app:cardElevation="@dimen/_4mdp">
 
-            <com.iranmobiledev.moodino.ui.view.EmojiView
+            <com.iranmobiledev.moodino.ui.view.EmojiViewGroup
                 android:id="@+id/emojisView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

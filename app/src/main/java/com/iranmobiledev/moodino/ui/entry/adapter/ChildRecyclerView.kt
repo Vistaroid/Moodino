@@ -26,7 +26,7 @@ class ChildRecyclerView(
     private val language: Int
 ) : RecyclerView.Adapter<ChildRecyclerView.ViewHolder>(), KoinComponent {
 
-
+    private val persianDate = PersianDate()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val emojiFactory = EmojiFactory.create(context)
@@ -44,7 +44,7 @@ class ChildRecyclerView(
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry, index: Int) {
-            val emoji = emojiFactory.getEmoji(entry.emojiValue.toFloat())
+            val emoji = emojiFactory.getEmoji(entry.emojiValue)
             binding.entryItem = entry
             itemsVisibility(entry, index)
             entryIcon.setImageResource(emoji.image)
@@ -71,7 +71,6 @@ class ChildRecyclerView(
 
         private fun setEntryDate(entry: Entry) {
             entryDate.visibility = View.VISIBLE
-            val persianDate = PersianDateObj.persianDate
             val date = EntryDate(
                 persianDate.shYear,
                 persianDate.shMonth,
@@ -79,7 +78,7 @@ class ChildRecyclerView(
             )
             if (entry.date == date)
                 entryDate.text = todayStringDate(language)
-            else if (entry.date == yesterday(PersianDateObj.persianDate))
+            else if (entry.date == yesterday(persianDate))
                 entryDate.text = yesterdayStringDate(language)
         }
 
@@ -91,7 +90,6 @@ class ChildRecyclerView(
             )
         }
         private fun yesterdayStringDate(language: Int): String {
-            val persianDate = PersianDateObj.persianDate
             persianDate.shDay = persianDate.shDay-1
             return persianDateFormat(language,pattern = "j F", date = persianDate)
         }
@@ -108,12 +106,18 @@ class ChildRecyclerView(
 
         popupWindow.isOutsideTouchable = true
         popupWindow.elevation = 15f
+        popupWindow.isFocusable = true
         popupWindow.animationStyle = R.anim.popup_window
         popupWindow.showAsDropDown(view)
 
         val deleteTv = contentView.findViewById<TextView>(R.id.deleteTv)
+        val editTv = contentView.findViewById<TextView>(R.id.editTv)
         deleteTv.setOnClickListener {
             entryEventLister.delete(witchEntry)
+            popupWindow.dismiss()
+        }
+        editTv.setOnClickListener {
+            entryEventLister.update(witchEntry)
             popupWindow.dismiss()
         }
     }
@@ -124,6 +128,7 @@ class ChildRecyclerView(
         return ViewHolder(view)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun remove(entry: Entry) {
         val entryInList = entries.find {
             it == entry
@@ -133,6 +138,8 @@ class ChildRecyclerView(
             entries.remove(entry)
             notifyItemRemoved(index)
         }
+        if(entries.size == 1 || entries.size == 0)
+            notifyDataSetChanged()
     }
 
     fun add(entry: Entry) {
