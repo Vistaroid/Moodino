@@ -45,8 +45,6 @@
                     android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    android:background="@drawable/circle_bg"
-                    android:backgroundTint="@color/white"
                     android:src="@drawable/emoji_rad"
                     android:tint="@color/rad_color"/>
 
@@ -75,8 +73,6 @@
                     android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    android:background="@drawable/circle_bg"
-                    android:backgroundTint="@color/white"
                     android:src="@drawable/emoji_meh"
                     android:tint="@color/meh_color" />
 
@@ -105,8 +101,6 @@
                     android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    android:background="@drawable/circle_bg"
-                    android:backgroundTint="@color/white"
                     android:src="@drawable/emoji_bad"
                     android:tint="@color/bad_color" />
 
@@ -135,8 +129,6 @@
                     android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    android:background="@drawable/circle_bg"
-                    android:backgroundTint="@color/white"
                     android:src="@drawable/emoji_awful"
                     android:tint="@color/awful_color" />
 
@@ -165,8 +157,6 @@
                     android:onClick="@{clickListener}"
                     android:layout_width="@dimen/_40mdp"
                     android:layout_height="@dimen/_40mdp"
-                    android:background="@drawable/circle_bg"
-                    android:backgroundTint="@color/white"
                     android:src="@drawable/emoji_good"
                     android:tint="@color/good_color" />
 
