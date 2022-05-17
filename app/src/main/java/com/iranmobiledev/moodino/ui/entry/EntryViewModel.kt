@@ -46,10 +46,6 @@ class EntryViewModel(
     fun deleteEntry(entry: Entry) {
         entryRepository.delete(entry)
     }
-
-    fun addActivity(activity: Activity): Long {
-        return activityRepository.add(activity)
-    }
     fun getEntries() : LiveData<List<RecyclerViewData>> {
         return entries
     }

@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.ui.entry
 
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -39,6 +40,11 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
     private val sharePref: SharedPreferences by inject()
     private val persianDate = PersianDate()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        sharePref.edit().putBoolean(FIRST_ENTER, false).apply()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,10 +1,10 @@
 package com.iranmobiledev.moodino.repository.activity
 
 import com.iranmobiledev.moodino.data.Activity
+import com.iranmobiledev.moodino.data.ActivityAndCategory
+import kotlinx.coroutines.flow.Flow
+
 
 interface ActivityRepository {
-    fun add(activity: Activity) : Long
-    fun delete(activity: Activity) : Int
-    fun update(activity: Activity) : Int
-    fun getAll() : List<Activity>
+    fun getAll() : Flow<List<ActivityAndCategory>>
 }

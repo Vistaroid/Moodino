@@ -13,13 +13,14 @@ import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
 import com.iranmobiledev.moodino.listener.EmojiClickListener
+import com.iranmobiledev.moodino.ui.view.ActivityView
 import com.iranmobiledev.moodino.utlis.*
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
 var initialFromBackPress = false
 
-class AddEntryFragment : BaseFragment(), EmojiClickListener {
+class AddEntryFragment : BaseFragment(), EmojiClickListener{
 
     private lateinit var binding: AddEntryFragmentBinding
     private var persianDate: PersianDate = PersianDate()

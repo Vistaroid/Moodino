@@ -6,8 +6,8 @@ import android.app.NotificationManager
 import android.content.SharedPreferences
 import android.os.Build
 import com.iranmobiledev.moodino.data.Activity
+import com.iranmobiledev.moodino.data.Category
 import com.iranmobiledev.moodino.database.AppDatabase
-import com.iranmobiledev.moodino.database.EntryDao
 import com.iranmobiledev.moodino.repository.activity.ActivityRepository
 import com.iranmobiledev.moodino.repository.activity.ActivityRepositoryImpl
 import com.iranmobiledev.moodino.repository.activity.source.ActivityLocalDataSource
@@ -17,7 +17,6 @@ import com.iranmobiledev.moodino.ui.calendar.CalendarViewModel
 import com.iranmobiledev.moodino.repository.more.MoreRepository
 import com.iranmobiledev.moodino.repository.more.MoreRepositoryImpl
 import com.iranmobiledev.moodino.repository.more.source.MoreLocalDataSource
-import com.iranmobiledev.moodino.ui.MainActivity
 import com.iranmobiledev.moodino.ui.MainActivityViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
@@ -25,9 +24,7 @@ import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 
 import com.iranmobiledev.moodino.ui.more.timer.ReminderViewModel
-import com.iranmobiledev.moodino.utlis.GlideImageLoader
-import com.iranmobiledev.moodino.utlis.ImageLoadingService
-import com.iranmobiledev.moodino.utlis.LANGUAGE
+import com.iranmobiledev.moodino.utlis.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.component.KoinComponent
@@ -59,7 +56,7 @@ class App : Application() , KoinComponent{
 
             viewModel { ReminderViewModel(get()) }
             factory <EntryRepository> { EntryRepositoryImpl(database.getEntryDao) }
-            factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
+            factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getCategoryDao)) }
             factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(get())) }
             single <ImageLoadingService>{ GlideImageLoader() }
             single { EntryContainerAdapter() }
@@ -75,36 +72,28 @@ class App : Application() , KoinComponent{
         //TODO should change here
         sharedPref.edit().putInt(LANGUAGE, PERSIAN).apply()
 
-        val firstEnter = sharedPref.getBoolean("first_enter", false)
-        if (!firstEnter)
-            makeDefaultActivities()
+        val firstEnter = sharedPref.getBoolean(FIRST_ENTER, true)
+        if (firstEnter)
+            makeActivities()
     }
 
-    private fun makeDefaultActivities() {
-        val viewModel: EntryViewModel = get()
-        viewModel.addActivity(
-            Activity(
-                id = null,
-                image = R.drawable.ic_arrow_bottom,
-                title = "achievement",
-                category = "CT"
-            )
-        )
-        viewModel.addActivity(
-            Activity(
-                id = null,
-                image = R.drawable.ic_arrow_bottom,
-                title = "achievement",
-                category = "CT"
-            )
-        )
-        viewModel.addActivity(
-            Activity(
-                id = null,
-                image = R.drawable.ic_arrow_bottom,
-                title = "achievement",
-                category = "CT"
-            )
-        )
+    private fun makeActivities() {
+        val dataBase = AppDatabase.getAppDatabase(this)
+        val categoryDao = dataBase.getCategoryDao
+        val activityDao = dataBase.getActivityDao
+        val categories = mutableListOf(Category(null,getString(R.string.daily)))
+
+        categories.forEach {
+            val id = categoryDao.add(it)
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_friends,getString(R.string.friends)))
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_date, getString(R.string.mDate)))
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_gaming, getString(R.string.gaming)))
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_movie, getString(R.string.movie)))
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_reading, getString(R.string.reading)))
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_relax, getString(R.string.relax)))
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_shopping, getString(R.string.shopping)))
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_sleep, getString(R.string.sleep)))
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_cleaning, getString(R.string.cleaning)))
+        }
     }
 }

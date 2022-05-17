@@ -137,5 +137,19 @@
     <string name="add_new_entry">Add a new entry!</string>
     <string name="add_reminder">Add Reminder</string>
     <string name="add_reminder_success">Add Reminder Successed</string>
-
+    <string name="mNot_found">No entry found</string>
+    <string name="habits">Habits</string>
+    <string name="daily">Daily</string>
+    <string name="friends">Friends</string>
+    <string name="mDate">Date</string>
+    <string name="healthy">Healthy</string>
+    <string name="family">Family</string>
+    <string name="movie">Movie</string>
+    <string name="reading">Reading</string>
+    <string name="sport">Sport</string>
+    <string name="relax">Relax</string>
+    <string name="shopping">Shopping</string>
+    <string name="sleep">Sleep</string>
+    <string name="cleaning">Cleaning</string>
+    <string name="gaming">Gaming</string>
 </resources>

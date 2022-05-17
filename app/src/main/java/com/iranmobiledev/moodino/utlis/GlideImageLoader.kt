@@ -8,4 +8,8 @@ class GlideImageLoader() : ImageLoadingService {
     override fun load(context: Context, imagePath: String, container: ImageView) {
         Glide.with(context).load(imagePath).into(container)
     }
+
+    override fun load(context: Context, imageResource: Int, container: ImageView) {
+        Glide.with(context).load(imageResource).into(container)
+    }
 }

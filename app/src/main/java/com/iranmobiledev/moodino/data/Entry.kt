@@ -14,7 +14,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Entry(
     @PrimaryKey(autoGenerate = true)
-    var id : Int? = null,
+    var id : Long? = null,
     var note : String = "",
     var activities : List<Activity> = ArrayList(),
     var photoPath : String = "",

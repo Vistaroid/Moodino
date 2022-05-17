@@ -1,8 +1,11 @@
 package com.iranmobiledev.moodino.ui.entry
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.Activity
+import com.iranmobiledev.moodino.data.ActivityAndCategory
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.repository.activity.ActivityRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
@@ -16,10 +19,28 @@ class EntryDetailViewModel(
     private val activityRepository: ActivityRepository
 ) : BaseViewModel() {
 
+    private val activities = MutableLiveData<List<ActivityAndCategory>>()
+
+    init {
+        fetchActivities()
+    }
+
     fun addEntry(entry: Entry) {
         entryRepository.add(entry)
     }
     fun update(entry: Entry){
         entryRepository.update(entry)
+    }
+
+    fun fetchActivities(){
+        viewModelScope.launch(Dispatchers.IO) {
+            activityRepository.getAll().collect{
+                activities.postValue(it)
+            }
+        }
+    }
+
+    fun getActivities(): LiveData<List<ActivityAndCategory>>{
+        return activities
     }
 }

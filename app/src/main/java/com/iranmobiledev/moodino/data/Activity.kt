@@ -6,12 +6,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "table_activity")
+@Entity
 @Parcelize
 data class Activity(
     @PrimaryKey(autoGenerate = true)
-    var id : Int?,
+    var activityId : Long?,
+    var activityCategoryId : Long,
     val image : Int,
     val title : String,
-    val category : String,
 ) : Parcelable

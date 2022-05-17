@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.listener.EmojiClickListener
+import com.iranmobiledev.moodino.ui.entry.adapter.ParentActivitiesAdapter
 import com.iranmobiledev.moodino.utlis.*
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
@@ -20,6 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import saman.zamani.persiandate.PersianDate
+
 //TODO for edit mode should implement date and time set
 class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     KoinComponent {
@@ -29,7 +33,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     private val imageLoader: ImageLoadingService by inject()
     private var entry = Entry()
     private var editMode = false
-    private val sharedPref : SharedPreferences by inject()
+    private val sharedPref: SharedPreferences by inject()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,11 +43,20 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
         entry = EntryDetailFragmentArgs.fromBundle(requireArguments()).entry
         setupUi(EmojiFactory.create(requireContext()))
         setupUtil()
+        setupObserver()
         setupClicks()
         return binding.root
     }
 
+    private fun setupObserver() {
+        entryDetailViewModel.getActivities().observe(viewLifecycleOwner){
+            binding.parentActivityRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            binding.parentActivityRv.adapter = ParentActivitiesAdapter(it)
+        }
+    }
+
     private fun setupUi(emojiFactory: EmojiInterface) {
+        setupActivityRv()
         editMode = EntryDetailFragmentArgs.fromBundle(requireArguments()).edit
         if (editMode)
             setupEditMode()
@@ -59,6 +72,12 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
         val language = sharedPref.getInt(LANGUAGE, PERSIAN)
         if (language == PERSIAN)
             binding.backIv.rotation = 180f
+    }
+
+    private fun setupActivityRv() {
+        binding.parentActivityRv.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        binding.parentActivityRv.adapter = ParentActivitiesAdapter(mutableListOf())
     }
 
     private fun setupEditMode() {
@@ -97,7 +116,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
         binding.selectImageLayout.setOnClickListener {
             createPhotoSelectorDialog()
         }
-
     }
 
     private fun navigateToEntryFragment() {
@@ -152,6 +170,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     }
 
     override fun onEmojiItemClicked(emojiValue: Int) {
-        entry.emojiValue= emojiValue
+        entry.emojiValue = emojiValue
     }
 }

@@ -35,4 +35,14 @@
     <declare-styleable name="EmojiView">
         <attr name="text" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="ActivityView">
+        <attr name="selectedItem" format="boolean"/>
+        <attr name="activity_text" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ActivityGroupView">
+        <attr name="expanded" format="boolean"/>
+        <attr name="title" format="string"/>
+    </declare-styleable>
 </resources>
