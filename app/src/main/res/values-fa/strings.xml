@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">مودینو</string>
-    <string name="let_s_pick_up_where_you_left_off">بیا از جایی که متوقف شدی، شروع کنیم!</string>
+    <string name="let_s_pick_up_where_you_left_off">یه روزمرگی جدید برای امروز</string>
     <string name="how_are_you">حالت چطوره؟</string>
     <string name="rad">عالی</string>
     <string name="good">خوب</string>
@@ -134,9 +134,11 @@
     <string name="choose">انتخاب کنید</string>
     <string name="its_time_to_play_memories">وقتشه یکم خاطره بازی کنیم.</string>
     <string name="it_was_first_entry_lets_make_some_other">این از اولیش\nوقتشه خاطرات بیشتری اضافه کنی.</string>
-    <string name="add_new_entry">Add a new entry!</string>
     <string name="add_reminder">افزودن یاداور</string>
     <string name="add_reminder_success">یادآور با موفقیت تنظیم شد</string>
     <string name="add_new_entry">افزودن خاطره جدید</string>
-    <string name="not_found">واسه امروز چیزی ثبت نکردی</string>
+    <string name="not_registered">واسه امروز چیزی ثبت نکردی</string>
+    <string name="not_found">چیزی یافت نشد</string>
+    <string name="never_mind">بیخیال</string>
+    <string name="ok">باشه</string>
 </resources>
