@@ -28,6 +28,7 @@ import com.iranmobiledev.moodino.ui.more.timer.ReminderViewModel
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import com.iranmobiledev.moodino.utlis.LANGUAGE
+import com.iranmobiledev.moodino.utlis.PERSIAN
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.component.KoinComponent

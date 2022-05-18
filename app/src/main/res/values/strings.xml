@@ -137,5 +137,6 @@
     <string name="add_new_entry">Add a new entry!</string>
     <string name="add_reminder">Add Reminder</string>
     <string name="add_reminder_success">Add Reminder Successed</string>
+    <string name="not_found">You have not registered anything for today !</string>
 
 </resources>
