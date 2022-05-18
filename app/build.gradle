@@ -121,9 +121,9 @@ dependencies {
     def dynamicanimation_version = "1.0.0"
     implementation("androidx.dynamicanimation:dynamicanimation:$dynamicanimation_version")
 
-
     def lottie_version = "5.0.3"
     implementation "com.airbnb.android:lottie:$lottie_version"
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
     implementation 'com.github.aliab:Persian-Date-Picker-Dialog:1.8.0'
 }
 

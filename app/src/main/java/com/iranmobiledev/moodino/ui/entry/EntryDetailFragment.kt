@@ -8,25 +8,32 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
+import com.iranmobiledev.moodino.listener.ActivityItemCallback
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
+import com.iranmobiledev.moodino.ui.entry.adapter.ParentActivitiesAdapter
+import com.iranmobiledev.moodino.ui.view.ActivityView
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
-import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import saman.zamani.persiandate.PersianDate
 
 //TODO for edit mode should implement date and time set
-class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEventListener,
+
+class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCallback,DatePickerDialogEventListener,
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
@@ -35,6 +42,8 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialog
     private var entry = Entry()
     private var editMode = false
     private val sharedPref: SharedPreferences by inject()
+    private val activities = mutableListOf<Activity>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,11 +53,21 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialog
         entry = EntryDetailFragmentArgs.fromBundle(requireArguments()).entry
         setupUi(EmojiFactory.create(requireContext()))
         setupUtil()
+        setupObserver()
         setupClicks()
         return binding.root
     }
 
+    private fun setupObserver() {
+        entryDetailViewModel.getActivities().observe(viewLifecycleOwner) {
+            binding.parentActivityRv.layoutManager =
+                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            binding.parentActivityRv.adapter = ParentActivitiesAdapter(it, this)
+        }
+    }
+
     private fun setupUi(emojiFactory: EmojiInterface) {
+        setupActivityRv()
         editMode = EntryDetailFragmentArgs.fromBundle(requireArguments()).edit
         if (editMode)
             setupEditMode()
@@ -64,6 +83,12 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialog
         val language = sharedPref.getInt(LANGUAGE, PERSIAN)
         if (language == PERSIAN)
             binding.backIv.rotation = 180f
+    }
+
+    private fun setupActivityRv() {
+        binding.parentActivityRv.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        binding.parentActivityRv.adapter = ParentActivitiesAdapter(mutableListOf(), this)
     }
 
     private fun setupEditMode() {
@@ -115,6 +140,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialog
             }
             getPersianDialog(requireContext(),this,persianDate).show()
         }
+
     }
 
     private fun navigateToEntryFragment() {
@@ -151,6 +177,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialog
     }
 
     private val saveOnClick = View.OnClickListener {
+        entry.activities = activities
         binding.noteEt.text?.let {
             entry.note = it.toString()
         }
@@ -168,7 +195,14 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, DatePickerDialog
     }
 
     override fun onEmojiItemClicked(emojiValue: Int) {
-        entry.emojiValue= emojiValue
+        entry.emojiValue = emojiValue
+    }
+
+    override fun onActivityItemClicked(activity: Activity, selected: Boolean) {
+        val found = activities.find { it == activity }
+        found?.let { if (!selected) activities.remove(activity) }
+        if (found == null && selected)
+            activities.add(activity)
     }
 
     override fun onDateSelected(persianPickerDate: PersianPickerDate) {

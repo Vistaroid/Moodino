@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.iranmobiledev.moodino.utlis.HalinoPopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import com.google.android.material.card.MaterialCardView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
@@ -18,6 +20,7 @@ import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
 import saman.zamani.persiandate.PersianDate
+
 
 class ChildRecyclerView(
     private var entryEventLister: EntryEventLister,
@@ -37,7 +40,6 @@ class ChildRecyclerView(
         private val entryImageContainer: MaterialCardView = binding.imageContainer
         private val entryNote: TextView = binding.entryNote
         private val activityRv: RecyclerView = binding.activityRv
-
         private val spacer: View = binding.spacer
         private val entryDate: TextView = binding.entryDate
         private val entryViewGroup : ViewGroup = binding.entryViewGroup
@@ -52,6 +54,15 @@ class ChildRecyclerView(
             moreIcon.setOnClickListener { makePopupMenu(entry, it) }
             entryTitle.text = emoji.title
             entryTitle.setTextColor(emoji.color)
+            setupSmallActivitiesRv(entry)
+        }
+
+        private fun setupSmallActivitiesRv(entry: Entry) {
+            val layoutManager = FlexboxLayoutManager(context)
+            layoutManager.flexDirection = FlexDirection.ROW
+            layoutManager.justifyContent = JustifyContent.FLEX_START
+            binding.activityRv.layoutManager = layoutManager
+            binding.activityRv.adapter = SmallActivityAdapter(entry.activities, entry.emojiValue)
         }
 
         private fun itemsVisibility(entry: Entry, index: Int) {

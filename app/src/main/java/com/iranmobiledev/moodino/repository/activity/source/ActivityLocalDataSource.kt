@@ -1,22 +1,14 @@
 package com.iranmobiledev.moodino.repository.activity.source
 
 import com.iranmobiledev.moodino.data.Activity
-import com.iranmobiledev.moodino.database.ActivitiesDao
+import com.iranmobiledev.moodino.data.ActivityAndCategory
+import com.iranmobiledev.moodino.database.ActivityDao
+import com.iranmobiledev.moodino.database.CategoryDao
+import kotlinx.coroutines.flow.Flow
 
-class ActivityLocalDataSource(private val activityDao : ActivitiesDao) : ActivityDataSource {
-    override fun add(activity: Activity) : Long{
-        return activityDao.add(activity)
+class ActivityLocalDataSource(private val categoryDao : CategoryDao) : ActivityDataSource {
+    override fun getAll(): Flow<List<ActivityAndCategory>> {
+        return categoryDao.getAll()
     }
 
-    override fun delete(activity: Activity) : Int{
-        return activityDao.delete(activity)
-    }
-
-    override fun update(activity: Activity) : Int{
-        return activityDao.update(activity)
-    }
-
-    override fun getAll(): List<Activity> {
-        return activityDao.getAll()
-    }
 }

@@ -69,12 +69,13 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/_12mdp"
+                android:layout_height="@dimen/_12mdp"
                 android:layout_gravity="center_vertical"
-                android:rotation="180"
                 app:srcCompat="@drawable/ic_arrow_bottom"
-                app:tint="?colorPrimary" />
+                app:tint="?colorPrimary"
+                android:layout_marginStart="@dimen/_4mdp"
+                android:rotation="-90"/>
         </LinearLayout>
 
         <LinearLayout
@@ -107,12 +108,13 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/_12mdp"
+                android:layout_height="@dimen/_12mdp"
                 android:layout_gravity="center_vertical"
-                android:rotation="180"
                 app:srcCompat="@drawable/ic_arrow_bottom"
-                app:tint="?colorPrimary" />
+                app:tint="?colorPrimary"
+                android:layout_marginStart="@dimen/_4mdp"
+                android:rotation="-90"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -149,4 +151,5 @@
         app:layout_constraintEnd_toEndOf="@+id/continueButton"
         app:layout_constraintStart_toStartOf="@+id/continueButton"
         app:layout_constraintTop_toBottomOf="@+id/continueButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

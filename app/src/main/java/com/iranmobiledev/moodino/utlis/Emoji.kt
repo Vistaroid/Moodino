@@ -54,6 +54,9 @@ object EmojiFactory{
     }
 }
 
+fun getEmoji(context: Context,emojiValue: Int): Emoji{
+    return EmojiFactory.create(context).getEmoji(emojiValue)
+}
 
 object EmojiValue{
     const val AWFUL = 1

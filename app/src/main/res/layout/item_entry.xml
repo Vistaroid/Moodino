@@ -73,12 +73,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activityRv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6mdp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
             app:layout_constraintTop_toBottomOf="@+id/entryTitle"
-            android:visibility="gone"
-            />
+            android:layout_marginEnd="@dimen/_12mdp"/>
 
         <TextView
             android:id="@+id/entryNote"
