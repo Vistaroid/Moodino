@@ -23,10 +23,13 @@ class SmallActivityAdapter(private val activities: List<Activity>,private val em
 
         private val binding : ItemActivitySmallBinding = ItemActivitySmallBinding.bind(itemView)
 
-        fun bind(activity: Activity) {
+        fun bind(activity: Activity, index: Int) {
             binding.smallActivityTitle.text = activity.title
             imageLoader.load(itemView.context,activity.image,binding.icon)
             ImageViewCompat.setImageTintList(binding.icon, ColorStateList.valueOf(getEmoji(itemView.context,emojiValue).color));
+
+            if(index == activities.size-1)
+                binding.circle.visibility = View.GONE
         }
     }
 
@@ -36,7 +39,7 @@ class SmallActivityAdapter(private val activities: List<Activity>,private val em
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(activities[position])
+        holder.bind(activities[position], position)
     }
 
     override fun getItemCount(): Int = activities.size

@@ -79,8 +79,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/entryTitle"
             app:layout_constraintTop_toBottomOf="@+id/entryTitle"
-            android:layout_marginEnd="@dimen/_12mdp"
-            />
+            android:layout_marginEnd="@dimen/_12mdp"/>
 
         <TextView
             android:id="@+id/entryNote"
