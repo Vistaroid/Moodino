@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -67,10 +68,7 @@ class ActivityGroupView(context: Context, attributeSet: AttributeSet?) :
     }
 
     private fun setupRecyclerView() {
-        //binding.activityGroupRv.layoutManager = GridLayoutManager(context, 5)
-        val layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW)
-        layoutManager.justifyContent = JustifyContent.CENTER
-        binding.activityGroupRv.layoutManager = layoutManager
+        binding.activityGroupRv.layoutManager = GridLayoutManager(context, 5)
     }
 
     fun setAdapter(groupAdapter: ChildActivityAdapter) {

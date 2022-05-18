@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.ItemActivityBinding
+import com.iranmobiledev.moodino.listener.ActivityItemCallback
 
 class ActivityView(context: Context, attributeSet: AttributeSet?) : LinearLayout(context, attributeSet) , View.OnClickListener{
-    private val binding : ItemActivityBinding
+    val binding : ItemActivityBinding
     var shouldSelect : Boolean = true
+    var mSelected : Boolean = false
     private var text = ""
+
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = ItemActivityBinding.inflate(inflater, this, false)
@@ -40,19 +43,27 @@ class ActivityView(context: Context, attributeSet: AttributeSet?) : LinearLayout
         binding.activityBackground.setBackgroundResource(R.drawable.activity_bg)
         binding.activityIcon.isSelectedEmoji = true
         shouldSelect = false
+        mSelected = true
     }
 
     fun setUnselected(){
         binding.activityBackground.setBackgroundResource(R.drawable.unselect_activity_bg)
         binding.activityIcon.isSelectedEmoji = false
         shouldSelect = true
+        mSelected = false
+    }
+
+    fun clickedOn(){
+        onClick(this)
     }
 
     override fun onClick(v: View?) {
-        if(shouldSelect)
+        if(shouldSelect){
             setSelected()
-        else
+        }
+        else{
             setUnselected()
+        }
     }
 
     fun getRoot() : View{

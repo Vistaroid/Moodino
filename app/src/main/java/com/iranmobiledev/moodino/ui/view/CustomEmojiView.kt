@@ -43,4 +43,8 @@ class CustomEmojiView(context: Context, attr: AttributeSet): AppCompatImageView(
         imageTintList= tintColor
         setPadding(0,0,0,0)
     }
+
+    fun tint(color: Int){
+        tintColor = resources.getColorStateList(color, resources.newTheme())
+    }
 }

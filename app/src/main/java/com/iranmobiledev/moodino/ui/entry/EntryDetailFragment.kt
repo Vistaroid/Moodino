@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
+import com.iranmobiledev.moodino.listener.ActivityItemCallback
 import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.ui.entry.adapter.ParentActivitiesAdapter
+import com.iranmobiledev.moodino.ui.view.ActivityView
 import com.iranmobiledev.moodino.utlis.*
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
@@ -25,7 +28,7 @@ import org.koin.core.component.inject
 import saman.zamani.persiandate.PersianDate
 
 //TODO for edit mode should implement date and time set
-class EntryDetailFragment : BaseFragment(), EmojiClickListener,
+class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCallback,
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
@@ -34,6 +37,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     private var entry = Entry()
     private var editMode = false
     private val sharedPref: SharedPreferences by inject()
+    private val activities = mutableListOf<Activity>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,9 +53,10 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     }
 
     private fun setupObserver() {
-        entryDetailViewModel.getActivities().observe(viewLifecycleOwner){
-            binding.parentActivityRv.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            binding.parentActivityRv.adapter = ParentActivitiesAdapter(it)
+        entryDetailViewModel.getActivities().observe(viewLifecycleOwner) {
+            binding.parentActivityRv.layoutManager =
+                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            binding.parentActivityRv.adapter = ParentActivitiesAdapter(it, this)
         }
     }
 
@@ -77,7 +82,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     private fun setupActivityRv() {
         binding.parentActivityRv.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        binding.parentActivityRv.adapter = ParentActivitiesAdapter(mutableListOf())
+        binding.parentActivityRv.adapter = ParentActivitiesAdapter(mutableListOf(), this)
     }
 
     private fun setupEditMode() {
@@ -152,6 +157,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
     }
 
     private val saveOnClick = View.OnClickListener {
+        entry.activities = activities
         binding.noteEt.text?.let {
             entry.note = it.toString()
         }
@@ -171,5 +177,12 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener,
 
     override fun onEmojiItemClicked(emojiValue: Int) {
         entry.emojiValue = emojiValue
+    }
+
+    override fun onActivityItemClicked(activity: Activity, selected: Boolean) {
+        val found = activities.find { it == activity }
+        found?.let { if (!selected) activities.remove(activity) }
+        if (found == null && selected)
+            activities.add(activity)
     }
 }

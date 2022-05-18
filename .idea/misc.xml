@@ -145,6 +145,7 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/dialog_bg.xml" value="0.1495" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/emoji_bad.xml" value="0.201" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/emoji_rad.xml" value="0.26" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/drawable/fill_circle.xml" value="0.2425" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_arrow_bottom.xml" value="0.242" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_back.xml" value="0.2775" />
         <entry key="..\:/project team/Moodino/app/src/main/res/drawable/ic_book.xml" value="0.2175" />
@@ -188,6 +189,7 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity.xml" value="0.33" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity_container.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity_group_view.xml" value="0.2694746376811594" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity_small.xml" value="0.75" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_entry.xml" value="0.33" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_entry_container.xml" value="0.2513586956521739" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_entry_test.xml" value="0.33" />

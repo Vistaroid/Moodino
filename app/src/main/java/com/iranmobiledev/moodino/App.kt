@@ -94,6 +94,7 @@ class App : Application() , KoinComponent{
             activityDao.addActivity(Activity(null,id,R.drawable.ic_shopping, getString(R.string.shopping)))
             activityDao.addActivity(Activity(null,id,R.drawable.ic_sleep, getString(R.string.sleep)))
             activityDao.addActivity(Activity(null,id,R.drawable.ic_cleaning, getString(R.string.cleaning)))
+            activityDao.addActivity(Activity(null,id,R.drawable.ic_brain, getString(R.string.mLearn)))
         }
     }
 }

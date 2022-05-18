@@ -11,7 +11,8 @@
     android:layout_marginTop="@dimen/_10mdp"
     android:layout_marginBottom="@dimen/_10mdp"
     android:layout_marginStart="@dimen/_12mdp"
-    android:layout_marginEnd="@dimen/_12mdp">
+    android:layout_marginEnd="@dimen/_12mdp"
+    app:contentPaddingBottom="@dimen/_12mdp">
 
     <LinearLayout
         android:layout_width="match_parent"
