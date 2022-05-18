@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/_15mdp"
     android:layout_margin="@dimen/_15mdp">
 
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="@dimen/_15mdp">
+        android:layout_margin="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,6 +23,7 @@
             android:layout_gravity="start"/>
 
         <RadioGroup
+            android:id="@+id/rg_DchangeLanguage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -32,12 +33,14 @@
             android:layout_marginBottom="@dimen/_20mdp">
 
             <RadioButton
+                android:id="@+id/rb_DchangeLanguage_persian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Persian"
                 android:textSize="@dimen/_13font_mdp"/>
 
             <RadioButton
+                android:id="@+id/rb_DchangeLanguage_english"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="English"
@@ -49,15 +52,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="end"
-            android:layout_marginTop="@dimen/_20mdp">
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_DchangeLanguage_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
                 style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_DchangeLanguage_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/save"

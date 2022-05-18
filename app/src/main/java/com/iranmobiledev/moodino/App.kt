@@ -22,6 +22,7 @@ import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
+import com.iranmobiledev.moodino.ui.more.MoreViewModel
 
 import com.iranmobiledev.moodino.ui.more.timer.ReminderViewModel
 import com.iranmobiledev.moodino.utlis.*
@@ -57,6 +58,7 @@ class App : Application() , KoinComponent{
             viewModel { EntryDetailViewModel(get(), get()) }
             viewModel { CalendarViewModel(get()) }
             viewModel { PinLockViewModel(get()) }
+            viewModel { MoreViewModel(get()) }
 
             viewModel { ReminderViewModel(get()) }
             factory <EntryRepository> { EntryRepositoryImpl(database.getEntryDao) }
@@ -74,7 +76,6 @@ class App : Application() , KoinComponent{
 
         val sharedPref: SharedPreferences = get()
         //TODO should change here
-        sharedPref.edit().putInt(LANGUAGE, PERSIAN).apply()
 
         val firstEnter = sharedPref.getBoolean(FIRST_ENTER, true)
         if (firstEnter)

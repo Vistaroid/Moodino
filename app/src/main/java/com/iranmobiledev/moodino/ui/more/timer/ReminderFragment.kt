@@ -57,6 +57,8 @@ class ReminderFragment : BaseFragment(){
             val a = MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_24H)
                 .setTitleText("Select time")
+                .setPositiveButtonText(getString(R.string.save))
+                .setNegativeButtonText(getString(R.string.cancel))
                 .build()
 
             a.addOnPositiveButtonClickListener {
