@@ -29,16 +29,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/picker_provider_paths" />
         </provider>
-        <activity
-            android:name=".ui.more.pinLock.PinLockActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".ui.more.activities.ActivitiesActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

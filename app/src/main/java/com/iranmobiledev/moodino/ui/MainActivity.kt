@@ -1,6 +1,8 @@
 package com.iranmobiledev.moodino.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -18,9 +20,11 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
-import com.iranmobiledev.moodino.utlis.setupWithNavController
+import com.iranmobiledev.moodino.utlis.*
 import org.greenrobot.eventbus.EventBus
 import saman.zamani.persiandate.PersianDate
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : BaseActivity() {
@@ -158,6 +162,18 @@ class MainActivity : BaseActivity() {
         binding.bottomAppBar.visibility = View.GONE
         binding.bottomAppBar.performHide(true)
         binding.bottomNavigationView.visibility = View.GONE
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        val shared = newBase?.getSharedPreferences("sharedPref" , MODE_PRIVATE)
+        val lan = when(shared?.getInt(LANGUAGE , ENGLISH)){
+            ENGLISH -> "en"
+            PERSIAN -> "fa"
+            else -> "en"
+        }
+        super.attachBaseContext(MyContextWrapper.wrap(newBase ,
+            Locale(lan).toString()
+        ))
     }
 }
 

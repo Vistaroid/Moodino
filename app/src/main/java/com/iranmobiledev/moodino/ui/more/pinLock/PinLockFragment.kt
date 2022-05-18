@@ -5,34 +5,44 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
-import com.iranmobiledev.moodino.databinding.ActivityPinLockBinding
+import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.databinding.FragmentPinLockBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class PinLockActivity : BaseActivity() {
+class PinLockFragment : BaseFragment() {
 
-    lateinit var binding : ActivityPinLockBinding
+    lateinit var binding : FragmentPinLockBinding
     val viewModel : PinLockViewModel by viewModel()
     var dialog : AlertDialog ?= null
     var pin = ""
     var confirmPin = ""
     var charNum = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityPinLockBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentPinLockBinding.inflate(inflater , container , false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
 
         binding.pinLockToolbar.onBackButtonClickListener = View.OnClickListener {
-            finish()
+            findNavController().popBackStack()
         }
 
         when {
@@ -40,18 +50,18 @@ class PinLockActivity : BaseActivity() {
                 binding.rbPinlockFingetPrint.isChecked = true
                 binding.btnPinlock.visibility = View.GONE
                 binding.tvPinlockTitle.text = getString(R.string.active_pin_lock)
-                binding.ivPinlock.setImageDrawable(getDrawable(R.drawable.ic_lock_active))
+                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_active))
             }
             viewModel.checkPIN() -> {
                 binding.rbPinlockPINLock.isChecked = true
                 binding.btnPinlock.visibility = View.GONE
                 binding.tvPinlockTitle.text = getString(R.string.active_pin_lock)
-                binding.ivPinlock.setImageDrawable(getDrawable(R.drawable.ic_lock_active))
+                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_active))
             }
             else -> {
                 binding.rbPinlockOff.isChecked = true
                 binding.tvPinlockTitle.text = getString(R.string.not_active_pin_lock)
-                binding.ivPinlock.setImageDrawable(getDrawable(R.drawable.ic_lock_notactive))
+                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_notactive))
             }
         }
 
@@ -87,8 +97,8 @@ class PinLockActivity : BaseActivity() {
 
     fun activeLocke(){
 
-        val view = LayoutInflater.from(this).inflate(R.layout.dialog_pin_lock , null)
-        dialog = AlertDialog.Builder(this).setView(view).create()
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_pin_lock , null)
+        dialog = AlertDialog.Builder(requireContext()).setView(view).create()
         dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog!!.show()
 
@@ -212,7 +222,7 @@ class PinLockActivity : BaseActivity() {
                     }
                     else{
                         binding.rbPinlockOff.isChecked = true
-                        Toast.makeText(this ,getString(R.string.error_pin) , Toast.LENGTH_SHORT ).show()
+                        Toast.makeText(requireContext() ,getString(R.string.error_pin) , Toast.LENGTH_SHORT ).show()
                     }
                 }
             }

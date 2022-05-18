@@ -1,7 +1,9 @@
 package com.iranmobiledev.moodino
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.database.AppDatabase
 import com.iranmobiledev.moodino.database.EntryDao
@@ -20,6 +22,7 @@ import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
+import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.android.ext.koin.androidContext
@@ -28,6 +31,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import java.util.*
 
 class App : Application(), KoinComponent {
     override fun onCreate() {
@@ -42,6 +46,7 @@ class App : Application(), KoinComponent {
             viewModel { CalendarViewModel(get()) }
             viewModel { PinLockViewModel(get()) }
             viewModel { StatsFragmentViewModel(get()) }
+            viewModel { MoreViewModel(get()) }
             factory<EntryRepository> { EntryRepositoryImpl(database.getEntryDao) }
             factory<ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getActivityDao)) }
             factory<MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(get())) }
@@ -56,12 +61,12 @@ class App : Application(), KoinComponent {
         }
 
         val sharedPref: SharedPreferences = get()
-        //TODO should change here
-        sharedPref.edit().putInt(LANGUAGE, PERSIAN).apply()
+
 
         val firstEnter = sharedPref.getBoolean("first_enter", false)
         if (!firstEnter)
             makeDefaultActivities()
+
     }
 
     private fun makeDefaultActivities() {

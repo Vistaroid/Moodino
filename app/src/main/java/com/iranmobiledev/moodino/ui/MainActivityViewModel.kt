@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui
 
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
 import android.view.animation.*
@@ -10,6 +11,9 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.RecyclerViewData
+import com.iranmobiledev.moodino.utlis.ENGLISH
+import com.iranmobiledev.moodino.utlis.LANGUAGE
+import com.iranmobiledev.moodino.utlis.PERSIAN
 
 
 class MainActivityViewModel() : BaseViewModel() {
