@@ -153,4 +153,8 @@
     <string name="cleaning">Cleaning</string>
     <string name="gaming">Gaming</string>
     <string name="mLearn">Learn</string>
+    <string name="not_registered">You have not registered anything for today !</string>
+    <string name="not_found">not found</string>
+    <string name="never_mind">cancel</string>
+    <string name="ok">Ok</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">مودینو</string>
-    <string name="let_s_pick_up_where_you_left_off">بیا از جایی که متوقف شدی، شروع کنیم!</string>
+    <string name="let_s_pick_up_where_you_left_off">یه روزمرگی جدید برای امروز</string>
     <string name="how_are_you">حالت چطوره؟</string>
     <string name="rad">عالی</string>
     <string name="good">خوب</string>
@@ -153,4 +153,8 @@
     <string name="cleaning">تمیز کردن</string>
     <string name="gaming">بازی</string>
     <string name="mLearn">آموزش</string>
+    <string name="not_registered">واسه امروز چیزی ثبت نکردی</string>
+    <string name="not_found">چیزی یافت نشد</string>
+    <string name="never_mind">بیخیال</string>
+    <string name="ok">باشه</string>
 </resources>
