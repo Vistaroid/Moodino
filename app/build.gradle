@@ -124,6 +124,6 @@ dependencies {
 
     def lottie_version = "5.0.3"
     implementation "com.airbnb.android:lottie:$lottie_version"
-
+    implementation 'com.github.aliab:Persian-Date-Picker-Dialog:1.8.0'
 }
 
