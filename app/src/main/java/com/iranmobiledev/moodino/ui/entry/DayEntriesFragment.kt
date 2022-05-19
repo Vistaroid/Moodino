@@ -7,16 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.FragmentDayEntriesBinding
+import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import saman.zamani.persiandate.PersianDate
 
-class DayEntriesFragment : BaseFragment(), KoinComponent {
+class DayEntriesFragment : BaseFragment(), KoinComponent, EntryEventLister {
 
     companion object {
         fun newInstance() = DayEntriesFragment()
@@ -45,6 +50,13 @@ class DayEntriesFragment : BaseFragment(), KoinComponent {
                 false -> binding.emptyStateDayEntires.visibility = View.GONE
             }
         }
+
+        binding.addBtn.setOnClickListener {
+            val date= PersianDate()
+            val direction= DayEntriesFragmentDirections.actionDayEntriesFragmentToAddEntryFragment("","")
+            findNavController().navigate(direction)
+        }
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -65,4 +77,14 @@ class DayEntriesFragment : BaseFragment(), KoinComponent {
         super.onDestroy()
         entryAdapter.setData(entryAdapter.copyData)
     }
+
+    override fun update(entry: Entry) {
+        val action = DayEntriesFragmentDirections.actionDayEntriesFragmentToEntryDetailFragment (edit = true, entry = entry)
+        findNavController().navigate(action)
+    }
+    override fun delete(entry: Entry): Boolean {
+      //  lifecycleScope.launchWhenResumed { showDeleteDialog(entry) }
+        return true
+    }
+
 }
