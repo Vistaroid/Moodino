@@ -59,6 +59,7 @@
                             android:textAppearance="?textAppearanceHeadline6"
                             android:textColor="?colorOnPrimary"
                             android:textSize="@dimen/_13font_mdp" />
+
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
