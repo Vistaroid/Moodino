@@ -20,12 +20,13 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class ChildActivityAdapter(
-    private var activities: List<Activity>,
+    var activities: MutableList<Activity>,
     private val context: Context,
-    private val clickObserver: ActivityItemCallback
-) : RecyclerView.Adapter<ChildActivityAdapter.ViewHolder>() , KoinComponent{
+    private val clickObserver: ActivityItemCallback,
+    private val activitiesShouldSelect: MutableList<Activity>
+) : RecyclerView.Adapter<ChildActivityAdapter.ViewHolder>(), KoinComponent {
 
-    private val imageLoader : ImageLoadingService by inject()
+    private val imageLoader: ImageLoadingService by inject()
 
     inner class ViewHolder(selfView: ActivityView) : RecyclerView.ViewHolder(selfView.getRoot()) {
 
@@ -35,6 +36,10 @@ class ChildActivityAdapter(
         fun bind(activity: Activity) {
             imageLoader.load(context, activity.image, binding.activityIcon)
             binding.activityTitle.text = activity.title
+
+            activitiesShouldSelect.find { it == activity }
+                .also { it?.let { mSelfView.clickedOn() } }
+
             itemView.setOnClickListener {
                 mSelfView.clickedOn()
                 clickObserver.onActivityItemClicked(activity, mSelfView.mSelected)
