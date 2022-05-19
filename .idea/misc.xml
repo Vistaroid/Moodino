@@ -100,11 +100,13 @@
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/ic_close.xml" value="0.105" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/ic_cup.xml" value="0.119" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/ic_happy_outlined.xml" value="0.1265" />
+        <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/note_bg.xml" value="0.1" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/outlined_circle.xml" value="0.1265" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/primary_circle_shape.xml" value="0.1265" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/round_corner_rectangle.xml" value="0.1265" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/round_left_corner_rectangle.xml" value="0.1265" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/round_right_corner_rectangle.xml" value="0.1265" />
+        <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/unselect_activity_bg.xml" value="0.1" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/view_bg_stroke.xml" value="0.1265" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/drawable/view_circle_bg_stroke.xml" value="0.1265" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/achievements_card.xml" value="0.17239583333333333" />
@@ -118,6 +120,8 @@
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/fragment_month.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.125" />
+        <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/item_activity.xml" value="0.15324074074074073" />
+        <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/item_activity_group_view.xml" value="0.15324074074074073" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/item_entry.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/item_entry_container.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/Toka/AndroidStudioProjects/Github/Moodino/app/src/main/res/layout/main_toolbar.xml" value="0.16666666666666666" />

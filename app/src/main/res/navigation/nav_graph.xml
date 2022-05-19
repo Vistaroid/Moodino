@@ -115,6 +115,12 @@
             android:name="day"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_dayEntriesFragment_to_addEntryFragment"
+            app:destination="@id/addEntryFragment" />
+        <action
+            android:id="@+id/action_dayEntriesFragment_to_entryDetailFragment"
+            app:destination="@id/entryDetailFragment" />
     </fragment>
 
     <fragment
