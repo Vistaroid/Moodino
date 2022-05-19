@@ -44,7 +44,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private var entry = Entry()
     private var editMode = false
     private val sharedPref: SharedPreferences by inject()
-    private val activities = mutableListOf<Activity>()
+    private var activities = mutableListOf<Activity>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +53,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     ): View {
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
         entry = EntryDetailFragmentArgs.fromBundle(requireArguments()).entry
+        activities = entry.activities
         setupUi(EmojiFactory.create(requireContext()))
         setupUtil()
         setupObserver()
@@ -64,7 +65,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         entryDetailViewModel.getActivities().observe(viewLifecycleOwner) {
             binding.parentActivityRv.layoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            binding.parentActivityRv.adapter = ParentActivitiesAdapter(it, this)
+            binding.parentActivityRv.adapter = ParentActivitiesAdapter(it, this, entry.activities)
         }
     }
 
@@ -74,6 +75,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         else
             binding.addPhotoTv.setText(R.string.change_photo)
         setupActivityRv()
+
         editMode = EntryDetailFragmentArgs.fromBundle(requireArguments()).edit
         if (editMode)
             setupEditMode()
@@ -91,11 +93,11 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             binding.backIv.rotation = 180f
     }
 
-    private fun setupActivityRv() {
-        binding.parentActivityRv.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        binding.parentActivityRv.adapter = ParentActivitiesAdapter(mutableListOf(), this)
-    }
+//    private fun setupActivityRv() {
+//        binding.parentActivityRv.layoutManager =
+//            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+//        binding.parentActivityRv.adapter = ParentActivitiesAdapter(mutableListOf(), this, entry.activities)
+//    }
 
     private fun setupEditMode() {
         selectActivities(entry.activities)
