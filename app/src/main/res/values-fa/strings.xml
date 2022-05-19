@@ -157,4 +157,6 @@
     <string name="not_found">چیزی یافت نشد</string>
     <string name="never_mind">بیخیال</string>
     <string name="ok">باشه</string>
+    <string name="delete_photo">عکس حذف بشه؟</string>
+    <string name="change_photo">تغییر عکس</string>
 </resources>

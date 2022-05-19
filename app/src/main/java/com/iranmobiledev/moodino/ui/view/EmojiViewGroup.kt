@@ -4,19 +4,17 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.EmojiViewBinding
 import com.iranmobiledev.moodino.listener.EmojiClickListener
-import com.iranmobiledev.moodino.utlis.EmojiValue
 
 class EmojiViewGroup(context: Context, attributeSet: AttributeSet?) :
     LinearLayout(context, attributeSet) {
 
     private var emojiClickListener: EmojiClickListener? = null
-    private var selectedView: CustomEmojiView?= null //  View is Selected
+    var selectedView: CustomEmojiView?= null //  View is Selected
+
 
     init {
         val inflater =
@@ -41,6 +39,7 @@ class EmojiViewGroup(context: Context, attributeSet: AttributeSet?) :
             emojiClickListener?.onEmojiItemClicked(getEmojiValue(it.id))
         }
     }
+
 
     private fun getEmojiValue(emojiId: Int): Int{
         when (emojiId) {

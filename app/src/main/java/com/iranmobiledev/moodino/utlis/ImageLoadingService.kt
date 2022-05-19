@@ -6,4 +6,5 @@ import android.widget.ImageView
 interface ImageLoadingService {
     fun load(context: Context, imagePath : String, container: ImageView)
     fun load(context: Context, imageResource: Int, container: ImageView)
+    fun remove(context: Context, view: ImageView)
 }
