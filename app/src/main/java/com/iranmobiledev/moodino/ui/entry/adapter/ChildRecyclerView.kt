@@ -19,6 +19,7 @@ import com.iranmobiledev.moodino.databinding.ItemEntryBinding
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import saman.zamani.persiandate.PersianDate
 
 
@@ -30,6 +31,7 @@ class ChildRecyclerView(
 ) : RecyclerView.Adapter<ChildRecyclerView.ViewHolder>(), KoinComponent {
 
     private val persianDate = PersianDate()
+    private val imageLoader : ImageLoadingService by inject()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val emojiFactory = EmojiFactory.create(context)
@@ -49,7 +51,7 @@ class ChildRecyclerView(
             val emoji = emojiFactory.getEmoji(entry.emojiValue)
             binding.entryItem = entry
             itemsVisibility(entry, index)
-            entryIcon.setImageResource(emoji.image)
+            imageLoader.load(itemView.context,emoji.image, binding.EntryIcon)
             entryViewGroup.setOnClickListener { makePopupMenu(entry, moreIcon) }
             moreIcon.setOnClickListener { makePopupMenu(entry, it) }
             entryTitle.text = emoji.title

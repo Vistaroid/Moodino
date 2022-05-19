@@ -21,14 +21,14 @@ class ActivityGroupView(context: Context, attributeSet: AttributeSet?) :
     LinearLayout(context, attributeSet) {
 
     private val binding: ItemActivityGroupViewBinding
-    var expanded: Boolean = false
+    var expanded: Boolean = true
 
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = ItemActivityGroupViewBinding.inflate(inflater, this, false)
         val attr = context.obtainStyledAttributes(attributeSet, R.styleable.ActivityGroupView)
 
-        val expand = attr.getBoolean(R.styleable.ActivityGroupView_expanded, false)
+        val expand = attr.getBoolean(R.styleable.ActivityGroupView_expanded, true)
         val title = attr.getString(R.styleable.ActivityGroupView_title)
 
         title?.let { setTitle(it) }

@@ -272,6 +272,7 @@
                             android:background="@color/gray"
                             android:scaleType="centerCrop"/>
                         <ImageView
+                            android:id="@+id/deleteImage"
                             android:layout_width="@dimen/_25mdp"
                             android:layout_height="@dimen/_25mdp"
                             app:srcCompat="@drawable/ic_remove"
@@ -297,6 +298,7 @@
                             android:clickable="true"
                             android:focusable="true">
                             <TextView
+                                android:id="@+id/addPhotoTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/tap_to_add_photo"

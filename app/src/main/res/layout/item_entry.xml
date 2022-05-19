@@ -14,7 +14,6 @@
         android:id="@+id/entryViewGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/_75mdp"
         android:background="?selectableItemBackground"
         android:clickable="true"
         android:focusable="true">
@@ -36,7 +35,8 @@
             app:layout_constraintStart_toStartOf="@id/EntryIcon"
             app:layout_constraintTop_toBottomOf="@id/EntryIcon"
             android:layout_marginTop="@dimen/_12mdp"
-            app:layout_constraintEnd_toEndOf="@id/EntryIcon" />
+            app:layout_constraintEnd_toEndOf="@id/EntryIcon"
+            />
 
         <TextView
             android:id="@+id/entryDate"
@@ -58,7 +58,8 @@
             android:textSize="@dimen/_15mdp"
             app:layout_constraintBottom_toBottomOf="@+id/EntryIcon"
             app:layout_constraintStart_toEndOf="@+id/EntryIcon"
-            app:layout_constraintTop_toBottomOf="@+id/entryDate" />
+            app:layout_constraintTop_toBottomOf="@+id/entryDate"
+            />
 
         <TextView
             android:id="@+id/entryTimeTv"
@@ -71,48 +72,61 @@
             app:layout_constraintTop_toTopOf="@+id/entryTitle"
             android:textSize="@dimen/_11mdp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/activityRv"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/entryContentContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6mdp"
+            android:layout_marginEnd="@dimen/_17mdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/entryTitle"
-            app:layout_constraintTop_toBottomOf="@+id/entryTitle"
-            android:layout_marginEnd="@dimen/_12mdp"/>
-
-        <TextView
-            android:id="@+id/entryNote"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{entryItem.note}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/entryTitle"
-            app:layout_constraintTop_toBottomOf="@+id/activityRv"
-            android:layout_marginTop="@dimen/_10mdp"
-            android:layout_marginEnd="@dimen/_12mdp"
-            android:visibility="gone"/>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/imageContainer"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_180mdp"
-            app:cardCornerRadius="@dimen/_16mdp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/entryTitle"
-            app:layout_constraintTop_toBottomOf="@+id/entryNote"
+            app:layout_constraintStart_toStartOf="@id/entryTitle"
+            app:layout_constraintTop_toBottomOf="@id/entryTitle"
             android:layout_marginTop="@dimen/_12mdp"
-            android:layout_marginEnd="@dimen/_12mdp"
-            android:visibility="gone">
+            android:layout_marginBottom="@dimen/_12mdp">
 
-            <ImageView
-                android:id="@+id/entryImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                bind:loadImageUrl="@{entryItem.photoPath}" />
-        </com.google.android.material.card.MaterialCardView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activityRv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/entryNote"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_12mdp"
+                android:text="@{entryItem.note}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activityRv"
+                android:justificationMode="inter_word"
+                android:visibility="gone"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/imageContainer"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_180mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:cardCornerRadius="@dimen/_16mdp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/entryNote"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/entryImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    bind:loadImageUrl="@{entryItem.photoPath}" />
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <ImageView
             android:id="@+id/moreIcon"
