@@ -157,4 +157,7 @@
     <string name="not_found">چیزی یافت نشد</string>
     <string name="never_mind">بیخیال</string>
     <string name="ok">باشه</string>
+    <string name="fingerprint_access">اثرانگشت</string>
+    <string name="pinLock_access">فقط کد پین</string>
+    <string name="off">غیرفعال</string>
 </resources>

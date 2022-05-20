@@ -11,7 +11,7 @@
         android:id="@+id/appBar_more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
+        android:background="?colorBackground"
         app:elevation="0dp">
         
         <com.google.android.material.appbar.MaterialToolbar
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/more"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="?colorText"
                 android:textSize="15sp"
                 android:layout_gravity="center"/>
             
@@ -43,12 +43,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:id="@+id/btn_more_goals"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/goals"
-                app:ItemMore_icon="@drawable/ic_goals" />
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:id="@+id/btn_more_goals"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/goals"-->
+<!--                app:ItemMore_icon="@drawable/ic_goals" />-->
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
                 android:layout_width="match_parent"
@@ -81,7 +81,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:background="@color/background"/>
+                android:background="?colorBackground"
+                />
 
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
@@ -95,7 +96,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:background="@color/background"/>
+                android:background="?colorBackground"
+                />
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
                 android:layout_width="match_parent"
@@ -135,7 +137,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:background="@color/background"/>
+                android:background="?colorBackground"/>
 
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
@@ -148,28 +150,28 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:background="@color/background"/>
+                android:background="?colorBackground"/>
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/backup_restore"
-                app:ItemMore_icon="@drawable/ic_backup"
-                android:clickable="true"/>
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/backup_restore"-->
+<!--                app:ItemMore_icon="@drawable/ic_backup"-->
+<!--                android:clickable="true"/>-->
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/export_entries"
-                app:ItemMore_icon="@drawable/ic_export"
-                android:clickable="true"/>
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/export_entries"-->
+<!--                app:ItemMore_icon="@drawable/ic_export"-->
+<!--                android:clickable="true"/>-->
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/widgets"
-                app:ItemMore_icon="@drawable/ic_widgets"
-                android:clickable="true"/>
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/widgets"-->
+<!--                app:ItemMore_icon="@drawable/ic_widgets"-->
+<!--                android:clickable="true"/>-->
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
                 android:layout_width="match_parent"

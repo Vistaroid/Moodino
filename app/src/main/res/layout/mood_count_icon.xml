@@ -12,6 +12,7 @@
     <FrameLayout
         android:layout_width="50dp"
         android:layout_height="50dp">
+
         <ImageView
             android:id="@+id/moodIconImageView"
             app:tint="@color/rad_color"

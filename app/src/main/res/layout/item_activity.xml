@@ -25,13 +25,14 @@
             android:layout_height="@dimen/_45mdp"
             android:background="@drawable/unselect_activity_bg"
             android:layout_gravity="center_horizontal">
+
             <com.iranmobiledev.moodino.ui.view.CustomEmojiView
                 android:id="@+id/activityIcon"
                 android:layout_width="@dimen/_20mdp"
                 android:layout_height="@dimen/_20mdp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/ic_calendar"
-                android:tint="?colorPrimary"/>
+                android:tint="?colorPrimary" />
         </FrameLayout>
         <TextView
             android:id="@+id/activityTitle"

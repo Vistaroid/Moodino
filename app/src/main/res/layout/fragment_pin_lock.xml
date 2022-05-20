@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?colorBackground">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
+        android:background="?colorOnSecondary"
         app:elevation="4dp">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="?colorText"
             android:textSize="15sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"/>
@@ -57,14 +57,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="35dp"
-            android:background="@color/white">
+            android:background="?colorCard">
 
             <RadioButton
                 android:id="@+id/rb_pinlock_FingetPrint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Allow Fingerprint Access"
-                android:textSize="13sp"
+                android:text="@string/fingerprint_access"
+                android:textAppearance="?textAppearanceBody1"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"/>
 
@@ -72,8 +72,8 @@
                 android:id="@+id/rb_pinlock_PINLock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Only PIN Lock Access"
-                android:textSize="13sp"
+                android:text="@string/pinLock_access"
+                android:textAppearance="?textAppearanceBody1"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"/>
 
@@ -81,8 +81,8 @@
                 android:id="@+id/rb_pinlock_off"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Off"
-                android:textSize="13sp"
+                android:text="@string/off"
+                android:textAppearance="?textAppearanceBody1"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"/>
 
