@@ -59,6 +59,7 @@
                             android:textAppearance="?textAppearanceHeadline6"
                             android:textColor="?colorOnPrimary"
                             android:textSize="@dimen/_13font_mdp" />
+
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
@@ -108,7 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_50mdp"
-        android:background="@color/background"
+        android:background="?colorBackground"
         android:orientation="vertical"
         android:visibility="gone">
 

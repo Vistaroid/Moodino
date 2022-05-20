@@ -96,7 +96,6 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         override fun handleOnBackPressed() {
             findNavController().navigate(R.id.action_addEntryFragment_to_entriesFragment)
         }
-
     }
 
     override fun onDateSelected(persianPickerDate: PersianPickerDate) {

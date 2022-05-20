@@ -34,30 +34,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/select_color_mode"
-            android:textColor="@color/black"
+            android:textColor="?colorText"
             android:textSize="@dimen/_20font_mdp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"/>
 
         <RadioGroup
+            android:id="@+id/rg_DchangeMode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/_15mdp">
 
             <RadioButton
+                android:id="@+id/rb_DchangeMode_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/light_mode"
                 android:textSize="@dimen/_13font_mdp"/>
 
             <RadioButton
+                android:id="@+id/rb_DchangeMode_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dark_mode"
                 android:textSize="@dimen/_13font_mdp"/>
 
             <RadioButton
+                android:id="@+id/rb_DchangeMode_system"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/system_mode"
@@ -75,16 +79,22 @@
             android:layout_marginBottom="@dimen/_10mdp">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_DchangeMode_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                android:textAllCaps="true"
+                android:textAppearance="?textAppearanceBody1"
+                style="@style/Widget.Material3.Button.TextButton"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_DchangeMode_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/save"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                android:textAllCaps="true"
+                android:textAppearance="?textAppearanceBody1"
+                style="@style/Widget.Material3.Button.TextButton" />
 
 
         </LinearLayout>

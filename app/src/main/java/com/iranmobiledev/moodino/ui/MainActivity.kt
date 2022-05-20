@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
@@ -172,5 +173,18 @@ class MainActivity : BaseActivity() {
         }
         super.attachBaseContext(MyContextWrapper.wrap(newBase , Locale(lan).toString()))
     }
+
+
+    object SetThem{
+        fun themeApp(theme: Int) {
+            when(theme){
+                SYSTEM_DEFULT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                DARK -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        }
+    }
+
+
 }
 

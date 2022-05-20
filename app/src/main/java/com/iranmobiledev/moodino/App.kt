@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.SharedPreferences
 import android.os.Build
+import androidx.appcompat.app.AppCompatDelegate
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Category
 import com.iranmobiledev.moodino.database.AppDatabase
@@ -80,6 +81,12 @@ class App : Application() , KoinComponent{
         val firstEnter = sharedPref.getBoolean(FIRST_ENTER, true)
         if (firstEnter)
             makeActivities()
+
+        when(sharedPref.getInt(MODE_THEME , SYSTEM_DEFULT)){
+            SYSTEM_DEFULT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            DARK -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
     private fun makeActivities() {

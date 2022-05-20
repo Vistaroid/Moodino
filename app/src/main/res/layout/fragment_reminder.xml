@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background">
+    android:background="?colorBackground">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
+        android:background="?colorOnSecondary"
         app:elevation="4dp">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -29,9 +29,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="15dp"
-        android:background="@color/white"
+        android:background="?colorCard"
         android:layout_marginTop="15dp"
         android:visibility="visible"
+        android:layoutDirection="ltr"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <ImageView
@@ -49,14 +50,14 @@
             android:id="@+id/tv_reminder_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="test text"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/black"
-            android:textSize="17sp"
             android:layout_centerVertical="true"
-            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="15dp"
-            android:layout_toEndOf="@id/iv_reminder_iconAlarm"/>
+            android:layout_toEndOf="@id/iv_reminder_iconAlarm"
+            android:textColor="?colorText"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            tools:text="test text" />
 
 
         <ImageView
@@ -68,7 +69,7 @@
             android:layout_marginStart="10dp"
             android:padding="5dp"
             android:src="@drawable/ic_delete"
-            app:tint="@color/gray_dark_500" />
+            app:tint="@color/gray_title" />
 
 
     </RelativeLayout>

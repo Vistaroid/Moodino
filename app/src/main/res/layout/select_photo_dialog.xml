@@ -30,7 +30,7 @@
                 android:textSize="@dimen/_10mdp"
                 android:layout_gravity="center_horizontal"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="?colorText"
                 android:maxLines="1"/>
         </LinearLayout>
         <LinearLayout
@@ -53,7 +53,7 @@
                 android:textSize="@dimen/_10mdp"
                 android:layout_gravity="center_horizontal"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="?colorText"
                 android:maxLines="1"/>
         </LinearLayout>
     </LinearLayout>

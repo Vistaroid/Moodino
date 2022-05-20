@@ -1,77 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:id="@+id/rootView_calendar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rootView_calendar">
+    android:background="?colorOnSecondary">
 
     <com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbar
         android:id="@+id/main_toolbar"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView_calendar"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginHorizontal="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/round_corner_rectangle"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="2dp">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:background="@drawable/round_corner_rectangle"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginVertical="20dp"
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_happy_outlined"
+                    app:tint="@color/green" />
+
+                <TextView
+                    android:id="@+id/average_mood"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/average_mood"
+                    android:textAppearance="?attr/textAppearanceSubtitle1" />
 
-                    <ImageView
-                        android:src="@drawable/ic_happy_outlined"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        app:tint="@color/green" />
-
-                    <TextView
-                        android:id="@+id/average_mood"
-                        android:layout_margin="5dp"
-                        android:textAppearance="?attr/textAppearanceSubtitle1"
-                        android:text="@string/average_mood"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <com.iranmobiledev.moodino.ui.calendar.calendarpager.CalendarPager
-                    android:id="@+id/calendarPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_220mdp"/>
-
-                <View
-                    android:layout_marginHorizontal="15dp"
-                    android:background="@color/gray"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
-
-               <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
-                   android:id="@+id/moodCountView"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.iranmobiledev.moodino.ui.calendar.calendarpager.CalendarPager
+                android:id="@+id/calendarPager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_220mdp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="@color/gray" />
+
+            <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
+                android:id="@+id/moodCountView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

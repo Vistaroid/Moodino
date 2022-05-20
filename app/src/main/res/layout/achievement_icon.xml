@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_gravity="center_horizontal|bottom"
-            android:background="@color/white"
+            android:background="?colorOnSecondary"
             android:orientation="horizontal"
             android:padding="4dp">
 

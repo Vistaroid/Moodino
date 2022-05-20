@@ -74,7 +74,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             binding.addPhotoTv.setText(R.string.tap_to_add_photo)
         else
             binding.addPhotoTv.setText(R.string.change_photo)
-//        setupActivityRv()
 
         editMode = EntryDetailFragmentArgs.fromBundle(requireArguments()).edit
         if (editMode)
