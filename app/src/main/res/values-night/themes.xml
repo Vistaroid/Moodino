@@ -2,11 +2,35 @@
     <!-- Base application theme. -->
     <style name="Theme.Moodino" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/pink</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/primary</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/pink</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?colorBackground</item>
+        <item name="android:windowLightStatusBar">false</item>
         <!-- Customize your theme here. -->
+        <item name="bottomNavigationStyle">@style/myNavigationView</item>
+        <item name="listPopupWindowStyle">@style/popupMenuStyle</item>
+        <!-- Font family -->
+        <item name="android:fontFamily">@font/shabnam_medium</item>
+        <!--  Calendar Color-->
+        <item name="colorText">@color/white</item>
+        <item name="colorTextDay">@color/gray_dark_700</item>
+        <item name="colorSelectDay">@color/blue_dark</item>
+        <item name="colorCurrentDay">@color/black</item>
+        <item name="colorTextDayName">@color/gray_dark_500</item>
+        <item name="colorTextDaySelected">@color/black</item>
+        <item name="colorTextDayHaveEntry">@color/black</item>
+        <item name="colorDayHaveEntryDefault">@color/black</item>
+        <item name="colorMonthSwitch">@color/black</item>
+        <item name="colorBackground">@color/black</item>
+        <item name="colorIcon">@color/white</item>
+        <item name="colorCard">@color/gray800</item>
+        <item name="note_gb">@drawable/note_bg_dark</item>
+
+        <item name="textAppearanceLargePopupMenu">@style/AppTheme.TextAppearance.Popup</item>
     </style>
 
     <style name="Theme.Moodino.NoActionBar">

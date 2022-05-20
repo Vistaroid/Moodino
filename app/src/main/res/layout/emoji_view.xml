@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="15dp"
+        android:background="?colorCard">
 
         <TextView
             android:id="@+id/emojies_title"
@@ -20,7 +21,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/_12mdp"
             android:text="@string/how_are_you"
-            android:textColor="@color/black"
+            android:textColor="?colorText"
             android:textSize="@dimen/_14mdp"
             android:visibility="gone"/>
 

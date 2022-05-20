@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white">
+    android:background="?colorCard">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             tools:text="test text"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/black"
+            android:textColor="?colorText"
             android:textSize="17sp"
             android:layout_marginStart="@dimen/_15font_mdp"/>
 

@@ -17,10 +17,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/language"
-            android:textColor="@color/black"
+            android:textColor="?colorText"
             android:textSize="@dimen/_15font_mdp"
             android:textStyle="bold"
-            android:layout_gravity="start"/>
+            android:layout_gravity="start"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"/>
 
         <RadioGroup
             android:id="@+id/rg_DchangeLanguage"
@@ -59,14 +61,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                android:textAllCaps="true"
+                android:textAppearance="?textAppearanceBody1"
+                style="@style/Widget.Material3.Button.TextButton" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_DchangeLanguage_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/save"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                android:textAllCaps="true"
+                android:textAppearance="?textAppearanceBody1"
+                style="@style/Widget.Material3.Button.TextButton" />
 
         </LinearLayout>
 

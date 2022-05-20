@@ -45,25 +45,8 @@ class PinLockFragment : BaseFragment() {
             findNavController().popBackStack()
         }
 
-        when {
-            viewModel.checkFingerPrint() -> {
-                binding.rbPinlockFingetPrint.isChecked = true
-                binding.btnPinlock.visibility = View.GONE
-                binding.tvPinlockTitle.text = getString(R.string.active_pin_lock)
-                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_active))
-            }
-            viewModel.checkPIN() -> {
-                binding.rbPinlockPINLock.isChecked = true
-                binding.btnPinlock.visibility = View.GONE
-                binding.tvPinlockTitle.text = getString(R.string.active_pin_lock)
-                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_active))
-            }
-            else -> {
-                binding.rbPinlockOff.isChecked = true
-                binding.tvPinlockTitle.text = getString(R.string.not_active_pin_lock)
-                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_notactive))
-            }
-        }
+        checkPINLock()
+
 
         binding.btnPinlock.setOnClickListener {
             activeLocke()
@@ -73,6 +56,8 @@ class PinLockFragment : BaseFragment() {
             if (isChecked) {
                 viewModel.offLock()
                 binding.btnPinlock.visibility = View.VISIBLE
+                binding.tvPinlockTitle.text = getString(R.string.not_active_pin_lock)
+                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_notactive))
             }
         }
 
@@ -92,6 +77,28 @@ class PinLockFragment : BaseFragment() {
                     viewModel.setFingerPrintLock(true)
                     viewModel.setPINLock(true)
                 }
+        }
+    }
+
+    fun checkPINLock(){
+        when {
+            viewModel.checkFingerPrint() -> {
+                binding.rbPinlockFingetPrint.isChecked = true
+                binding.btnPinlock.visibility = View.GONE
+                binding.tvPinlockTitle.text = getString(R.string.active_pin_lock)
+                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_active))
+            }
+            viewModel.checkPIN() -> {
+                binding.rbPinlockPINLock.isChecked = true
+                binding.btnPinlock.visibility = View.GONE
+                binding.tvPinlockTitle.text = getString(R.string.active_pin_lock)
+                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_active))
+            }
+            else -> {
+                binding.rbPinlockOff.isChecked = true
+                binding.tvPinlockTitle.text = getString(R.string.not_active_pin_lock)
+                binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_notactive))
+            }
         }
     }
 
@@ -219,6 +226,8 @@ class PinLockFragment : BaseFragment() {
                         binding.rbPinlockFingetPrint.isChecked = true
                         binding.btnPinlock.visibility = View.GONE
                         viewModel.setPinLock(pin)
+                        binding.tvPinlockTitle.text = getString(R.string.active_pin_lock)
+                        binding.ivPinlock.setImageDrawable(requireContext().getDrawable(R.drawable.ic_lock_active))
                     }
                     else{
                         binding.rbPinlockOff.isChecked = true
