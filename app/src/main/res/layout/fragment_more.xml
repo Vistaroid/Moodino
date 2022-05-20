@@ -50,39 +50,39 @@
 <!--                app:ItemMore_title="@string/goals"-->
 <!--                app:ItemMore_icon="@drawable/ic_goals" />-->
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/weekly_report"
-                app:ItemMore_icon="@drawable/ic_chart"
-                android:clickable="true"/>
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/weekly_report"-->
+<!--                app:ItemMore_icon="@drawable/ic_chart"-->
+<!--                android:clickable="true"/>-->
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/monthly_report"
-                app:ItemMore_icon="@drawable/ic_chart"
-                android:clickable="true"/>
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/monthly_report"-->
+<!--                app:ItemMore_icon="@drawable/ic_chart"-->
+<!--                android:clickable="true"/>-->
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/photo_gallery"
-                app:ItemMore_icon="@drawable/ic_gallery"
-                android:clickable="true"/>
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/photo_gallery"-->
+<!--                app:ItemMore_icon="@drawable/ic_gallery"-->
+<!--                android:clickable="true"/>-->
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/achiement"
-                app:ItemMore_icon="@drawable/ic_achievement"
-                android:clickable="true" />
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/achiement"-->
+<!--                app:ItemMore_icon="@drawable/ic_achievement"-->
+<!--                android:clickable="true" />-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:background="?colorBackground"
-                />
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:background="?colorBackground"-->
+<!--                />-->
 
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
@@ -99,12 +99,12 @@
                 android:background="?colorBackground"
                 />
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/edite_moods"
-                app:ItemMore_icon="@drawable/ic_emoji"
-                android:clickable="true"/>
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/edite_moods"-->
+<!--                app:ItemMore_icon="@drawable/ic_emoji"-->
+<!--                android:clickable="true"/>-->
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
                 android:id="@+id/btn_more_activities"
@@ -113,12 +113,12 @@
                 app:ItemMore_title="@string/edite_activity"
                 app:ItemMore_icon="@drawable/ic_activity"/>
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/change_color"
-                app:ItemMore_icon="@drawable/ic_color"
-                android:clickable="true"/>
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/change_color"-->
+<!--                app:ItemMore_icon="@drawable/ic_color"-->
+<!--                android:clickable="true"/>-->
 
             <com.iranmobiledev.moodino.ui.more.ViewItemMore
                 android:id="@+id/btn_more_colorMode"
