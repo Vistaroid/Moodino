@@ -125,5 +125,8 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottie_version"
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
     implementation 'com.github.aliab:Persian-Date-Picker-Dialog:1.8.0'
+
+    testImplementation 'com.google.truth:truth:1.1.2'
+    androidTestImplementation 'com.google.truth:truth:1.1.2'
 }
 
