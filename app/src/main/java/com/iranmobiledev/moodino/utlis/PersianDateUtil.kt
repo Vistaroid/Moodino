@@ -61,9 +61,9 @@ fun getDate(
 
 fun PersianDate.newDate(entryDate :EntryDate): PersianDate {
     val newDate = PersianDate().apply {
-        setShYear(entryDate.year)
-        setShMonth(entryDate.month)
-        setShDay(entryDate.day)
+        shYear = entryDate.year
+        shMonth = entryDate.month
+        shDay = entryDate.day
     }
 
     return newDate
