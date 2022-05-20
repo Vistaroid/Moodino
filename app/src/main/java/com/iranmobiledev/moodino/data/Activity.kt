@@ -14,4 +14,5 @@ data class Activity(
     var activityCategoryId : Long,
     val image : Int,
     val title : String,
+    var selected: Boolean = false
 ) : Parcelable

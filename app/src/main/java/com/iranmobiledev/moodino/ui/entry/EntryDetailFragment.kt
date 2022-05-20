@@ -19,6 +19,7 @@ import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.listener.ActivityItemCallback
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
+import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.ui.entry.adapter.ParentActivitiesAdapter
 import com.iranmobiledev.moodino.ui.view.ActivityView
@@ -33,7 +34,8 @@ import saman.zamani.persiandate.PersianDate
 
 //TODO for edit mode should implement date and time set
 
-class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCallback,DatePickerDialogEventListener,
+class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCallback,
+    DatePickerDialogEventListener,
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
@@ -42,7 +44,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private var entry = Entry()
     private var editMode = false
     private val sharedPref: SharedPreferences by inject()
-    private val activities = mutableListOf<Activity>()
+    private var activities = mutableListOf<Activity>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +53,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     ): View {
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
         entry = EntryDetailFragmentArgs.fromBundle(requireArguments()).entry
+        activities = entry.activities
         setupUi(EmojiFactory.create(requireContext()))
         setupUtil()
         setupObserver()
@@ -62,12 +65,16 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         entryDetailViewModel.getActivities().observe(viewLifecycleOwner) {
             binding.parentActivityRv.layoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            binding.parentActivityRv.adapter = ParentActivitiesAdapter(it, this)
+            binding.parentActivityRv.adapter = ParentActivitiesAdapter(it, this, entry.activities)
         }
     }
 
     private fun setupUi(emojiFactory: EmojiInterface) {
-        setupActivityRv()
+        if(entry.note.isEmpty())
+            binding.addPhotoTv.setText(R.string.tap_to_add_photo)
+        else
+            binding.addPhotoTv.setText(R.string.change_photo)
+
         editMode = EntryDetailFragmentArgs.fromBundle(requireArguments()).edit
         if (editMode)
             setupEditMode()
@@ -85,14 +92,14 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             binding.backIv.rotation = 180f
     }
 
-    private fun setupActivityRv() {
-        binding.parentActivityRv.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        binding.parentActivityRv.adapter = ParentActivitiesAdapter(mutableListOf(), this)
-    }
+//    private fun setupActivityRv() {
+//        binding.parentActivityRv.layoutManager =
+//            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+//        binding.parentActivityRv.adapter = ParentActivitiesAdapter(mutableListOf(), this, entry.activities)
+//    }
 
     private fun setupEditMode() {
-        val persianDate = PersianDate()
+        selectActivities(entry.activities)
         setupDate()
         binding.pageTitle.visibility = View.GONE
         binding.timeDate.visibility = View.VISIBLE
@@ -101,6 +108,10 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         if (entry.photoPath.isNotEmpty())
             binding.entryImageContainer.visibility = View.VISIBLE
         imageLoader.load(requireContext(), entry.photoPath, binding.entryImage)
+    }
+
+    private fun selectActivities(activities: MutableList<Activity>) {
+        binding.parentActivityRv
     }
 
     private fun setupDate() {
@@ -131,16 +142,35 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             createPhotoSelectorDialog()
         }
         binding.date.implementSpringAnimationTrait()
-        binding.date.setOnClickListener{
+        binding.date.setOnClickListener {
             val persianDate = PersianDate()
             entry.date?.let {
                 persianDate.shYear = it.year
                 persianDate.shMonth = it.month
                 persianDate.shDay = it.day
             }
-            getPersianDialog(requireContext(),this,persianDate).show()
+            getPersianDialog(requireContext(), this, persianDate).show()
         }
-
+        binding.deleteImage.setOnClickListener {
+            val dialog = makeDialog(R.string.delete_photo, icon = R.drawable.ic_delete)
+            dialog.setItemEventListener(object : DialogEventListener{
+                override fun clickedItem(itemId: Int) {
+                    when (itemId) {
+                        R.id.rightButton -> {
+                            imageLoader.remove(requireContext(), binding.entryImage)
+                            entry.photoPath = ""
+                            binding.addPhotoTv.setText(R.string.tap_to_add_photo)
+                            binding.entryImageContainer.visibility = View.GONE
+                            dialog.dismiss()
+                        }
+                        R.id.leftButton -> {
+                            dialog.dismiss()
+                        }
+                    }
+                }
+            })
+            dialog.show(parentFragmentManager, null)
+        }
     }
 
     private fun navigateToEntryFragment() {
@@ -172,6 +202,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
                 binding.entryImageContainer.visibility = View.VISIBLE
                 entry.photoPath = it.path
                 imageLoader.load(requireContext(), entry.photoPath, binding.entryImage)
+                binding.addPhotoTv.setText(R.string.change_photo)
             }
         }.show(parentFragmentManager)
     }

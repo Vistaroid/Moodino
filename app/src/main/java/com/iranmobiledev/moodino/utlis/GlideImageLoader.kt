@@ -12,4 +12,8 @@ class GlideImageLoader() : ImageLoadingService {
     override fun load(context: Context, imageResource: Int, container: ImageView) {
         Glide.with(context).load(imageResource).into(container)
     }
+
+    override fun remove(context: Context, imageView: ImageView) {
+        Glide.with(context).clear(imageView)
+    }
 }

@@ -160,4 +160,6 @@
     <string name="fingerprint_access">Allow Fingerprint Access</string>
     <string name="pinLock_access">Only PIN Lock Access</string>
     <string name="off">off</string>
+    <string name="delete_photo">Delete photo?</string>
+    <string name="change_photo">Change photo</string>
 </resources>
