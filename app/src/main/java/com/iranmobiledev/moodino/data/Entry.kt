@@ -6,6 +6,7 @@ import androidx.annotation.StringRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import saman.zamani.persiandate.PersianDate
 
 
 //TODO warning some of this can be null while adding a entry ! byTayeb.
@@ -28,11 +29,30 @@ data class EntryDate(
     val year : Int,
     val month : Int,
     val day : Int,
-) : Parcelable
+) : Parcelable {
+
+    fun getDate(): String {
+        val monthName = PersianDate().monthName(month,PersianDate.Dialect.IRANIAN)
+        return "$day $monthName $year"
+    }
+}
 
 @Parcelize
 data class EntryTime(
     val hour : String,
     val minutes : String
-) : Parcelable
+) : Parcelable {
+
+    fun getTime(): String{
+        var hour = hour
+        var minute = hour
+        if (hour.length == 1){
+            hour = "0$hour"
+        }
+        if (minute.length == 1){
+            minute = "0$minute"
+        }
+        return "$hour:$minute"
+    }
+}
 

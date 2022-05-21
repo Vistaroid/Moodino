@@ -19,7 +19,6 @@ import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.ui.view.ActivityView
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
-import com.iranmobiledev.moodino.utlis.entry_util.toStringHour
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
@@ -50,7 +49,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     private fun setupUtil() {
         args.date?.let { entry.date = it }
         args.time?.let { entry.time = it }
-    }
+   }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

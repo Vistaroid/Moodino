@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/navGraph"
     app:startDestination="@id/entriesFragment">
 
 <!--    not working for activities shit-->
@@ -16,6 +16,11 @@
 <!--            app:destination="@id/addEntryFragment"-->
 <!--            />-->
 <!--    </activity>-->
+
+    <action
+        android:id="@+id/action_global_main"
+        app:destination="@id/addEntryFragment"/>
+
     <fragment
         android:id="@+id/entriesFragment"
         android:name="com.iranmobiledev.moodino.ui.entry.EntriesFragment"
@@ -72,13 +77,11 @@
         <argument
             android:name="date"
             app:argType="com.iranmobiledev.moodino.data.EntryDate"
-            app:nullable="true"
-            android:defaultValue="@null" />
+    />
         <argument
             android:name="time"
             app:argType="com.iranmobiledev.moodino.data.EntryTime"
-            app:nullable="true"
-            android:defaultValue="@null" />
+          />
         <action
             android:id="@+id/action_addEntryFragment_to_entriesFragment"
             app:destination="@id/entriesFragment"
