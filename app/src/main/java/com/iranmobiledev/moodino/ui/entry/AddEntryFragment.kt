@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.ui.entry
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.ui.view.ActivityView
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
+import com.iranmobiledev.moodino.utlis.entry_util.toStringHour
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
@@ -25,9 +27,14 @@ import saman.zamani.persiandate.PersianDateFormat
 var initialFromBackPress = false
 
 class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEventListener{
+
+    val TAG = "addEntryFragment"
+
     private val entry = Entry()
     private lateinit var binding: AddEntryFragmentBinding
     private var persianDate: PersianDate = PersianDate()
+    private lateinit var date: String
+    private lateinit var time: String
     private val args: AddEntryFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +45,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         setupUtil()
         setupClicks()
         setupUi()
+
         return binding.root
     }
 
@@ -47,6 +55,9 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
             PersianDateFormat.format(persianDate, "H"),
             PersianDateFormat.format(persianDate, "i")
         )
+
+        date = "${args.date?.year} ${args.date?.month}  ${args.date?.day}"
+        time = toStringHour(args.time?.hour,args.time?.minutes)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,8 +68,8 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     private fun setupUi() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPress)
         binding.continueButton.visibility = if (initialFromBackPress) View.VISIBLE else View.GONE
-        binding.dateTv.text = getDate(pattern = "j F Y")
-        binding.timeTv.text = getTime()
+        binding.dateTv.text = date
+        binding.timeTv.text = time
     }
 
     private fun navigateToEntryDetailFragment(entry: Entry) {
@@ -118,6 +129,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
             persianDate.hour = Integer.parseInt(it.hour)
             persianDate.minute = Integer.parseInt(it.minutes)
         }
+        
         binding.timeTv.text = getTime(persianDate)
         binding.dateTv.text =
             getDate(pattern = "j F Y", date = persianDate)

@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.FragmentDayEntriesBinding
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
@@ -53,7 +55,9 @@ class DayEntriesFragment : BaseFragment(), KoinComponent, EntryEventLister {
 
         binding.addBtn.setOnClickListener {
             val date= PersianDate()
-            val direction= DayEntriesFragmentDirections.actionDayEntriesFragmentToAddEntryFragment("","")
+            val direction= DayEntriesFragmentDirections.actionDayEntriesFragmentToAddEntryFragment(
+                EntryDate(1400,1,1), EntryTime(10.toString(),10.toString())
+            )
             findNavController().navigate(direction)
         }
 
