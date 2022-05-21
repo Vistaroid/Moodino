@@ -115,12 +115,12 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
 
     private fun setupDate() {
         val persianDate = PersianDate()
-        entry.date?.let {
+        entry.date.let {
             persianDate.shDay = it.day
             persianDate.shMonth = it.month
             persianDate.shYear = it.year
         }
-        entry.time?.let {
+        entry.time.let {
             persianDate.hour = Integer.parseInt(it.hour)
             persianDate.minute = Integer.parseInt(it.minutes)
         }
@@ -130,9 +130,8 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     private fun setupUtil() {
-        args.entry.date?.let { entry.date = it }
-        args.entry.time?.let { entry.time = it }
-        println("date is : ${entry.date}")
+        args.entry.date.let { entry.date = it }
+        args.entry.time.let { entry.time = it }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
     }
 
@@ -220,7 +219,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            println("date is ${entry.date}")
             val action = EntryDetailFragmentDirections.actionEntryDetailFragmentToAddEntryFragment(date = entry.date, time = entry.time)
             if (!editMode) {
                 findNavController().navigate(action)

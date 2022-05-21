@@ -25,17 +25,3 @@ fun getPersianNumber(number: Int): String {
         .replace("8", "۸")
         .replace("9", "۹");
 }
-
-fun toStringHour(h: String?,m: String?): String{
-    var hour = h
-    var minute = m
-    if (hour?.length == 1){
-        hour = "0$hour"
-    }
-
-    if (minute?.length == 1){
-        minute = "0$minute"
-    }
-
-    return "$hour:$minute"
-}
