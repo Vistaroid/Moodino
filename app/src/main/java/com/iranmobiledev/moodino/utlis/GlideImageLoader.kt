@@ -3,6 +3,7 @@ package com.iranmobiledev.moodino.utlis
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class GlideImageLoader() : ImageLoadingService {
     override fun load(context: Context, imagePath: String, container: ImageView) {

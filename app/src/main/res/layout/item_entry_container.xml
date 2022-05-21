@@ -9,7 +9,7 @@
     android:outlineAmbientShadowColor="@color/shadow"
     android:outlineSpotShadowColor="@color/shadow"
     app:cardCornerRadius="@dimen/_16mdp"
-    android:layout_marginTop="@dimen/_10mdp"
+    android:layout_marginTop="@dimen/_6mdp"
     android:layout_marginBottom="@dimen/_10mdp"
     android:layout_marginStart="@dimen/_12mdp"
     android:layout_marginEnd="@dimen/_12mdp">

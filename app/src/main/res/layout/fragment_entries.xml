@@ -70,7 +70,9 @@
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
                     android:paddingBottom="@dimen/_24mdp"
-                    app:layout_constraintTop_toBottomOf="@+id/addEntryCardView" />
+                    app:layout_constraintTop_toBottomOf="@+id/addEntryCardView"
+                    android:overScrollMode="never"
+                    android:layout_marginTop="@dimen/_8mdp"/>
 
                 <LinearLayout
                     android:id="@+id/bottomTextContainer"

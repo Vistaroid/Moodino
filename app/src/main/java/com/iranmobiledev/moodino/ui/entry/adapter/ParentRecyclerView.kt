@@ -84,36 +84,57 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
                 1 -> {
                     setLableColor(R.color.red_light)
                     setLableCircleColor(R.color.red_dark)
-                    entriesDateTitle.setTextColor(ContextCompat.getColor(context,R.color.red_dark))
+                    entriesDateTitle.setTextColor(ContextCompat.getColor(context, R.color.red_dark))
                 }
                 2 -> {
                     setLableColor(R.color.orange_light)
                     setLableCircleColor(R.color.orange_dark)
-                    entriesDateTitle.setTextColor(ContextCompat.getColor(context,R.color.orange_dark))
+                    entriesDateTitle.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.orange_dark
+                        )
+                    )
                 }
                 3 -> {
                     setLableColor(R.color.blue_light)
                     setLableCircleColor(R.color.blue_dark)
-                    entriesDateTitle.setTextColor(ContextCompat.getColor(context,R.color.blue_dark))
+                    entriesDateTitle.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.blue_dark
+                        )
+                    )
                 }
                 4 -> {
                     setLableColor(R.color.green_light)
                     setLableCircleColor(R.color.green_dark)
-                    entriesDateTitle.setTextColor(ContextCompat.getColor(context,R.color.green_dark))
+                    entriesDateTitle.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.green_dark
+                        )
+                    )
                 }
                 5 -> {
                     setLableColor(R.color.turquoise_light)
                     setLableCircleColor(R.color.turquoise_dark)
-                    entriesDateTitle.setTextColor(ContextCompat.getColor(context,R.color.turquoise_dark))
+                    entriesDateTitle.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.turquoise_dark
+                        )
+                    )
                 }
             }
         }
 
-        private fun setLableColor(@ColorRes color: Int){
+        private fun setLableColor(@ColorRes color: Int) {
             entriesLable.backgroundTintList =
                 context.resources.getColorStateList(color, context.theme)
         }
-        private fun setLableCircleColor(@ColorRes color: Int){
+
+        private fun setLableCircleColor(@ColorRes color: Int) {
             lableCircle.setColorFilter(
                 ContextCompat.getColor(context, color),
                 android.graphics.PorterDuff.Mode.SRC_IN
@@ -131,34 +152,12 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<RecyclerViewData>) {
-        val diffUtil = MyDiffUtil(this.data, data)
+        val sorted = data.sortedByDescending { it.entries[0].date?.day }
+        val diffUtil = MyDiffUtil(this.data, sorted)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
-        this.data = data
-        copyData = data as MutableList<RecyclerViewData>
+        this.data = sorted
+        copyData = sorted as MutableList<RecyclerViewData>
         diffResults.dispatchUpdatesTo(this)
-    }
-
-    fun addEntry(entry: Entry) {
-        val findData = data.find {
-            it.entries[0].date == entry.date
-        }
-        findData?.adapter?.add(entry)
-        if (findData == null) {
-            //data.add(0, RecyclerViewData(mutableListOf(entry)))
-            notifyItemInserted(0)
-        }
-    }
-
-    fun removeItem(entry: Entry) {
-        val foundData = data.find {
-            it.entries.contains(entry)
-        }
-        foundData?.adapter?.remove(entry)
-        if (foundData?.entries?.isEmpty() == true) {
-            val index = data.indexOf(foundData)
-            notifyItemRemoved(index)
-        }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -168,8 +167,8 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if(specifyDay == -1)
-        holder.bind(data[position])
+        if (specifyDay == -1)
+            holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {
@@ -188,8 +187,9 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         this.language = language
         this.copyData = data
     }
+
     @SuppressLint("NotifyDataSetChanged")
-    fun bindSpecificDay(day : Int){
+    fun bindSpecificDay(day: Int) {
         data = data.filter {
             it.entries[0].date?.day == day
         } as MutableList<RecyclerViewData>
@@ -197,7 +197,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         notifyDataSetChanged()
     }
 
-    fun getEmptyStateLiveData() : LiveData<Boolean>{
+    fun getEmptyStateLiveData(): LiveData<Boolean> {
         return emptyStateVisibility
     }
 }
