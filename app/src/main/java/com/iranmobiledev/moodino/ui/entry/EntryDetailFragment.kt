@@ -86,7 +86,10 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             5 -> emojiFactory.getEmoji(entry.emojiValue)
             else -> null
         }
-        icon?.let { binding.entryiconDetail.setImageResource(it.image) }
+        icon?.let {
+            //binding.entryIconDetail.isSelectedEmoji = true
+            binding.entryIconDetail.setImageResource(it.image)
+        }
         val language = sharedPref.getInt(LANGUAGE, PERSIAN)
         if (language == PERSIAN)
             binding.backIv.rotation = 180f
