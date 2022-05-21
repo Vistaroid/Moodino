@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.AverageMoodsDialogBinding
@@ -69,7 +71,7 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
 
         viewModel.fetchEntries()
 
-        materialDialog = MaterialAlertDialogBuilder(requireContext())
+        materialDialog = MaterialAlertDialogBuilder(requireContext(),R.style.MaterialAlertDialog_rounded)
         binding.averageMoodLayout.setOnClickListener {
             showDialog()
         }
