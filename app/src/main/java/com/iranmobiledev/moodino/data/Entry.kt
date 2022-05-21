@@ -35,3 +35,4 @@ data class EntryTime(
     val hour : String,
     val minutes : String
 ) : Parcelable
+
