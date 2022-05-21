@@ -109,7 +109,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupClicks() {
-        val action = EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment("","")
+        val action = EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment( EntryDate(1400,1,1), EntryTime(10.toString(),10.toString()))
         binding.addEntryCardView.setOnClickListener {findNavController().navigate(action)}
     }
 

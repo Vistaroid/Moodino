@@ -92,7 +92,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/circle_shape"
             android:backgroundTint="@color/rad_color"
-            android:src="@drawable/ic_timer"
+            android:src="@drawable/ic_clock"
             app:tint="@color/white" />
 
         <TextView
