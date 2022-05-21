@@ -26,6 +26,7 @@ import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.ui.more.MoreViewModel
 
 import com.iranmobiledev.moodino.ui.more.timer.ReminderViewModel
+import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
@@ -56,6 +57,7 @@ class App : Application() , KoinComponent{
         val modules = module {
             viewModel { MainActivityViewModel() }
             viewModel { EntryViewModel(get(), get()) }
+            viewModel {StatsFragmentViewModel(get())}
             viewModel { EntryDetailViewModel(get(), get()) }
             viewModel { CalendarViewModel(get()) }
             viewModel { PinLockViewModel(get()) }
