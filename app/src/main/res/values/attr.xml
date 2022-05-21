@@ -9,6 +9,14 @@
         <attr name="ToolBar_title" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="AverageMoodsDialogItemView">
+        <attr name="raw_icon" format="reference"/>
+        <attr name="raw_icon_tint" format="color"/>
+        <attr name="raw_title" format="string"/>
+        <attr name="raw_count" format="string"/>
+
+    </declare-styleable>
+
     <declare-styleable name="CountIcon">
         <attr name="MoodIcon" format="integer"/>
         <attr name="MoodCount" format="string"/>

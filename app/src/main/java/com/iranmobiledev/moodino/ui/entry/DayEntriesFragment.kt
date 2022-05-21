@@ -53,6 +53,7 @@ class DayEntriesFragment : BaseFragment(), KoinComponent, EntryEventLister {
 
         binding.addBtn.setOnClickListener {
             val date= PersianDate()
+
             val direction= DayEntriesFragmentDirections.actionDayEntriesFragmentToAddEntryFragment("","")
             findNavController().navigate(direction)
         }

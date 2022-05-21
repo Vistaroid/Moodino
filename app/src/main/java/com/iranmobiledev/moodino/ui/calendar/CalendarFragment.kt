@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.databinding.AverageMoodsDialogBinding
 import com.iranmobiledev.moodino.databinding.FragmentCalendarBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
 import com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbarItemClickListener
@@ -26,6 +28,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
     private lateinit var binding: FragmentCalendarBinding
     private val viewModel: CalendarViewModel by viewModel()
+
+    private lateinit var materialDialog: MaterialAlertDialogBuilder
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +69,16 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
 
         viewModel.fetchEntries()
 
+        materialDialog = MaterialAlertDialogBuilder(requireContext())
+        binding.averageMoodLayout.setOnClickListener {
+            showDialog()
+        }
+    }
+
+    private fun showDialog() {
+        val view = AverageMoodsDialogBinding.inflate(layoutInflater, null, false)
+        materialDialog.setView(view.root)
+        materialDialog.show()
     }
 
     private fun bringDate(
@@ -82,7 +96,8 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
         viewModel.entries.observe(viewLifecycleOwner) {
             CoroutineScope(Dispatchers.Main).launch {
                 delay(200)
-                val filterList= it.filter { it.date?.year == date.year && it.date?.month == date.month }
+                val filterList =
+                    it.filter { it.date?.year == date.year && it.date?.month == date.month }
                 binding.calendarPager.setEntries(filterList)
                 binding.moodCountView.setEntries(filterList)
             }
