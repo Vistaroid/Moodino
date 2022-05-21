@@ -17,21 +17,21 @@
 
                 <ImageView
                     android:id="@+id/backIv"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="@dimen/_15mdp"
+                    android:layout_height="@dimen/_15mdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_back"
                     app:tint="?colorPrimary"/>
 
                 <ImageView
-                    android:id="@+id/entryicon_detail"
+                    android:id="@+id/entryIcon_detail"
                     android:layout_width="@dimen/_16mdp"
                     android:layout_height="@dimen/_16mdp"
                     app:layout_constraintBottom_toBottomOf="@id/backIv"
                     app:layout_constraintStart_toEndOf="@id/backIv"
                     app:layout_constraintTop_toTopOf="@id/backIv"
-                    app:srcCompat="@drawable/emoji_good" />
+                    app:srcCompat="@drawable/emoji_good"/>
 
                 <LinearLayout
                     android:id="@+id/saveLayout"

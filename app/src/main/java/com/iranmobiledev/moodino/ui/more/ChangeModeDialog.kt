@@ -6,14 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import com.iranmobiledev.moodino.R
-import com.iranmobiledev.moodino.databinding.DialogChangeLanguageBinding
 import com.iranmobiledev.moodino.databinding.DialogChangeModeBinding
-import com.iranmobiledev.moodino.databinding.DialogViewBinding
-import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.utlis.*
 
 class ChangeModeDialog(private var mode : Int, private val listener: ChangeModeDialogListener) : DialogFragment() {
@@ -39,14 +34,14 @@ class ChangeModeDialog(private var mode : Int, private val listener: ChangeModeD
         when(mode){
             LIGHT -> binding.rbDchangeModeLight.isChecked = true
             DARK -> binding.rbDchangeModeDark.isChecked = true
-            SYSTEM_DEFULT -> binding.rbDchangeModeSystem.isChecked = true
+            SYSTEM_DEFAULT -> binding.rbDchangeModeSystem.isChecked = true
         }
 
         binding.rgDchangeMode.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.rb_DchangeMode_light -> mode = LIGHT
                 R.id.rb_DchangeMode_dark -> mode = DARK
-                R.id.rb_DchangeMode_system -> mode = SYSTEM_DEFULT
+                R.id.rb_DchangeMode_system -> mode = SYSTEM_DEFAULT
             }
         }
 
