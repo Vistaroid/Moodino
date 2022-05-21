@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -25,7 +26,7 @@ import saman.zamani.persiandate.PersianDate
 
 class ChildRecyclerView(
     private var entryEventLister: EntryEventLister,
-    val entries: MutableList<Entry>,
+    var entries: MutableList<Entry>,
     private val context: Context,
     private val language: Int
 ) : RecyclerView.Adapter<ChildRecyclerView.ViewHolder>(), KoinComponent {
@@ -90,9 +91,17 @@ class ChildRecyclerView(
                 persianDate.shDay
             )
             if (entry.date == date)
-                entryDate.text = todayStringDate(language)
+                entryDate.text = todayStringDate()
             else if (entry.date == yesterday(persianDate))
-                entryDate.text = yesterdayStringDate(language)
+                entryDate.text = yesterdayStringDate()
+            else {
+                entry.date?.let {
+                    persianDate.shDay = it.day
+                    persianDate.shMonth = it.month
+                    persianDate.shYear = it.year
+                }
+                entryDate.text = otherDayString(persianDate)
+            }
         }
 
         private fun yesterday(persianDate: PersianDate): EntryDate {
@@ -102,14 +111,16 @@ class ChildRecyclerView(
                 persianDate.shDay - 1
             )
         }
-        private fun yesterdayStringDate(language: Int): String {
+        private fun yesterdayStringDate(): String {
             persianDate.shDay = persianDate.shDay-1
-            return persianDateFormat(language,pattern = "j F", date = persianDate)
+            return persianDateFormat(pattern = "j F", date = persianDate)
         }
-        private fun todayStringDate(language: Int): String {
-            return persianDateFormat(language, pattern = "j F")
+        private fun todayStringDate(): String {
+            return persianDateFormat(pattern = "j F")
         }
-
+        private fun otherDayString(date: PersianDate): String{
+            return persianDateFormat(pattern = "j F", date = date)
+        }
     }
 
     private fun makePopupMenu(witchEntry: Entry, view: View) {

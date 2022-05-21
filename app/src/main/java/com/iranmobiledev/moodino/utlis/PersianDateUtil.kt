@@ -14,29 +14,14 @@ import saman.zamani.persiandate.PersianDateFormat
  * doc : https://github.com/samanzamani/persianDate
  */
 fun persianDateFormat(
-    language: Int = 1,
     pattern: String = "Y F",
     date: PersianDate = PersianDate()
 ): String {
-    return when (language) {
-        1 -> {
-            PersianDateFormat.format(
-                date,
-                pattern,
-                PersianDateFormat.PersianDateNumberCharacter.FARSI
-            )
-        }
-        2 -> {
-            PersianDateFormat.format(
-                date,
-                pattern,
-                PersianDateFormat.PersianDateNumberCharacter.ENGLISH
-            )
-        }
-        else -> {
-            ""
-        }
-    }
+    return PersianDateFormat.format(
+        date,
+        pattern,
+        PersianDateFormat.PersianDateNumberCharacter.FARSI
+    )
 }
 
 fun getTime(persianDate: PersianDate = PersianDate()): String {
