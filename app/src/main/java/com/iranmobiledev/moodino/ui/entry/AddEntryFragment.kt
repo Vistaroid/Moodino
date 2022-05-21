@@ -25,15 +25,13 @@ import saman.zamani.persiandate.PersianDateFormat
 
 var initialFromBackPress = false
 
-class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEventListener{
+class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEventListener {
 
     val TAG = "addEntryFragment"
 
     private val entry = Entry()
     private lateinit var binding: AddEntryFragmentBinding
     private var persianDate: PersianDate = PersianDate()
-    private lateinit var date: String
-    private lateinit var time: String
     private val args: AddEntryFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,14 +47,8 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     private fun setupUtil() {
-        entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
-        entry.time = EntryTime(
-            PersianDateFormat.format(persianDate, "H"),
-            PersianDateFormat.format(persianDate, "i")
-        )
-
-        date = args.date.getDate()
-        time = args.time.getTime()
+        args.date?.let { entry.date = it }
+        args.time?.let { entry.time = it }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,12 +59,14 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     private fun setupUi() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPress)
         binding.continueButton.visibility = if (initialFromBackPress) View.VISIBLE else View.GONE
-        binding.dateTv.text = date
-        binding.timeTv.text = time
+        println("date is ${args.date}")
+        binding.dateTv.text = args.date?.let { getDate(it) }
+        binding.timeTv.text = getTime()
     }
 
     private fun navigateToEntryDetailFragment(entry: Entry) {
-        val action = AddEntryFragmentDirections.actionAddEntryFragmentToEntryDetailFragment(entry = entry)
+        val action =
+            AddEntryFragmentDirections.actionAddEntryFragmentToEntryDetailFragment(entry = entry)
         findNavController().navigate(action)
     }
 
@@ -81,14 +75,14 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         binding.closeFragment.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.date.setOnClickListener{
+        binding.date.setOnClickListener {
             val persianDate = PersianDate()
             entry.date?.let {
                 persianDate.shYear = it.year
                 persianDate.shMonth = it.month
                 persianDate.shDay = it.day
             }
-            getPersianDialog(requireContext(),this,persianDate).show()
+            getPersianDialog(requireContext(), this, persianDate).show()
         }
     }
 
@@ -98,11 +92,11 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     override fun onEmojiItemClicked(emojiValue: Int) {
-        entry.emojiValue= emojiValue
+        entry.emojiValue = emojiValue
         navigateToEntryDetailFragment(entry)
     }
 
-    private val onBackPress = object : OnBackPressedCallback(true){
+    private val onBackPress = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             findNavController().navigate(R.id.action_addEntryFragment_to_entriesFragment)
         }
@@ -118,7 +112,6 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     private fun setupDate() {
-        val persianDate = PersianDate()
         entry.date?.let {
             persianDate.shDay = it.day
             persianDate.shMonth = it.month
@@ -128,7 +121,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
             persianDate.hour = Integer.parseInt(it.hour)
             persianDate.minute = Integer.parseInt(it.minutes)
         }
-        
+
         binding.timeTv.text = getTime(persianDate)
         binding.dateTv.text =
             getDate(pattern = "j F Y", date = persianDate)
