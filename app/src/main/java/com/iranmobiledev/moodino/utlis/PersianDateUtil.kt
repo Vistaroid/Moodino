@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.utlis
 
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.EntryTime
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
@@ -57,6 +58,14 @@ fun getDate(
         pattern,
         type
     )
+}
+
+fun getDate(date: EntryDate, pattern: String = "j F Y"): String{
+    val persianDate = PersianDate()
+    persianDate.shDay = date.day
+    persianDate.shMonth = date.month
+    persianDate.shYear = date.year
+    return PersianDateFormat.format(persianDate,pattern)
 }
 
 fun PersianDate.newDate(entryDate :EntryDate): PersianDate {

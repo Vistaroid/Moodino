@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
@@ -45,6 +46,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private var editMode = false
     private val sharedPref: SharedPreferences by inject()
     private var activities = mutableListOf<Activity>()
+    private val args : EntryDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,12 +94,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             binding.backIv.rotation = 180f
     }
 
-//    private fun setupActivityRv() {
-//        binding.parentActivityRv.layoutManager =
-//            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-//        binding.parentActivityRv.adapter = ParentActivitiesAdapter(mutableListOf(), this, entry.activities)
-//    }
-
     private fun setupEditMode() {
         selectActivities(entry.activities)
         setupDate()
@@ -131,6 +127,9 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     private fun setupUtil() {
+        args.entry.date?.let { entry.date = it }
+        args.entry.time?.let { entry.time = it }
+        println("date is : ${entry.date}")
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
     }
 
@@ -218,10 +217,12 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
+            println("date is ${entry.date}")
+            val action = EntryDetailFragmentDirections.actionEntryDetailFragmentToAddEntryFragment(date = entry.date, time = entry.time)
             if (!editMode) {
-                findNavController().navigate(R.id.action_entryDetailFragment_to_addEntryFragment)
+                findNavController().navigate(action)
                 initialFromBackPress = true
-            } else findNavController().navigate(R.id.action_entryDetailFragment_to_entriesFragment)
+            } else findNavController().navigate(action)
         }
     }
 
