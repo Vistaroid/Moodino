@@ -72,13 +72,11 @@
         <argument
             android:name="date"
             app:argType="com.iranmobiledev.moodino.data.EntryDate"
-            app:nullable="true"
-            android:defaultValue="@null" />
+    />
         <argument
             android:name="time"
             app:argType="com.iranmobiledev.moodino.data.EntryTime"
-            app:nullable="true"
-            android:defaultValue="@null" />
+          />
         <action
             android:id="@+id/action_addEntryFragment_to_entriesFragment"
             app:destination="@id/entriesFragment"

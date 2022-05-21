@@ -19,7 +19,6 @@ import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.ui.view.ActivityView
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
-import com.iranmobiledev.moodino.utlis.entry_util.toStringHour
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
@@ -56,8 +55,8 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
             PersianDateFormat.format(persianDate, "i")
         )
 
-        date = "${args.date?.year} ${args.date?.month}  ${args.date?.day}"
-        time = toStringHour(args.time?.hour,args.time?.minutes)
+        date = args.date.getDate()
+        time = args.time.getTime()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
