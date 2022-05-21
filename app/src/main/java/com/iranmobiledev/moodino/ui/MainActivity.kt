@@ -18,22 +18,26 @@ import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.iranmobiledev.moodino.NavGraphDirections
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
+import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
 import com.iranmobiledev.moodino.ui.entry.AddEntryFragmentDirections
 import com.iranmobiledev.moodino.ui.entry.EntriesFragmentDirections
 import com.iranmobiledev.moodino.utlis.*
+import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import org.greenrobot.eventbus.EventBus
 import saman.zamani.persiandate.PersianDate
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), DatePickerDialogEventListener {
 
     private val TAG = "mainActivity"
 
@@ -84,20 +88,25 @@ class MainActivity : BaseActivity() {
         }
         binding.anotherDayButton.setOnClickListener {
             viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+            setupDatePickerDialog()
         }
+    }
+
+    private fun setupDatePickerDialog() {
+        getPersianDialog(this, this, persianDate).show()
     }
 
     private fun getYesterdayAction(): NavDirections {
         val yesterday = persianDate.addDay(-1)
         val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
         val date = EntryDate(yesterday.shYear, yesterday.shMonth, yesterday.shDay)
-        return EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment(date, time)
+        return  NavGraphDirections.actionGlobalMain(date, time)
     }
 
     private fun getTodayAction(): NavDirections {
         val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
         val date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
-        return EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment(date, time)
+        return  NavGraphDirections.actionGlobalMain(date, time)
     }
 
     private fun setupUi() {
@@ -149,7 +158,7 @@ class MainActivity : BaseActivity() {
         val controller = bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
-            containerId = R.id.nav_graph,
+            containerId = R.id.navGraph,
             intent = intent
         )
         currentNavController = controller
@@ -206,6 +215,19 @@ class MainActivity : BaseActivity() {
                 DARK -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
+    }
+
+    override fun onDateSelected(persianPickerDate: PersianPickerDate) {
+        val action = NavGraphDirections.actionGlobalMain(
+            EntryDate(
+                persianPickerDate.persianYear,
+                persianPickerDate.persianMonth,
+                persianPickerDate.persianDay
+            ),
+            EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
+        )
+
+        navController.navigate(action)
     }
 
 
