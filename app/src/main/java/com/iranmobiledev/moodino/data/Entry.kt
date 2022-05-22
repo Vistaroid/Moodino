@@ -19,8 +19,8 @@ data class Entry(
     var note : String = "",
     var activities : MutableList<Activity> = mutableListOf(),
     var photoPath : String = "",
-    var date : EntryDate? = null,
-    var time : EntryTime? = null,
+    var date : EntryDate = EntryDate(0,0,0),
+    var time : EntryTime = EntryTime("",""),
     var emojiValue : Int = 3
 ) : Parcelable
 

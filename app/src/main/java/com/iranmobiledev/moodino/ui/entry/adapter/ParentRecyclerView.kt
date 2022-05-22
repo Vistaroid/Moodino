@@ -49,6 +49,8 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
             }
             if (data.entries.size == 1)
                 entriesLable.visibility = View.GONE
+            else
+                entriesLable.visibility = View.VISIBLE
         }
 
         private fun setupNestedAdapter(data: RecyclerViewData) {
@@ -70,8 +72,8 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
             val result = setupLableColor(data)
             drawLable(result)
             val persianDate = PersianDate()
-            persianDate.shMonth = data.entries[0].date?.month!!
-            persianDate.shDay = data.entries[0].date?.day!!
+            persianDate.shMonth = data.entries[0].date.month
+            persianDate.shDay = data.entries[0].date.day
             entryListDate.text = PersianDateFormat.format(
                 persianDate,
                 "j F",
@@ -152,10 +154,11 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<RecyclerViewData>) {
-        val sorted = data.sortedByDescending { it.entries[0].date?.day }
+        val sorted = data.sortedByDescending { it.entries[0].date.day }
         val diffUtil = MyDiffUtil(this.data, sorted)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         this.data = sorted
+        if(data.isNotEmpty())
         copyData = sorted as MutableList<RecyclerViewData>
         diffResults.dispatchUpdatesTo(this)
     }
@@ -191,7 +194,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     @SuppressLint("NotifyDataSetChanged")
     fun bindSpecificDay(day: Int) {
         data = data.filter {
-            it.entries[0].date?.day == day
+            it.entries[0].date.day == day
         } as MutableList<RecyclerViewData>
         emptyStateVisibility.value = data.isEmpty()
         notifyDataSetChanged()

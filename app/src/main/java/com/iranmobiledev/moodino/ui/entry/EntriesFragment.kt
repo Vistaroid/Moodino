@@ -68,6 +68,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         binding.mainToolbar.initialize(this)
         binding.addEntryCardView.visibility = View.GONE
         recyclerView = binding.entriesContainerRv
+        recyclerView.itemAnimator = null
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         recyclerView.adapter = adapter
