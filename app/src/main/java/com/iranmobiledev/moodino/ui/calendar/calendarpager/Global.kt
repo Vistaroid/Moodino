@@ -36,6 +36,8 @@ var weekDaysInitials = weekDaysEmptyList
 
 var monthPositionGlobal: Int= 2500
 
+var isDailyMoods: Boolean= true
+
 // This should be called before any use of Utils on the activity and services
 fun initGlobal(context: Context) {
 //    debugLog("Utils: initGlobal is called")
