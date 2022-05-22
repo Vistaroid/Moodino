@@ -6,9 +6,13 @@ import android.view.animation.*
 import android.widget.LinearLayout
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.base.BaseViewModel
+import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.data.RecyclerViewData
 
 
@@ -16,6 +20,7 @@ class MainActivityViewModel() : BaseViewModel() {
 
     val TAG = "mainActivityViewModel"
     var isMenuOpen = MutableLiveData(false)
+    val entryDate = MutableLiveData<EntryDate>()
 
     fun actionMenu(
         menuItems: ArrayList<LinearLayout>,

@@ -2,36 +2,45 @@ package com.iranmobiledev.moodino.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.nsd.NsdManager
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.iranmobiledev.moodino.NavGraphDirections
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
+import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
+import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
+import com.iranmobiledev.moodino.ui.entry.AddEntryFragmentDirections
+import com.iranmobiledev.moodino.ui.entry.EntriesFragmentDirections
 import com.iranmobiledev.moodino.utlis.*
+import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import org.greenrobot.eventbus.EventBus
 import saman.zamani.persiandate.PersianDate
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), DatePickerDialogEventListener {
 
     private val TAG = "mainActivity"
 
     lateinit var binding: ActivityMainBinding
+    val persianDate = PersianDate()
     private lateinit var navController: NavController
     private lateinit var fabItems: ArrayList<LinearLayout>
     private val viewModel: MainActivityViewModel by viewModels()
@@ -65,20 +74,37 @@ class MainActivity : BaseActivity() {
     private fun onFabItemsClickListener() {
 
         binding.todayButton.setOnClickListener {
-            val bundle = Bundle()
-            fabItems.forEach {
-                it.visibility = View.GONE
-            }
             viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
-            navController.navigate(R.id.addEntryFragment, bundle)
+            val action = getTodayAction()
+            navController.navigate(action)
         }
 
         binding.yesterdayButton.setOnClickListener {
             viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+            val action = getYesterdayAction()
+            navController.navigate(action)
         }
         binding.anotherDayButton.setOnClickListener {
             viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+            setupDatePickerDialog()
         }
+    }
+
+    private fun setupDatePickerDialog() {
+        getPersianDialog(this, this, persianDate).show()
+    }
+
+    private fun getYesterdayAction(): NavDirections {
+        val yesterday = persianDate.addDay(-1)
+        val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
+        val date = EntryDate(yesterday.shYear, yesterday.shMonth, yesterday.shDay)
+        return  NavGraphDirections.actionGlobalMain(date, time)
+    }
+
+    private fun getTodayAction(): NavDirections {
+        val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
+        val date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
+        return  NavGraphDirections.actionGlobalMain(date, time)
     }
 
     private fun setupUi() {
@@ -98,9 +124,13 @@ class MainActivity : BaseActivity() {
             viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
             viewModel.isMenuOpen.observe(this@MainActivity) { isOpen ->
                 binding.dimLayout.apply {
-                    setOnTouchListener {
-                            _, _ ->
-                        if (isOpen) viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
+                    setOnTouchListener { _, _ ->
+                        if (isOpen) viewModel.actionMenu(
+                            fabItems,
+                            binding.fabMenu,
+                            binding.dimLayout,
+                            animationDuration
+                        )
                         return@setOnTouchListener isOpen == true
                     }
                 }
@@ -126,7 +156,7 @@ class MainActivity : BaseActivity() {
         val controller = bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
-            containerId = R.id.nav_graph,
+            containerId = R.id.navGraph,
             intent = intent
         )
         currentNavController = controller
@@ -166,23 +196,36 @@ class MainActivity : BaseActivity() {
 
     override fun attachBaseContext(newBase: Context?) {
         val shared = newBase?.getSharedPreferences("sharedPref", MODE_PRIVATE)
-        val lan = when(shared?.getInt(LANGUAGE , ENGLISH)){
+        val lan = when (shared?.getInt(LANGUAGE, ENGLISH)) {
             ENGLISH -> "en"
             PERSIAN -> "fa"
             else -> "en"
         }
-        super.attachBaseContext(MyContextWrapper.wrap(newBase , Locale(lan).toString()))
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, Locale(lan).toString()))
     }
 
 
-    object SetThem{
+    object SetThem {
         fun themeApp(theme: Int) {
             when(theme){
-                SYSTEM_DEFULT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                SYSTEM_DEFAULT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 DARK -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
+    }
+
+    override fun onDateSelected(persianPickerDate: PersianPickerDate) {
+        val action = NavGraphDirections.actionGlobalMain(
+            EntryDate(
+                persianPickerDate.persianYear,
+                persianPickerDate.persianMonth,
+                persianPickerDate.persianDay
+            ),
+            EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
+        )
+
+        navController.navigate(action)
     }
 
 

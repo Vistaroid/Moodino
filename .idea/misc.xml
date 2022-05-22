@@ -65,6 +65,7 @@
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_add_round_corner.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_back_arrow.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_calendar.xml" value="0.211" />
+        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_clock.xml" value="0.1365" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_timer.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/outlined_circle.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/primary_circle_shape.xml" value="0.211" />
@@ -228,6 +229,26 @@
         <entry key="app/src/main/res/layout/dialog_change_mode.xml" value="0.11930091185410334" />
         <entry key="app/src/main/res/layout/dialog_pin_lock.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/dialog_view.xml" value="0.21784420289855072" />
+        <entry key="app/src/main/res/layout/emoji_view.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/empty_state_view.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/entry_detail_fragment.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/fragment_day_entries.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/fragment_entries.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/fragment_month.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/fragment_more.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_pin_lock.xml" value="0.11930091185410334" />
+        <entry key="app/src/main/res/layout/fragment_reminder.xml" value="0.11930091185410334" />
+        <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_activity.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_activity_group_view.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/item_activity_small.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/item_entry.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/item_entry_container.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/main_toolbar.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/mood_count_icon.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/moods_count_view.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/popup_view.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/select_photo_dialog.xml" value="0.21784420289855072" />
       </map>
     </option>

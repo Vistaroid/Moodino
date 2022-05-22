@@ -11,7 +11,7 @@ class MoreViewModel(private val sharedPreferences: SharedPreferences) : BaseView
 
     fun setLanguage(language : Int) = sharedPreferences.edit().putInt(LANGUAGE , language).apply()
 
-    fun getMode() : Int = sharedPreferences.getInt(MODE_THEME , SYSTEM_DEFULT)
+    fun getMode() : Int = sharedPreferences.getInt(MODE_THEME , SYSTEM_DEFAULT)
 
     fun setMode(mode : Int) = sharedPreferences.edit().putInt(MODE_THEME , mode).apply()
 }

@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import saman.zamani.persiandate.PersianDate
-import java.time.LocalDate
 import kotlin.collections.ArrayList
 
 
@@ -98,12 +97,14 @@ class StatsFragmentViewModel(
         var chainLengthMax = 0
         var chainLength = 1
 
+
         for (date in reversedDates) {
-            val nextDateAsLocalDate = LocalDate.of(date.year, date.month, date.day).minusDays(1)
+
+            val nextDateAsLocalDate = PersianDate().newDate(date).addDay(-1)
             if (date != reversedDates.last()) {
                 val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
                 val nextDate =
-                    LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
+                    PersianDate().newDate(nextDateElement)
                 if (nextDateAsLocalDate == nextDate) {
                     if (reversedDates.size <= 2) {
                         chainLengthMax++
@@ -117,8 +118,8 @@ class StatsFragmentViewModel(
                     chainLength = 0
                 }
             } else {
-                if (LocalDate.of(date.year, date.month, date.day)
-                        .minusDays(1) == nextDateAsLocalDate
+                if (PersianDate().newDate(date)
+                        .addDay(-1) == nextDateAsLocalDate
                 ) {
                     chainLengthMax++
                 }
@@ -136,14 +137,14 @@ class StatsFragmentViewModel(
         for (date in reversedDate) {
 
             val nextDateAsLocalDate =
-                LocalDate.of(date.year, date.month, date.day).minusDays(1)
+                PersianDate().newDate(date).addDay(-1)
 
             if (date == reversedDate.first()) latestChain = 1
 
             if (date != reversedDate.last()) {
                 val nextDateElement = reversedDate[reversedDate.indexOf(date) + 1]
                 val nextDate =
-                    LocalDate.of(nextDateElement.year, nextDateElement.month, nextDateElement.day)
+                    PersianDate().newDate(nextDateElement)
 
                 if (nextDateAsLocalDate == nextDate) latestChain++ else break
             }

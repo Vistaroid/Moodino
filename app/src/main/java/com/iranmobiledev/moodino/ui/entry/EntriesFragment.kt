@@ -68,6 +68,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         binding.mainToolbar.initialize(this)
         binding.addEntryCardView.visibility = View.GONE
         recyclerView = binding.entriesContainerRv
+        recyclerView.itemAnimator = null
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         recyclerView.adapter = adapter
@@ -75,12 +76,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
     private fun setupObserver() {
         viewModel.getEntries().observe(viewLifecycleOwner){
-                val item = it.find { x ->
-                    x.entries.size > 1
-                }
                 if (it.isNotEmpty()) binding.bottomTextContainer.visibility = View.VISIBLE
-
-                if (item == null) binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
+                if (it.size == 1) binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
                 else binding.bottomText.setText(R.string.its_time_to_play_memories)
 
                 if (it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE) binding.emptyStateContainer.visibility =
@@ -92,7 +89,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
                 adapter.setData(it)
         }
-
     }
 
     private fun addEntryCardViewVisibilityCheck(entries: List<RecyclerViewData>) {
@@ -114,7 +110,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupClicks() {
-        val action = EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment("","")
+        val action = EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment( EntryDate(1400,1,1), EntryTime(10.toString(),10.toString()))
         binding.addEntryCardView.setOnClickListener {findNavController().navigate(action)}
     }
 
@@ -135,7 +131,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                 when (itemId) {
                     R.id.rightButton -> {
                         viewModel.deleteEntry(entry)
-                        adapter.removeItem(entry)
+                       // adapter.removeItem(entry)
                         dialog.dismiss()
                     }
                     R.id.leftButton -> {
