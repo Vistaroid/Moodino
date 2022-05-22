@@ -1,12 +1,11 @@
 package com.iranmobiledev.moodino.ui.calendar
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iranmobiledev.moodino.R
@@ -15,6 +14,7 @@ import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.AverageMoodsDialogBinding
 import com.iranmobiledev.moodino.databinding.FragmentCalendarBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.Jdn
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.isDailyMoods
 import com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbarItemClickListener
 import com.iranmobiledev.moodino.utlis.*
 import io.github.persiancalendar.calendar.AbstractDate
@@ -30,6 +30,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
     private lateinit var binding: FragmentCalendarBinding
     private val viewModel: CalendarViewModel by viewModel()
+    private var entries: List<Entry>?= null
 
     private lateinit var materialDialog: MaterialAlertDialogBuilder
 
@@ -58,7 +59,7 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
         }
 
         viewModel.selectedMonth
-            .onEach { updateToolbar(binding, it) }
+            .onEach { updateToolbar(it) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
 
         if (viewModel.selectedDay != Jdn.today()) {
@@ -79,8 +80,39 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
 
     private fun showDialog() {
         val view = AverageMoodsDialogBinding.inflate(layoutInflater, null, false)
-        materialDialog.setView(view.root)
-        materialDialog.show()
+        view.dailyMoods.setCount(entries?.size)
+        view.averageMoods.setCount(entries?.size)
+
+        view.radMoods.setCount(entries?.filter { it.emojiValue == EmojiValue.RAD }?.size)
+        view.goodMoods.setCount(entries?.filter { it.emojiValue == EmojiValue.GOOD }?.size)
+        view.mehMoods.setCount(entries?.filter { it.emojiValue == EmojiValue.MEH }?.size)
+        view.badMoods.setCount(entries?.filter { it.emojiValue == EmojiValue.BAD }?.size)
+        view.awfulMoods.setCount(entries?.filter { it.emojiValue == EmojiValue.AWFUL }?.size)
+        val dialog= materialDialog.setView(view.root).create()
+        view.setClickListener { view->
+            when(view.id){
+                R.id.daily_moods -> {
+                    isDailyMoods= true
+                    entries?.let { setData(it) }
+                }
+                R.id.average_moods -> {
+                    isDailyMoods= false
+                    entries?.let { setData(it) }
+                }
+                R.id.rad_moods -> entries?.filter { it.emojiValue == EmojiValue.RAD }
+                    ?.let { it1 -> setData(it1) }
+                R.id.good_moods ->entries?.filter { it.emojiValue == EmojiValue.GOOD }
+                    ?.let { it1 -> setData(it1) }
+                R.id.meh_moods ->entries?.filter { it.emojiValue == EmojiValue.MEH }
+                    ?.let { it1 -> setData(it1) }
+                R.id.bad_moods ->entries?.filter { it.emojiValue == EmojiValue.BAD }
+                    ?.let { it1 -> setData(it1) }
+                R.id.awful_moods ->entries?.filter { it.emojiValue == EmojiValue.AWFUL }
+                    ?.let { it1 -> setData(it1) }
+            }
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     private fun bringDate(
@@ -94,16 +126,21 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
 
     }
 
-    private fun updateToolbar(binding: FragmentCalendarBinding, date: AbstractDate) {
+    private fun updateToolbar(date: AbstractDate) {
         viewModel.entries.observe(viewLifecycleOwner) {
             CoroutineScope(Dispatchers.Main).launch {
                 delay(200)
                 val filterList =
                     it.filter { it.date?.year == date.year && it.date?.month == date.month }
-                binding.calendarPager.setEntries(filterList)
-                binding.moodCountView.setEntries(filterList)
+                setData(filterList)
+                entries= filterList
             }
         }
+    }
+
+    private fun setData(entries: List<Entry>){
+        binding.calendarPager.setEntries(entries)
+        binding.moodCountView.setEntries(entries)
     }
 
     override fun clickOnAdBtn() {

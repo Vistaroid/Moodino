@@ -13,6 +13,8 @@ import com.iranmobiledev.moodino.databinding.AverageMoodsDialogItemBinding
 class AverageMoodsDialogItemView(context: Context, attr: AttributeSet?): LinearLayoutCompat(context, attr) {
 
 
+    private lateinit var view: AverageMoodsDialogItemBinding
+
     companion object{
         const val defaultTitle= "Title"
         const val defaultCount= "0x"
@@ -21,7 +23,7 @@ class AverageMoodsDialogItemView(context: Context, attr: AttributeSet?): LinearL
 
     init {
         val inflater= context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view= AverageMoodsDialogItemBinding.inflate(inflater,this,true)
+        view= AverageMoodsDialogItemBinding.inflate(inflater,this,true)
 
         if (attr!= null){
             val styleable = context.obtainStyledAttributes(attr,R.styleable.AverageMoodsDialogItemView)
@@ -34,6 +36,13 @@ class AverageMoodsDialogItemView(context: Context, attr: AttributeSet?): LinearL
 
             view.count.text= styleable.getString(R.styleable.AverageMoodsDialogItemView_raw_count)?: defaultCount
             styleable.recycle()
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun setCount(count: Int?){
+        if (count!= null){
+            view.count.text= count.toString() + "x"
         }
     }
 

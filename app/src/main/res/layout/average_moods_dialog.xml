@@ -1,103 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="20dp"
-    android:padding="20dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:orientation="vertical"
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:padding="20dp">
 
-       <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
-           app:raw_icon="@drawable/ic_chart"
-           app:raw_icon_tint="?attr/colorPrimary"
-           app:raw_title="@string/daily_moods"
-           app:raw_count="0x"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
-            app:raw_icon="@drawable/emoji_meh"
-            app:raw_icon_tint="?attr/colorPrimary"
-            app:raw_title="@string/average_mood"
-            app:raw_count="0x"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
+                android:id="@+id/daily_moods"
+                app:raw_icon="@drawable/ic_chart"
+                app:raw_icon_tint="?attr/colorPrimary"
+                app:raw_title="@string/daily_moods"
+                app:raw_count="0x"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:background="@color/gray_icon"
-            android:layout_width="match_parent"
-            android:layout_marginVertical="10dp"
-            android:layout_height="1dp"/>
+            <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
+                android:id="@+id/average_moods"
+                app:raw_icon="@drawable/emoji_meh"
+                app:raw_icon_tint="?attr/colorPrimary"
+                app:raw_title="@string/average_mood"
+                app:raw_count="0x"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:text="@string/activities"
-            android:layout_marginVertical="10dp"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:background="@color/gray_icon"
+                android:layout_width="match_parent"
+                android:layout_marginVertical="10dp"
+                android:layout_height="1dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            tools:listitem="@layout/average_moods_dialog_item"
-            tools:itemCount="3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+<!--            <TextView-->
+<!--                android:text="@string/activities"-->
+<!--                android:layout_marginVertical="10dp"-->
+<!--                android:textAppearance="?attr/textAppearanceHeadline6"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
 
-        <com.google.android.material.divider.MaterialDivider
-            android:background="@color/gray_icon"
-            android:layout_width="match_parent"
-            android:layout_marginVertical="10dp"
-            android:layout_height="1dp"/>
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                tools:listitem="@layout/average_moods_dialog_item"-->
+<!--                tools:itemCount="3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
 
-        <TextView
-            android:text="@string/moods"
-            android:layout_marginVertical="10dp"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+<!--            <com.google.android.material.divider.MaterialDivider-->
+<!--                android:background="@color/gray_icon"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_marginVertical="10dp"-->
+<!--                android:layout_height="1dp" />-->
 
-        <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
-            app:raw_icon="@drawable/emoji_rad"
-            app:raw_icon_tint="@color/rad_color"
-            app:raw_title="@string/rad"
-            app:raw_count="0x"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
-            app:raw_icon="@drawable/emoji_good"
-            app:raw_icon_tint="@color/good_color"
-            app:raw_title="@string/good"
-            app:raw_count="0x"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
-            app:raw_icon="@drawable/emoji_meh"
-            app:raw_icon_tint="@color/meh_color"
-            app:raw_title="@string/meh"
-            app:raw_count="0x"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
-            app:raw_icon="@drawable/emoji_bad"
-            app:raw_icon_tint="@color/bad_color"
-            app:raw_title="@string/bad"
-            app:raw_count="0x"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
-            app:raw_icon="@drawable/emoji_awful"
-            app:raw_icon_tint="@color/awful_color"
-            app:raw_title="@string/awful"
-            app:raw_count="0x"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:text="@string/moods"
+                android:layout_marginVertical="10dp"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-</androidx.core.widget.NestedScrollView>
+            <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
+                android:id="@+id/rad_moods"
+                app:raw_icon="@drawable/emoji_rad"
+                app:raw_icon_tint="@color/rad_color"
+                app:raw_title="@string/rad"
+                app:raw_count="0x"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
+                android:id="@+id/good_moods"
+                app:raw_icon="@drawable/emoji_good"
+                app:raw_icon_tint="@color/good_color"
+                app:raw_title="@string/good"
+                app:raw_count="0x"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
+                android:id="@+id/meh_moods"
+                app:raw_icon="@drawable/emoji_meh"
+                app:raw_icon_tint="@color/meh_color"
+                app:raw_title="@string/meh"
+                app:raw_count="0x"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
+                android:id="@+id/bad_moods"
+                app:raw_icon="@drawable/emoji_bad"
+                app:raw_icon_tint="@color/bad_color"
+                app:raw_title="@string/bad"
+                app:raw_count="0x"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.iranmobiledev.moodino.ui.calendar.calendarpager.AverageMoodsDialogItemView
+                android:id="@+id/awful_moods"
+                app:raw_icon="@drawable/emoji_awful"
+                app:raw_icon_tint="@color/awful_color"
+                app:raw_title="@string/awful"
+                app:raw_count="0x"
+                android:onClick="@{clickListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

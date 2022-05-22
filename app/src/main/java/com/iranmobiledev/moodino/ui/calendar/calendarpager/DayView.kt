@@ -1,11 +1,13 @@
 package com.iranmobiledev.moodino.ui.calendar.calendarpager
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Rect
+import android.graphics.*
+import android.provider.Settings
 import android.util.AttributeSet
 import android.view.View
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.utlis.ColorArray
+import com.iranmobiledev.moodino.utlis.EmojiValue
 import com.iranmobiledev.moodino.utlis.entry_util.toPersian
 import kotlin.math.min
 
@@ -43,16 +45,82 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
 //            width / 2f, height / 2f, radius, shared.selectedPaint
 //        )
         if (!entries.isNullOrEmpty()){
-            val list= entries?.filter { it.date?.toPersian()?.day.toString() == text }
-            if (!list.isNullOrEmpty()){
-                dayHaveEntry= true
-                canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint(list[0].emojiValue) )
+            val filterList= entries?.filter { it.date?.toPersian()?.day.toString() == text }
+            if (!filterList.isNullOrEmpty()){
+                if (isDailyMoods){
+                     drawPieChart(canvas,filterList)
+                }else{
+                    dayHaveEntry= true
+                    canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint(filterList[0].emojiValue) )
+                }
+
             }
         }
 
         if (today) canvas?.drawCircle(
             width / 2f, height / 2f, radius, shared.todayPaint
         )
+    }
+
+    private fun drawPieChart(canvas: Canvas?,entries: List<Entry>){
+        val paint= Paint(Paint.ANTI_ALIAS_FLAG).also {
+            it.style= Paint.Style.FILL
+            }
+        val smallSide= if (width<height) width else height
+        val centerX= width/2f
+        val centerY= height/2f
+        val left= centerX-smallSide/2
+        val top= centerY-smallSide/2
+        val right= centerX+smallSide/2
+        val bottom= centerY+smallSide/2
+
+        val rectF= RectF(left,top,right,bottom)
+        val unit= 360f/entries.size
+
+        val radCount= entries.filter { it.emojiValue == EmojiValue.RAD }.size
+        val radDegree= radCount*unit
+
+        val goodCount= entries.filter { it.emojiValue == EmojiValue.GOOD }.size
+        val goodDegree= goodCount*unit
+
+        val mehCount= entries.filter { it.emojiValue == EmojiValue.MEH }.size
+        val mehDegree=  mehCount*unit
+
+        val badCount= entries.filter { it.emojiValue == EmojiValue.BAD }.size
+        val badDegree= badCount*unit
+
+        val awfulCount= entries.filter { it.emojiValue == EmojiValue.AWFUL }.size
+        val awfulDegree=  awfulCount*unit
+
+        if (radCount > 0){
+            paint.color= ColorArray.rad
+            canvas?.drawArc(rectF,0f,radDegree, true, paint)
+        }
+
+        if (goodCount > 0){
+            paint.color= ColorArray.good
+            canvas?.drawArc(rectF,radDegree,goodDegree, true, paint)
+        }
+
+        if (mehCount > 0){
+            paint.color= ColorArray.meh
+            canvas?.drawArc(rectF,radDegree+goodDegree,mehDegree, true, paint)
+        }
+
+        if (badCount > 0){
+            paint.color= ColorArray.bad
+            canvas?.drawArc(rectF,radDegree+goodDegree+mehDegree,badDegree, true, paint)
+        }
+
+        if (awfulCount > 0){
+            paint.color= ColorArray.awful
+            canvas?.drawArc(rectF,radDegree+goodDegree+mehDegree+badDegree,awfulDegree, true, paint)
+        }
+
+        // draw circle white in center
+        paint.color= Color.WHITE
+        canvas?.drawCircle(centerX,centerY,(smallSide/2)-25f,paint)
+
     }
 
     private val textBounds= Rect()
