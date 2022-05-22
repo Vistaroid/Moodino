@@ -16,6 +16,7 @@ import com.google.android.material.card.MaterialCardView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.utlis.*
@@ -46,10 +47,12 @@ class ChildRecyclerView(
         private val spacer: View = binding.spacer
         private val entryDate: TextView = binding.entryDate
         private val entryViewGroup : ViewGroup = binding.entryViewGroup
+        private val entryTime : TextView = binding.entryTimeTv
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry, index: Int) {
             val emoji = emojiFactory.getEmoji(entry.emojiValue)
+            setTime(entry.time)
             binding.entryItem = entry
             itemsVisibility(entry, index)
             imageLoader.load(itemView.context,emoji.image, binding.EntryIcon)
@@ -58,6 +61,13 @@ class ChildRecyclerView(
             entryTitle.text = emoji.title
             entryTitle.setTextColor(emoji.color)
             setupSmallActivitiesRv(entry)
+        }
+
+        private fun setTime(entryTime: EntryTime) {
+            val persianDate = PersianDate()
+            persianDate.hour = Integer.parseInt(entryTime.hour)
+            persianDate.minute = Integer.parseInt(entryTime.minutes)
+            this.entryTime.text = getTime(persianDate)
         }
 
         private fun setupSmallActivitiesRv(entry: Entry) {

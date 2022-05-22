@@ -37,7 +37,7 @@ class EntryViewModel(
             return sortedList
         val filtered = entries.filter { it.date == entries[0].date }
         val notFiltered = entries.filterNot { it.date == entries[0].date }
-        sortedList.add(0, RecyclerViewData(entries = filtered))
+        sortedList.add(0, RecyclerViewData(entries = filtered, date = filtered[0].date))
         return makeListFromEntries(notFiltered as MutableList<Entry>, sortedList)
     }
 

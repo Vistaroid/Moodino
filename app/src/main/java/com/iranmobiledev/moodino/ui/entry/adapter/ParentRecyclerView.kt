@@ -155,12 +155,13 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<RecyclerViewData>) {
-        val sorted = data.sortedByDescending { it.entries[0].date.day }
-        val diffUtil = MyDiffUtil(this.data, sorted)
+        val sortedByDay = data.sortedByDescending { it.date.day }
+        val sortedByMonth = sortedByDay.sortedByDescending { it.date.month }
+        val diffUtil = MyDiffUtil(this.data, sortedByMonth)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
-        this.data = sorted
-        if(data.isNotEmpty())
-        copyData = sorted as MutableList<RecyclerViewData>
+        this.data = sortedByMonth
+        if (data.isNotEmpty())
+            copyData = sortedByMonth as MutableList<RecyclerViewData>
         diffResults.dispatchUpdatesTo(this)
     }
 
@@ -205,14 +206,15 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         return emptyStateVisibility
     }
 
-    fun positionOf(mDate: EntryDate): Int{
-        val index = data.find {
-            it.entries[0].date == mDate
-        }
-        index?.let {
-            return data.indexOf(it)
-        }
-        return 0
+    fun positionOf(mDate: EntryDate, scrollToDay: Boolean): Int {
+        val found =
+            if (scrollToDay) data.find {
+                mDate.year == it.date.year &&
+                        mDate.month == it.date.month &&
+                        mDate.day == it.date.day
+            } else data.find { mDate.year == it.date.year && mDate.month == it.date.month }
+        found?.let { return data.indexOf(it) }
+        return -1
     }
 }
 
