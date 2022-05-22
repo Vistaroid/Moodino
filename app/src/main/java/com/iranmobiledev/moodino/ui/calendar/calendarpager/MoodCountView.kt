@@ -18,6 +18,7 @@ class MoodCountView(context: Context, attr: AttributeSet): LinearLayoutCompat(co
     }
 
     fun setEntries(entries: List<Entry>?){
+        refresh()
         if (!entries.isNullOrEmpty()) {
             val distinctList = entries.distinctBy { it.emojiValue }
             distinctList.forEach { item ->
@@ -30,12 +31,14 @@ class MoodCountView(context: Context, attr: AttributeSet): LinearLayoutCompat(co
                     EmojiValue.AWFUL -> binding.awful.setData(list.size, ColorArray.awful)
                 }
             }
-        } else {
-            binding.rad.refresh()
-            binding.good.refresh()
-            binding.meh.refresh()
-            binding.bad.refresh()
-            binding.awful.refresh()
         }
+    }
+
+    private fun refresh(){
+        binding.rad.refresh()
+        binding.good.refresh()
+        binding.meh.refresh()
+        binding.bad.refresh()
+        binding.awful.refresh()
     }
 }

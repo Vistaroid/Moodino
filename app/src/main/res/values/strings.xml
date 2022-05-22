@@ -162,4 +162,7 @@
     <string name="off">off</string>
     <string name="delete_photo">Delete photo?</string>
     <string name="change_photo">Change photo</string>
+    <string name="daily_moods">daily moods</string>
+    <string name="moods">Moods</string>
+    <string name="content_description">content description</string>
 </resources>
