@@ -35,11 +35,9 @@ class EntryViewModel(
     private fun makeListFromEntries(entries: MutableList<Entry>, sortedList : MutableList<RecyclerViewData>): List<RecyclerViewData> {
         if(entries.size == 0)
             return sortedList
-        val data = RecyclerViewData(mutableListOf())
         val filtered = entries.filter { it.date == entries[0].date }
         val notFiltered = entries.filterNot { it.date == entries[0].date }
-        data.entries = filtered
-        sortedList.add(0, data)
+        sortedList.add(0, RecyclerViewData(entries = filtered))
         return makeListFromEntries(notFiltered as MutableList<Entry>, sortedList)
     }
 

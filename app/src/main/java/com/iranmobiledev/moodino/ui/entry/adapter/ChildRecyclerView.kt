@@ -95,7 +95,7 @@ class ChildRecyclerView(
             else if (entry.date == yesterday(persianDate))
                 entryDate.text = yesterdayStringDate()
             else {
-                entry.date?.let {
+                entry.date.let {
                     persianDate.shDay = it.day
                     persianDate.shMonth = it.month
                     persianDate.shYear = it.year
