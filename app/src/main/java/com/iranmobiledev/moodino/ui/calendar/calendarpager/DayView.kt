@@ -4,12 +4,15 @@ import android.content.Context
 import android.graphics.*
 import android.provider.Settings
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.utlis.ColorArray
 import com.iranmobiledev.moodino.utlis.EmojiValue
 import com.iranmobiledev.moodino.utlis.entry_util.toPersian
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 class DayView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
 
@@ -51,7 +54,7 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
                      drawPieChart(canvas,filterList)
                 }else{
                     dayHaveEntry= true
-                    canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint(filterList[0].emojiValue) )
+                    drawAverageChart(canvas,filterList,shared,radius)
                 }
 
             }
@@ -121,6 +124,13 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
         paint.color= Color.WHITE
         canvas?.drawCircle(centerX,centerY,(smallSide/2)-25f,paint)
 
+    }
+
+    private fun drawAverageChart(canvas: Canvas?, entries: List<Entry>,shared: SharedDayViewData, radius: Float){
+        val sum: Double= entries.sumOf { it.emojiValue }.toDouble()
+        val average: Double = sum/entries.size
+        val roundedAverage= average.roundToInt()
+        canvas?.drawCircle(width / 2f, height /2f, radius - 3 , shared.haveEntryPaint(roundedAverage) )
     }
 
     private val textBounds= Rect()

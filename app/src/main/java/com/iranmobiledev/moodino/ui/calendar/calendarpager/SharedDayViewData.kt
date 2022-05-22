@@ -25,7 +25,7 @@ class SharedDayViewData(context: Context,height: Float) {
 ////        addShadowIfNeeded(it)
 //    }
 
-    private val colorDayHaveEntryDefault= context.resolveColor(R.attr.colorDayHaveEntryDefault)
+  //  private val colorDayHaveEntryDefault= context.resolveColor(R.attr.colorDayHaveEntryDefault)
     fun haveEntryPaint(value: Int): Paint  {
         val paint= Paint(Paint.ANTI_ALIAS_FLAG).also {
             it.style= Paint.Style.FILL
@@ -35,7 +35,7 @@ class SharedDayViewData(context: Context,height: Float) {
                 EmojiValue.MEH -> ColorArray.meh
                 EmojiValue.BAD -> ColorArray.bad
                 EmojiValue.AWFUL -> ColorArray.awful
-                else -> colorDayHaveEntryDefault
+                else -> ColorArray.meh
             }
 //        addShadowIfNeeded(it)
         }
