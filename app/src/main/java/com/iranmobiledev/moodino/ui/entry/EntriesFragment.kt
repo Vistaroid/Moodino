@@ -144,7 +144,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun changeCurrentMonth(date: AbstractDate) {
-        Toast.makeText(context, date.year.toString() + date.monthName, Toast.LENGTH_SHORT).show()
+        val mDate = EntryDate(date.year,date.month,date.dayOfMonth)
+        val position = adapter.positionOf(mDate)
+        binding.entriesContainerRv.scrollToPosition(position)
     }
 
     override fun update(entry: Entry) {

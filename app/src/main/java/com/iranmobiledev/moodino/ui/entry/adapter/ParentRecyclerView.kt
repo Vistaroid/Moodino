@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.RecyclerViewData
 import com.iranmobiledev.moodino.databinding.ItemEntryContainerBinding
 import com.iranmobiledev.moodino.listener.EntryEventLister
@@ -191,7 +192,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     @SuppressLint("NotifyDataSetChanged")
     fun bindSpecificDay(day: Int) {
         data = data.filter {
-            it.entries[0].date?.day == day
+            it.entries[0].date.day == day
         } as MutableList<RecyclerViewData>
         emptyStateVisibility.value = data.isEmpty()
         notifyDataSetChanged()
@@ -199,6 +200,16 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
 
     fun getEmptyStateLiveData(): LiveData<Boolean> {
         return emptyStateVisibility
+    }
+
+    fun positionOf(mDate: EntryDate): Int{
+        val index = data.find {
+            it.entries[0].date == mDate
+        }
+        index?.let {
+            return data.indexOf(it)
+        }
+        return 0
     }
 }
 
