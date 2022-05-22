@@ -110,7 +110,14 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupClicks() {
-        val action = EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment( EntryDate(1400,1,1), EntryTime(10.toString(),10.toString()))
+        val persianDate = PersianDate()
+        val date = EntryDate(
+            persianDate.shYear,
+            persianDate.shMonth,
+            persianDate.shDay
+        )
+        val time = EntryTime(persianDate.hour.toString(),persianDate.minute.toString())
+        val action = EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment(date = date,time = time)
         binding.addEntryCardView.setOnClickListener {findNavController().navigate(action)}
     }
 
