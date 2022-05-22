@@ -47,10 +47,9 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     private fun setupUtil() {
-
         args.date?.let { entry.date = it }
         args.time?.let { entry.time = it }
-    }
+   }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
