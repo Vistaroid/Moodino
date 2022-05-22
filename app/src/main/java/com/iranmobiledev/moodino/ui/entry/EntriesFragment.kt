@@ -144,7 +144,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun changeCurrentMonth(date: AbstractDate) {
-        Toast.makeText(context, date.year.toString() + date.monthName, Toast.LENGTH_SHORT).show()
+
     }
 
     override fun update(entry: Entry) {
