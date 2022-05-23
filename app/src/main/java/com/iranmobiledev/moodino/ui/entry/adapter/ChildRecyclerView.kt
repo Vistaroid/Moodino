@@ -56,7 +56,7 @@ class ChildRecyclerView(
             setTime(entry.time)
             binding.entryItem = entry
             itemsVisibility(entry, index)
-            imageLoader.load(itemView.context, emoji.image, binding.EntryIcon)
+            binding.EntryIcon.setImageResource(emoji.image)
             entryViewGroup.setOnClickListener { makePopupMenu(entry, moreIcon) }
             moreIcon.setOnClickListener { makePopupMenu(entry, it) }
             entryTitle.text = emoji.title
