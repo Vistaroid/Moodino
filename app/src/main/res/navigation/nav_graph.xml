@@ -92,6 +92,10 @@
             app:destination="@id/entriesFragment"
             app:popUpTo="@id/entriesFragment"
             app:popUpToInclusive="true"/>
+        <argument
+            android:name="initialFromBackPress"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/entryDetailFragment"

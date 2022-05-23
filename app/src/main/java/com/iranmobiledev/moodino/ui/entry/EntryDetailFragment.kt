@@ -80,18 +80,14 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         editMode = EntryDetailFragmentArgs.fromBundle(requireArguments()).edit
         if (editMode)
             setupEditMode()
-        val icon = when (entry.emojiValue) {
-            1 -> emojiFactory.getEmoji(entry.emojiValue)
-            2 -> emojiFactory.getEmoji(entry.emojiValue)
-            3 -> emojiFactory.getEmoji(entry.emojiValue)
-            4 -> emojiFactory.getEmoji(entry.emojiValue)
-            5 -> emojiFactory.getEmoji(entry.emojiValue)
-            else -> null
-        }
-        icon?.let {
-            //binding.entryIconDetail.isSelectedEmoji = true
-            binding.entryIconDetail.setImageResource(it.image)
-        }
+//        val icon = when (entry.emojiValue) {
+//            1 -> emojiFactory.getEmoji(entry.emojiValue)
+//            2 -> emojiFactory.getEmoji(entry.emojiValue)
+//            3 -> emojiFactory.getEmoji(entry.emojiValue)
+//            4 -> emojiFactory.getEmoji(entry.emojiValue)
+//            5 -> emojiFactory.getEmoji(entry.emojiValue)
+//            else -> null
+//        }
         val language = sharedPref.getInt(LANGUAGE, PERSIAN)
         if (language == PERSIAN)
             binding.backIv.rotation = 180f
@@ -152,6 +148,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             }
             getPersianDialog(requireContext(), this, persianDate).show()
         }
+        binding.backIv.setOnClickListener { requireActivity().onBackPressed() }
         binding.deleteImage.setOnClickListener {
             val dialog = makeDialog(R.string.delete_photo, icon = R.drawable.ic_delete)
             dialog.setItemEventListener(object : DialogEventListener {
@@ -218,11 +215,11 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         override fun handleOnBackPressed() {
             val action = EntryDetailFragmentDirections.actionEntryDetailFragmentToAddEntryFragment(
                 date = entry.date,
-                time = entry.time
+                time = entry.time,
+                initialFromBackPress = true
             )
             if (!editMode) {
                 findNavController().navigate(action)
-                initialFromBackPress = true
             } else findNavController().navigate(action)
         }
     }
