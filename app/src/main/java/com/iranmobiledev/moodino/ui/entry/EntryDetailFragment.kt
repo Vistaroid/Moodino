@@ -23,7 +23,7 @@ import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.ui.entry.adapter.ParentActivitiesAdapter
-import com.iranmobiledev.moodino.ui.view.ActivityView
+import com.iranmobiledev.moodino.ui.view.CustomEmojiView
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import com.vansuita.pickimage.bundle.PickSetup
@@ -127,7 +127,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     private fun setupClicks() {
-        binding.emojiViewEntryDetail.setEmptyStateOnClickListener(this)
+        binding.emojiViewEntryDetail.setEmojiClickListener(this)
         binding.saveLayout.setOnClickListener(saveOnClick)
         binding.saveEntryFab.setOnClickListener(saveOnClick)
         binding.selectImageLayout.setOnClickListener {

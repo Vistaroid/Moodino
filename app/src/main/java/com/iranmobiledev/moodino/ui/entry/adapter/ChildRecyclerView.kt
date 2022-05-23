@@ -61,6 +61,7 @@ class ChildRecyclerView(
             moreIcon.setOnClickListener { makePopupMenu(entry, it) }
             entryTitle.text = emoji.title
             entryTitle.setTextColor(emoji.color)
+            binding.activityRv.setOnClickListener { makePopupMenu(entry, it) }
             setupSmallActivitiesRv(entry)
         }
 

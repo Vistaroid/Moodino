@@ -8,13 +8,13 @@ import android.widget.LinearLayout
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.EmojiViewBinding
 import com.iranmobiledev.moodino.listener.EmojiClickListener
+import com.iranmobiledev.moodino.utlis.Emoji
 
 class EmojiViewGroup(context: Context, attributeSet: AttributeSet?) :
     LinearLayout(context, attributeSet) {
 
     private var emojiClickListener: EmojiClickListener? = null
-    var selectedView: CustomEmojiView?= null //  View is Selected
-
+    var selectedView: CustomEmojiView? = null //  View is Selected
 
     init {
         val inflater =
@@ -23,25 +23,25 @@ class EmojiViewGroup(context: Context, attributeSet: AttributeSet?) :
         val attr = context.obtainStyledAttributes(attributeSet, R.styleable.EmojiView)
         val text = attr.getString(R.styleable.EmojiView_text)
 
-        if(!text.isNullOrEmpty()){
+        if (!text.isNullOrEmpty()) {
             view.emojiesTitle.visibility = View.VISIBLE
             view.emojiesTitle.text = text
         }
         view.clickListener = OnClickListener {
-            if (selectedView!= null){
-                selectedView!!.isSelectedEmoji= !selectedView!!.isSelectedEmoji
-                selectedView= it as CustomEmojiView
-                selectedView!!.isSelectedEmoji= !selectedView!!.isSelectedEmoji
-            }else{
-                selectedView= it as CustomEmojiView
-                selectedView!!.isSelectedEmoji= !selectedView!!.isSelectedEmoji
+            if (selectedView != null) {
+                selectedView!!.isSelectedEmoji = !selectedView!!.isSelectedEmoji
+                selectedView = it as CustomEmojiView
+                selectedView!!.isSelectedEmoji = !selectedView!!.isSelectedEmoji
+            } else {
+                selectedView = it as CustomEmojiView
+                selectedView!!.isSelectedEmoji = !selectedView!!.isSelectedEmoji
             }
             emojiClickListener?.onEmojiItemClicked(getEmojiValue(it.id))
         }
     }
 
 
-    private fun getEmojiValue(emojiId: Int): Int{
+    private fun getEmojiValue(emojiId: Int): Int {
         when (emojiId) {
             R.id.radImage -> return 5
             R.id.goodImage -> return 4
@@ -52,7 +52,7 @@ class EmojiViewGroup(context: Context, attributeSet: AttributeSet?) :
         return 3 // default
     }
 
-    fun setEmptyStateOnClickListener(listener: EmojiClickListener) {
+    fun setEmojiClickListener(listener: EmojiClickListener) {
         emojiClickListener = listener
     }
 }
