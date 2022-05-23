@@ -95,34 +95,42 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
         val awfulCount= entries.filter { it.emojiValue == EmojiValue.AWFUL }.size
         val awfulDegree=  awfulCount*unit
 
+        val divider= 3f
+        var sumDegree= 0f
         if (radCount > 0){
             paint.color= ColorArray.rad
-            canvas?.drawArc(rectF,0f,radDegree, true, paint)
+            canvas?.drawArc(rectF,sumDegree+divider,radDegree-divider, true, paint)
+            sumDegree+= radDegree
         }
 
         if (goodCount > 0){
             paint.color= ColorArray.good
-            canvas?.drawArc(rectF,radDegree,goodDegree, true, paint)
+            canvas?.drawArc(rectF,sumDegree+divider,goodDegree-divider, true, paint)
+            sumDegree+= goodDegree
         }
 
         if (mehCount > 0){
             paint.color= ColorArray.meh
-            canvas?.drawArc(rectF,radDegree+goodDegree,mehDegree, true, paint)
+            canvas?.drawArc(rectF,sumDegree+divider,mehDegree-divider, true, paint)
+            sumDegree+= mehDegree
         }
 
         if (badCount > 0){
             paint.color= ColorArray.bad
-            canvas?.drawArc(rectF,radDegree+goodDegree+mehDegree,badDegree, true, paint)
+            canvas?.drawArc(rectF,sumDegree+divider,badDegree-divider, true, paint)
+            sumDegree+= badDegree
         }
 
         if (awfulCount > 0){
             paint.color= ColorArray.awful
-            canvas?.drawArc(rectF,radDegree+goodDegree+mehDegree+badDegree,awfulDegree, true, paint)
+            canvas?.drawArc(rectF,sumDegree+divider,awfulDegree-divider, true, paint)
+            sumDegree+= awfulDegree
         }
 
         // draw circle white in center
         paint.color= Color.WHITE
-        canvas?.drawCircle(centerX,centerY,(smallSide/2)-25f,paint)
+        val radius= (smallSide/2f)*2/3
+        canvas?.drawCircle(centerX,centerY,radius,paint)
 
     }
 
