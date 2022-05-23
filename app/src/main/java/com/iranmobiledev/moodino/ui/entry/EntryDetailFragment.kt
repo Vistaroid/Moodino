@@ -95,6 +95,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
 
     private fun setupEditMode() {
         setupDate()
+        binding.emojiViewEntryDetail.setSelectedEmojiView(entry.emojiValue)
         binding.pageTitle.visibility = View.GONE
         binding.timeDate.visibility = View.VISIBLE
         binding.emojiViewEntryDetail.visibility = View.VISIBLE
@@ -136,7 +137,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         binding.date.implementSpringAnimationTrait()
         binding.date.setOnClickListener {
             val persianDate = PersianDate()
-            entry.date?.let {
+            entry.date.let {
                 persianDate.shYear = it.year
                 persianDate.shMonth = it.month
                 persianDate.shDay = it.day
@@ -216,11 +217,13 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             val action = EntryDetailFragmentDirections.actionEntryDetailFragmentToAddEntryFragment(
                 date = entry.date,
                 time = entry.time,
-                initialFromBackPress = true
+                initialFromBackPress = true,
+                emojiValue = entry.emojiValue
             )
+            val actionGoToEntriesFragment = EntryDetailFragmentDirections.actionEntryDetailFragmentToEntriesFragment(null)
             if (!editMode) {
                 findNavController().navigate(action)
-            } else findNavController().navigate(action)
+            } else findNavController().navigate(actionGoToEntriesFragment)
         }
     }
 
