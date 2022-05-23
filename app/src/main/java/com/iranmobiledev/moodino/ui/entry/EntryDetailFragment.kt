@@ -94,7 +94,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     private fun setupEditMode() {
-        selectActivities(entry.activities)
         setupDate()
         binding.pageTitle.visibility = View.GONE
         binding.timeDate.visibility = View.VISIBLE
@@ -103,10 +102,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         if (entry.photoPath.isNotEmpty())
             binding.entryImageContainer.visibility = View.VISIBLE
         imageLoader.load(requireContext(), entry.photoPath, binding.entryImage)
-    }
-
-    private fun selectActivities(activities: MutableList<Activity>) {
-        binding.parentActivityRv
     }
 
     private fun setupDate() {
@@ -194,10 +189,15 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private fun createPhotoSelectorDialog() {
         PickImageDialog.build(setupPhotoDialog()) {
             if (it.error == null) {
-                binding.entryImageContainer.visibility = View.VISIBLE
+                binding.apply {
+                    entryImageContainer.visibility = View.VISIBLE
+                    addPhotoTv.setText(R.string.change_photo)
+                    nestedScrollView.post{
+                        nestedScrollView.fullScroll(View.FOCUS_DOWN)
+                    }
+                }
                 entry.photoPath = it.path
                 imageLoader.load(requireContext(), entry.photoPath, binding.entryImage)
-                binding.addPhotoTv.setText(R.string.change_photo)
             }
         }.show(parentFragmentManager)
     }

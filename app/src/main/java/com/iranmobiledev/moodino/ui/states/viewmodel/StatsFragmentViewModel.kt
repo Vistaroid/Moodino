@@ -100,6 +100,8 @@ class StatsFragmentViewModel(
 
         for (date in reversedDates) {
 
+            Log.d(TAG, "getLongestChainFromDates: $date")
+
             val nextDateAsLocalDate = PersianDate().newDate(date).addDay(-1)
             if (date != reversedDates.last()) {
                 val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
