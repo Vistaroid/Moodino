@@ -65,7 +65,6 @@
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_add_round_corner.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_back_arrow.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_calendar.xml" value="0.211" />
-        <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_clock.xml" value="0.1365" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/ic_timer.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/outlined_circle.xml" value="0.211" />
         <entry key="..\:/Users/SamGostar/StudioProjects/Moodino/app/src/main/res/drawable/primary_circle_shape.xml" value="0.211" />
@@ -214,6 +213,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_backspace_24.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_calendar.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_cross.xml" value="0.1225" />
+        <entry key="app/src/main/res/drawable/ic_date.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/ic_img_dont_locke.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_img_locked.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_lock_active.xml" value="0.1185" />
@@ -253,6 +253,9 @@
         <entry key="app/src/main/res/layout/main_toolbar.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/mood_count_icon.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/moods_count_view.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/notification_collapsed.xml" value="0.23097826086956522" />
+        <entry key="app/src/main/res/layout/notification_expanded.xml" value="0.23097826086956522" />
+        <entry key="app/src/main/res/layout/notification_reminder.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/popup_view.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/select_photo_dialog.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/view_more_item.xml" value="0.23758246702988461" />
