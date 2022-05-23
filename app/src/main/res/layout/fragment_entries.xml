@@ -100,6 +100,13 @@
                         app:lottie_loop="true"
                         app:lottie_rawRes="@raw/star_emoji" />
                 </LinearLayout>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="295dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -109,10 +116,11 @@
         android:id="@+id/emptyStateContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_50mdp"
+        android:layout_marginTop="@dimen/_45mdp"
         android:background="?colorBackground"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:paddingTop="@dimen/_12mdp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/emojisCardView"
@@ -120,10 +128,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/_16mdp"
-            android:layout_marginTop="@dimen/_12mdp"
             android:layout_marginEnd="@dimen/_16mdp"
             app:cardCornerRadius="@dimen/_16mdp"
-            app:cardElevation="@dimen/_4mdp">
+            app:cardElevation="@dimen/_2mdp">
 
             <com.iranmobiledev.moodino.ui.view.EmojiViewGroup
                 android:id="@+id/emojisView"
@@ -138,7 +145,7 @@
             android:layout_height="match_parent"
             app:animation="@raw/empty_state_animation"
             app:contentText="@string/let_s_add_first_entry_tap_the_big_plus_button"
-            app:icon="@drawable/ic_hand_down" />
+            app:icon="@drawable/ic_hand_down"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
