@@ -1,7 +1,6 @@
 package com.iranmobiledev.moodino.ui.entry
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +11,13 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
-import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
 import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
-import com.iranmobiledev.moodino.ui.view.ActivityView
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import saman.zamani.persiandate.PersianDate
-import saman.zamani.persiandate.PersianDateFormat
 
 
 class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEventListener {
@@ -50,7 +46,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.emojiViewAddEntry.setEmptyStateOnClickListener(this)
+        binding.emojiViewAddEntry.setEmojiClickListener(this)
     }
 
     private fun setupUi() {
