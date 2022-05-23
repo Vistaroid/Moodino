@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.RecyclerViewData
 import com.iranmobiledev.moodino.databinding.ItemEntryContainerBinding
 import com.iranmobiledev.moodino.listener.EntryEventLister
@@ -154,12 +155,13 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<RecyclerViewData>) {
-        val sorted = data.sortedByDescending { it.entries[0].date.day }
-        val diffUtil = MyDiffUtil(this.data, sorted)
+        val sortedByDay = data.sortedByDescending { it.date.day }
+        val sortedByMonth = sortedByDay.sortedByDescending { it.date.month }
+        val diffUtil = MyDiffUtil(this.data, sortedByMonth)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
-        this.data = sorted
-        if(data.isNotEmpty())
-        copyData = sorted as MutableList<RecyclerViewData>
+        this.data = sortedByMonth
+        if (data.isNotEmpty())
+            copyData = sortedByMonth as MutableList<RecyclerViewData>
         diffResults.dispatchUpdatesTo(this)
     }
 
@@ -202,6 +204,17 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
 
     fun getEmptyStateLiveData(): LiveData<Boolean> {
         return emptyStateVisibility
+    }
+
+    fun positionOf(mDate: EntryDate, scrollToDay: Boolean): Int {
+        val found =
+            if (scrollToDay) data.find {
+                mDate.year == it.date.year &&
+                        mDate.month == it.date.month &&
+                        mDate.day == it.date.day
+            } else data.find { mDate.year == it.date.year && mDate.month == it.date.month }
+        found?.let { return data.indexOf(it) }
+        return -1
     }
 }
 
