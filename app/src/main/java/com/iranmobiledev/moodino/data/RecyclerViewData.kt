@@ -8,4 +8,5 @@ data class RecyclerViewData(
     val id: String = UUID.randomUUID().toString(),
     var entries : List<Entry>,
     var adapter : ChildRecyclerView? = null,
+    val date: EntryDate
 )

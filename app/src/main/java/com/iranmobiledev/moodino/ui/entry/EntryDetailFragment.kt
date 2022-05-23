@@ -171,12 +171,9 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         }
     }
 
-    private fun navigateToEntryFragment() {
-        findNavController().navigate(
-            R.id.action_entryDetailFragment_to_entriesFragment,
-            Bundle().apply {
-                putParcelable(ENTRY, entry)
-            })
+    private fun navigateToEntryFragment(newEntry: Entry) {
+        val action = EntryDetailFragmentDirections.actionEntryDetailFragmentToEntriesFragment(newEntry)
+        findNavController().navigate(action)
     }
 
     private fun setupPhotoDialog(): PickSetup {
@@ -212,7 +209,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         }
         if (editMode) entryDetailViewModel.update(entry)
         else entryDetailViewModel.addEntry(entry)
-        navigateToEntryFragment()
+        navigateToEntryFragment(entry)
     }
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
