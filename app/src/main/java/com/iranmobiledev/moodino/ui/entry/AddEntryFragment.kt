@@ -23,11 +23,8 @@ import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
-var initialFromBackPress = false
 
 class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEventListener {
-
-    val TAG = "addEntryFragment"
 
     private val entry = Entry()
     private lateinit var binding: AddEntryFragmentBinding
@@ -58,7 +55,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
 
     private fun setupUi() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPress)
-        binding.continueButton.visibility = if (initialFromBackPress) View.VISIBLE else View.GONE
+        binding.continueButton.visibility = if (args.initialFromBackPress) View.VISIBLE else View.GONE
         println("date is ${args.date}")
         binding.dateTv.text = args.date.let { getDate(it) }
         binding.timeTv.text = getTime()
@@ -84,15 +81,12 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
             }
             getPersianDialog(requireContext(), this, persianDate).show()
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        initialFromBackPress = false
+        binding.continueButton.setOnClickListener { navigateToEntryDetailFragment(entry) }
     }
 
     override fun onEmojiItemClicked(emojiValue: Int) {
         entry.emojiValue = emojiValue
+        if(!args.initialFromBackPress)
         navigateToEntryDetailFragment(entry)
     }
 

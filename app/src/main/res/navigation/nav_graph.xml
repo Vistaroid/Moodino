@@ -36,6 +36,11 @@
             app:destination="@id/entryDetailFragment"
             app:enterAnim="@anim/enter_anim_from_bottom"
             app:popExitAnim="@anim/exit_anim_from_top"/>
+        <argument
+            android:name="newEntry"
+            app:argType="com.iranmobiledev.moodino.data.Entry"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
@@ -87,6 +92,10 @@
             app:destination="@id/entriesFragment"
             app:popUpTo="@id/entriesFragment"
             app:popUpToInclusive="true"/>
+        <argument
+            android:name="initialFromBackPress"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/entryDetailFragment"

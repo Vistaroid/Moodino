@@ -24,15 +24,6 @@
                     app:srcCompat="@drawable/ic_back"
                     app:tint="?colorPrimary"/>
 
-                <ImageView
-                    android:id="@+id/entryIcon_detail"
-                    android:layout_width="@dimen/_16mdp"
-                    android:layout_height="@dimen/_16mdp"
-                    app:layout_constraintBottom_toBottomOf="@id/backIv"
-                    app:layout_constraintStart_toEndOf="@id/backIv"
-                    app:layout_constraintTop_toTopOf="@id/backIv"
-                    app:srcCompat="@drawable/emoji_good"/>
-
                 <LinearLayout
                     android:id="@+id/saveLayout"
                     android:layout_width="wrap_content"
