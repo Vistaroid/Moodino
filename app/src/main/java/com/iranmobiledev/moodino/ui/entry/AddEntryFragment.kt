@@ -40,14 +40,13 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     private fun setupUtil() {
-        args.date?.let { entry.date = it }
-        args.time?.let { entry.time = it }
+        args.date.let { entry.date = it }
+        args.time.let { entry.time = it }
    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.emojiViewAddEntry.setEmojiClickListener(this)
-        binding.emojiViewAddEntry.setSelectedEmojiView(EmojiValue.GOOD)
     }
 
     private fun setupUi() {
@@ -56,6 +55,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         println("date is ${args.date}")
         binding.dateTv.text = args.date.let { getDate(it) }
         binding.timeTv.text = getTime()
+        binding.emojiViewAddEntry.setSelectedEmojiView(args.emojiValue)
     }
 
     private fun navigateToEntryDetailFragment(entry: Entry) {
@@ -71,7 +71,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         }
         binding.date.setOnClickListener {
             val persianDate = PersianDate()
-            entry.date?.let {
+            entry.date.let {
                 persianDate.shYear = it.year
                 persianDate.shMonth = it.month
                 persianDate.shDay = it.day
@@ -103,12 +103,12 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     private fun setupDate() {
-        entry.date?.let {
+        entry.date.let {
             persianDate.shDay = it.day
             persianDate.shMonth = it.month
             persianDate.shYear = it.year
         }
-        entry.time?.let {
+        entry.time.let {
             persianDate.hour = Integer.parseInt(it.hour)
             persianDate.minute = Integer.parseInt(it.minutes)
         }
