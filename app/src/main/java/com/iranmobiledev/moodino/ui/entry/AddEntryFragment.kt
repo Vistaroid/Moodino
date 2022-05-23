@@ -60,7 +60,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPress)
         binding.continueButton.visibility = if (initialFromBackPress) View.VISIBLE else View.GONE
         println("date is ${args.date}")
-        binding.dateTv.text = args.date?.let { getDate(it) }
+        binding.dateTv.text = args.date.let { getDate(it) }
         binding.timeTv.text = getTime()
     }
 

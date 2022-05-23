@@ -46,7 +46,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private var editMode = false
     private val sharedPref: SharedPreferences by inject()
     private var activities = mutableListOf<Activity>()
-    private val args : EntryDetailFragmentArgs by navArgs()
+    private val args: EntryDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,7 +72,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     private fun setupUi(emojiFactory: EmojiInterface) {
-        if(entry.note.isEmpty())
+        if (entry.note.isEmpty())
             binding.addPhotoTv.setText(R.string.tap_to_add_photo)
         else
             binding.addPhotoTv.setText(R.string.change_photo)
@@ -154,7 +154,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         }
         binding.deleteImage.setOnClickListener {
             val dialog = makeDialog(R.string.delete_photo, icon = R.drawable.ic_delete)
-            dialog.setItemEventListener(object : DialogEventListener{
+            dialog.setItemEventListener(object : DialogEventListener {
                 override fun clickedItem(itemId: Int) {
                     when (itemId) {
                         R.id.rightButton -> {
@@ -219,7 +219,10 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            val action = EntryDetailFragmentDirections.actionEntryDetailFragmentToAddEntryFragment(date = entry.date, time = entry.time)
+            val action = EntryDetailFragmentDirections.actionEntryDetailFragmentToAddEntryFragment(
+                date = entry.date,
+                time = entry.time
+            )
             if (!editMode) {
                 findNavController().navigate(action)
                 initialFromBackPress = true
