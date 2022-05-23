@@ -182,9 +182,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun scroll(date: EntryDate) {
-
         lifecycleScope.launchWhenResumed {
-            delay(1000)
+            delay(500)
             val position = adapter.positionOf(date, true)
             if (position != -1) {
                 val y = binding.entriesContainerRv.getChildAt(position).y

@@ -157,11 +157,12 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     fun setData(data: List<RecyclerViewData>) {
         val sortedByDay = data.sortedByDescending { it.date.day }
         val sortedByMonth = sortedByDay.sortedByDescending { it.date.month }
-        val diffUtil = MyDiffUtil(this.data, sortedByMonth)
+        val sortedByYear = sortedByMonth.sortedByDescending { it.date.year }
+        val diffUtil = MyDiffUtil(this.data, sortedByYear)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
-        this.data = sortedByMonth
+        this.data = sortedByYear
         if (data.isNotEmpty())
-            copyData = sortedByMonth as MutableList<RecyclerViewData>
+            copyData = sortedByYear as MutableList<RecyclerViewData>
         diffResults.dispatchUpdatesTo(this)
     }
 
