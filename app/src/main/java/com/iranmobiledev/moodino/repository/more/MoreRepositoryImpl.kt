@@ -17,4 +17,6 @@ class MoreRepositoryImpl(private val moreLocalDataSource: MoreLocalDataSource) :
     override suspend fun saveTimeReminder(time: String) = moreLocalDataSource.saveTimeReminder(time)
 
     override fun getTimeReminder(): String = moreLocalDataSource.getTimeReminder()
+
+    override fun getPin(): String = moreLocalDataSource.getPin()
 }
