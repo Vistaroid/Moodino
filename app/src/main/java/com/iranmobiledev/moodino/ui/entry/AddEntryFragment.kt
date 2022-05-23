@@ -47,6 +47,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.emojiViewAddEntry.setEmojiClickListener(this)
+        binding.emojiViewAddEntry.setSelectedEmojiView(EmojiValue.GOOD)
     }
 
     private fun setupUi() {
