@@ -1,6 +1,6 @@
 package com.iranmobiledev.moodino.service
 
-import android.app.AlarmManager
+import android.annotation.SuppressLint
 import android.app.Application
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -9,22 +9,27 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.util.Log
-import android.widget.Toast
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat.getSystemService
 import com.iranmobiledev.moodino.NOTIFICATION_ID
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.ui.MainActivity
 
+
 class AlarmReciver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
-
         notification(context!!)
-
     }
 
     fun notification(context : Context){
+
+
         val intent = Intent(context , MainActivity::class.java)
         val content = PendingIntent.getActivity(context , 1 , intent , PendingIntent.FLAG_MUTABLE)
 
@@ -32,7 +37,7 @@ class AlarmReciver : BroadcastReceiver() {
 
         val notifi = NotificationCompat.Builder(context, NOTIFICATION_ID)
             .setContentTitle(context.getString(R.string.app_name))
-            .setContentText("امروز چطوری ؟")
+            .setContentText(context.getString(R.string.how_are_you))
             .setContentIntent(content)
             .setSmallIcon(android.R.drawable.ic_notification_overlay)
             .setAutoCancel(true)
