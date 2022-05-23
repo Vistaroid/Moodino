@@ -34,6 +34,7 @@ import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.ui.more.MoreViewModel
 
 import com.iranmobiledev.moodino.ui.more.timer.ReminderViewModel
+import com.iranmobiledev.moodino.ui.splashScreen.SplashViewModel
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
@@ -68,6 +69,7 @@ class App : Application() , KoinComponent{
             viewModel { CalendarViewModel(get()) }
             viewModel { PinLockViewModel(get()) }
             viewModel { MoreViewModel(get()) }
+            viewModel { SplashViewModel(get()) }
             viewModel { ReminderViewModel(get()) }
 
             factory <EntryRepository> { EntryRepositoryImpl(database.getEntryDao) }
