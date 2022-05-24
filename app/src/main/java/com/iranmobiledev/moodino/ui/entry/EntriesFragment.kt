@@ -39,6 +39,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
     private val sharePref: SharedPreferences by inject()
     private val persianDate = PersianDate()
+    private lateinit var layoutManager: LinearLayoutManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -69,8 +70,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         binding.addEntryCardView.visibility = View.GONE
         recyclerView = binding.entriesContainerRv
         recyclerView.itemAnimator = null
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        layoutManager =LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        recyclerView.layoutManager =layoutManager
         recyclerView.adapter = adapter
     }
 
@@ -112,9 +113,11 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             scroll(it.date)
         }
 
-        val entryDate= EntryDate(1399,7,7)
-        binding.mainToolbar.goToMonth(entryDate)
-
+        binding.entriesContainerRv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                layoutManager.findFirstVisibleItemPosition()
+            }
+        })
     }
 
     private fun setupClicks() {
