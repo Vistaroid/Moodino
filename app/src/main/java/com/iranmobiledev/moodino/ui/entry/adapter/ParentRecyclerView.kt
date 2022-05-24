@@ -217,5 +217,9 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         found?.let { return data.indexOf(it) }
         return -1
     }
+
+    fun findDataWithPosition(position: Int) : EntryDate{
+        return data[position].date
+    }
 }
 

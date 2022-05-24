@@ -112,12 +112,10 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         newEntry?.let {
             scroll(it.date)
         }
+    }
 
-        binding.entriesContainerRv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                layoutManager.findFirstVisibleItemPosition()
-            }
-        })
+    override fun onResume() {
+        super.onResume()
     }
 
     private fun setupClicks() {
@@ -184,8 +182,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun scroll(date: EntryDate) {
+        binding.mainToolbar.goToMonth(date)
         lifecycleScope.launchWhenResumed {
-            delay(500)
+            delay(400)
             val position = adapter.positionOf(date, true)
             if (position != -1) {
                 val y = binding.entriesContainerRv.getChildAt(position).y
