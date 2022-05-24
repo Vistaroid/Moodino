@@ -12,10 +12,12 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.iranmobiledev.moodino.R
+import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.MainToolbarBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.*
 import io.github.persiancalendar.calendar.AbstractDate
 import kotlinx.coroutines.delay
+import saman.zamani.persiandate.PersianDate
 
 class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(context, attr) {
 
@@ -56,6 +58,14 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
         this.changeCurrentMonth = changeCurrentMonth
     }
 
+    fun goToMonth(entryDate: EntryDate){
+        val jdn= Jdn(CalendarType.SHAMSI,entryDate.year,entryDate.month,entryDate.day)
+        val newPos= applyOffset(position = -mainCalendar.getMonthsDistance(baseJdn, jdn))
+        monthPositionGlobal= newPos
+        val date = bind(monthPositionGlobal)
+        changeCurrentMonth?.changeCurrentMonth(date)
+    }
+
     private fun ad() {
         mainToolbarItemClickListener?.clickOnAdBtn()
     }
@@ -87,7 +97,7 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
         view?.title = date.monthName + " " + date.year
     }
 
-    fun bind(position: Int): AbstractDate {
+    private fun bind(position: Int): AbstractDate {
         val date = mainCalendar.getMonthStartFromMonthsDistance(
             baseJdn, -applyOffset(position)
         )

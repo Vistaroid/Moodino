@@ -111,6 +111,10 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         newEntry?.let {
             scroll(it.date)
         }
+
+        val entryDate= EntryDate(1399,7,7)
+        binding.mainToolbar.goToMonth(entryDate)
+
     }
 
     private fun setupClicks() {
