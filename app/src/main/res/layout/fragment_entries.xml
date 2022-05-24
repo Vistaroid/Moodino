@@ -1,119 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/contentContainer_entries"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/contentContainer_entries"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbar
             android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="center_horizontal"/>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/entriesContainerRv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8mdp"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/_390mdp"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar">
+            android:paddingBottom="@dimen/_24mdp"
+            android:layout_gravity="center_horizontal"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/bottomTextContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/addEntryCardView"
-                    style="@style/CardViewStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12mdp"
-                    app:cardBackgroundColor="?colorPrimary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/bottomText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_12mdp"
+                android:text="@string/its_time_to_play_memories"
+                android:textAlignment="center" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/_40mdp"
-                            android:layout_height="@dimen/_40mdp"
-                            app:srcCompat="@drawable/ic_add" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="14dp"
-                            android:text="@string/let_s_pick_up_where_you_left_off"
-                            android:textAppearance="?textAppearanceHeadline6"
-                            android:textColor="?colorOnPrimary"
-                            android:textSize="@dimen/_13font_mdp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/entriesContainerRv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:paddingBottom="@dimen/_24mdp"
-                    app:layout_constraintTop_toBottomOf="@+id/addEntryCardView"
-                    android:layout_marginTop="@dimen/_8mdp"/>
-
-                <LinearLayout
-                    android:id="@+id/bottomTextContainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/entriesContainerRv">
-
-                    <TextView
-                        android:id="@+id/bottomText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_12mdp"
-                        android:text="@string/its_time_to_play_memories"
-                        android:textAlignment="center" />
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:layout_width="@dimen/_30mdp"
-                        android:layout_height="@dimen/_30mdp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_2mdp"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/star_emoji" />
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
-
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="@dimen/_30mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_2mdp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/star_emoji" />
+        </LinearLayout>
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/emptyStateContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_45mdp"
+        android:layout_marginTop="@dimen/_30mdp"
         android:background="?colorBackground"
         android:orientation="vertical"
+        android:paddingTop="@dimen/_12mdp"
         android:visibility="gone"
-        android:paddingTop="@dimen/_12mdp">
+        android:layout_gravity="center">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/emojisCardView"
@@ -138,7 +87,7 @@
             android:layout_height="match_parent"
             app:animation="@raw/empty_state_animation"
             app:contentText="@string/let_s_add_first_entry_tap_the_big_plus_button"
-            app:icon="@drawable/ic_hand_down"/>
+            app:icon="@drawable/ic_hand_down" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

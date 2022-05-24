@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.lifecycle.LiveData
@@ -18,130 +19,160 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.RecyclerViewData
+import com.iranmobiledev.moodino.databinding.AddEntryCardViewBinding
+import com.iranmobiledev.moodino.databinding.ItemEntryBinding
 import com.iranmobiledev.moodino.databinding.ItemEntryContainerBinding
+import com.iranmobiledev.moodino.listener.AddEntryCardViewListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.utlis.MyDiffUtil
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
+const val ENTRY_DEFAULT = 0
+const val ENTRY_CARD = 1
 
 class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
     private lateinit var context: Context
     private lateinit var entryEventListener: EntryEventLister
     private lateinit var data: List<RecyclerViewData>
     private var language: Int = -1
+    private lateinit var addEntryCardEventLister: AddEntryCardViewListener
     var specifyDay = -1
     private val emptyStateVisibility = MutableLiveData<Boolean>()
     var copyData = mutableListOf<RecyclerViewData>()
+    private var viewType = ENTRY_DEFAULT
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding: ItemEntryContainerBinding = ItemEntryContainerBinding.bind(itemView)
-        private val entryListDate = binding.entriesDateTitle
-        private val entryRecyclerView = binding.entryRv
-        private val entriesLable: ViewGroup = binding.entriesLable
-        private val lableCircle: ImageView = binding.lableCircle
-        private val entriesDateTitle: TextView = binding.entriesDateTitle
+    inner class ViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
+        private var itemEntryContainerBinding: ItemEntryContainerBinding? = null
+
+        init {
+            if (viewType == ENTRY_DEFAULT)
+                itemEntryContainerBinding = ItemEntryContainerBinding.bind(itemView)
+        }
 
         @SuppressLint("SetTextI18n")
         fun bind(data: RecyclerViewData) {
-            if (data.entries.isNotEmpty()) {
-                setupUi(data)
-                setupNestedAdapter(data)
+            if (viewType == ENTRY_DEFAULT) {
+                itemEntryContainerBinding?.let {
+                    if (data.entries.isNotEmpty()) {
+                        setupUi(data)
+                        setupNestedAdapter(data)
+                    }
+                    if (data.entries.size == 1)
+                        it.entriesLable.visibility = View.GONE
+                    else
+                        it.entriesLable.visibility = View.VISIBLE
+                }
             }
-            if (data.entries.size == 1)
-                entriesLable.visibility = View.GONE
-            else
-                entriesLable.visibility = View.VISIBLE
+            itemView.setOnClickListener {
+                if (it is CardView)
+                    addEntryCardEventLister.onAddEntryCardClicked()
+            }
         }
 
         private fun setupNestedAdapter(data: RecyclerViewData) {
-            entryRecyclerView.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            entryRecyclerView.itemAnimator = null
-            val adapter =
-                ChildRecyclerView(
-                    entryEventListener,
-                    data.entries as MutableList<Entry>,
-                    context,
-                    language
-                )
-            entryRecyclerView.adapter = adapter
-            data.adapter = adapter
+            itemEntryContainerBinding?.let {
+                it.entryRv.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                it.entryRv.itemAnimator = null
+                val adapter =
+                    ChildRecyclerView(
+                        entryEventListener,
+                        data.entries as MutableList<Entry>,
+                        context,
+                        language
+                    )
+                it.entryRv.adapter = adapter
+                data.adapter = adapter
+            }
         }
 
         private fun setupUi(data: RecyclerViewData) {
-            val result = setupLableColor(data)
-            drawLable(result)
-            val persianDate = PersianDate()
-            persianDate.shMonth = data.entries[0].date.month
-            persianDate.shDay = data.entries[0].date.day
-            entryListDate.text = PersianDateFormat.format(
-                persianDate,
-                "j F",
-                PersianDateFormat.PersianDateNumberCharacter.FARSI
-            )
+            itemEntryContainerBinding?.let {
+                val result = setupLableColor(data)
+                drawLable(result)
+                val persianDate = PersianDate()
+                persianDate.shMonth = data.entries[0].date.month
+                persianDate.shDay = data.entries[0].date.day
+                it.entriesDateTitle.text = PersianDateFormat.format(
+                    persianDate,
+                    "j F",
+                    PersianDateFormat.PersianDateNumberCharacter.FARSI
+                )
+            }
         }
 
         private fun drawLable(result: Int) {
-            when (result) {
-                1 -> {
-                    setLableColor(R.color.red_light)
-                    setLableCircleColor(R.color.red_dark)
-                    entriesDateTitle.setTextColor(ContextCompat.getColor(context, R.color.red_dark))
-                }
-                2 -> {
-                    setLableColor(R.color.orange_light)
-                    setLableCircleColor(R.color.orange_dark)
-                    entriesDateTitle.setTextColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.orange_dark
+            itemEntryContainerBinding?.let {
+                when (result) {
+                    1 -> {
+                        setLableColor(R.color.red_light)
+                        setLableCircleColor(R.color.red_dark)
+                        it.entriesDateTitle.setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.red_dark
+                            )
                         )
-                    )
-                }
-                3 -> {
-                    setLableColor(R.color.blue_light)
-                    setLableCircleColor(R.color.blue_dark)
-                    entriesDateTitle.setTextColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.blue_dark
+                    }
+                    2 -> {
+                        setLableColor(R.color.orange_light)
+                        setLableCircleColor(R.color.orange_dark)
+                        it.entriesDateTitle.setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.orange_dark
+                            )
                         )
-                    )
-                }
-                4 -> {
-                    setLableColor(R.color.green_light)
-                    setLableCircleColor(R.color.green_dark)
-                    entriesDateTitle.setTextColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.green_dark
+                    }
+                    3 -> {
+                        setLableColor(R.color.blue_light)
+                        setLableCircleColor(R.color.blue_dark)
+                        it.entriesDateTitle.setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.blue_dark
+                            )
                         )
-                    )
-                }
-                5 -> {
-                    setLableColor(R.color.turquoise_light)
-                    setLableCircleColor(R.color.turquoise_dark)
-                    entriesDateTitle.setTextColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.turquoise_dark
+                    }
+                    4 -> {
+                        setLableColor(R.color.green_light)
+                        setLableCircleColor(R.color.green_dark)
+                        it.entriesDateTitle.setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.green_dark
+                            )
                         )
-                    )
+                    }
+                    5 -> {
+                        setLableColor(R.color.turquoise_light)
+                        setLableCircleColor(R.color.turquoise_dark)
+                        it.entriesDateTitle.setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.turquoise_dark
+                            )
+                        )
+                    }
                 }
             }
         }
 
         private fun setLableColor(@ColorRes color: Int) {
-            entriesLable.backgroundTintList =
-                context.resources.getColorStateList(color, context.theme)
+            itemEntryContainerBinding?.let {
+                it.entriesLable.backgroundTintList =
+                    context.resources.getColorStateList(color, context.theme)
+            }
         }
 
         private fun setLableCircleColor(@ColorRes color: Int) {
-            lableCircle.setColorFilter(
-                ContextCompat.getColor(context, color),
-                android.graphics.PorterDuff.Mode.SRC_IN
-            )
+            itemEntryContainerBinding?.let {
+                it.lableCircle.setColorFilter(
+                    ContextCompat.getColor(context, color),
+                    android.graphics.PorterDuff.Mode.SRC_IN
+                )
+            }
         }
 
         private fun setupLableColor(data: RecyclerViewData): Int {
@@ -167,14 +198,32 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_entry_container, parent, false)
-        return ViewHolder(view)
+        val view = when (viewType) {
+            ENTRY_DEFAULT -> R.layout.item_entry_container
+            ENTRY_CARD -> R.layout.add_entry_card_view
+            else -> R.layout.item_entry_container
+        }
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(view, parent, false),
+            viewType
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (specifyDay == -1)
             holder.bind(data[position])
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        val persianDate = PersianDate()
+        val entryDate = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
+        val today = data.find { it.date == entryDate }
+        if (today == null && position == 0){
+            viewType = ENTRY_CARD
+            return ENTRY_CARD
+        }
+        viewType = ENTRY_DEFAULT
+        return ENTRY_DEFAULT
     }
 
     override fun getItemCount(): Int {
@@ -185,6 +234,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         context: Context,
         entryEventListener: EntryEventLister,
         data: List<RecyclerViewData>,
+        addEntryCardEventLister: AddEntryCardViewListener,
         language: Int
     ) {
         this.context = context
@@ -192,6 +242,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         this.data = data as MutableList<RecyclerViewData>
         this.language = language
         this.copyData = data
+        this.addEntryCardEventLister = addEntryCardEventLister
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -218,7 +269,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         return -1
     }
 
-    fun findDataWithPosition(position: Int) : EntryDate{
+    fun findDataWithPosition(position: Int): EntryDate {
         return data[position].date
     }
 }
