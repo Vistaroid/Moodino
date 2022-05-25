@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.splashScreen
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +15,14 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.ActivitySplashBinding
 import com.iranmobiledev.moodino.ui.MainActivity
 import com.iranmobiledev.moodino.ui.more.pinLock.PinLockDialog
+import com.iranmobiledev.moodino.utlis.ENGLISH
+import com.iranmobiledev.moodino.utlis.LANGUAGE
+import com.iranmobiledev.moodino.utlis.MyContextWrapper
+import com.iranmobiledev.moodino.utlis.PERSIAN
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import java.util.*
 import java.util.concurrent.Executor
 
 class SplashActivity : AppCompatActivity() {
@@ -113,5 +119,15 @@ class SplashActivity : AppCompatActivity() {
     fun endSplash(){
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         finish()
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        val shared = newBase?.getSharedPreferences("sharedPref", MODE_PRIVATE)
+        val lan = when (shared?.getInt(LANGUAGE, PERSIAN)) {
+            ENGLISH -> "en"
+            PERSIAN -> "fa"
+            else -> "en"
+        }
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, Locale(lan).toString()))
     }
 }

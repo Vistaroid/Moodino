@@ -106,12 +106,12 @@
 <!--                app:ItemMore_icon="@drawable/ic_emoji"-->
 <!--                android:clickable="true"/>-->
 
-            <com.iranmobiledev.moodino.ui.more.ViewItemMore
-                android:id="@+id/btn_more_activities"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:ItemMore_title="@string/edite_activity"
-                app:ItemMore_icon="@drawable/ic_activity"/>
+<!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
+<!--                android:id="@+id/btn_more_activities"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:ItemMore_title="@string/edite_activity"-->
+<!--                app:ItemMore_icon="@drawable/ic_activity"/>-->
 
 <!--            <com.iranmobiledev.moodino.ui.more.ViewItemMore-->
 <!--                android:layout_width="match_parent"-->
