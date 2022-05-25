@@ -26,9 +26,10 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/average_mood_layout"
+                android:id="@+id/filter_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="170dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_marginVertical="20dp"
@@ -39,24 +40,26 @@
                 android:paddingVertical="2dp">
 
                 <ImageView
-                    android:id="@+id/average_mood_emoji"
+                    android:id="@+id/filter_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_happy_outlined"
                     app:tint="@color/green" />
 
                 <TextView
-                    android:id="@+id/average_mood_title"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/filter_title"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_margin="5dp"
-                    android:text="@string/average_mood"
+                    android:text=""
                     android:textAppearance="?attr/textAppearanceSubtitle1" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:tint="?attr/colorPrimary" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

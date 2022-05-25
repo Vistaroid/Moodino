@@ -16,4 +16,6 @@ interface MoreDataSource {
 
     fun getTimeReminder() : String
 
+    fun getPin() : String
+
 }

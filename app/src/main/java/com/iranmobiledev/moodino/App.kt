@@ -1,11 +1,18 @@
 package com.iranmobiledev.moodino
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.media.RingtoneManager
 import android.os.Build
+import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.NotificationCompat
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Category
 import com.iranmobiledev.moodino.database.AppDatabase
@@ -18,6 +25,7 @@ import com.iranmobiledev.moodino.ui.calendar.CalendarViewModel
 import com.iranmobiledev.moodino.repository.more.MoreRepository
 import com.iranmobiledev.moodino.repository.more.MoreRepositoryImpl
 import com.iranmobiledev.moodino.repository.more.source.MoreLocalDataSource
+import com.iranmobiledev.moodino.ui.MainActivity
 import com.iranmobiledev.moodino.ui.MainActivityViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryDetailViewModel
 import com.iranmobiledev.moodino.ui.entry.EntryViewModel
@@ -26,6 +34,7 @@ import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.ui.more.MoreViewModel
 
 import com.iranmobiledev.moodino.ui.more.timer.ReminderViewModel
+import com.iranmobiledev.moodino.ui.splashScreen.SplashViewModel
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.GlideImageLoader
@@ -55,13 +64,14 @@ class App : Application() , KoinComponent{
         val modules = module {
             viewModel { MainActivityViewModel() }
             viewModel { EntryViewModel(get(), get()) }
-            viewModel {StatsFragmentViewModel(get())}
+            viewModel { StatsFragmentViewModel(get()) }
             viewModel { EntryDetailViewModel(get(), get()) }
             viewModel { CalendarViewModel(get()) }
             viewModel { PinLockViewModel(get()) }
             viewModel { MoreViewModel(get()) }
-
+            viewModel { SplashViewModel(get()) }
             viewModel { ReminderViewModel(get()) }
+
             factory <EntryRepository> { EntryRepositoryImpl(database.getEntryDao) }
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getCategoryDao)) }
             factory <MoreRepository> { MoreRepositoryImpl(MoreLocalDataSource(get())) }
