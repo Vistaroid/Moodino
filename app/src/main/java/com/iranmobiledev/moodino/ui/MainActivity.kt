@@ -196,7 +196,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
 
     override fun attachBaseContext(newBase: Context?) {
         val shared = newBase?.getSharedPreferences("sharedPref", MODE_PRIVATE)
-        val lan = when (shared?.getInt(LANGUAGE, ENGLISH)) {
+        val lan = when (shared?.getInt(LANGUAGE, PERSIAN)) {
             ENGLISH -> "en"
             PERSIAN -> "fa"
             else -> "en"
