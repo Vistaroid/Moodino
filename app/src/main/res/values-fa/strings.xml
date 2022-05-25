@@ -166,4 +166,6 @@
     <string name="login_with_fingerprint">ورود با اثرانگشت</string>
     <string name="confirm_fingerPrint">تایید اثرانگشت</string>
     <string name="fingerPrint_error">اثرانگشت مطابقت ندارد!</string>
+    <string name="daily_moods">"حالت روزانه "</string>
+    <string name="moods">حالت ها</string>
 </resources>
