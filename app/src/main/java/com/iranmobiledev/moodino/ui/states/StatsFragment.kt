@@ -78,10 +78,10 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun initRtl() {
-        val viewModel : MoreViewModel by inject()
+        val viewModel: MoreViewModel by inject()
         val currentLanguage = if (viewModel.getLanguage() == 1) "persian" else "english"
 
-        if (currentLanguage == "persian"){
+        if (currentLanguage == "persian") {
             binding.apply {
                 shareDaysRow.rotation = -90f
                 shareMoodChart.rotation = -90f
@@ -93,17 +93,23 @@ class StatsFragment : BaseFragment() {
 
     private fun initYearInPixelCard() {
         val yearView = binding.yearView
-         model.entries.observe(viewLifecycleOwner){
-             yearView.entries = it
-             val distinctEntries = it.distinctBy { entry -> entry.date.month }
-             binding.moodCountView.setEntries(distinctEntries)
-         }
+        model.entries.observe(viewLifecycleOwner) {
+            yearView.entries = it
+            val distinctEntries = it.distinctBy { entry -> entry.date.month }
+            binding.moodCountView.setEntries(distinctEntries)
+        }
     }
 
     private fun initPieChartCard() {
         setupMoodsCount()
 
-        val colors = arrayListOf<Int>(ColorArray.rad,ColorArray.good,ColorArray.meh,ColorArray.bad,ColorArray.awful)
+        val colors = arrayListOf<Int>(
+            ColorArray.rad,
+            ColorArray.good,
+            ColorArray.meh,
+            ColorArray.bad,
+            ColorArray.awful
+        )
 
         val pieChart = binding.moodCountPieChart
 
