@@ -25,6 +25,11 @@ class AlarmReciver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         notification(context!!)
+
+        val i = Intent()
+        i.setClassName(context.packageName , "com.iranmobiledev.moodino.service.NotificationView")
+        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.startActivity(i)
     }
 
     fun notification(context : Context){

@@ -49,13 +49,15 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Moodino.NoActionBar"
-            tools:ignore="LockedOrientationActivity">
+            tools:ignore="LockedOrientationActivity"/>
 
-        </activity>
+        <activity
+            android:name=".service.NotificationView"
+            android:theme="@style/Theme.Transparent"/>
 
         <receiver
             android:name=".service.AlarmReciver"
-            android:exported="true"></receiver>
+            android:exported="true" />
     </application>
 
 </manifest>
