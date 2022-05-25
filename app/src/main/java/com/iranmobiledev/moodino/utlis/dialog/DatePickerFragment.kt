@@ -14,13 +14,12 @@ import saman.zamani.persiandate.PersianDate
 
 
 fun getPersianDialog(context: Context, listener: DatePickerDialogEventListener, initDate: PersianDate) : PersianDatePickerDialog{
-    return PersianDatePickerDialog(context).setPositiveButtonString(context.getString(R.string.ok))
+    val persianDateDialog = PersianDatePickerDialog(context).setPositiveButtonString(context.getString(R.string.ok))
         .setNegativeButton(context.getString(R.string.never_mind))
         .setTodayButton(context.getString(R.string.today))
         .setTodayButtonVisible(true)
         .setMinYear(1300)
         .setMaxYear(PersianDatePickerDialog.THIS_YEAR)
-        .setMaxMonth(PersianDatePickerDialog.THIS_MONTH)
         .setMaxDay(PersianDatePickerDialog.THIS_DAY)
         .setInitDate(initDate.shYear, initDate.shMonth, initDate.shDay)
         .setActionTextColor(Color.GRAY)
@@ -36,4 +35,5 @@ fun getPersianDialog(context: Context, listener: DatePickerDialogEventListener, 
             override fun onDismissed() {
             }
         })
+    return persianDateDialog
 }

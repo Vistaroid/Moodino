@@ -1,26 +1,27 @@
 package com.iranmobiledev.moodino.ui.more
 
+import android.annotation.SuppressLint
+import android.app.Application
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.media.RingtoneManager
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import androidx.appcompat.app.AlertDialog
+import android.widget.*
+import androidx.core.app.NotificationCompat
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.button.MaterialButton
+import com.iranmobiledev.moodino.NOTIFICATION_ID
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentMoreBinding
 import com.iranmobiledev.moodino.ui.MainActivity
-import com.iranmobiledev.moodino.ui.more.pinLock.PinLockFragment
-import com.iranmobiledev.moodino.utlis.ENGLISH
-import com.iranmobiledev.moodino.utlis.PERSIAN
-import org.greenrobot.eventbus.EventBus
 import org.koin.android.ext.android.inject
+
 
 class MoreFragment : BaseFragment() {
 
@@ -38,8 +39,6 @@ class MoreFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         binding.btnMorePinLock.setOnClickListener {
             findNavController().navigate(R.id.action_moreFragment_to_pinLockFragment)

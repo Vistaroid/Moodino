@@ -3,6 +3,7 @@ package com.iranmobiledev.moodino.ui.calendar.calendarpager
 import android.content.Context
 import android.graphics.Paint
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.utlis.*
 
@@ -11,7 +12,7 @@ class SharedDayViewData(context: Context,height: Float) {
 
     val layoutParams= ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,height.toInt())
 
-    private val textSize = height * (/*if (isArabicDigitSelected) 18 else */ 25) / 40
+    private val textSize = height * (/*if (isArabicDigitSelected) 18 else */ 25) / 60
 
     val selectedPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
         it.style= Paint.Style.FILL
@@ -50,12 +51,13 @@ class SharedDayViewData(context: Context,height: Float) {
     }
 
     private val colorTextDayName= context.resolveColor(R.attr.colorTextDayName)
-    private val headerTextSize= height * 11 / 40
+    private val headerTextSize= height * 25 / 60
 
     val headerTextPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
         it.textAlign= Paint.Align.CENTER
         it.textSize= headerTextSize
         it.color= colorTextDayName
+        it.typeface= ResourcesCompat.getFont(context,R.font.shabnam_medium)
 //        addShadowIfNeeded(it)
     }
 
@@ -83,6 +85,7 @@ class SharedDayViewData(context: Context,height: Float) {
     private val colorTextDay = context.resolveColor(R.attr.colorTextDay)
     val dayOfMonthNumberTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).also {
         it.textAlign = Paint.Align.CENTER
+        it.typeface = ResourcesCompat.getFont(context,R.font.shabnam_light)
         it.textSize = textSize
         it.color = colorTextDay
   //      addShadowIfNeeded(it)

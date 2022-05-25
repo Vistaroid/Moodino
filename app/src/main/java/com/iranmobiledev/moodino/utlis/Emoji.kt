@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.utlis
 
 import android.content.Context
+import android.graphics.Color
 import com.iranmobiledev.moodino.R
 
 enum class EmojiType{
@@ -22,17 +23,17 @@ data class Emoji(
 private class SimpleEmoji(private val context: Context): EmojiInterface{
     override fun getEmoji(value: Int): Emoji {
         return when (value) {
-            EmojiValue.AWFUL -> Emoji(value, context.getString(R.string.awful), R.drawable.emoji_awful, ColorArray.awful
+            EmojiValue.AWFUL -> Emoji(value, context.getString(R.string.awful), R.drawable.emoji_awful, context.resources.getColor(R.color.awful_color,context.theme)
             )
-            EmojiValue.BAD -> Emoji(value, context.getString(R.string.bad), R.drawable.emoji_bad, ColorArray.bad
+            EmojiValue.BAD -> Emoji(value, context.getString(R.string.bad), R.drawable.emoji_bad, context.resources.getColor(R.color.bad_color,context.theme)
             )
-            EmojiValue.MEH -> Emoji(value, context.getString(R.string.meh), R.drawable.emoji_meh, ColorArray.meh
+            EmojiValue.MEH -> Emoji(value, context.getString(R.string.meh), R.drawable.emoji_meh, context.resources.getColor(R.color.meh_color,context.theme)
             )
-            EmojiValue.GOOD -> Emoji(value, context.getString(R.string.good), R.drawable.emoji_good, ColorArray.good
+            EmojiValue.GOOD -> Emoji(value, context.getString(R.string.good), R.drawable.emoji_good, context.resources.getColor(R.color.good_color,context.theme)
             )
-            EmojiValue.RAD -> Emoji(value, context.getString(R.string.rad), R.drawable.emoji_rad, ColorArray.rad
+            EmojiValue.RAD -> Emoji(value, context.getString(R.string.rad), R.drawable.emoji_rad, context.resources.getColor(R.color.rad_color,context.theme)
             )
-            else -> Emoji(value, context.getString(R.string.meh), R.drawable.emoji_meh, ColorArray.meh
+            else -> Emoji(value, context.getString(R.string.meh), R.drawable.emoji_meh, context.resources.getColor(R.color.meh_color,context.theme)
             )
         }
     }
