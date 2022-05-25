@@ -1,7 +1,6 @@
 package com.iranmobiledev.moodino.ui.entry
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +11,13 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
-import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
 import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
-import com.iranmobiledev.moodino.ui.view.ActivityView
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import saman.zamani.persiandate.PersianDate
-import saman.zamani.persiandate.PersianDateFormat
 
 
 class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEventListener {
@@ -44,13 +40,13 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     private fun setupUtil() {
-        args.date?.let { entry.date = it }
-        args.time?.let { entry.time = it }
+        args.date.let { entry.date = it }
+        args.time.let { entry.time = it }
    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.emojiViewAddEntry.setEmptyStateOnClickListener(this)
+        binding.emojiViewAddEntry.setEmojiClickListener(this)
     }
 
     private fun setupUi() {
@@ -59,6 +55,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         println("date is ${args.date}")
         binding.dateTv.text = args.date.let { getDate(it) }
         binding.timeTv.text = getTime()
+        binding.emojiViewAddEntry.setSelectedEmojiView(args.emojiValue)
     }
 
     private fun navigateToEntryDetailFragment(entry: Entry) {
@@ -74,7 +71,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         }
         binding.date.setOnClickListener {
             val persianDate = PersianDate()
-            entry.date?.let {
+            entry.date.let {
                 persianDate.shYear = it.year
                 persianDate.shMonth = it.month
                 persianDate.shDay = it.day
@@ -106,12 +103,12 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     private fun setupDate() {
-        entry.date?.let {
+        entry.date.let {
             persianDate.shDay = it.day
             persianDate.shMonth = it.month
             persianDate.shYear = it.year
         }
-        entry.time?.let {
+        entry.time.let {
             persianDate.hour = Integer.parseInt(it.hour)
             persianDate.minute = Integer.parseInt(it.minutes)
         }

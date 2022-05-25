@@ -61,7 +61,7 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
         }
 
         if (today) canvas?.drawCircle(
-            width / 2f, height / 2f, radius, shared.todayPaint
+            width / 2f, height / 2f, radius-2, shared.todayPaint
         )
     }
 
@@ -69,7 +69,7 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
         val paint= Paint(Paint.ANTI_ALIAS_FLAG).also {
             it.style= Paint.Style.FILL
             }
-        val smallSide= if (width<height) width else height
+        val smallSide= min(width,height)
         val centerX= width/2f
         val centerY= height/2f
         val left= centerX-smallSide/2
@@ -94,8 +94,10 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
 
         val awfulCount= entries.filter { it.emojiValue == EmojiValue.AWFUL }.size
         val awfulDegree=  awfulCount*unit
-
-        val divider= 3f
+        var divider= 3f
+        if (entries.size == 1){
+            divider= 0f
+        }
         var sumDegree= 0f
         if (radCount > 0){
             paint.color= ColorArray.rad

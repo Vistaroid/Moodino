@@ -16,4 +16,6 @@ interface MoreRepository {
 
     fun getTimeReminder() : String
 
+    fun getPin() : String
+
 }
