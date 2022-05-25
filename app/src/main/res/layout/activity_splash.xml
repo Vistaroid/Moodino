@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.splashScreen.SplashActivity"
+    android:background="?colorBackground">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/l_splash_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:backgroundTint="?colorPrimary"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="20dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_png"
+                    android:padding="20dp"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAppearance="?textAppearanceHeadline5"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_20mdp"
+                android:textColor="?colorText"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="15dp"
+            app:lottie_rawRes="@raw/anim_loading"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/l_splash_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/_30mdp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:backgroundTint="?colorPrimary"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="20dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_png"
+                    android:padding="15dp"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAppearance="?textAppearanceHeadline5"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_20mdp"
+                android:textColor="?colorText"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="30dp">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_splash_pinlock"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/login_with_pinlock"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_splash_fingerprint"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/login_with_fingerprint"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

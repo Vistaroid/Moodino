@@ -40,7 +40,7 @@
         <attr name="icon" format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="EmojiView">
+    <declare-styleable name="EmojiViewGroup">
         <attr name="text" format="string"/>
     </declare-styleable>
 

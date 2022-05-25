@@ -7,6 +7,8 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
+import com.iranmobiledev.moodino.R
 
 class MoodCountDayView(context: Context, attr: AttributeSet?): View(context, attr) {
 
@@ -17,30 +19,31 @@ class MoodCountDayView(context: Context, attr: AttributeSet?): View(context, att
 
     init {
         textPaint.also {
-            it.color= defaultColor
+        //    it.color= defaultColor
             it.textAlign= Paint.Align.CENTER
             it.textSize= 36f
+            it.typeface= ResourcesCompat.getFont(context, R.font.shabnam_medium)
         }
-        rectPaint.color= defaultColor
+      //  rectPaint.color= defaultColor
     }
 
 
-    fun setData(number: Int?, color: Int?){
+    fun setData(number: Int?, color: Int){
         this.text= number?: defaultText
-        textPaint.color= color?: defaultColor
-        rectPaint.color= color?: defaultColor
+        textPaint.color= color //?: defaultColor
+        rectPaint.color= color //?: defaultColor
         postInvalidate()
     }
 
-    fun refresh(){
+    fun refresh(color: Int){
         this.text= defaultText
-        textPaint.color= defaultColor
-        rectPaint.color= defaultColor
+        textPaint.color= color
+        rectPaint.color= color
         postInvalidate()
     }
 
     companion object{
-        const val defaultColor= Color.GRAY
+      //  const val defaultColor= Color.GRAY
         const val defaultText= 0
         const val rectHeight= 16
         const val rectWidth= 100

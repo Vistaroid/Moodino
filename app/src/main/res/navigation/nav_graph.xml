@@ -96,6 +96,10 @@
             android:name="initialFromBackPress"
             app:argType="boolean"
             android:defaultValue="false" />
+        <argument
+            android:name="emojiValue"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/entryDetailFragment"

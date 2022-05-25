@@ -44,4 +44,8 @@ class MoreLocalDataSource(private val sharedPreferences: SharedPreferences) : Mo
     override fun getTimeReminder(): String {
         return sharedPreferences.getString(TIME_REMINDER , "").toString()
     }
+
+    override fun getPin(): String {
+        return sharedPreferences.getString(PIN_LOCK , "").toString()
+    }
 }
