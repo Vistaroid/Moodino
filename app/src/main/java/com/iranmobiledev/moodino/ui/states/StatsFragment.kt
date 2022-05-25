@@ -17,6 +17,7 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
+import com.iranmobiledev.moodino.ui.states.customView.YearView
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -70,6 +71,17 @@ class StatsFragment : BaseFragment() {
         initDayInRowCard()
         initLineChartCard()
         initPieChartCard()
+        initYearInPixelCard()
+    }
+
+    private fun initYearInPixelCard() {
+        val view = binding.yearInPixelCard
+        var yearView = YearView(requireContext())
+        model.entries.observe(viewLifecycleOwner){
+            yearView.setEntries(it)
+            view.removeAllViews()
+            view.addView(yearView)
+        }
     }
 
     private fun initPieChartCard() {
