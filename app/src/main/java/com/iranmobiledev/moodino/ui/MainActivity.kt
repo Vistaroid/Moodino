@@ -26,10 +26,12 @@ import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
 import com.iranmobiledev.moodino.ui.entry.AddEntryFragmentDirections
 import com.iranmobiledev.moodino.ui.entry.EntriesFragmentDirections
+import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import org.greenrobot.eventbus.EventBus
+import org.koin.android.ext.android.inject
 import saman.zamani.persiandate.PersianDate
 import java.util.*
 import kotlin.collections.ArrayList
@@ -62,6 +64,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
             binding.anotherDayLinearlayout
         )
         setContentView(binding.root)
+        initRtl()
         setupUi()
         onFabClickListener()
         onFabItemsClickListener()
@@ -71,8 +74,18 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
         ).toLong()
     }
 
-    private fun onFabItemsClickListener() {
+    private fun initRtl() {
+        val viewModel : MoreViewModel by inject()
+        val currentLanguage = if (viewModel.getLanguage() == 1) "persian" else "english"
 
+        if (currentLanguage == "persian"){
+            binding.apply {
+                yesterdayButton.rotation = -180f
+            }
+        }
+    }
+
+    private fun onFabItemsClickListener() {
         binding.todayButton.setOnClickListener {
             viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
             val action = getTodayAction()

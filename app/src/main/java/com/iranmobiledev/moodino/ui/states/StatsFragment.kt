@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.ui.states
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -17,8 +18,11 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.language
+import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -66,10 +70,25 @@ class StatsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.getEntries()
+        initRtl()
         initDayInRowCard()
         initLineChartCard()
         initPieChartCard()
         initYearInPixelCard()
+    }
+
+    private fun initRtl() {
+        val viewModel : MoreViewModel by inject()
+        val currentLanguage = if (viewModel.getLanguage() == 1) "persian" else "english"
+
+        if (currentLanguage == "persian"){
+            binding.apply {
+                shareDaysRow.rotation = -90f
+                shareMoodChart.rotation = -90f
+                shareMoodCount.rotation = -90f
+                shareYearView.rotation = -90f
+            }
+        }
     }
 
     private fun initYearInPixelCard() {

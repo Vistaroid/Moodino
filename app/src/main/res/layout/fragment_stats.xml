@@ -73,7 +73,7 @@
                         app:tint="?colorIcon" />
 
                     <ImageView
-                        android:id="@+id/shareImageButton"
+                        android:id="@+id/shareDaysRow"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="12dp"
@@ -396,7 +396,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/shareImageButtonMoodChart"
+                        android:id="@+id/shareMoodChart"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginEnd="4dp"
@@ -522,7 +522,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/shareMoodCount"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_share"
@@ -653,7 +653,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:text="Year In Pixel"
+                        android:text="@string/year_in_pixel"
                         android:textAlignment="viewStart"
                         android:textColor="?colorText"
                         app:layout_constraintStart_toStartOf="parent"
