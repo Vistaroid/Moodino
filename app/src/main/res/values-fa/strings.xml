@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">مودینو</string>
+    <string name="app_name">حالینو</string>
     <string name="let_s_pick_up_where_you_left_off">یه روزمرگی جدید برای امروز اضافه کن</string>
     <string name="how_are_you">حالت چطوره؟</string>
     <string name="rad">عالی</string>
@@ -32,7 +32,7 @@
     <string name="note">یادداشت</string>
     <string name="continue_text">ادامه</string>
     <string name="save">ذخیره</string>
-    <string name="what_have_you_been_up_to">امروز چیکار کردی؟</string>
+    <string name="what_have_you_been_up_to">چه کارهایی انجام دادی؟</string>
     <string name="add_note">افزودن یادداشت</string>
     <string name="photo">عکس</string>
     <string name="tap_to_add_photo">افزودن عکس</string>
@@ -163,4 +163,11 @@
     <string name="delete_photo">عکس حذف بشه؟</string>
     <string name="change_photo">تغییر عکس</string>
     <string name="year_in_pixel">وضعیت امسال</string>
+    <string name="login_with_pinlock">ورود با پین کد</string>
+    <string name="login_with_fingerprint">ورود با اثرانگشت</string>
+    <string name="confirm_fingerPrint">تایید اثرانگشت</string>
+    <string name="fingerPrint_error">اثرانگشت مطابقت ندارد!</string>
+    <string name="daily_moods">"حالت روزانه "</string>
+    <string name="moods">حالت ها</string>
+
 </resources>

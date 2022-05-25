@@ -1,11 +1,15 @@
 package com.iranmobiledev.moodino.ui.calendar
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iranmobiledev.moodino.R
@@ -72,8 +76,13 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
 
         viewModel.fetchEntries()
 
+        // default title
+        setFilter(resources.getString(R.string.daily_moods),
+            R.drawable.ic_chart ,
+            resources.getColor(R.color.primary, context?.theme))
+
         materialDialog = MaterialAlertDialogBuilder(requireContext(),R.style.MaterialAlertDialog_rounded)
-        binding.averageMoodLayout.setOnClickListener {
+        binding.filterLayout.setOnClickListener {
             showDialog()
         }
     }
@@ -89,30 +98,63 @@ class CalendarFragment : BaseFragment(), MainToolbarItemClickListener {
         view.badMoods.setCount(entries?.filter { it.emojiValue == EmojiValue.BAD }?.size)
         view.awfulMoods.setCount(entries?.filter { it.emojiValue == EmojiValue.AWFUL }?.size)
         val dialog= materialDialog.setView(view.root).create()
+
+        val emojiFactory= EmojiFactory.create(requireContext())
         view.setClickListener { view->
             when(view.id){
                 R.id.daily_moods -> {
                     isDailyMoods= true
+                    setFilter(resources.getString(R.string.daily_moods),
+                        R.drawable.ic_chart ,
+                        resources.getColor(R.color.primary,context?.theme))
                     entries?.let { setData(it) }
                 }
                 R.id.average_moods -> {
                     isDailyMoods= false
+                    setFilter(resources.getString(R.string.average_mood),
+                        R.drawable.emoji_good,
+                        resources.getColor(R.color.good_color,context?.theme))
                     entries?.let { setData(it) }
                 }
-                R.id.rad_moods -> entries?.filter { it.emojiValue == EmojiValue.RAD }
-                    ?.let { it1 -> setData(it1) }
-                R.id.good_moods ->entries?.filter { it.emojiValue == EmojiValue.GOOD }
-                    ?.let { it1 -> setData(it1) }
-                R.id.meh_moods ->entries?.filter { it.emojiValue == EmojiValue.MEH }
-                    ?.let { it1 -> setData(it1) }
-                R.id.bad_moods ->entries?.filter { it.emojiValue == EmojiValue.BAD }
-                    ?.let { it1 -> setData(it1) }
-                R.id.awful_moods ->entries?.filter { it.emojiValue == EmojiValue.AWFUL }
-                    ?.let { it1 -> setData(it1) }
+                R.id.rad_moods ->{
+                    val emoji= emojiFactory.getEmoji(EmojiValue.RAD)
+                    setFilter(emoji.title, emoji.image, emoji.color)
+                    entries?.filter { it.emojiValue == EmojiValue.RAD }
+                        ?.let { it1 -> setData(it1) }
+                }
+                R.id.good_moods -> {
+                    val emoji= emojiFactory.getEmoji(EmojiValue.GOOD)
+                    setFilter(emoji.title, emoji.image, emoji.color)
+                    entries?.filter { it.emojiValue == EmojiValue.GOOD }
+                        ?.let { it1 -> setData(it1) }
+                }
+                R.id.meh_moods -> {
+                    val emoji= emojiFactory.getEmoji(EmojiValue.MEH)
+                    setFilter(emoji.title, emoji.image, emoji.color)
+                    entries?.filter { it.emojiValue == EmojiValue.MEH }
+                        ?.let { it1 -> setData(it1) }
+                }
+                R.id.bad_moods -> {
+                    val emoji= emojiFactory.getEmoji(EmojiValue.BAD)
+                    setFilter(emoji.title, emoji.image, emoji.color)
+                    entries?.filter { it.emojiValue == EmojiValue.BAD }
+                        ?.let { it1 -> setData(it1) }
+                }
+                R.id.awful_moods -> {
+                    val emoji= emojiFactory.getEmoji(EmojiValue.AWFUL)
+                    setFilter(emoji.title, emoji.image, emoji.color)
+                    entries?.filter { it.emojiValue == EmojiValue.AWFUL }
+                        ?.let { it1 -> setData(it1) }
+                }
             }
             dialog.dismiss()
         }
         dialog.show()
+    }
+    private fun setFilter(title: String, icon: Int, iconColor: Int){
+        binding.filterTitle.text= title
+        binding.filterIcon.setImageResource(icon)
+        binding.filterIcon.imageTintList= ColorStateList.valueOf(iconColor)
     }
 
     private fun bringDate(

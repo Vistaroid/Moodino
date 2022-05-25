@@ -4,15 +4,11 @@ package com.iranmobiledev.moodino.ui.entry
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
@@ -22,7 +18,6 @@ import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.*
@@ -111,11 +106,15 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.emojisView.setEmptyStateOnClickListener(this)
+        binding.emojisView.setEmojiClickListener(this)
         val newEntry = EntriesFragmentArgs.fromBundle(requireArguments()).newEntry
         newEntry?.let {
             scroll(it.date)
         }
+
+        val entryDate= EntryDate(1399,7,7)
+        binding.mainToolbar.goToMonth(entryDate)
+
     }
 
     private fun setupClicks() {
