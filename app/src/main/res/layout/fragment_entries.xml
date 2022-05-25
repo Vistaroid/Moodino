@@ -22,34 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8mdp"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/_24mdp"
+            android:paddingBottom="@dimen/_480mdp"
             android:layout_gravity="center_horizontal"/>
-
-        <LinearLayout
-            android:id="@+id/bottomTextContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:id="@+id/bottomText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_12mdp"
-                android:text="@string/its_time_to_play_memories"
-                android:textAlignment="center" />
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="@dimen/_30mdp"
-                android:layout_height="@dimen/_30mdp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_2mdp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/star_emoji" />
-        </LinearLayout>
     </LinearLayout>
 
 

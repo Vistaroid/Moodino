@@ -20,6 +20,7 @@ import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.RecyclerViewData
 import com.iranmobiledev.moodino.databinding.AddEntryCardViewBinding
+import com.iranmobiledev.moodino.databinding.BottomRvTextBinding
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
 import com.iranmobiledev.moodino.databinding.ItemEntryContainerBinding
 import com.iranmobiledev.moodino.listener.AddEntryCardViewListener
@@ -30,6 +31,7 @@ import saman.zamani.persiandate.PersianDateFormat
 
 const val ENTRY_DEFAULT = 0
 const val ENTRY_CARD = 1
+const val BOTTOM_TEXT = 2
 
 class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
     private lateinit var context: Context
@@ -40,28 +42,35 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     var specifyDay = -1
     private val emptyStateVisibility = MutableLiveData<Boolean>()
     var copyData = mutableListOf<RecyclerViewData>()
-    private var viewType = ENTRY_DEFAULT
+    var hasTodayEntry = true
 
     inner class ViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
         private var itemEntryContainerBinding: ItemEntryContainerBinding? = null
-
+        private var itemBottomRvTextBinding: BottomRvTextBinding? = null
         init {
             if (viewType == ENTRY_DEFAULT)
                 itemEntryContainerBinding = ItemEntryContainerBinding.bind(itemView)
+            if(viewType == BOTTOM_TEXT)
+                itemBottomRvTextBinding = BottomRvTextBinding.bind(itemView)
         }
 
         @SuppressLint("SetTextI18n")
-        fun bind(data: RecyclerViewData) {
-            if (viewType == ENTRY_DEFAULT) {
+        fun bind(mData: RecyclerViewData) {
+            if (mData.viewType == ENTRY_DEFAULT) {
                 itemEntryContainerBinding?.let {
-                    if (data.entries.isNotEmpty()) {
-                        setupUi(data)
-                        setupNestedAdapter(data)
+                    if (mData.entries.isNotEmpty()) {
+                        setupUi(mData)
+                        setupNestedAdapter(mData)
                     }
-                    if (data.entries.size == 1)
+                    if (mData.entries.size == 1)
                         it.entriesLable.visibility = View.GONE
                     else
                         it.entriesLable.visibility = View.VISIBLE
+                }
+            }
+            if(mData.viewType == BOTTOM_TEXT){
+                itemBottomRvTextBinding?.let {
+                        it.bottomText.text = context.getString(R.string.its_time_to_play_memories)
                 }
             }
             itemView.setOnClickListener {
@@ -184,11 +193,12 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setData(data: List<RecyclerViewData>) {
+
+    fun setData(data: MutableList<RecyclerViewData>) {
         val sortedByDay = data.sortedByDescending { it.date.day }
         val sortedByMonth = sortedByDay.sortedByDescending { it.date.month }
         val sortedByYear = sortedByMonth.sortedByDescending { it.date.year }
+
         val diffUtil = MyDiffUtil(this.data, sortedByYear)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         this.data = sortedByYear
@@ -201,6 +211,7 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         val view = when (viewType) {
             ENTRY_DEFAULT -> R.layout.item_entry_container
             ENTRY_CARD -> R.layout.add_entry_card_view
+            BOTTOM_TEXT -> R.layout.bottom_rv_text
             else -> R.layout.item_entry_container
         }
         return ViewHolder(
@@ -215,14 +226,12 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     }
 
     override fun getItemViewType(position: Int): Int {
-        val persianDate = PersianDate()
-        val entryDate = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
-        val today = data.find { it.date == entryDate }
-        if (today == null && position == 0){
-            viewType = ENTRY_CARD
+        if(data[position].viewType == ENTRY_CARD){
+            hasTodayEntry = false
             return ENTRY_CARD
         }
-        viewType = ENTRY_DEFAULT
+        if(position == data.lastIndex)
+            return BOTTOM_TEXT
         return ENTRY_DEFAULT
     }
 
@@ -248,8 +257,9 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
     @SuppressLint("NotifyDataSetChanged")
     fun bindSpecificDay(day: Int) {
         data = data.filter {
-            it.entries[0].date.day == day
+           it.viewType == ENTRY_DEFAULT
         } as MutableList<RecyclerViewData>
+        data = data.filter { it.entries[0].date.day == day }
         emptyStateVisibility.value = data.isEmpty()
         notifyDataSetChanged()
     }
