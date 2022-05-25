@@ -165,4 +165,5 @@
     <string name="daily_moods">daily moods</string>
     <string name="moods">Moods</string>
     <string name="content_description">content description</string>
+    <string name="year_in_pixel">Year In Pixel</string>
 </resources>

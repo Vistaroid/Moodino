@@ -162,4 +162,5 @@
     <string name="off">غیرفعال</string>
     <string name="delete_photo">عکس حذف بشه؟</string>
     <string name="change_photo">تغییر عکس</string>
+    <string name="year_in_pixel">وضعیت امسال</string>
 </resources>

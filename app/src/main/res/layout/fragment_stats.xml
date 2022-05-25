@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootView_states"
@@ -7,10 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.states.StatsFragment">
 
+
+    <com.iranmobiledev.moodino.ui.calendar.toolbar.MainToolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/scrollView_states"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:id="@+id/scrollView_states"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -46,7 +58,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/moreImageButtonMoodChart"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -57,9 +69,9 @@
                         app:layout_constraintStart_toEndOf="@+id/daysInRowHeader"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.514"
-                        app:tint="?colorIcon"/>
+                        app:tint="?colorIcon" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/shareImageButton"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -376,13 +388,13 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         android:text="@string/mood_chart"
-                        android:textColor="?colorText"
                         android:textAlignment="viewStart"
+                        android:textColor="?colorText"
                         app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/shareImageButtonMoodChart"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -621,7 +633,7 @@
                 android:id="@+id/year_in_pixel_card"
                 style="@style/CardViewStyle"
                 android:layout_width="match_parent"
-                android:layout_height="800dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:outlineAmbientShadowColor="@color/shadow"
                 android:outlineSpotShadowColor="@color/shadow"
@@ -630,132 +642,80 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/moodCountPieChartCard">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/yearInPixelHeader"
+                        style="@style/cardHeaderTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Year In Pixel"
+                        android:textAlignment="viewStart"
+                        android:textColor="?colorText"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/moreView"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_more_outlined"
+                        app:layout_constraintBottom_toBottomOf="@+id/yearInPixelHeader"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/yearInPixelHeader"
+                        app:tint="?colorIcon" />
+
+
+                    <ImageView
+                        android:id="@+id/shareYearView"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:src="@drawable/ic_share"
+                        app:layout_constraintBottom_toBottomOf="@+id/moreView"
+                        app:layout_constraintEnd_toStartOf="@+id/moreView"
+                        app:layout_constraintTop_toTopOf="@+id/moreView"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:tint="?colorIcon" />
+
+                    <com.iranmobiledev.moodino.ui.states.customView.YearView
+                        android:id="@+id/yearView"
+                        android:layout_width="match_parent"
+                        android:layout_height="470dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/yearInPixelHeader" />
+
+                    <View
+                        android:id="@+id/yearViewDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/yearView" />
+
+                    <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
+                        android:id="@+id/moodCountView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/yearViewDivider" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
-
-
-            <Space
-                android:id="@+id/spacer"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/moodCountPieChartCard" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/moodChartCard"-->
-    <!--        app:cardElevation="4dp"-->
-    <!--        android:outlineSpotShadowColor="@color/shadow"-->
-    <!--        android:outlineAmbientShadowColor="@color/shadow">-->
-
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--            android:id="@+id/achievementsConstraintLayout"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/achievementHeader"-->
-    <!--                style="@style/cardHeaderTextStyle"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:paddingBottom="10dp"-->
-    <!--                android:text="@string/achievements"-->
-    <!--                android:textAlignment="viewStart"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--            <ImageButton-->
-    <!--                android:id="@+id/moreImageButtonAchievement"-->
-    <!--                android:layout_width="24dp"-->
-    <!--                android:layout_height="24dp"-->
-    <!--                android:background="@color/white"-->
-    <!--                android:src="@drawable/ic_share"-->
-    <!--                app:layout_constraintBottom_toBottomOf="@+id/achievementHeader"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="@+id/achievementHeader"-->
-    <!--                app:layout_constraintVertical_bias="0.0" />-->
-
-    <!--            <com.iranmobiledev.moodino.ui.states.customView.CustomViewAchievement-->
-    <!--                android:id="@+id/customViewAchievement"-->
-    <!--                android:layout_width="100dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                app:FirstStarTint="@color/primary"-->
-    <!--                app:Icon="@drawable/ic_book"-->
-    <!--                app:Name="@string/first_note"-->
-    <!--                app:SecondStarTint="@color/gray"-->
-    <!--                app:ThirdStarTint="@color/gray"-->
-    <!--                app:layout_constraintEnd_toStartOf="@+id/customViewAchievement2"-->
-    <!--                app:layout_constraintHorizontal_bias="0.5"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toBottomOf="@+id/achievementHeader" />-->
-
-    <!--            <com.iranmobiledev.moodino.ui.states.customView.CustomViewAchievement-->
-    <!--                android:id="@+id/customViewAchievement2"-->
-    <!--                android:layout_width="100dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                app:FirstStarTint="@color/primary"-->
-    <!--                app:Icon="@drawable/ic_camera_for_achievements"-->
-    <!--                app:Name="@string/first_entry_acheivement"-->
-    <!--                app:SecondStarTint="@color/gray"-->
-    <!--                app:ThirdStarTint="@color/gray"-->
-    <!--                app:layout_constraintEnd_toStartOf="@+id/customViewAchievement3"-->
-    <!--                app:layout_constraintHorizontal_bias="0.5"-->
-    <!--                app:layout_constraintStart_toEndOf="@+id/customViewAchievement"-->
-    <!--                app:layout_constraintTop_toBottomOf="@+id/achievementHeader" />-->
-
-    <!--            <com.iranmobiledev.moodino.ui.states.customView.CustomViewAchievement-->
-    <!--                android:id="@+id/customViewAchievement3"-->
-    <!--                android:layout_width="100dp"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                app:FirstStarTint="@color/primary"-->
-    <!--                app:Icon="@drawable/ic_library"-->
-    <!--                app:Name="@string/a_week_with_us"-->
-    <!--                app:SecondStarTint="@color/gray"-->
-    <!--                app:ThirdStarTint="@color/gray"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintHorizontal_bias="0.5"-->
-    <!--                app:layout_constraintStart_toEndOf="@+id/customViewAchievement2"-->
-    <!--                app:layout_constraintTop_toBottomOf="@+id/achievementHeader" />-->
-
-
-    <!--            <View-->
-    <!--                android:id="@+id/dividerAchievement"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="1dp"-->
-    <!--                android:layout_marginTop="10dp"-->
-    <!--                android:background="@color/gray"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toBottomOf="@id/customViewAchievement"-->
-    <!--                tools:layout_editor_absoluteX="1dp" />-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/totalAchievementsTextView"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="24dp"-->
-    <!--                android:layout_marginTop="16dp"-->
-    <!--                android:text="3-20"-->
-    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toBottomOf="@id/dividerAchievement" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_marginRight="4dp"-->
-    <!--                android:backgroundTint="@color/white"-->
-    <!--                android:text="@string/show_all"-->
-    <!--                android:textColor="@color/primary"-->
-    <!--                android:textSize="12sp"-->
-    <!--                app:layout_constraintBottom_toBottomOf="@+id/totalAchievementsTextView"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="@+id/totalAchievementsTextView" />-->
-    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-    <!--    </androidx.cardview.widget.CardView>-->
-</FrameLayout>
+    <androidx.legacy.widget.Space
+        android:id="@+id/spacer"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView_states" />
+</androidx.constraintlayout.widget.ConstraintLayout>
