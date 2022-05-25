@@ -176,8 +176,10 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/activity_group_view.xml" value="0.5" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/activity_pin_lock.xml" value="0.22" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/add_entry_card_view.xml" value="0.27291666666666664" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/add_entry_fragment.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/another_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/bottom_rv_text.xml" value="0.27291666666666664" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/dialog_change_language.xml" value="0.25181159420289856" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/dialog_view.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/emoji_item.xml" value="0.2513586956521739" />
@@ -189,7 +191,7 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/en.xml" value="0.27291666666666664" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/entry_detail_fragment.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_calendar.xml" value="0.13272543059777103" />
-        <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.33" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_entries.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_more.xml" value="0.13272543059777103" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/fragment_stats.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/item_activity.xml" value="0.33" />

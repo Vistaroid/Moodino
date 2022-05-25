@@ -9,27 +9,37 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.*
 import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
+import com.iranmobiledev.moodino.listener.AddEntryCardViewListener
 import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
+import com.iranmobiledev.moodino.ui.entry.adapter.BOTTOM_TEXT
+import com.iranmobiledev.moodino.ui.entry.adapter.ENTRY_CARD
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.*
 import io.github.persiancalendar.calendar.AbstractDate
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
+
 class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
+    AddEntryCardViewListener,
     KoinComponent, EmojiClickListener {
 
     private lateinit var binding: FragmentEntriesBinding
@@ -38,7 +48,10 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private val adapter: EntryContainerAdapter by inject()
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
     private val sharePref: SharedPreferences by inject()
+    private val args: EntriesFragmentArgs by navArgs()
     private val persianDate = PersianDate()
+    private lateinit var layoutManager: LinearLayoutManager
+    private var userScroll = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -53,7 +66,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         binding = FragmentEntriesBinding.inflate(inflater, container, false)
         setupUi()
         setupObserver()
-        setupClicks()
         return binding.root
     }
 
@@ -63,45 +75,58 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         adapter.create(
             requireContext().applicationContext, this,
             mutableListOf(),
+            this,
             sharePref.getInt(LANGUAGE, 1)
         )
         binding.mainToolbar.initialize(this)
-        binding.addEntryCardView.visibility = View.GONE
         recyclerView = binding.entriesContainerRv
         recyclerView.itemAnimator = null
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
     }
 
     private fun setupObserver() {
-        viewModel.getEntries().observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) binding.bottomTextContainer.visibility = View.VISIBLE
-            if (it.size == 1) binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
-            else binding.bottomText.setText(R.string.its_time_to_play_memories)
-
-            if (it.isEmpty() && emptyStateEnum == EmptyStateEnum.INVISIBLE) binding.emptyStateContainer.visibility =
-                View.VISIBLE
-            else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE) binding.emptyStateContainer.visibility =
-                View.GONE
-
-            addEntryCardViewVisibilityCheck(it)
-
-            adapter.setData(it)
-        }
-    }
-
-    private fun addEntryCardViewVisibilityCheck(entries: List<RecyclerViewData>) {
+        val persianDate = PersianDate()
         val today = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
-        var found = false
-        entries.forEach {
-            if (it.entries[0].date == today) {
-                found = true
-                binding.addEntryCardView.visibility = View.GONE
+        viewModel.getEntries().observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+//                binding.bottomTextContainer.visibility = View.VISIBLE
+//                if (it.size == 1) binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
+//                else binding.bottomText.setText(R.string.its_time_to_play_memories)
+                val data = it as MutableList<RecyclerViewData>
+                val date = data.find { it.date == today }
+                val bottomText = data.find { it.date == EntryDate(0,0,0) }
+                if (date == null) {
+                    val cardItem = RecyclerViewData(
+                        entries = listOf(),
+                        adapter = null,
+                        id = "card",
+                        date = EntryDate(5000, 13, 32),
+                        viewType = ENTRY_CARD
+
+                    )
+                    if (!data.contains(cardItem))
+                        data.add(0, cardItem)
+                }
+                if(bottomText == null){
+                    val bottomTextData = RecyclerViewData(
+                        entries = mutableListOf(),
+                        date = EntryDate(0, 0, 0),
+                        viewType = BOTTOM_TEXT
+                    )
+                    data.add(bottomTextData)
+                }
+
+                adapter.setData(data)
+
+            } else {
+                if (emptyStateEnum == EmptyStateEnum.INVISIBLE) binding.emptyStateContainer.visibility =
+                    View.VISIBLE
+                else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE) binding.emptyStateContainer.visibility =
+                    View.GONE
             }
         }
-        if (!found)
-            binding.addEntryCardView.visibility = View.VISIBLE
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -110,26 +135,52 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         val newEntry = EntriesFragmentArgs.fromBundle(requireArguments()).newEntry
         newEntry?.let {
             scroll(it.date)
+            requireArguments().clear()
         }
 
-        val entryDate= EntryDate(1399,7,7)
-        binding.mainToolbar.goToMonth(entryDate)
+        var scrollUpPosition = -1
+        var scrollDownPosition = -1
+        var state = -1
+        binding.entriesContainerRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-    }
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                state = newState
+                userScroll = state != RecyclerView.SCROLL_STATE_IDLE
+            }
 
-    private fun setupClicks() {
-        val persianDate = PersianDate()
-        val date = EntryDate(
-            persianDate.shYear,
-            persianDate.shMonth,
-            persianDate.shDay
-        )
-        val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
-        val action = EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment(
-            date = date,
-            time = time
-        )
-        binding.addEntryCardView.setOnClickListener { findNavController().navigate(action) }
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                lifecycleScope.launch {
+                    withContext(Dispatchers.IO) {
+                        if (dy > 0) {
+                            if (state == RecyclerView.SCROLL_STATE_DRAGGING || state == RecyclerView.SCROLL_STATE_SETTLING) {
+                                val position = layoutManager.findFirstVisibleItemPosition()
+                                if (position != -1) {
+                                    if (position != scrollUpPosition) {
+                                        val date = adapter.findDataWithPosition(position)
+                                        if (date.day <= 31)
+                                            binding.mainToolbar.goToMonth(date)
+                                        scrollUpPosition = position
+                                    }
+                                }
+                            }
+                        }
+                        if (dy < 0) {
+                            if (state == RecyclerView.SCROLL_STATE_DRAGGING || state == RecyclerView.SCROLL_STATE_SETTLING) {
+                                val position = layoutManager.findFirstVisibleItemPosition()
+                                if (position != -1) {
+                                    if (position != scrollDownPosition) {
+                                        val date = adapter.findDataWithPosition(position)
+                                        if (date.day <= 31)
+                                            binding.mainToolbar.goToMonth(date)
+                                        scrollDownPosition = position
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
     private fun navigateToEntryDetail(entry: Entry) {
@@ -162,34 +213,38 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun changeCurrentMonth(date: AbstractDate) {
-        scroll(date)
+        if (!userScroll)
+            scroll(date)
     }
 
     private fun scroll(date: AbstractDate) {
+        val smoothScroller = object : LinearSmoothScroller(requireContext()) {
+            override fun getVerticalSnapPreference(): Int {
+                return SNAP_TO_START
+            }
+        }
         val mDate = EntryDate(date.year, date.month, date.dayOfMonth)
+
         val position = adapter.positionOf(mDate, false)
         if (position != -1) {
-            val y: Float = if (binding.addEntryCardView.visibility == View.VISIBLE)
-                binding.entriesContainerRv.getChildAt(position).y+200
-            else
-                binding.entriesContainerRv.getChildAt(position).y
-            binding.nestedScrollView.post {
-                binding.nestedScrollView.fling(0)
-                binding.nestedScrollView.smoothScrollTo(0, y.toInt())
-            }
+            smoothScroller.targetPosition = position
+            layoutManager.startSmoothScroll(smoothScroller)
         }
     }
 
     private fun scroll(date: EntryDate) {
+        val smoothScroller = object : LinearSmoothScroller(requireContext()) {
+            override fun getVerticalSnapPreference(): Int {
+                return SNAP_TO_START
+            }
+        }
         lifecycleScope.launchWhenResumed {
-            delay(500)
+            binding.mainToolbar.goToMonth(date)
+            delay(1000)
             val position = adapter.positionOf(date, true)
             if (position != -1) {
-                val y = binding.entriesContainerRv.getChildAt(position).y
-                binding.nestedScrollView.post {
-                    binding.nestedScrollView.fling(0)
-                    binding.nestedScrollView.smoothScrollTo(0, y.toInt())
-                }
+                smoothScroller.targetPosition = position
+                layoutManager.startSmoothScroll(smoothScroller)
             }
         }
     }
@@ -216,6 +271,21 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         )
         entry.emojiValue = emojiValue
         navigateToEntryDetail(entry)
+    }
+
+    override fun onAddEntryCardClicked() {
+        val persianDate = PersianDate()
+        val date = EntryDate(
+            persianDate.shYear,
+            persianDate.shMonth,
+            persianDate.shDay
+        )
+        val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
+        val action = EntriesFragmentDirections.actionEntriesFragmentToAddEntryFragment(
+            date = date,
+            time = time
+        )
+        findNavController().navigate(action)
     }
 
 }
