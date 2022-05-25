@@ -42,7 +42,6 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     private val TAG = "mainActivity"
 
     lateinit var binding: ActivityMainBinding
-    val persianDate = PersianDate()
     private lateinit var navController: NavController
     private lateinit var fabItems: ArrayList<LinearLayout>
     private val viewModel: MainActivityViewModel by viewModels()
@@ -104,10 +103,12 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     }
 
     private fun setupDatePickerDialog() {
+        val persianDate = PersianDate()
         getPersianDialog(this, this, persianDate).show()
     }
 
     private fun getYesterdayAction(): NavDirections {
+        val persianDate = PersianDate()
         val yesterday = persianDate.addDay(-1)
         val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
         val date = EntryDate(yesterday.shYear, yesterday.shMonth, yesterday.shDay)
@@ -115,6 +116,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     }
 
     private fun getTodayAction(): NavDirections {
+        val persianDate = PersianDate()
         val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
         val date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         return  NavGraphDirections.actionGlobalMain(date, time)
@@ -229,6 +231,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     }
 
     override fun onDateSelected(persianPickerDate: PersianPickerDate) {
+        val persianDate = PersianDate()
         val action = NavGraphDirections.actionGlobalMain(
             EntryDate(
                 persianPickerDate.persianYear,
