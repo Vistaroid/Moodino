@@ -26,6 +26,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:id="@+id/constraint"
             android:layout_height="wrap_content">
 
             <com.google.android.material.card.MaterialCardView
@@ -682,6 +683,7 @@
                         app:tint="?colorIcon" />
 
                     <com.iranmobiledev.moodino.ui.states.customView.YearView
+
                         android:id="@+id/yearView"
                         android:layout_width="match_parent"
                         android:layout_height="470dp"
@@ -705,17 +707,17 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/yearViewDivider" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </androidx.cardview.widget.CardView>
+
+
+            <androidx.legacy.widget.Space
+                android:id="@+id/spacer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/year_in_pixel_card" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-    <androidx.legacy.widget.Space
-        android:id="@+id/spacer"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scrollView_states" />
 </androidx.constraintlayout.widget.ConstraintLayout>
