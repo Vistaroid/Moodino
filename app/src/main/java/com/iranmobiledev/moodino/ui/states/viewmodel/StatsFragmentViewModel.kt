@@ -58,6 +58,9 @@ class StatsFragmentViewModel(
     fun getEntries() {
         viewModelScope.launch {
             entryRepository.getAll().collectLatest { entries ->
+                entries.forEach {
+                    Log.d(TAG, "getEntries123: ${it.date}")
+                }
                 _entries.postValue(entries)
             }
         }
@@ -99,9 +102,6 @@ class StatsFragmentViewModel(
 
 
         for (date in reversedDates) {
-
-            Log.d(TAG, "getLongestChainFromDates: $date")
-
             val nextDateAsLocalDate = PersianDate().newDate(date).addDay(-1)
             if (date != reversedDates.last()) {
                 val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
@@ -177,9 +177,6 @@ class StatsFragmentViewModel(
         }
 
         optimizeEntries(entriesLineChart, optimizedLineChartEntries)
-        optimizedLineChartEntries.forEach {
-            Log.d(TAG, "getEntriesForLineChart: $it")
-        }
         _lineChartEntries.postValue(optimizedLineChartEntries)
         _lineChartDates.postValue(entriesDaysNumber.toList())
     }
@@ -214,16 +211,6 @@ class StatsFragmentViewModel(
 
     private fun getYFromEntry(entry: com.iranmobiledev.moodino.data.Entry): Float {
         return entry.emojiValue.toFloat()
-//        return when (entry.title) {
-//            R.string.rad -> 5f
-//            R.string.good -> 4f
-//            R.string.meh -> 3f
-//            R.string.bad -> 2f
-//            R.string.awful -> 1f
-//            else -> {
-//                3f
-//            }
-//        }
     }
 
     @SuppressLint("NewApi")
@@ -273,29 +260,4 @@ class StatsFragmentViewModel(
     fun initPieChart(pieChart: PieChart) {
 
     }
-
-    val datesMock = listOf<EntryDate>(
-        EntryDate(1401, 2, 2),
-        EntryDate(1401, 2, 3),
-        EntryDate(1401, 2, 4),
-        EntryDate(1401, 2, 5),
-        EntryDate(1401, 2, 8),
-        EntryDate(1401, 2, 9),
-        EntryDate(1401, 2, 10),
-        EntryDate(1401, 2, 11),
-        EntryDate(1401, 2, 12),
-        EntryDate(1401, 2, 13),
-        EntryDate(1401, 2, 18),
-        EntryDate(1401, 2, 19),
-        EntryDate(1401, 2, 20),
-        EntryDate(1401, 2, 21),
-        EntryDate(1401, 2, 22),
-        EntryDate(1401, 2, 23),
-        EntryDate(1401, 2, 24),
-        EntryDate(1401, 2, 25),
-        EntryDate(1401, 2, 26),
-        EntryDate(1401, 2, 27),
-        EntryDate(1401, 2, 28),
-    )
-
 }
