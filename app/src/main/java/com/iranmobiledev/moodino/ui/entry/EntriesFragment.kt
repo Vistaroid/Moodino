@@ -128,6 +128,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.emojisView.setEmojiClickListener(this)
+        getEmojiFromNotification()
         val newEntry = EntriesFragmentArgs.fromBundle(requireArguments()).newEntry
         newEntry?.let {
             newEntryScroll = true
@@ -135,18 +136,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             requireArguments().clear()
         }
 
-        if (EmojiNotification.emoji != null){
-            val entry = Entry()
-            entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
-            entry.time = EntryTime(
-                PersianDateFormat.format(persianDate, "H"),
-                PersianDateFormat.format(persianDate, "i")
-            )
-            entry.emojiValue = EmojiNotification.emoji!!
-            navigateToEntryDetail(entry)
-            EmojiNotification.emoji = null
-        }
-        
         var scrollUpPosition = -1
         var scrollDownPosition = -1
         var state = -1
@@ -198,6 +187,21 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                 }
             }
         })
+    }
+
+    private fun getEmojiFromNotification() {
+        val persianDate = PersianDate()
+        if (EmojiNotification.emoji != null){
+            val entry = Entry()
+            entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
+            entry.time = EntryTime(
+                PersianDateFormat.format(persianDate, "H"),
+                PersianDateFormat.format(persianDate, "i")
+            )
+            entry.emojiValue = EmojiNotification.emoji!!
+            navigateToEntryDetail(entry)
+            EmojiNotification.emoji = null
+        }
     }
 
     private fun navigateToEntryDetail(entry: Entry) {
