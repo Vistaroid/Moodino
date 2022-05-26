@@ -18,6 +18,7 @@ import com.iranmobiledev.moodino.databinding.FragmentEntriesBinding
 import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
+import com.iranmobiledev.moodino.service.EmojiNotification
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.EntryContainerAdapter
 import com.iranmobiledev.moodino.utlis.*
@@ -114,17 +115,16 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         val entryDate= EntryDate(1399,7,7)
         binding.mainToolbar.goToMonth(entryDate)
 
-        if (requireActivity().intent.extras != null){
-            val emoji = requireActivity().intent.extras?.getInt("emoji" , 0)
+        if (EmojiNotification.emoji != null){
             val entry = Entry()
             entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
             entry.time = EntryTime(
                 PersianDateFormat.format(persianDate, "H"),
                 PersianDateFormat.format(persianDate, "i")
             )
-            entry.emojiValue = emoji!!
+            entry.emojiValue = EmojiNotification.emoji!!
             navigateToEntryDetail(entry)
-            requireActivity().intent = null
+            EmojiNotification.emoji = null
         }
     }
 

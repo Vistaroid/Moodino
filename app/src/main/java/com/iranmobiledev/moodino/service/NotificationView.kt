@@ -30,6 +30,9 @@ import com.iranmobiledev.moodino.utlis.MyContextWrapper
 import com.iranmobiledev.moodino.utlis.PERSIAN
 import java.util.*
 
+object EmojiNotification{
+    var emoji : Int ?= null
+}
 
 class NotificationView : Activity() {
 
@@ -94,8 +97,8 @@ class NotificationView : Activity() {
     }
 
     fun clickEmoji(emoji : Int){
+        EmojiNotification.emoji = emoji
         val i = Intent(this , MainActivity::class.java)
-        i.putExtra("emoji" , emoji)
         startActivity(i)
         finish()
     }
@@ -111,7 +114,6 @@ class NotificationView : Activity() {
     }
 
     fun notification(context : Context){
-
 
         val intent = Intent(context , MainActivity::class.java)
         val content = PendingIntent.getActivity(context , 1 , intent , PendingIntent.FLAG_MUTABLE)
