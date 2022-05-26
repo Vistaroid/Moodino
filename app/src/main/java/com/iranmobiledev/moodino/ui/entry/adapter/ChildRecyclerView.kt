@@ -107,16 +107,12 @@ class ChildRecyclerView(
             else if (entry.date == yesterday(persianDate))
                 entryDate.text = yesterdayStringDate()
             else {
-                val thisYear = persianDate.shYear
                 entry.date.let {
                     persianDate.shDay = it.day
                     persianDate.shMonth = it.month
                     persianDate.shYear = it.year
                 }
-                if (thisYear != entry.date.year)
-                    entryDate.text = otherDayString(persianDate, "j F Y")
-                else
-                    entryDate.text = otherDayString(persianDate)
+                entryDate.text = otherDayString(persianDate)
             }
         }
 

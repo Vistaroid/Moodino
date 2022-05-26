@@ -26,10 +26,12 @@ import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
 import com.iranmobiledev.moodino.ui.entry.AddEntryFragmentDirections
 import com.iranmobiledev.moodino.ui.entry.EntriesFragmentDirections
+import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import org.greenrobot.eventbus.EventBus
+import org.koin.android.ext.android.inject
 import saman.zamani.persiandate.PersianDate
 import java.util.*
 import kotlin.collections.ArrayList
@@ -40,7 +42,6 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     private val TAG = "mainActivity"
 
     lateinit var binding: ActivityMainBinding
-    val persianDate = PersianDate()
     private lateinit var navController: NavController
     private lateinit var fabItems: ArrayList<LinearLayout>
     private val viewModel: MainActivityViewModel by viewModels()
@@ -62,6 +63,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
             binding.anotherDayLinearlayout
         )
         setContentView(binding.root)
+        initRtl()
         setupUi()
         onFabClickListener()
         onFabItemsClickListener()
@@ -71,8 +73,18 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
         ).toLong()
     }
 
-    private fun onFabItemsClickListener() {
+    private fun initRtl() {
+        val viewModel : MoreViewModel by inject()
+        val currentLanguage = if (viewModel.getLanguage() == 1) "persian" else "english"
 
+        if (currentLanguage == "persian"){
+            binding.apply {
+                yesterdayButton.rotation = -180f
+            }
+        }
+    }
+
+    private fun onFabItemsClickListener() {
         binding.todayButton.setOnClickListener {
             viewModel.actionMenu(fabItems, binding.fabMenu, binding.dimLayout, animationDuration)
             val action = getTodayAction()
@@ -91,10 +103,12 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     }
 
     private fun setupDatePickerDialog() {
+        val persianDate = PersianDate()
         getPersianDialog(this, this, persianDate).show()
     }
 
     private fun getYesterdayAction(): NavDirections {
+        val persianDate = PersianDate()
         val yesterday = persianDate.addDay(-1)
         val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
         val date = EntryDate(yesterday.shYear, yesterday.shMonth, yesterday.shDay)
@@ -102,6 +116,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     }
 
     private fun getTodayAction(): NavDirections {
+        val persianDate = PersianDate()
         val time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
         val date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         return  NavGraphDirections.actionGlobalMain(date, time)
@@ -216,6 +231,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     }
 
     override fun onDateSelected(persianPickerDate: PersianPickerDate) {
+        val persianDate = PersianDate()
         val action = NavGraphDirections.actionGlobalMain(
             EntryDate(
                 persianPickerDate.persianYear,

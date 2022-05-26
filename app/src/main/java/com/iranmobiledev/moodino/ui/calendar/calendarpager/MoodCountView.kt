@@ -35,10 +35,10 @@ class MoodCountView(context: Context, attr: AttributeSet): LinearLayoutCompat(co
     }
 
     private fun refresh(){
-        binding.rad.refresh()
-        binding.good.refresh()
-        binding.meh.refresh()
-        binding.bad.refresh()
-        binding.awful.refresh()
+        binding.rad.refresh(ColorArray.rad)
+        binding.good.refresh(ColorArray.good)
+        binding.meh.refresh(ColorArray.meh)
+        binding.bad.refresh(ColorArray.bad)
+        binding.awful.refresh(ColorArray.awful)
     }
 }
