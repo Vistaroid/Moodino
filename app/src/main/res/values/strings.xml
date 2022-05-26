@@ -164,9 +164,10 @@
     <string name="change_photo">Change photo</string>
     <string name="daily_moods">daily moods</string>
     <string name="moods">Moods</string>
-    <string name="content_description" translatable="false">content description</string>
+    <string name="year_in_pixel">Year In Pixel</string>
+   <string name="content_description" translatable="false">content description</string>
     <string name="login_with_pinlock">Login PIN Lock</string>
     <string name="login_with_fingerprint">Login Finger Print</string>
     <string name="confirm_fingerPrint">Confirm Finger Print</string>
     <string name="fingerPrint_error">Finger print not match</string>
-</resources>
+/resources>
