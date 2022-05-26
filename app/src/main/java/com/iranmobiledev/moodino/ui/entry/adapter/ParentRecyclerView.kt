@@ -279,6 +279,11 @@ class EntryContainerAdapter : RecyclerView.Adapter<EntryContainerAdapter.ViewHol
         return -1
     }
 
+    fun entryPositionOf(entry: Entry): Int{
+        val data = copyData.find { it.date == entry.date }
+        return data?.entries?.indexOf(entry)!!
+    }
+
     fun findDataWithPosition(position: Int): EntryDate {
         return data[position].date
     }
