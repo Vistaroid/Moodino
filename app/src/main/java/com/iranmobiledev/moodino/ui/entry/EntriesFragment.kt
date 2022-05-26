@@ -49,7 +49,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private var emptyStateEnum: EmptyStateEnum = EmptyStateEnum.INVISIBLE
     private val sharePref: SharedPreferences by inject()
     private val args: EntriesFragmentArgs by navArgs()
-    private val persianDate = PersianDate()
     private lateinit var layoutManager: LinearLayoutManager
     private var userScroll = false
 
@@ -263,6 +262,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun onEmojiItemClicked(emojiValue: Int) {
+        val persianDate = PersianDate()
         val entry = Entry()
         entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         entry.time = EntryTime(
