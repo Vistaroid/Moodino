@@ -51,7 +51,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     private val args: EntriesFragmentArgs by navArgs()
     private lateinit var layoutManager: LinearLayoutManager
     private var userScroll = false
-
+    private var newEntryScroll = false
+    private var fromToolbarClick = false
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharePref.edit().putBoolean(FIRST_ENTER, false).apply()
@@ -90,9 +91,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         val today = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         viewModel.getEntries().observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-//                binding.bottomTextContainer.visibility = View.VISIBLE
-//                if (it.size == 1) binding.bottomText.setText(R.string.it_was_first_entry_lets_make_some_other)
-//                else binding.bottomText.setText(R.string.its_time_to_play_memories)
                 val data = it as MutableList<RecyclerViewData>
                 val date = data.find { it.date == today }
                 val bottomText = data.find { it.date == EntryDate(0,0,0) }
@@ -116,7 +114,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                     )
                     data.add(bottomTextData)
                 }
-
                 adapter.setData(data)
 
             } else {
@@ -133,6 +130,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         binding.emojisView.setEmojiClickListener(this)
         val newEntry = EntriesFragmentArgs.fromBundle(requireArguments()).newEntry
         newEntry?.let {
+            newEntryScroll = true
             scroll(it.date)
             requireArguments().clear()
         }
@@ -145,12 +143,17 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 state = newState
                 userScroll = state != RecyclerView.SCROLL_STATE_IDLE
+                if(newState == RecyclerView.SCROLL_STATE_IDLE)
+                    newEntryScroll = false
             }
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                println("y is y : $dy")
                 lifecycleScope.launch {
                     withContext(Dispatchers.IO) {
                         if (dy > 0) {
+                            if(!fromToolbarClick)
+                            if(!newEntryScroll)
                             if (state == RecyclerView.SCROLL_STATE_DRAGGING || state == RecyclerView.SCROLL_STATE_SETTLING) {
                                 val position = layoutManager.findFirstVisibleItemPosition()
                                 if (position != -1) {
@@ -164,6 +167,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                             }
                         }
                         if (dy < 0) {
+                            if(!fromToolbarClick)
+                            if(!newEntryScroll)
                             if (state == RecyclerView.SCROLL_STATE_DRAGGING || state == RecyclerView.SCROLL_STATE_SETTLING) {
                                 val position = layoutManager.findFirstVisibleItemPosition()
                                 if (position != -1) {
@@ -188,7 +193,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         findNavController().navigate(R.id.action_entriesFragment_to_entryDetailFragment, bundle)
     }
 
-    private fun showDeleteDialog(entry: Entry) {
+    private fun showDeleteDialog(entry: Entry, deletePosition: Int) {
         val dialog = makeDialog(
             mainText = R.string.dialogMainText,
             subText = R.string.dialogSubText,
@@ -199,7 +204,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                 when (itemId) {
                     R.id.rightButton -> {
                         viewModel.deleteEntry(entry)
-                        // adapter.removeItem(entry)
                         dialog.dismiss()
                     }
                     R.id.leftButton -> {
@@ -212,8 +216,15 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun changeCurrentMonth(date: AbstractDate) {
-        if (!userScroll)
-            scroll(date)
+        lifecycleScope.launch {
+            if (!userScroll)
+                if(recyclerView.scrollState == RecyclerView.SCROLL_STATE_IDLE){
+                    fromToolbarClick = true
+                    scroll(date)
+                    delay(500)
+                    fromToolbarClick = false
+                }
+        }
     }
 
     private fun scroll(date: AbstractDate) {
@@ -230,6 +241,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             layoutManager.startSmoothScroll(smoothScroller)
         }
     }
+
+
 
     private fun scroll(date: EntryDate) {
         val smoothScroller = object : LinearSmoothScroller(requireContext()) {
@@ -257,7 +270,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun delete(entry: Entry): Boolean {
-        lifecycleScope.launchWhenResumed { showDeleteDialog(entry) }
+        val position = adapter.entryPositionOf(entry)
+        lifecycleScope.launchWhenResumed { showDeleteDialog(entry, position) }
         return true
     }
 
