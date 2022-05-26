@@ -57,7 +57,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         return binding.root
     }
 
-
     private fun setupUi() {
         adapter.specifyDay = -1
         adapter.create(
@@ -115,6 +114,18 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         val entryDate= EntryDate(1399,7,7)
         binding.mainToolbar.goToMonth(entryDate)
 
+        if (requireActivity().intent.extras != null){
+            val emoji = requireActivity().intent.extras?.getInt("emoji" , 0)
+            val entry = Entry()
+            entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
+            entry.time = EntryTime(
+                PersianDateFormat.format(persianDate, "H"),
+                PersianDateFormat.format(persianDate, "i")
+            )
+            entry.emojiValue = emoji!!
+            navigateToEntryDetail(entry)
+            requireActivity().intent = null
+        }
     }
 
     private fun setupClicks() {

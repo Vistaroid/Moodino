@@ -1,8 +1,7 @@
 package com.iranmobiledev.moodino.ui.splashScreen
 
-import android.content.SharedPreferences
 import com.iranmobiledev.moodino.base.BaseViewModel
-import com.iranmobiledev.moodino.repository.more.MoreRepository
+import com.iranmobiledev.moodino.repository.more.source.MoreRepository
 
 class SplashViewModel(private val moreRepository: MoreRepository) : BaseViewModel() {
 

@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.ui.more.timer
+package com.iranmobiledev.moodino.ui.more.reminder
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -16,6 +16,7 @@ import com.google.android.material.timepicker.TimeFormat
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentReminderBinding
+import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.service.AlarmReciver
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,6 +44,7 @@ class ReminderFragment : BaseFragment(){
         }
 
         checkReminder()
+        binding.switchReminderPopup.isChecked = viewModel.checkPopupReminder()
 
         val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(requireContext() , AlarmReciver::class.java)
@@ -83,10 +85,32 @@ class ReminderFragment : BaseFragment(){
             a.show(requireActivity().supportFragmentManager , null)
         }
 
+        binding.switchReminderPopup.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.setPopupReminder(isChecked)
+        }
+
         binding.ivReminderDelete.setOnClickListener {
-            viewModel.setReminder("")
-            alarmManager.cancel(pendingIntent)
-            checkReminder()
+
+            val dialog = makeDialog(
+                mainText = R.string.delete_reminder,
+                icon = R.drawable.ic_delete,
+            )
+            dialog.setItemEventListener(object : DialogEventListener {
+                override fun clickedItem(itemId: Int) {
+                    when (itemId) {
+                        R.id.rightButton -> {
+                            viewModel.setReminder("")
+                            alarmManager.cancel(pendingIntent)
+                            checkReminder()
+                            dialog.dismiss()
+                        }
+                        R.id.leftButton -> {
+                            dialog.dismiss()
+                        }
+                    }
+                }
+            })
+            dialog.show(parentFragmentManager, null)
         }
 
     }

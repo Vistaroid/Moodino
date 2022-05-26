@@ -1,4 +1,4 @@
-package com.iranmobiledev.moodino.repository.more
+package com.iranmobiledev.moodino.repository.more.source
 
 interface MoreRepository {
 
@@ -17,5 +17,9 @@ interface MoreRepository {
     fun getTimeReminder() : String
 
     fun getPin() : String
+
+    fun setPopupReminder(popup : Boolean)
+
+    fun checkPopupReminder() : Boolean
 
 }

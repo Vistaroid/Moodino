@@ -166,4 +166,7 @@
     <string name="login_with_fingerprint">ورود با اثرانگشت</string>
     <string name="confirm_fingerPrint">تایید اثرانگشت</string>
     <string name="fingerPrint_error">اثرانگشت مطابقت ندارد!</string>
+    <string name="popup_reminder">نمایش پاپ آپ یادآور</string>
+    <string name="delete_reminder">حذف یادآور ؟</string>
+
 </resources>

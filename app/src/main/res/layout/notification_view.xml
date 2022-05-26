@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@android:color/transparent"
     tools:context=".service.NotificationView">
 
@@ -16,14 +16,26 @@
         android:backgroundTint="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btn_notificationView_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"
+                app:tint="@color/black"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="5dp"/>
 
             <TextView
                 android:id="@+id/tv_notificationView_title"
@@ -42,12 +54,12 @@
                 android:id="@+id/constraint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_notificationView_title"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="30dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/tv_notificationView_title">
+                android:layout_marginBottom="30dp">
 
                 <LinearLayout
                     android:id="@+id/radItem"
@@ -64,8 +76,7 @@
                         android:layout_width="@dimen/_40mdp"
                         android:layout_height="@dimen/_40mdp"
                         android:src="@drawable/emoji_rad"
-                        android:tint="@color/rad_color"
-                        />
+                        android:tint="@color/rad_color" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -187,15 +198,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </RelativeLayout>
-
-
-        <Button
-            android:id="@+id/btnnnnn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/transparent"/>
 
     </androidx.cardview.widget.CardView>
 

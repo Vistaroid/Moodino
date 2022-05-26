@@ -1,8 +1,8 @@
-package com.iranmobiledev.moodino.ui.more.timer
+package com.iranmobiledev.moodino.ui.more.reminder
 
 import androidx.lifecycle.viewModelScope
 import com.iranmobiledev.moodino.base.BaseViewModel
-import com.iranmobiledev.moodino.repository.more.MoreRepository
+import com.iranmobiledev.moodino.repository.more.source.MoreRepository
 import kotlinx.coroutines.launch
 
 class ReminderViewModel(private val moreRepository: MoreRepository) : BaseViewModel() {
@@ -16,5 +16,15 @@ class ReminderViewModel(private val moreRepository: MoreRepository) : BaseViewMo
         viewModelScope.launch {
             moreRepository.saveTimeReminder(time)
         }
+    }
+
+    fun setPopupReminder(popup : Boolean){
+        viewModelScope.launch {
+            moreRepository.setPopupReminder(popup)
+        }
+    }
+
+    fun checkPopupReminder() : Boolean{
+        return moreRepository.checkPopupReminder()
     }
 }

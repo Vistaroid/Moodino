@@ -1,22 +1,62 @@
-package com.iranmobiledev.moodino.repository.more
+package com.iranmobiledev.moodino.repository.more.source
 
-import com.iranmobiledev.moodino.repository.more.source.MoreLocalDataSource
+import android.content.SharedPreferences
 
-class MoreRepositoryImpl(private val moreLocalDataSource: MoreLocalDataSource) : MoreRepository {
+const val PIN_LOCK = "pin_locke"
+const val ACTIVE_PIN_LOCK = "is_active_pin_locke"
+const val ACTIVE_FINGERPRINT_LOCK = "is_active_fingerprint_locke"
+const val TIME_REMINDER = "reminder_time"
+const val POPUP_REMIDER = "popup_reminder"
 
-    override suspend fun savePINLock(pin: String) = moreLocalDataSource.savePINLock(pin)
+class MoreRepositoryImpl(private val sharedPreferences: SharedPreferences) : MoreRepository {
 
-    override fun isActivePINLock(): Boolean = moreLocalDataSource.isActivePINLock()
+    override suspend fun savePINLock(pin: String) {
+        sharedPreferences.edit().apply {
+            putString(PIN_LOCK , pin)
+        }.apply()
+    }
 
-    override fun isActiveFingerPrintLock(): Boolean = moreLocalDataSource.isActiveFingerPrintLock()
+    override fun isActivePINLock(): Boolean {
+        return sharedPreferences.getBoolean(ACTIVE_PIN_LOCK , false)
+    }
 
-    override suspend fun setActivePINLock(active: Boolean) = moreLocalDataSource.setActivePINLock(active)
+    override fun isActiveFingerPrintLock(): Boolean {
+        return sharedPreferences.getBoolean(ACTIVE_FINGERPRINT_LOCK , false)
+    }
 
-    override suspend fun setActiveFingerPrintLock(active: Boolean) = moreLocalDataSource.setActiveFingerPrintLock(active)
+    override suspend fun setActivePINLock(active: Boolean) {
+        sharedPreferences.edit().apply {
+            putBoolean(ACTIVE_PIN_LOCK , active)
+        }.apply()
+    }
 
-    override suspend fun saveTimeReminder(time: String) = moreLocalDataSource.saveTimeReminder(time)
+    override suspend fun setActiveFingerPrintLock(active: Boolean) {
+        sharedPreferences.edit().apply {
+            putBoolean(ACTIVE_FINGERPRINT_LOCK , active)
+        }.apply()
+    }
 
-    override fun getTimeReminder(): String = moreLocalDataSource.getTimeReminder()
+    override suspend fun saveTimeReminder(time: String) {
+        sharedPreferences.edit().apply {
+            putString(TIME_REMINDER , time)
+        }.apply()
+    }
 
-    override fun getPin(): String = moreLocalDataSource.getPin()
+    override fun getTimeReminder(): String {
+        return sharedPreferences.getString(TIME_REMINDER , "").toString()
+    }
+
+    override fun getPin(): String {
+        return sharedPreferences.getString(PIN_LOCK , "").toString()
+    }
+
+    override fun setPopupReminder(popup: Boolean) {
+        sharedPreferences.edit().apply {
+            putBoolean(POPUP_REMIDER , popup)
+        }.apply()
+    }
+
+    override fun checkPopupReminder(): Boolean {
+        return sharedPreferences.getBoolean(POPUP_REMIDER , true)
+    }
 }
