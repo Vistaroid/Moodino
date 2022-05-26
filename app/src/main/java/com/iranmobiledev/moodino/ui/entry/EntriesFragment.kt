@@ -69,7 +69,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         return binding.root
     }
 
-
     private fun setupUi() {
         adapter.specifyDay = -1
         adapter.create(
@@ -216,6 +215,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun changeCurrentMonth(date: AbstractDate) {
+
         lifecycleScope.launch {
             if (!userScroll)
                 if(recyclerView.scrollState == RecyclerView.SCROLL_STATE_IDLE){
