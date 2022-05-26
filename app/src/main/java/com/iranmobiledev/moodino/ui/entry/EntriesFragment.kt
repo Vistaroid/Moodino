@@ -21,6 +21,7 @@ import com.iranmobiledev.moodino.listener.AddEntryCardViewListener
 import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.listener.EmojiClickListener
 import com.iranmobiledev.moodino.listener.EntryEventLister
+import com.iranmobiledev.moodino.service.EmojiNotification
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.entry.adapter.BOTTOM_TEXT
 import com.iranmobiledev.moodino.ui.entry.adapter.ENTRY_CARD
@@ -68,7 +69,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         setupObserver()
         return binding.root
     }
-
 
     private fun setupUi() {
         adapter.specifyDay = -1
@@ -135,10 +135,23 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             requireArguments().clear()
         }
 
+        if (EmojiNotification.emoji != null){
+            val entry = Entry()
+            entry.date = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
+            entry.time = EntryTime(
+                PersianDateFormat.format(persianDate, "H"),
+                PersianDateFormat.format(persianDate, "i")
+            )
+            entry.emojiValue = EmojiNotification.emoji!!
+            navigateToEntryDetail(entry)
+            EmojiNotification.emoji = null
+        }
+        
         var scrollUpPosition = -1
         var scrollDownPosition = -1
         var state = -1
         binding.entriesContainerRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 state = newState

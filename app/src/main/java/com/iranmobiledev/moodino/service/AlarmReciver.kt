@@ -15,21 +15,32 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.RemoteViews
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.iranmobiledev.moodino.NOTIFICATION_ID
 import com.iranmobiledev.moodino.R
+import com.iranmobiledev.moodino.repository.more.source.POPUP_REMIDER
 import com.iranmobiledev.moodino.ui.MainActivity
 
 
 class AlarmReciver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        notification(context!!)
 
-        val i = Intent()
-        i.setClassName(context.packageName , "com.iranmobiledev.moodino.service.NotificationView")
-        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        context.startActivity(i)
+        val shared = context?.getSharedPreferences("sharedPref", AppCompatActivity.MODE_PRIVATE)
+        val popup = shared?.getBoolean(POPUP_REMIDER , true)
+
+        if (popup == true){
+            val i = Intent()
+            i.setClassName(context.packageName , "com.iranmobiledev.moodino.service.NotificationView")
+            i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(i)
+        }
+        else notification(context!!)
+
+        val notifiSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val r = RingtoneManager.getRingtone(context , notifiSound)
+        r.play()
     }
 
     fun notification(context : Context){
@@ -49,10 +60,6 @@ class AlarmReciver : BroadcastReceiver() {
             .setVibrate(longArrayOf(500,500,500,500))
             .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE))
             .build()
-
-        val notifiSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val r = RingtoneManager.getRingtone(context , notifiSound)
-        r.play()
 
         notifiManager.notify(101 , notifi)
     }

@@ -145,7 +145,7 @@
 
     <fragment
         android:id="@+id/reminderFragment"
-        android:name="com.iranmobiledev.moodino.ui.more.timer.ReminderFragment"
+        android:name="com.iranmobiledev.moodino.ui.more.reminder.ReminderFragment"
         android:label="ReminderFragment" />
     <fragment
         android:id="@+id/pinLockFragment"
