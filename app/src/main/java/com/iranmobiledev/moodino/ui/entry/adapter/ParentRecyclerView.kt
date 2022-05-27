@@ -19,6 +19,7 @@ import com.iranmobiledev.moodino.databinding.BottomRvTextBinding
 import com.iranmobiledev.moodino.databinding.ItemEntryContainerBinding
 import com.iranmobiledev.moodino.callback.AddEntryCardViewListener
 import com.iranmobiledev.moodino.callback.EntryEventLister
+import com.iranmobiledev.moodino.utlis.MyDiffUtil
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
@@ -37,30 +38,6 @@ class EntryContainerAdapter(
     private val emptyStateVisibility = MutableLiveData<Boolean>()
     var copyData = mutableListOf<RecyclerViewData>()
     var hasTodayEntry = true
-
-    private val differCallback = object: DiffUtil.ItemCallback<RecyclerViewData>(){
-        override fun areItemsTheSame(
-            oldItem: RecyclerViewData,
-            newItem: RecyclerViewData
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(
-            oldItem: RecyclerViewData,
-            newItem: RecyclerViewData
-        ): Boolean {
-            return when{
-                oldItem.adapter != newItem.adapter -> false
-                oldItem.entries != newItem.entries -> false
-                oldItem.viewType != newItem.viewType -> false
-                oldItem.date != newItem.date -> false
-                else -> true
-            }
-        }
-    }
-
-    val differ = AsyncListDiffer(this,differCallback)
 
     inner class ViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
         private var itemEntryContainerBinding: ItemEntryContainerBinding? = null
@@ -241,23 +218,23 @@ class EntryContainerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (specifyDay == -1){
-            val data = differ.currentList[position]
+            val data = this.data[position]
             holder.bind(data)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (differ.currentList[position].viewType == ENTRY_CARD) {
+        if (data[position].viewType == ENTRY_CARD) {
             hasTodayEntry = false
             return ENTRY_CARD
         }
-        if (position == differ.currentList.lastIndex)
+        if (position == data.lastIndex)
             return BOTTOM_TEXT
         return ENTRY_DEFAULT
     }
 
     override fun getItemCount(): Int {
-        return differ.currentList.size
+        return data.size
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -286,12 +263,12 @@ class EntryContainerAdapter(
     }
 
     fun entryPositionOf(entry: Entry): Int {
-        val data = differ.currentList.find { it.date == entry.date } ?: return -1
-        return differ.currentList.indexOf(data)
+        val data = copyData.find { it.date == entry.date } ?: return -1
+        return copyData.indexOf(data)
     }
 
     fun findDataWithPosition(position: Int): EntryDate {
-        return differ.currentList[position].date
+        return copyData[position].date
     }
 }
 
