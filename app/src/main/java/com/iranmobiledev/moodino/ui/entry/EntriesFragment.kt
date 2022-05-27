@@ -233,6 +233,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun changeCurrentMonth(date: AbstractDate) {
+
         lifecycleScope.launch {
             if (!userScroll)
                 if(recyclerView.scrollState == RecyclerView.SCROLL_STATE_IDLE){
