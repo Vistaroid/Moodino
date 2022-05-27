@@ -6,6 +6,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
@@ -23,6 +24,12 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
     private val grayColor = resources.getColor(R.color.gray_icon)
     var entries: List<Entry>? = null
     private var dayMoodsCount = arrayListOf(0, 0, 0, 0, 0)
+
+    private var radCount = 0
+    private var goodCount = 0
+    private var mehCount = 0
+    private var badCount = 0
+    private var awfulCount = 0
 
     //    private lateinit var entries: List<Entry>
     private val monthsLength = listOf<Int>(
@@ -65,7 +72,7 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
     private fun drawMonthDaysNumberColumn(radius: Float) {
         for (i in 1..31) {
             val index = if (i == 0) 1 else i
-            drawNumber(i.toString(), radius, radius * (index * 3) + ySpace)
+            drawNumber(i.toString(), radius, radius * (index * 3) + ySpace + resources.getDimension(R.dimen.margin))
         }
     }
 
@@ -83,14 +90,16 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
 
     private fun drawNumber(text: String, x: Float, y: Float) {
         paint.color = grayColor
-        paint.textSize = 30f
-        paint.textAlign = Paint.Align.CENTER
+        paint.typeface= ResourcesCompat.getFont(context, R.font.shabnam_medium)
+        paint.textSize = resources.getDimension(R.dimen.textSize)
+
         canvas?.drawText(text, x, y, paint)
     }
 
     private fun drawText(text: String, x: Float, y: Float) {
         paint.color = grayColor
-        paint.textSize = 30f
+        paint.textSize = resources.getDimension(R.dimen.textSize)
+        paint.typeface= ResourcesCompat.getFont(context, R.font.shabnam_medium)
         paint.textAlign = Paint.Align.CENTER
         canvas?.drawText(text, x, y, paint)
     }
@@ -115,7 +124,7 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
                 drawText(
                     monthsName[month - 1].toString(),
                     (radius * (month * 2) + xSpace * month) + radius,
-                    radius
+                    radius + resources.getDimension(R.dimen.margin)
                 )
             }
 
@@ -126,10 +135,6 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
                 color
             )
         }
-
-        dayMoodsCount.forEach {
-            Log.d("sdfqwef", "drawMonth: $it")
-        }
     }
 
     private fun getAverageColor(entries: List<Entry>): Int {
@@ -139,11 +144,21 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
     }
 
     fun getColor(emojiValue: Int): Int = when (emojiValue) {
-        0 -> ColorArray.awful
-        1 -> ColorArray.bad
-        2 -> ColorArray.meh
-        3 -> ColorArray.good
-        4 -> ColorArray.rad
+        1 -> {
+            ColorArray.awful
+        }
+        2 -> {
+            ColorArray.bad
+        }
+        3 -> {
+            ColorArray.meh
+        }
+        4 -> {
+            ColorArray.good
+        }
+        5 -> {
+            ColorArray.rad
+        }
         else -> {
             ColorArray.meh
         }
