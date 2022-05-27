@@ -40,7 +40,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/moodChartCard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:backgroundTint="?colorCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearDays"
@@ -376,7 +377,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/moodCountPieChartCard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/daysInRowCard">
+                app:layout_constraintTop_toBottomOf="@+id/daysInRowCard"
+                android:backgroundTint="?colorCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -502,7 +504,8 @@
                 app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/moodChartCard">
+                app:layout_constraintTop_toBottomOf="@id/moodChartCard"
+                android:backgroundTint="?colorCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -641,7 +644,8 @@
                 app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/moodCountPieChartCard">
+                app:layout_constraintTop_toBottomOf="@id/moodCountPieChartCard"
+                android:backgroundTint="?colorCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
