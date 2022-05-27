@@ -29,11 +29,10 @@ class AboutFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding.tvAbout.text = "تیم توسعه دهندگان : \n" +
-                "محمدجواد خوش نشین\n" +
-                "طیب شاه بخش\n" +
-                "مهدي سیاری\n" +
-                "سیدعلی طباطبائی"
+        binding.tvAbout.text = "محمدجواد خوش نشین\n" +
+                "سیدعلی طباطبائی\n" +
+                "طیب شه بخش\n" +
+                "مهدي سایری"
 
 
         binding.btnAboutContactUs.setOnClickListener {
