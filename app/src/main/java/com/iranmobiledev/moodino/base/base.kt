@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.base
 
 import android.content.Context
+import android.content.res.Configuration
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -41,6 +42,16 @@ interface BaseView {
 
     val mRootView: ViewGroup?
     val viewContext: Context
+
+
+    fun nightMode() : Boolean{
+        return when (viewContext.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> true
+            Configuration.UI_MODE_NIGHT_NO -> false
+            else -> false
+        }
+    }
+
 
     /**
      * @return instance of MoodinoDialog

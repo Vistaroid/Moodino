@@ -104,7 +104,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
 
     private fun setupDatePickerDialog() {
         val persianDate = PersianDate()
-        getPersianDialog(this, this, persianDate).show()
+        getPersianDialog(this, this, persianDate , nightMode()).show()
     }
 
     private fun getYesterdayAction(): NavDirections {
