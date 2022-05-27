@@ -31,7 +31,12 @@ class EntryViewModel(
             }
         }
     }
-
+    fun update(entry: Entry){
+        entryRepository.update(entry)
+    }
+    fun addEntry(entry: Entry) {
+        entryRepository.add(entry)
+    }
     private fun makeListFromEntries(entries: MutableList<Entry>, sortedList : MutableList<RecyclerViewData>): List<RecyclerViewData> {
         if(entries.size == 0)
             return sortedList

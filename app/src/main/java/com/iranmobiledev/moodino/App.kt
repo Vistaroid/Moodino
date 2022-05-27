@@ -67,7 +67,6 @@ class App : Application() , KoinComponent{
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getCategoryDao)) }
             factory <MoreRepository> { MoreRepositoryImpl(get()) }
             single <ImageLoadingService>{ GlideImageLoader() }
-            single { EntryContainerAdapter() }
             single { applicationContext.getSharedPreferences("sharedPref", MODE_PRIVATE) }
         }
 

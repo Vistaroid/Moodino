@@ -18,23 +18,31 @@ import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
-import com.iranmobiledev.moodino.listener.EntryEventLister
+import com.iranmobiledev.moodino.callback.EntryEventLister
+import com.iranmobiledev.moodino.data.RecyclerViewData
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import saman.zamani.persiandate.PersianDate
-import java.util.regex.Pattern
 
 
 class ChildRecyclerView(
     private var entryEventLister: EntryEventLister,
-    var entries: MutableList<Entry>,
+    var entries: List<Entry>,
     private val context: Context,
     private val language: Int
 ) : RecyclerView.Adapter<ChildRecyclerView.ViewHolder>(), KoinComponent {
 
     private val persianDate = PersianDate()
     private val imageLoader: ImageLoadingService by inject()
+
+
+    fun updateData(newList: List<Entry>){
+        val diffUtil = ChildRvDiffUtil(entries, newList)
+        val diffResults = DiffUtil.calculateDiff(diffUtil)
+        entries = newList
+        diffResults.dispatchUpdatesTo(this)
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val emojiFactory = EmojiFactory.create(context)
@@ -61,7 +69,6 @@ class ChildRecyclerView(
             moreIcon.setOnClickListener { makePopupMenu(entry, it) }
             entryTitle.text = emoji.title
             entryTitle.setTextColor(emoji.color)
-            binding.activityRv.setOnClickListener { makePopupMenu(entry, it) }
             setupSmallActivitiesRv(entry)
         }
 
@@ -126,14 +133,14 @@ class ChildRecyclerView(
 
         private fun yesterdayStringDate(): String {
             persianDate.shDay = persianDate.shDay - 1
-            return persianDateFormat(pattern = "j F", date = persianDate)
+            return persianDateFormat(pattern = "j F Y", date = persianDate)
         }
 
         private fun todayStringDate(): String {
-            return persianDateFormat(pattern = "j F")
+            return persianDateFormat(pattern = "j F Y")
         }
 
-        private fun otherDayString(date: PersianDate, pattern: String = "j F"): String {
+        private fun otherDayString(date: PersianDate, pattern: String = "j F Y"): String {
             return persianDateFormat(pattern = pattern, date = date)
         }
     }

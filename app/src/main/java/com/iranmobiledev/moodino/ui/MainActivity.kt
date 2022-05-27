@@ -2,15 +2,14 @@ package com.iranmobiledev.moodino.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.net.nsd.NsdManager
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
 import android.widget.LinearLayout
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -22,10 +21,8 @@ import com.iranmobiledev.moodino.base.BaseActivity
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
-import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
+import com.iranmobiledev.moodino.callback.DatePickerDialogEventListener
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
-import com.iranmobiledev.moodino.ui.entry.AddEntryFragmentDirections
-import com.iranmobiledev.moodino.ui.entry.EntriesFragmentDirections
 import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
@@ -44,7 +41,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var fabItems: ArrayList<LinearLayout>
-    private val viewModel: MainActivityViewModel by viewModels()
+    private lateinit var viewModel: MainActivityViewModel
     private var animationDuration: Long = 0
     private var currentNavController: LiveData<NavController>? = null
 
@@ -57,6 +54,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
         super.onCreate(savedInstanceState)
         initGlobal(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         fabItems = arrayListOf(
             binding.yesterdayLinearlayout,
             binding.todayLinearlayout,

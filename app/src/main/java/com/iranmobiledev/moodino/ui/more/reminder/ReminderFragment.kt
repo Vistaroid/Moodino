@@ -16,7 +16,7 @@ import com.google.android.material.timepicker.TimeFormat
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentReminderBinding
-import com.iranmobiledev.moodino.listener.DialogEventListener
+import com.iranmobiledev.moodino.callback.DialogEventListener
 import com.iranmobiledev.moodino.service.AlarmReciver
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -36,11 +36,6 @@
             app:destination="@id/entryDetailFragment"
             app:enterAnim="@anim/enter_anim_from_bottom"
             app:popExitAnim="@anim/exit_anim_from_top"/>
-        <argument
-            android:name="newEntry"
-            app:argType="com.iranmobiledev.moodino.data.Entry"
-            app:nullable="true"
-            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
@@ -78,7 +73,8 @@
             android:id="@+id/action_addEntryFragment_to_entryDetailFragment"
             app:destination="@id/entryDetailFragment"
             app:enterAnim="@anim/enter_anim_from_bottom"
-            app:popExitAnim="@anim/exit_anim_from_top"/>
+            app:popExitAnim="@anim/exit_anim_from_top"
+            />
         <argument
             android:name="date"
             app:argType="com.iranmobiledev.moodino.data.EntryDate"
@@ -93,10 +89,6 @@
             app:popUpTo="@id/entriesFragment"
             app:popUpToInclusive="true"/>
         <argument
-            android:name="initialFromBackPress"
-            app:argType="boolean"
-            android:defaultValue="false" />
-        <argument
             android:name="emojiValue"
             app:argType="integer"
             android:defaultValue="-1" />
@@ -109,7 +101,7 @@
         <action
             android:id="@+id/action_entryDetailFragment_to_entriesFragment"
             app:destination="@id/entriesFragment"
-            app:popUpTo="@id/entriesFragment"
+            app:popUpTo="@id/addEntryFragment"
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_entryDetailFragment_to_addEntryFragment"
