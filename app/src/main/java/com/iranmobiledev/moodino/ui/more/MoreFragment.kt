@@ -66,6 +66,10 @@ class MoreFragment : BaseFragment() {
         binding.btnMoreReminder.setOnClickListener {
             findNavController().navigate(R.id.action_moreFragment_to_reminderFragment)
         }
+
+        binding.btnMoreAbout.setOnClickListener {
+            findNavController().navigate(R.id.action_moreFragment_to_aboutFragment)
+        }
     }
 
 }

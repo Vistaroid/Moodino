@@ -222,6 +222,7 @@
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/ic_cross.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_date.xml" value="0.1325" />
+        <entry key="app/src/main/res/drawable/ic_email.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/ic_img_dont_locke.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_img_locked.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_lock_active.xml" value="0.1185" />
@@ -248,6 +249,7 @@
         <entry key="app/src/main/res/layout/emoji_view_group.xml" value="0.13177083333333334" />
         <entry key="app/src/main/res/layout/empty_state_view.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/entry_detail_fragment.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/fragment_day_entries.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/fragment_entries.xml" value="0.2033514492753623" />

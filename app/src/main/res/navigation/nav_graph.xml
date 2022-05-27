@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_moreFragment_to_pinLockFragment"
             app:destination="@id/pinLockFragment" />
+        <action
+            android:id="@+id/action_moreFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/addEntryFragment"
@@ -151,5 +154,9 @@
         android:id="@+id/pinLockFragment"
         android:name="com.iranmobiledev.moodino.ui.more.pinLock.PinLockFragment"
         android:label="PinLockFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.iranmobiledev.moodino.ui.more.AboutFragment"
+        android:label="AboutFragment" />
 
 </navigation>
