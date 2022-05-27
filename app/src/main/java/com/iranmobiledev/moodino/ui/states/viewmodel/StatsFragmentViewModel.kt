@@ -1,16 +1,11 @@
 package com.iranmobiledev.moodino.ui.states.viewmodel
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Color
 import android.util.Log
-import android.widget.TextView
-import androidx.compose.runtime.withRunningRecomposer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
@@ -58,107 +53,83 @@ class StatsFragmentViewModel(
     fun getEntries() {
         viewModelScope.launch {
             entryRepository.getAll().collectLatest { entries ->
-                entries.forEach {
-                    Log.d(TAG, "getEntries123: ${it.date}")
-                }
-                _entries.postValue(entries)
+                var sortedList = entries.sortedWith(compareBy(
+                    { it.date.year },
+                    { it.date.month },
+                    { it.date.day }
+                ))
+                _entries.postValue(sortedList)
             }
         }
     }
 
     fun initDaysInRow() {
+
         viewModelScope.launch {
-            _entries.asFlow().collectLatest { entries ->
+                entries.asFlow().collectLatest {
 
-                //Adding week days name to daysInRow card
-                launch {
-                    getFiveDaysAsWeekDays()
-                }
+                    //Adding week days name to daysInRow card
+                    launch {
+                        getFiveDaysAsWeekDays()
+                    }
 
-                val dates = withContext(Dispatchers.IO) {
-                    getDatesFromEntries(entries)
-                }
+                    val dates = withContext(Dispatchers.IO) {
+                        getDatesFromEntries()
+                    }
 
-                launch {
-                    getLongestChainFromDates(dates)
-                }
+                    launch {
+                        getLongestChainFromDates(dates)
+                    }
 
-                launch {
-                    getLatestChain(dates)
+                    launch {
+                        getLastFiveDaysStatus(dates)
+                    }
                 }
-
-                launch {
-                    getLastFiveDaysStatus(dates)
-                }
-            }
         }
     }
 
     @SuppressLint("NewApi")
     private fun getLongestChainFromDates(datesList: List<EntryDate>) {
-        val reversedDates = datesList.distinct().reversed()
+        val dates = datesList.distinct()
         var chainLengthMax = 0
         var chainLength = 1
+        var latestChain = 0
 
+        for(date in dates){
+            
+            if (date == dates.last()) {
+                chainLengthMax++
+                _latestChainLiveData.postValue(latestChain)
+                break
+            }
+            
+            var index = dates.indexOf(date)
+            var nextItemPersianDate = PersianDate().newDate(dates[index+1])
+            var nextDatePersianDate = PersianDate().newDate(date).addDay(1)
 
-        for (date in reversedDates) {
-            val nextDateAsLocalDate = PersianDate().newDate(date).addDay(-1)
-            if (date != reversedDates.last()) {
-                val nextDateElement = reversedDates[reversedDates.indexOf(date) + 1]
-                val nextDate =
-                    PersianDate().newDate(nextDateElement)
-                if (nextDateAsLocalDate == nextDate) {
-                    if (reversedDates.size <= 2) {
-                        chainLengthMax++
-                    } else {
-                        chainLength++
-                    }
-                } else {
-                    if (chainLength >= chainLengthMax) {
-                        chainLengthMax = chainLength
-                    }
-                    chainLength = 0
-                }
-            } else {
-                if (PersianDate().newDate(date)
-                        .addDay(-1) == nextDateAsLocalDate
-                ) {
-                    chainLengthMax++
-                }
+            var nextItem = EntryDate(nextItemPersianDate.shYear,nextItemPersianDate.shMonth,nextItemPersianDate.shDay)
+            var nextDate = EntryDate(nextDatePersianDate.shYear,nextDatePersianDate.shMonth,nextDatePersianDate.shDay)
+
+            if (nextItem == nextDate){
+                chainLength++
+            }else {
+                if (chainLength >= chainLengthMax) chainLengthMax = chainLength
+                latestChain = chainLength
+                chainLength = 0
             }
         }
+
         _longestChainLiveData.postValue(chainLengthMax)
     }
 
-    @SuppressLint("NewApi")
-    private fun getLatestChain(dates: List<EntryDate>) {
-
-        val reversedDate = dates.distinct().reversed()
-        var latestChain = 0
-
-        for (date in reversedDate) {
-
-            val nextDateAsLocalDate =
-                PersianDate().newDate(date).addDay(-1)
-
-            if (date == reversedDate.first()) latestChain = 1
-
-            if (date != reversedDate.last()) {
-                val nextDateElement = reversedDate[reversedDate.indexOf(date) + 1]
-                val nextDate =
-                    PersianDate().newDate(nextDateElement)
-
-                if (nextDateAsLocalDate == nextDate) latestChain++ else break
-            }
-        }
-        _latestChainLiveData.postValue(latestChain)
-    }
-
     fun initLineChart() {
+        val persianDate = PersianDate()
         viewModelScope.launch {
             _entries.asFlow().collectLatest {
                 launch {
-                    getEntriesForLineChart(it)
+                    var currentMonthEntries =
+                        it.filter { it.date.year == persianDate.shYear && it.date.month == persianDate.shMonth }
+                    getEntriesForLineChart(currentMonthEntries)
                 }
             }
         }
@@ -233,11 +204,16 @@ class StatsFragmentViewModel(
         _weekDays.postValue(days)
     }
 
-    private fun getDatesFromEntries(entries: List<com.iranmobiledev.moodino.data.Entry>): List<EntryDate> {
+    private fun getDatesFromEntries(): List<EntryDate> {
         val dates = mutableListOf<EntryDate>()
-        for (entry in entries) {
-            dates.add(entry.date!!)
+
+        val entries = entries.value
+        if (entries != null) {
+            for (entry in entries) {
+                dates.add(entry.date!!)
+            }
         }
+        
         return dates
     }
 
