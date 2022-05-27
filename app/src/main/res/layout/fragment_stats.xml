@@ -59,33 +59,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/moreImageButtonMoodChart"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_more_outlined"
-                        app:layout_constraintBottom_toBottomOf="@+id/daysInRowHeader"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.921"
-                        app:layout_constraintStart_toEndOf="@+id/daysInRowHeader"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.514"
-                        app:tint="?colorIcon" />
-
-                    <ImageView
-                        android:id="@+id/shareDaysRow"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="12dp"
-                        android:src="@drawable/ic_share"
-                        app:layout_constraintBottom_toBottomOf="@+id/daysInRowHeader"
-                        app:layout_constraintEnd_toStartOf="@+id/moreImageButtonMoodChart"
-                        app:layout_constraintHorizontal_bias="0.941"
-                        app:layout_constraintStart_toEndOf="@+id/daysInRowHeader"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.514"
-                        app:tint="?colorIcon" />
-
                     <FrameLayout
                         android:id="@+id/frameLayout"
                         android:layout_width="match_parent"
@@ -395,18 +368,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/shareMoodChart"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="4dp"
-                        android:src="@drawable/ic_share"
-                        app:layout_constraintBottom_toTopOf="@+id/moodsLineChartLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0"
-                        app:tint="?colorIcon" />
-
                     <FrameLayout
                         android:id="@+id/moodsLineChartLayout"
                         android:layout_width="match_parent"
@@ -520,16 +481,6 @@
                         android:textColor="?colorText"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/shareMoodCount"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_share"
-                        app:layout_constraintBottom_toBottomOf="@+id/entryTimeTv"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/entryTimeTv"
-                        app:tint="?colorIcon" />
 
                     <com.github.mikephil.charting.charts.PieChart
                         android:id="@+id/moodCountPieChart"
@@ -659,34 +610,13 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/moreView"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_more_outlined"
-                        app:layout_constraintBottom_toBottomOf="@+id/yearInPixelHeader"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/yearInPixelHeader"
-                        app:tint="?colorIcon" />
 
-
-                    <ImageView
-                        android:id="@+id/shareYearView"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:src="@drawable/ic_share"
-                        app:layout_constraintBottom_toBottomOf="@+id/moreView"
-                        app:layout_constraintEnd_toStartOf="@+id/moreView"
-                        app:layout_constraintTop_toTopOf="@+id/moreView"
-                        app:layout_constraintVertical_bias="0.0"
-                        app:tint="?colorIcon" />
 
                     <com.iranmobiledev.moodino.ui.states.customView.YearView
-
+                        android:layoutDirection="ltr"
                         android:id="@+id/yearView"
                         android:layout_width="match_parent"
-                        android:layout_height="470dp"
+                        android:layout_height="580dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/yearInPixelHeader" />
 
@@ -701,7 +631,7 @@
                         app:layout_constraintTop_toBottomOf="@id/yearView" />
 
                     <com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
-                        android:id="@+id/moodCountView"
+                        android:id="@+id/moodCountViewStats"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
