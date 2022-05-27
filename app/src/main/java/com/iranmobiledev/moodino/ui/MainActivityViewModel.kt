@@ -101,7 +101,7 @@ class MainActivityViewModel() : BaseViewModel() {
         val springAnim = SpringAnimation(fab, SpringAnimation.ROTATION)
         val springForce = SpringForce()
         if (isMenuOpen.value == false) {
-            springForce.finalPosition = 180f
+            springForce.finalPosition = 225f
             springAnim.spring = springForce
             springForce.dampingRatio = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
             springForce.stiffness = SpringForce.STIFFNESS_VERY_LOW
