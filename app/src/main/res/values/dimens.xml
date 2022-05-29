@@ -2,4 +2,9 @@
 <resources>
     <dimen name="grid_calendar_height">320sp</dimen>
     <dimen name="arrow_size">26dp</dimen>
+    <dimen name="xSpace">8dp</dimen>
+    <dimen name="ySpace">14dp</dimen>
+    <dimen name="circleSize">6dp</dimen>
+    <dimen name="textSize">10dp</dimen>
+    <dimen name="margin">2dp</dimen>
 </resources>

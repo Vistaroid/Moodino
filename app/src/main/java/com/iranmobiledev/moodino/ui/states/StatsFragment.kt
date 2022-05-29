@@ -1,6 +1,7 @@
 package com.iranmobiledev.moodino.ui.states
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -18,12 +19,14 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
+import com.iranmobiledev.moodino.databinding.MoodsCountViewBinding
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.language
 import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import saman.zamani.persiandate.PersianDate
 
 
 class StatsFragment : BaseFragment() {
@@ -35,6 +38,7 @@ class StatsFragment : BaseFragment() {
     private lateinit var daysContainer: ArrayList<FrameLayout>
     private lateinit var daysTextView: ArrayList<TextView>
     private lateinit var daysIcon: ArrayList<ImageView>
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,12 +86,6 @@ class StatsFragment : BaseFragment() {
         val currentLanguage = if (viewModel.getLanguage() == 1) "persian" else "english"
 
         if (currentLanguage == "persian") {
-            binding.apply {
-                shareDaysRow.rotation = -90f
-                shareMoodChart.rotation = -90f
-                shareMoodCount.rotation = -90f
-                shareYearView.rotation = -90f
-            }
         }
     }
 
@@ -95,8 +93,6 @@ class StatsFragment : BaseFragment() {
         val yearView = binding.yearView
         model.entries.observe(viewLifecycleOwner) {
             yearView.entries = it
-            val distinctEntries = it.distinctBy { entry -> entry.date.month }
-            binding.moodCountView.setEntries(distinctEntries)
         }
     }
 

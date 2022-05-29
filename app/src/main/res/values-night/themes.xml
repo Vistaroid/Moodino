@@ -27,7 +27,7 @@
         <item name="colorMonthSwitch">@color/black</item>
         <item name="colorBackground">@color/black</item>
         <item name="colorIcon">@color/white</item>
-        <item name="colorCard">@color/gray800</item>
+        <item name="colorCard">@color/gray900</item>
         <item name="note_gb">@drawable/note_bg_dark</item>
 
         <item name="textAppearanceLargePopupMenu">@style/AppTheme.TextAppearance.Popup</item>
