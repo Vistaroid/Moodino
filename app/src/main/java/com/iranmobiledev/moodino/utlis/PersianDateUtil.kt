@@ -58,8 +58,8 @@ fun PersianDate.newDate(entryDate :EntryDate): PersianDate {
         shYear = entryDate.year
         shMonth = entryDate.month
         shDay = entryDate.day
-    }
 
+    }
     return newDate
 }
 

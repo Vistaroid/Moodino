@@ -8,16 +8,18 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.databinding.MoodsCountViewBinding
 import com.iranmobiledev.moodino.utlis.*
+import kotlin.math.roundToInt
 
-class MoodCountView(context: Context, attr: AttributeSet): LinearLayoutCompat(context, attr) {
+class MoodCountView(context: Context, attr: AttributeSet) : LinearLayoutCompat(context, attr) {
 
     private var binding: MoodsCountViewBinding
+
     init {
-        val inflater= context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding= MoodsCountViewBinding.inflate(inflater,this,true)
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        binding = MoodsCountViewBinding.inflate(inflater, this, true)
     }
 
-    fun setEntries(entries: List<Entry>?){
+    fun setEntries(entries: List<Entry>?) {
         refresh()
         if (!entries.isNullOrEmpty()) {
             val distinctList = entries.distinctBy { it.emojiValue }
@@ -34,7 +36,7 @@ class MoodCountView(context: Context, attr: AttributeSet): LinearLayoutCompat(co
         }
     }
 
-    private fun refresh(){
+    private fun refresh() {
         binding.rad.refresh(ColorArray.rad)
         binding.good.refresh(ColorArray.good)
         binding.meh.refresh(ColorArray.meh)

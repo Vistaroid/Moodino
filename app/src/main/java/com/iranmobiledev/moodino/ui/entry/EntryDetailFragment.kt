@@ -137,7 +137,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
                 persianDate.shMonth = it.month
                 persianDate.shDay = it.day
             }
-            getPersianDialog(requireContext(), this, persianDate).show()
+            getPersianDialog(requireContext(), this, persianDate , nightMode()).show()
         }
         binding.time.setOnClickListener {
             val dialog = TimePickerDialog(entry.time)
@@ -184,6 +184,10 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             cameraButtonText = getString(R.string.cameraTxt)
             width = 500
             height = 500
+            backgroundColor = requireContext().getColor( if (nightMode()) R.color.gray900 else R.color.white)
+            titleColor = requireContext().getColor( if (nightMode()) R.color.white else R.color.black)
+            cancelTextColor = requireContext().getColor( if (nightMode()) R.color.white else R.color.black)
+            buttonTextColor = requireContext().getColor( if (nightMode()) R.color.white else R.color.black)
         }
     }
 
