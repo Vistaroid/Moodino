@@ -102,6 +102,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupUtil() {
+        binding.entriesContainerRv.itemAnimator = null
         mainViewModel.initialFromBackPressEntryDetailAddEntry = false
         mainViewModel.selectedAddEntryEmoji = -1
     }
@@ -121,41 +122,41 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         val persianDate = PersianDate()
         val today = EntryDate(persianDate.shYear, persianDate.shMonth, persianDate.shDay)
         viewModel.getEntries().observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                val data = it as MutableList<RecyclerViewData>
-                val date = data.find { item -> item.date == today }
-                val bottomText = data.find { item -> item.date == EntryDate(0, 0, 0) }
-                if (date == null) {
-                    val cardItem = RecyclerViewData(
-                        entries = listOf(),
-                        adapter = null,
-                        id = "card",
-                        date = EntryDate(5000, 13, 32),
-                        viewType = ENTRY_CARD
+            lifecycleScope.launch {
+                if (it.isNotEmpty()) {
+                    binding.emptyStateContainer.visibility = View.GONE
+                    val data = it as MutableList<RecyclerViewData>
+                    val date = data.find { item -> item.date == today }
+                    val bottomText = data.find { item -> item.date == EntryDate(0, 0, 0) }
+                    if (date == null) {
+                        val cardItem = RecyclerViewData(
+                            entries = listOf(),
+                            adapter = null,
+                            id = "card",
+                            date = EntryDate(5000, 13, 32),
+                            viewType = ENTRY_CARD
 
-                    )
-                    if (!data.contains(cardItem))
-                        data.add(0, cardItem)
+                        )
+                        if (!data.contains(cardItem))
+                            data.add(0, cardItem)
+                    }
+                    if (bottomText == null) {
+                        val bottomTextData = RecyclerViewData(
+                            entries = mutableListOf(),
+                            date = EntryDate(0, 0, 0),
+                            viewType = BOTTOM_TEXT
+                        )
+                        data.add(bottomTextData)
+                    }
+                    // Save state
+
+                    var recyclerViewState: Parcelable? = binding.entriesContainerRv.layoutManager?.onSaveInstanceState()
+                    adapter.setData(data)
+                    binding.entriesContainerRv.layoutManager?.onRestoreInstanceState(recyclerViewState);
+
+                } else {
+                    binding.emptyStateContainer.visibility = View.VISIBLE
                 }
-                if (bottomText == null) {
-                    val bottomTextData = RecyclerViewData(
-                        entries = mutableListOf(),
-                        date = EntryDate(0, 0, 0),
-                        viewType = BOTTOM_TEXT
-                    )
-                    data.add(bottomTextData)
-                }
-                // Save state
-
-                var recyclerViewState: Parcelable? = binding.entriesContainerRv.layoutManager?.onSaveInstanceState()
-                adapter.setData(data)
-                binding.entriesContainerRv.layoutManager?.onRestoreInstanceState(recyclerViewState);
-
-            } else {
-                if (emptyStateEnum == EmptyStateEnum.INVISIBLE) binding.emptyStateContainer.visibility =
-                    View.VISIBLE
-                else if (it.isNotEmpty() && emptyStateEnum == EmptyStateEnum.VISIBLE) binding.emptyStateContainer.visibility =
-                    View.GONE
             }
         }
     }

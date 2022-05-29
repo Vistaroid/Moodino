@@ -163,7 +163,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     private fun navigateToEntryFragment() {
-        findNavController().popBackStack(R.id.addEntryFragment,true)
+        findNavController().popBackStack(R.id.entriesFragment,false)
     }
 
     private fun setupPhotoDialog(): PickSetup {
