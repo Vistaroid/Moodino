@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.entry
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,8 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     private var persianDate: PersianDate = PersianDate()
     private val args: AddEntryFragmentArgs by navArgs()
     private lateinit var mainViewModel: MainActivityViewModel
+    private var nightMode : Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +52,8 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.emojiViewAddEntry.setEmojiClickListener(this)
+
+
     }
 
     private fun setupUi() {
@@ -77,7 +82,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
                 persianDate.shMonth = it.month
                 persianDate.shDay = it.day
             }
-            getPersianDialog(requireContext(), this, persianDate).show()
+            getPersianDialog(requireContext(), this, persianDate , nightMode()).show()
         }
         binding.continueButton.setOnClickListener { navigateToEntryDetailFragment(entry) }
     }

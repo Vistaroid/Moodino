@@ -171,4 +171,6 @@
     <string name="delete_reminder">حذف یادآور ؟</string>
     <string name="daily_moods">"حالت روزانه "</string>
     <string name="moods">حالت ها</string>
+    <string name="contact_us">ارتباط با ما</string>
+
 </resources>
