@@ -39,6 +39,7 @@ class EntryContainerAdapter(
     private val emptyStateVisibility = MutableLiveData<Boolean>()
     var copyData = mutableListOf<RecyclerViewData>()
     var hasTodayEntry = true
+    private var newEntry: Entry? = null
 
     inner class ViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
         private var itemEntryContainerBinding: ItemEntryContainerBinding? = null
@@ -87,6 +88,12 @@ class EntryContainerAdapter(
                         context,
                         language
                     )
+                newEntry?.let { entry ->
+                    if(data.entries[0].date == entry.date){
+                            adapter.newEntry(entry)
+                    }
+                }
+
                 adapter.updateData(data.entries)
                 it.entryRv.adapter = adapter
                 data.adapter = adapter
@@ -217,13 +224,6 @@ class EntryContainerAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (specifyDay == -1){
-            val data = this.data[position]
-            holder.bind(data)
-        }
-    }
-
     override fun getItemViewType(position: Int): Int {
         if (data[position].viewType == ENTRY_CARD) {
             hasTodayEntry = false
@@ -264,6 +264,10 @@ class EntryContainerAdapter(
         return -1
     }
 
+    fun newEntry(entry: Entry?){
+        newEntry = entry
+    }
+
     fun entryPositionOf(entry: Entry): Int {
         val data = copyData.find { it.date == entry.date } ?: return -1
         return copyData.indexOf(data)
@@ -271,6 +275,13 @@ class EntryContainerAdapter(
 
     fun findDataWithPosition(position: Int): EntryDate {
         return copyData[position].date
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (specifyDay == -1){
+            val data = this.data[position]
+            holder.bind(data)
+        }
     }
 }
 

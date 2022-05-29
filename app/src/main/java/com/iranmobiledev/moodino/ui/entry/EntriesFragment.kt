@@ -93,11 +93,13 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupNewEntryOrUpdate(entry: Entry, update: Boolean) {
+        adapter.newEntry(entry)
         lifecycleScope.launch {
             newEntryScroll = true
             if (update) viewModel.update(entry)
             else viewModel.addEntry(entry)
             delay(2000)
+            if(!update)
             scroll(entry.date)
             delay(1500)
             newEntryScroll = false
@@ -355,6 +357,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
     override fun onStop() {
         super.onStop()
+        adapter.newEntry(null)
     }
 
     override fun onDestroy() {

@@ -5,6 +5,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -35,7 +37,7 @@ class ChildRecyclerView(
 
     private val persianDate = PersianDate()
     private val imageLoader: ImageLoadingService by inject()
-
+    private var newEntry: Entry? = null
 
     fun updateData(newList: List<Entry>){
         val diffUtil = ChildRvDiffUtil(entries, newList)
@@ -60,6 +62,14 @@ class ChildRecyclerView(
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry, index: Int) {
+            if(entry == newEntry)
+            newEntry?.let {
+                val alphaAnimation = AlphaAnimation(0f,1f)
+                alphaAnimation.duration = 4000
+                itemView.animation = alphaAnimation
+                alphaAnimation.start()
+                newEntry = null
+            }
             val emoji = emojiFactory.getEmoji(entry.emojiValue)
             setTime(entry.time)
             binding.entryItem = entry
@@ -168,7 +178,9 @@ class ChildRecyclerView(
         }
     }
 
-
+    fun newEntry(entry: Entry){
+        newEntry = entry
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
         return ViewHolder(view)
