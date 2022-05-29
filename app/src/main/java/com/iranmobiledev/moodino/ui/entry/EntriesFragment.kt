@@ -94,10 +94,13 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
     private fun setupNewEntryOrUpdate(entry: Entry, update: Boolean) {
         lifecycleScope.launch {
-            scroll(entry.date)
-            delay(1000)
+            newEntryScroll = true
             if (update) viewModel.update(entry)
             else viewModel.addEntry(entry)
+            delay(2000)
+            scroll(entry.date)
+            delay(1500)
+            newEntryScroll = false
         }
     }
 
@@ -150,7 +153,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                     }
                     // Save state
 
-                    var recyclerViewState: Parcelable? = binding.entriesContainerRv.layoutManager?.onSaveInstanceState()
+                    val recyclerViewState: Parcelable? = binding.entriesContainerRv.layoutManager?.onSaveInstanceState()
                     adapter.setData(data)
                     binding.entriesContainerRv.layoutManager?.onRestoreInstanceState(recyclerViewState);
 
@@ -179,7 +182,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             }
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                println("y is y : $dy")
                 lifecycleScope.launch {
                     withContext(Dispatchers.IO) {
                         if (dy > 0) {

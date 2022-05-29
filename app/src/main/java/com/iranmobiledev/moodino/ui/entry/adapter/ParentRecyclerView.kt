@@ -259,6 +259,7 @@ class EntryContainerAdapter(
                         mDate.month == it.date.month &&
                         mDate.day == it.date.day
             } else data.find { mDate.year == it.date.year && mDate.month == it.date.month }
+
         found?.let { return data.indexOf(it) }
         return -1
     }
