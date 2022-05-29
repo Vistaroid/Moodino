@@ -10,8 +10,9 @@ import ir.hamsaa.persiandatepicker.api.PersianPickerListener
 import saman.zamani.persiandate.PersianDate
 
 
-fun getPersianDialog(context: Context, listener: DatePickerDialogEventListener, initDate: PersianDate) : PersianDatePickerDialog{
-    val persianDateDialog = PersianDatePickerDialog(context).setPositiveButtonString(context.getString(R.string.ok))
+fun getPersianDialog(context: Context, listener: DatePickerDialogEventListener, initDate: PersianDate , nightMode : Boolean) : PersianDatePickerDialog{
+    val persianDateDialog = PersianDatePickerDialog(context)
+        .setPositiveButtonString(context.getString(R.string.ok))
         .setNegativeButton(context.getString(R.string.never_mind))
         .setTodayButton(context.getString(R.string.today))
         .setTodayButtonVisible(true)
@@ -22,13 +23,15 @@ fun getPersianDialog(context: Context, listener: DatePickerDialogEventListener, 
         .setActionTextColor(Color.GRAY)
         .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
         .setShowInBottomSheet(true)
+        .setBackgroundColor(context.getColor(if (nightMode) R.color.gray900 else R.color.white))
+        .setPickerBackgroundColor(context.getColor(if (nightMode)R.color.gray900 else R.color.white))
+        .setTitleColor(context.getColor(if (nightMode)R.color.white else R.color.black))
         .setListener(object : PersianPickerListener{
             override fun onDateSelected(persianPickerDate: PersianPickerDate?) {
                 persianPickerDate?.let {
                     listener.onDateSelected(persianPickerDate)
                 }
             }
-
             override fun onDismissed() {
             }
         })

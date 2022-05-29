@@ -223,6 +223,7 @@
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/ic_cross.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_date.xml" value="0.1325" />
+        <entry key="app/src/main/res/drawable/ic_email.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/ic_img_dont_locke.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_img_locked.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_lock_active.xml" value="0.1185" />
@@ -239,7 +240,11 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2272766808970721" />
         <entry key="app/src/main/res/layout/activity_pin_lock.xml" value="0.13611914915879084" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.23097826086956522" />
+        <entry key="app/src/main/res/layout/add_entry_card_view.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/add_entry_fragment.xml" value="0.11930091185410334" />
+        <entry key="app/src/main/res/layout/average_moods_dialog.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layout/average_moods_dialog_item.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layout/bottom_rv_text.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/days_in_a_row_card.xml" value="0.23774323394333102" />
         <entry key="app/src/main/res/layout/dialog_change_language.xml" value="0.11930091185410334" />
         <entry key="app/src/main/res/layout/dialog_change_mode.xml" value="0.25" />
@@ -249,6 +254,7 @@
         <entry key="app/src/main/res/layout/emoji_view_group.xml" value="0.13177083333333334" />
         <entry key="app/src/main/res/layout/empty_state_view.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/entry_detail_fragment.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/fragment_day_entries.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/fragment_entries.xml" value="0.2033514492753623" />
