@@ -143,7 +143,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             val dialog = TimePickerDialog(entry.time)
             dialog.setListener(this)
             dialog.show(parentFragmentManager,null)
-           // dialog.setTime(entry.time)
         }
         binding.backIv.setOnClickListener { requireActivity().onBackPressed() }
         binding.deleteImage.setOnClickListener {
