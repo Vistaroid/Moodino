@@ -27,6 +27,7 @@ import com.iranmobiledev.moodino.utlis.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import saman.zamani.persiandate.PersianDate
+import kotlin.math.roundToInt
 
 
 class StatsFragment : BaseFragment() {
@@ -38,7 +39,6 @@ class StatsFragment : BaseFragment() {
     private lateinit var daysContainer: ArrayList<FrameLayout>
     private lateinit var daysTextView: ArrayList<TextView>
     private lateinit var daysIcon: ArrayList<ImageView>
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,6 +93,13 @@ class StatsFragment : BaseFragment() {
         val yearView = binding.yearView
         model.entries.observe(viewLifecycleOwner) {
             yearView.entries = it
+        }
+        initMoodCountView()
+    }
+
+    private fun initMoodCountView() {
+        model.entries.observe(viewLifecycleOwner){
+            binding.moodCountViewStats.setEntries(it,true)
         }
     }
 
