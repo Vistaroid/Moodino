@@ -1,15 +1,12 @@
 package com.iranmobiledev.moodino.ui.view
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.ItemActivityBinding
-import com.iranmobiledev.moodino.listener.ActivityItemCallback
 
 class ActivityView(context: Context, attributeSet: AttributeSet?) : LinearLayout(context, attributeSet) , View.OnClickListener{
     val binding : ItemActivityBinding

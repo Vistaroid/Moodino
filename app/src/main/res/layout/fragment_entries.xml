@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8mdp"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/_470mdp"
+            android:paddingBottom="@dimen/_500mdp"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 

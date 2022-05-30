@@ -1,6 +1,5 @@
 package com.iranmobiledev.moodino.utlis.dialog
 
-import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle

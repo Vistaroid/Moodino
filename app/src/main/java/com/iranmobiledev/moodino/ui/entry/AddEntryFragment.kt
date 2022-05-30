@@ -5,16 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.AddEntryFragmentBinding
-import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
-import com.iranmobiledev.moodino.listener.EmojiClickListener
+import com.iranmobiledev.moodino.callback.DatePickerDialogEventListener
+import com.iranmobiledev.moodino.callback.EmojiClickListener
+import com.iranmobiledev.moodino.ui.MainActivityViewModel
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
@@ -27,6 +27,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     private lateinit var binding: AddEntryFragmentBinding
     private var persianDate: PersianDate = PersianDate()
     private val args: AddEntryFragmentArgs by navArgs()
+    private lateinit var mainViewModel: MainActivityViewModel
     private var nightMode : Boolean = false
 
     override fun onCreateView(
@@ -35,6 +36,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         savedInstanceState: Bundle?
     ): View {
         binding = AddEntryFragmentBinding.inflate(inflater, container, false)
+        mainViewModel = ViewModelProvider(requireActivity())[MainActivityViewModel::class.java]
         setupUtil()
         setupClicks()
         setupUi()
@@ -55,12 +57,11 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     private fun setupUi() {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPress)
-        binding.continueButton.visibility = if (args.initialFromBackPress) View.VISIBLE else View.GONE
-        println("date is ${args.date}")
+        binding.continueButton.visibility = if (mainViewModel.initialFromBackPressEntryDetailAddEntry) View.VISIBLE else View.GONE
         binding.dateTv.text = args.date.let { getDate(it) }
         binding.timeTv.text = getTime()
-        binding.emojiViewAddEntry.setSelectedEmojiView(args.emojiValue)
+        if(mainViewModel.selectedAddEntryEmoji != -1)
+        binding.emojiViewAddEntry.setSelectedEmojiView(mainViewModel.selectedAddEntryEmoji)
     }
 
     private fun navigateToEntryDetailFragment(entry: Entry) {
@@ -87,15 +88,10 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     override fun onEmojiItemClicked(emojiValue: Int) {
+        mainViewModel.selectedAddEntryEmoji = emojiValue
         entry.emojiValue = emojiValue
-        if(!args.initialFromBackPress)
+        if(!mainViewModel.initialFromBackPressEntryDetailAddEntry)
         navigateToEntryDetailFragment(entry)
-    }
-
-    private val onBackPress = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            findNavController().navigate(R.id.action_addEntryFragment_to_entriesFragment)
-        }
     }
 
     override fun onDateSelected(persianPickerDate: PersianPickerDate) {

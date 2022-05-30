@@ -1,19 +1,10 @@
 package com.iranmobiledev.moodino.ui.entry.adapter
 
 import android.content.Context
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.AlignSelf
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Activity
-import com.iranmobiledev.moodino.databinding.ItemActivityBinding
-import com.iranmobiledev.moodino.listener.ActivityItemCallback
+import com.iranmobiledev.moodino.callback.ActivityItemCallback
 import com.iranmobiledev.moodino.ui.view.ActivityView
 import com.iranmobiledev.moodino.utlis.ImageLoadingService
 import org.koin.core.component.KoinComponent

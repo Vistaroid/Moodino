@@ -11,7 +11,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.DialogViewBinding
-import com.iranmobiledev.moodino.listener.DialogEventListener
+import com.iranmobiledev.moodino.callback.DialogEventListener
 
 class MoodinoDialog(
     @StringRes private val mainText: Int,

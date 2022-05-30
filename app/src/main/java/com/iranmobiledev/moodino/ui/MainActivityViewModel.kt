@@ -11,16 +11,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iranmobiledev.moodino.base.BaseViewModel
+import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.data.RecyclerViewData
+import com.iranmobiledev.moodino.ui.view.CustomEmojiView
 
 
-class MainActivityViewModel() : BaseViewModel() {
+class MainActivityViewModel : BaseViewModel() {
 
     val TAG = "mainActivityViewModel"
     var isMenuOpen = MutableLiveData(false)
     val entryDate = MutableLiveData<EntryDate>()
+    var selectedAddEntryEmoji : Int = -1
+    var initialFromBackPressEntryDetailAddEntry = false
+    var newEntryAdded: Entry? = null
+    var updateEntry: Entry? = null
 
     fun actionMenu(
         menuItems: ArrayList<LinearLayout>,

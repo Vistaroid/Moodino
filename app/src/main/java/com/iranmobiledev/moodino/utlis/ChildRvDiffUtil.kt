@@ -1,13 +1,12 @@
 package com.iranmobiledev.moodino.utlis
 
-import android.os.Bundle
 import androidx.recyclerview.widget.DiffUtil
+import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.RecyclerViewData
 
-
-class MyDiffUtil(
-    private val oldList: List<RecyclerViewData>,
-    private val newList: List<RecyclerViewData>
+class ChildRvDiffUtil(
+    private val oldList: List<Entry>,
+    private val newList: List<Entry>
 ) : DiffUtil.Callback() {
 
 
@@ -24,10 +23,6 @@ class MyDiffUtil(
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return when {
-            oldList[oldItemPosition].entries != newList[newItemPosition].entries -> false
-            oldList[oldItemPosition].adapter != newList[newItemPosition].adapter -> false
-            else -> true
-        }
+        return oldList[oldItemPosition] == newList[newItemPosition]
     }
 }
