@@ -67,7 +67,6 @@ class App : Application() , KoinComponent{
             factory <ActivityRepository> { ActivityRepositoryImpl(ActivityLocalDataSource(database.getCategoryDao)) }
             factory <MoreRepository> { MoreRepositoryImpl(get()) }
             single <ImageLoadingService>{ GlideImageLoader() }
-            single { EntryContainerAdapter() }
             single { applicationContext.getSharedPreferences("sharedPref", MODE_PRIVATE) }
         }
 
@@ -98,16 +97,16 @@ class App : Application() , KoinComponent{
 
         categories.forEach {
             val id = categoryDao.add(it)
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_friends,getString(R.string.friends)))
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_date, getString(R.string.mDate)))
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_gaming, getString(R.string.gaming)))
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_movie, getString(R.string.movie)))
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_reading, getString(R.string.reading)))
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_relax, getString(R.string.relax)))
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_shopping, getString(R.string.shopping)))
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_sleep, getString(R.string.sleep)))
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_cleaning, getString(R.string.cleaning)))
-            activityDao.addActivity(Activity(null,id,R.drawable.ic_brain, getString(R.string.mLearn)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_friends),getString(R.string.friends)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_date), getString(R.string.mDate)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_gaming), getString(R.string.gaming)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_movie), getString(R.string.movie)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_reading), getString(R.string.reading)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_relax), getString(R.string.relax)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_shopping), getString(R.string.shopping)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_sleep), getString(R.string.sleep)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_cleaning), getString(R.string.cleaning)))
+            activityDao.addActivity(Activity(null,id,resources.getResourceEntryName(R.drawable.ic_brain), getString(R.string.mLearn)))
         }
     }
 }

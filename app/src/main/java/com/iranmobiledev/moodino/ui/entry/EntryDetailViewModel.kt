@@ -25,12 +25,8 @@ class EntryDetailViewModel(
         fetchActivities()
     }
 
-    fun addEntry(entry: Entry) {
-        entryRepository.add(entry)
-    }
-    fun update(entry: Entry){
-        entryRepository.update(entry)
-    }
+
+
 
     fun fetchActivities(){
         viewModelScope.launch(Dispatchers.IO) {

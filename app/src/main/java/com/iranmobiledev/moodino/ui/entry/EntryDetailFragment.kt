@@ -6,41 +6,46 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.callback.*
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
-import com.iranmobiledev.moodino.listener.ActivityItemCallback
-import ir.hamsaa.persiandatepicker.api.PersianPickerDate
-import com.iranmobiledev.moodino.listener.DatePickerDialogEventListener
-import com.iranmobiledev.moodino.listener.DialogEventListener
-import com.iranmobiledev.moodino.listener.EmojiClickListener
+import com.iranmobiledev.moodino.callback.ActivityItemCallback
+import com.iranmobiledev.moodino.callback.DatePickerDialogEventListener
+import com.iranmobiledev.moodino.callback.DialogEventListener
+import com.iranmobiledev.moodino.callback.EmojiClickListener
+import com.iranmobiledev.moodino.ui.MainActivityViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.ParentActivitiesAdapter
-import com.iranmobiledev.moodino.ui.view.CustomEmojiView
 import com.iranmobiledev.moodino.utlis.*
+import com.iranmobiledev.moodino.utlis.dialog.TimePickerDialog
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import saman.zamani.persiandate.PersianDate
 
+
 //TODO for edit mode should implement date and time set
 
 class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCallback,
-    DatePickerDialogEventListener,
+    DatePickerDialogEventListener,TimePickerCallback,
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
     private val entryDetailViewModel: EntryDetailViewModel by viewModel()
+    private lateinit var mainViewModel: MainActivityViewModel
     private val imageLoader: ImageLoadingService by inject()
     private var entry = Entry()
     private var editMode = false
@@ -56,6 +61,8 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
         entry = EntryDetailFragmentArgs.fromBundle(requireArguments()).entry
         activities = entry.activities
+        mainViewModel = ViewModelProvider(requireActivity())[MainActivityViewModel::class.java]
+        mainViewModel.initialFromBackPressEntryDetailAddEntry = true
         setupUi(EmojiFactory.create(requireContext()))
         setupUtil()
         setupObserver()
@@ -80,14 +87,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         editMode = EntryDetailFragmentArgs.fromBundle(requireArguments()).edit
         if (editMode)
             setupEditMode()
-//        val icon = when (entry.emojiValue) {
-//            1 -> emojiFactory.getEmoji(entry.emojiValue)
-//            2 -> emojiFactory.getEmoji(entry.emojiValue)
-//            3 -> emojiFactory.getEmoji(entry.emojiValue)
-//            4 -> emojiFactory.getEmoji(entry.emojiValue)
-//            5 -> emojiFactory.getEmoji(entry.emojiValue)
-//            else -> null
-//        }
         val language = sharedPref.getInt(LANGUAGE, PERSIAN)
         if (language == PERSIAN)
             binding.backIv.rotation = 180f
@@ -124,7 +123,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private fun setupUtil() {
         args.entry.date.let { entry.date = it }
         args.entry.time.let { entry.time = it }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
     }
 
     private fun setupClicks() {
@@ -135,6 +133,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             createPhotoSelectorDialog()
         }
         binding.date.implementSpringAnimationTrait()
+        binding.time.implementSpringAnimationTrait()
         binding.date.setOnClickListener {
             val persianDate = PersianDate()
             entry.date.let {
@@ -143,6 +142,11 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
                 persianDate.shDay = it.day
             }
             getPersianDialog(requireContext(), this, persianDate , nightMode()).show()
+        }
+        binding.time.setOnClickListener {
+            val dialog = TimePickerDialog(entry.time)
+            dialog.setListener(this)
+            dialog.show(parentFragmentManager,null)
         }
         binding.backIv.setOnClickListener { requireActivity().onBackPressed() }
         binding.deleteImage.setOnClickListener {
@@ -167,9 +171,8 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         }
     }
 
-    private fun navigateToEntryFragment(newEntry: Entry) {
-        val action = EntryDetailFragmentDirections.actionEntryDetailFragmentToEntriesFragment(newEntry)
-        findNavController().navigate(action)
+    private fun navigateToEntryFragment() {
+        findNavController().popBackStack(R.id.entriesFragment,false)
     }
 
     private fun setupPhotoDialog(): PickSetup {
@@ -197,7 +200,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
                 binding.apply {
                     entryImageContainer.visibility = View.VISIBLE
                     addPhotoTv.setText(R.string.change_photo)
-                    nestedScrollView.post{
+                    nestedScrollView.post {
                         nestedScrollView.fullScroll(View.FOCUS_DOWN)
                     }
                 }
@@ -212,23 +215,9 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         binding.noteEt.text?.let {
             entry.note = it.toString()
         }
-        if (editMode) entryDetailViewModel.update(entry)
-        else entryDetailViewModel.addEntry(entry)
-        navigateToEntryFragment(entry)
-    }
-    private val onBackPressed = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            val action = EntryDetailFragmentDirections.actionEntryDetailFragmentToAddEntryFragment(
-                date = entry.date,
-                time = entry.time,
-                initialFromBackPress = true,
-                emojiValue = entry.emojiValue
-            )
-            val actionGoToEntriesFragment = EntryDetailFragmentDirections.actionEntryDetailFragmentToEntriesFragment(null)
-            if (!editMode) {
-                findNavController().navigate(action)
-            } else findNavController().navigate(actionGoToEntriesFragment)
-        }
+        if (editMode) mainViewModel.updateEntry = entry
+        else mainViewModel.newEntryAdded = entry
+        navigateToEntryFragment()
     }
 
     override fun onEmojiItemClicked(emojiValue: Int) {
@@ -249,5 +238,22 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             persianPickerDate.persianDay
         )
         setupDate()
+    }
+
+    override fun onTimePickerDataReceived(hour: Int, minute: Int) {
+        val time = EntryTime("","")
+        if(hour < 10)
+            time.hour = "0$hour"
+        else
+            time.hour = hour.toString()
+        if(minute < 10)
+            time.minutes = "0$minute"
+        else
+            time.minutes = minute.toString()
+        entry.time = time
+        setupTime(time)
+    }
+    private fun setupTime(time: EntryTime) {
+        binding.timeTv.text = "${time.hour}:${time.minutes}"
     }
 }

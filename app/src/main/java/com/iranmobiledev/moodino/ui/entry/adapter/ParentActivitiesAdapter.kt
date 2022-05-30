@@ -8,7 +8,7 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.ActivityAndCategory
 import com.iranmobiledev.moodino.data.Category
-import com.iranmobiledev.moodino.listener.ActivityItemCallback
+import com.iranmobiledev.moodino.callback.ActivityItemCallback
 import com.iranmobiledev.moodino.ui.view.ActivityGroupView
 
 

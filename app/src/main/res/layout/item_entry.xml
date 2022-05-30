@@ -26,7 +26,8 @@
             android:layout_height="@dimen/_40mdp"
             android:layout_margin="@dimen/_12mdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <View
             android:id="@+id/spacer"

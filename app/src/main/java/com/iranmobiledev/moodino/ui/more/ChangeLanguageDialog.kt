@@ -6,13 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.DialogChangeLanguageBinding
-import com.iranmobiledev.moodino.databinding.DialogViewBinding
-import com.iranmobiledev.moodino.listener.DialogEventListener
 import com.iranmobiledev.moodino.utlis.ENGLISH
 import com.iranmobiledev.moodino.utlis.PERSIAN
 

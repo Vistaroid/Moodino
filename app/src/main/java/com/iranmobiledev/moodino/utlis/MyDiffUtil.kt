@@ -1,8 +1,9 @@
 package com.iranmobiledev.moodino.utlis
 
+import android.os.Bundle
 import androidx.recyclerview.widget.DiffUtil
-import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.RecyclerViewData
+
 
 class MyDiffUtil(
     private val oldList: List<RecyclerViewData>,

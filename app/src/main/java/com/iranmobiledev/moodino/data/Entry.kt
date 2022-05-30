@@ -39,8 +39,8 @@ data class EntryDate(
 
 @Parcelize
 data class EntryTime(
-    val hour : String,
-    val minutes : String
+    var hour : String,
+    var minutes : String
 ) : Parcelable {
 
     fun getTime(): String{
