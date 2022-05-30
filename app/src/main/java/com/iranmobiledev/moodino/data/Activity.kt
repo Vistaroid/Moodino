@@ -12,7 +12,7 @@ data class Activity(
     @PrimaryKey(autoGenerate = true)
     var activityId : Long?,
     var activityCategoryId : Long,
-    val image : Int,
+    val iconName : String,
     val title : String,
     var selected: Boolean = false
 ) : Parcelable

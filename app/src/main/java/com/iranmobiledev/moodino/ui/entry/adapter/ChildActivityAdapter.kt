@@ -34,7 +34,8 @@ class ChildActivityAdapter(
         private val binding = selfView.binding
 
         fun bind(activity: Activity) {
-            imageLoader.load(context, activity.image, binding.activityIcon)
+            val icon = context.resources.getIdentifier(activity.iconName,"drawable", context.packageName)
+            imageLoader.load(context, icon, binding.activityIcon)
             binding.activityTitle.text = activity.title
 
             activitiesShouldSelect.find { it == activity }
