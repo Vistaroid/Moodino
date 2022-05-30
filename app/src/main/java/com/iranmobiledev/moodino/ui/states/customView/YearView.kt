@@ -9,6 +9,7 @@ import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
+import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.MoodCountView
 import com.iranmobiledev.moodino.utlis.ColorArray
 import saman.zamani.persiandate.PersianDate
@@ -19,10 +20,11 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var canvas: Canvas? = null
     private var ySpace = resources.getDimension(R.dimen.ySpace)
-    private var xSpace = resources.getDimension(R.dimen.ySpace)
+    private var xSpace = resources.getDimension(R.dimen.xSpace)
+    private var margin = resources.getDimension(R.dimen.margin)
     private val persianDate = PersianDate()
     private val grayColor = resources.getColor(R.color.gray_icon)
-    var entries: List<Entry>? = null
+    var entries: List<Entry>? = listOf(Entry(emojiValue = 1, date = EntryDate(1401, 3, 1)))
     private var dayMoodsCount = arrayListOf(0, 0, 0, 0, 0)
 
     private var radCount = 0
@@ -63,7 +65,7 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
     )
 
     fun setData(entries: List<Entry>) {
-        val radius = resources.getDimension(R.dimen.circleSize)
+        val radius = (width / context.resources.displayMetrics.density) / 12 - margin
         drawMonthDaysNumberColumn(radius)
         drawMonths(radius, entries)
         postInvalidate()
@@ -72,7 +74,11 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
     private fun drawMonthDaysNumberColumn(radius: Float) {
         for (i in 1..31) {
             val index = if (i == 0) 1 else i
-            drawNumber(i.toString(), radius, radius * (index * 3) + ySpace + resources.getDimension(R.dimen.margin))
+            drawNumber(
+                i.toString(),
+                radius,
+                (radius * (index * 2.5) + ySpace + resources.getDimension(R.dimen.margin1)).toFloat()
+            )
         }
     }
 
@@ -90,8 +96,9 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
 
     private fun drawNumber(text: String, x: Float, y: Float) {
         paint.color = grayColor
-        paint.typeface= ResourcesCompat.getFont(context, R.font.shabnam_medium)
+        paint.typeface = ResourcesCompat.getFont(context, R.font.shabnam_medium)
         paint.textSize = resources.getDimension(R.dimen.textSize)
+        paint.textAlign  =Paint.Align.CENTER
 
         canvas?.drawText(text, x, y, paint)
     }
@@ -99,7 +106,7 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
     private fun drawText(text: String, x: Float, y: Float) {
         paint.color = grayColor
         paint.textSize = resources.getDimension(R.dimen.textSize)
-        paint.typeface= ResourcesCompat.getFont(context, R.font.shabnam_medium)
+        paint.typeface = ResourcesCompat.getFont(context, R.font.shabnam_medium)
         paint.textAlign = Paint.Align.CENTER
         canvas?.drawText(text, x, y, paint)
     }
@@ -123,14 +130,14 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
             if (i == 1) {
                 drawText(
                     monthsName[month - 1].toString(),
-                    (radius * (month * 2) + xSpace * month) + radius,
+                    radius * (month * 3.2).toFloat(),
                     radius + resources.getDimension(R.dimen.margin)
                 )
             }
 
             drawCircle(
-                cx = (radius * (month * 2) + xSpace * month) + radius,
-                cy = radius * (index * 3) + ySpace,
+                cx = (radius * (month * 3.2)).toFloat(),
+                (radius * (index * 2.5) + ySpace).toFloat(),
                 radius,
                 color
             )

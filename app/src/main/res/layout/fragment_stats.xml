@@ -611,12 +611,14 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
 
-
                     <com.iranmobiledev.moodino.ui.states.customView.YearView
-                        android:layoutDirection="ltr"
                         android:id="@+id/yearView"
-                        android:layout_width="match_parent"
-                        android:layout_height="580dp"
+                        android:layout_width="357dp"
+                        android:layout_height="640dp"
+                        android:layout_marginLeft="32dp"
+                        android:layoutDirection="ltr"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/yearInPixelHeader" />
 
