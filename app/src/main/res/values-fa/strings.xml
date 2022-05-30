@@ -112,7 +112,7 @@
     <string name="wednesday">چهارشنبه</string>
     <string name="thursday">پنجشنبه</string>
     <string name="friday">جمعه</string>
-    <string name="average_mood">میانگین احساسات</string>
+    <string name="average_mood">میانگین </string>
     <string name="keep">نگه داشتن</string>
     <string name="enter_pin">پین جدید را وارد کنید</string>
     <string name="confirm_pin">پین جدید را دوباره وارد کنید</string>
