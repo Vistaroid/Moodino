@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="pink">#EB4961</color>
-    <color name="primary">#15B790</color>
+    <color name="primary">#15B690</color>
     <color name="green">#79CD3C</color>
     <color name="orange">#FF8B3E</color>
     <color name="pink_light">#EC625B</color>
@@ -18,10 +18,10 @@
     <color name="gray_title">#979797</color>
     <color name="gray_icon">#B9B9B9</color>
     <color name="rad_color">#2DAA8A</color>
-    <color name="good_color">#93BB53</color>
-    <color name="meh_color">#71A6C6</color>
-    <color name="bad_color">#D69048</color>
-    <color name="awful_color">#EB4961</color>
+    <color name="good_color">#7FBF1D</color>
+    <color name="meh_color">#4EA2D2</color>
+    <color name="bad_color">#F58B1E</color>
+    <color name="awful_color">#EF162E</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="gray_light">#EFEFEF</color>
 
@@ -29,7 +29,7 @@
     <color name="blue_dark">#62A2C0</color>
     <color name="blue_light">#CFEDFF</color>
     <color name="green_dark">#81B631</color>
-    <color name="green_light">#E5F3D2</color>
+    <color name="green_light">#CDFFD4</color>
     <color name="orange_dark">#E08E34</color>
     <color name="orange_light">#FEE8D0</color>
     <color name="red_dark">#D9223E</color>

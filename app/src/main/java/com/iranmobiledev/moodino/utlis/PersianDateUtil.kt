@@ -98,3 +98,12 @@ fun PersianDate.tomorrow(): EntryDate {
         else -> return EntryDate(0, 0, 0)
     }
 }
+
+fun PersianDate.isGreaterThan(persianDate: PersianDate): Boolean{
+    return when{
+        shYear > persianDate.shYear -> return true
+        shYear == persianDate.shYear && shMonth > persianDate.shMonth -> return true
+        shYear == persianDate.shYear && shMonth == persianDate.shMonth && shDay > persianDate.shDay -> return true
+        else -> return false
+    }
+}
