@@ -84,8 +84,8 @@ class SharedDayViewData(context: Context,height: Float) {
 
     private val colorTextDay = context.resolveColor(R.attr.colorTextDay)
     val dayOfMonthNumberTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).also {
-        it.textAlign = Paint.Align.CENTER
         it.typeface = ResourcesCompat.getFont(context,R.font.shabnam_light)
+        it.textAlign = Paint.Align.CENTER
         it.textSize = textSize
         it.color = colorTextDay
   //      addShadowIfNeeded(it)
