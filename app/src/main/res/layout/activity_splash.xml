@@ -24,13 +24,14 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:backgroundTint="?colorPrimary"
-                app:cardCornerRadius="100dp"
+                app:cardCornerRadius="75dp"
                 app:cardElevation="20dp"
                 android:layout_gravity="center">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_png"
                     android:padding="0dp"/>
 
