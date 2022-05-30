@@ -28,6 +28,7 @@ class SmallActivityAdapter(private val activities: List<Activity>,private val em
             binding.smallActivityTitle.text = activity.title
             //imageLoader.load(itemView.context,activity.image,binding.icon)
           //  binding.icon.setImageResource(activity.image)
+          //  binding.icon.setImageResource(activity.image)
             imageLoader.load(itemView.context,icon,binding.icon)
             ImageViewCompat.setImageTintList(binding.icon, ColorStateList.valueOf(getEmoji(itemView.context,emojiValue).color));
 

@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
+import com.iranmobiledev.moodino.callback.*
 import com.iranmobiledev.moodino.data.Activity
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.EntryDetailFragmentBinding
 import com.iranmobiledev.moodino.callback.ActivityItemCallback
 import com.iranmobiledev.moodino.callback.DatePickerDialogEventListener
@@ -24,6 +26,7 @@ import com.iranmobiledev.moodino.callback.EmojiClickListener
 import com.iranmobiledev.moodino.ui.MainActivityViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.ParentActivitiesAdapter
 import com.iranmobiledev.moodino.utlis.*
+import com.iranmobiledev.moodino.utlis.dialog.TimePickerDialog
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import com.vansuita.pickimage.bundle.PickSetup
 import com.vansuita.pickimage.dialog.PickImageDialog
@@ -37,7 +40,7 @@ import saman.zamani.persiandate.PersianDate
 //TODO for edit mode should implement date and time set
 
 class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCallback,
-    DatePickerDialogEventListener,
+    DatePickerDialogEventListener,TimePickerCallback,
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
@@ -130,6 +133,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             createPhotoSelectorDialog()
         }
         binding.date.implementSpringAnimationTrait()
+        binding.time.implementSpringAnimationTrait()
         binding.date.setOnClickListener {
             val persianDate = PersianDate()
             entry.date.let {
@@ -138,6 +142,11 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
                 persianDate.shDay = it.day
             }
             getPersianDialog(requireContext(), this, persianDate , nightMode()).show()
+        }
+        binding.time.setOnClickListener {
+            val dialog = TimePickerDialog(entry.time)
+            dialog.setListener(this)
+            dialog.show(parentFragmentManager,null)
         }
         binding.backIv.setOnClickListener { requireActivity().onBackPressed() }
         binding.deleteImage.setOnClickListener {
@@ -229,5 +238,22 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             persianPickerDate.persianDay
         )
         setupDate()
+    }
+
+    override fun onTimePickerDataReceived(hour: Int, minute: Int) {
+        val time = EntryTime("","")
+        if(hour < 10)
+            time.hour = "0$hour"
+        else
+            time.hour = hour.toString()
+        if(minute < 10)
+            time.minutes = "0$minute"
+        else
+            time.minutes = minute.toString()
+        entry.time = time
+        setupTime(time)
+    }
+    private fun setupTime(time: EntryTime) {
+        binding.timeTv.text = "${time.hour}:${time.minutes}"
     }
 }

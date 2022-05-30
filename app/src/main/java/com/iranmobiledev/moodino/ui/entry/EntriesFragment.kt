@@ -281,19 +281,11 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun scroll(date: AbstractDate) {
-        val smoothScroller = object : LinearSmoothScroller(requireContext()) {
-            override fun getVerticalSnapPreference(): Int {
-                return SNAP_TO_START
-            }
-        }
         val mDate = EntryDate(date.year, date.month, date.dayOfMonth)
-
-
-        val position = adapter.positionOf(mDate, false)
-        if (position != -1) {
-            smoothScroller.targetPosition = position
-            layoutManager.startSmoothScroll(smoothScroller)
-        }
+      
+      val position = adapter.positionOf(mDate, false)
+        if (position != -1)
+            layoutManager.scrollToPosition(position)
     }
 
 
@@ -309,7 +301,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                 delay(1000)
                 if (position != -1) {
                     smoothScroller.targetPosition = position
-                    layoutManager.startSmoothScroll(smoothScroller)
+                    layoutManager.scrollToPosition(position)
+                    
+                   // layoutManager.startSmoothScroll(smoothScroller)
                 }
             }
 
