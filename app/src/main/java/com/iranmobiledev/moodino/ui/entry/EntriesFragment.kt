@@ -282,7 +282,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
     private fun scroll(date: AbstractDate) {
         val mDate = EntryDate(date.year, date.month, date.dayOfMonth)
-        val position = adapter.positionOf(mDate, false)
+      
+      val position = adapter.positionOf(mDate, false)
         if (position != -1)
             layoutManager.scrollToPosition(position)
     }
@@ -301,6 +302,8 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                 if (position != -1) {
                     smoothScroller.targetPosition = position
                     layoutManager.scrollToPosition(position)
+                    
+                   // layoutManager.startSmoothScroll(smoothScroller)
                 }
             }
 

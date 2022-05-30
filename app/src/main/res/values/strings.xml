@@ -162,7 +162,6 @@
     <string name="off">off</string>
     <string name="delete_photo">Delete photo?</string>
     <string name="change_photo">Change photo</string>
-    <string name="daily_moods">daily moods</string>
     <string name="moods">Moods</string>
     <string name="year_in_pixel">Year In Pixel</string>
     <string name="content_description" translatable="false">content description</string>
@@ -171,7 +170,8 @@
     <string name="confirm_fingerPrint">Confirm Finger Print</string>
     <string name="fingerPrint_error">Finger print not match</string>
     <string name="popup_reminder">Display Reminder Pop-Up</string>
+    <string name="daily_moods">daily moods</string>
     <string name="delete_reminder">Delete Reminder ?</string>
     <string name="contact_us">Contact us</string>
-
+    <string name="not_reached_today">You have not reached this date yet, replace today date</string>
 </resources>
