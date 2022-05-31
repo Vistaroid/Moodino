@@ -54,6 +54,7 @@ class SharedDayViewData(context: Context,height: Float) {
     private val headerTextSize= height * 25 / 60
 
     val headerTextPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
+        it.typeface = ResourcesCompat.getFont(context,R.font.shabnam_light)
         it.textAlign= Paint.Align.CENTER
         it.textSize= headerTextSize
         it.color= colorTextDayName
@@ -63,6 +64,7 @@ class SharedDayViewData(context: Context,height: Float) {
 
     private val colorTextDaySelected= context.resolveColor(R.attr.colorTextDaySelected)
     val headerTextSelectedPaint = Paint(Paint.ANTI_ALIAS_FLAG).also {
+        it.typeface = ResourcesCompat.getFont(context,R.font.shabnam_light)
         it.textAlign = Paint.Align.CENTER
         it.textSize = headerTextSize
         it.color = colorTextDaySelected
@@ -70,12 +72,14 @@ class SharedDayViewData(context: Context,height: Float) {
     }
 
     val weekDayInitialsTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).also {
+        it.typeface = ResourcesCompat.getFont(context,R.font.shabnam_light)
         it.textAlign = Paint.Align.CENTER
         it.textSize = height * 20 / 40
         it.color = colorTextDayName
 //        addShadowIfNeeded(it)
     }
     val dayOfMonthNumberTextSelectedPaint = Paint(Paint.ANTI_ALIAS_FLAG).also {
+        it.typeface = ResourcesCompat.getFont(context,R.font.shabnam_light)
         it.textAlign = Paint.Align.CENTER
         it.textSize = textSize
         it.color = colorTextDaySelected
@@ -92,6 +96,7 @@ class SharedDayViewData(context: Context,height: Float) {
     }
 
     val weekNumberTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).also {
+        it.typeface = ResourcesCompat.getFont(context,R.font.shabnam_light)
         it.textAlign = Paint.Align.CENTER
         it.textSize = headerTextSize
         it.color = colorTextDayName
@@ -100,6 +105,7 @@ class SharedDayViewData(context: Context,height: Float) {
 
     private val colorTextDayHavingEntry= context.resolveColor(R.attr.colorTextDayHaveEntry)
     val haveEntryTextPaint= Paint(Paint.ANTI_ALIAS_FLAG).also {
+        it.typeface = ResourcesCompat.getFont(context,R.font.shabnam_light)
         it.textAlign= Paint.Align.CENTER
         it.textSize= textSize
         it.color= colorTextDayHavingEntry
