@@ -40,9 +40,9 @@ class ChildRecyclerView(
     private var newEntry: Entry? = null
 
     fun updateData(newList: List<Entry>){
-        val diffUtil = ChildRvDiffUtil(entries, newList)
+        val diffUtil = ChildRvDiffUtil(entries, sortedByMinute)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
-        entries = newList
+        entries = sortedByMinute
         diffResults.dispatchUpdatesTo(this)
     }
 

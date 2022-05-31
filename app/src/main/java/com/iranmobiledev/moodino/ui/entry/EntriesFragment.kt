@@ -98,9 +98,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             newEntryScroll = true
             if (update) viewModel.update(entry)
             else viewModel.addEntry(entry)
-            delay(2000)
-            if(!update)
-            scroll(entry.date)
+            delay(1000)
+            if (!update)
+                scroll(entry.date)
             delay(1500)
             newEntryScroll = false
         }
@@ -113,7 +113,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     private fun setupUi() {
-        layoutManager = LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)
+        layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.apply {
             mainToolbar.initialize(this@EntriesFragment)
             entriesContainerRv.layoutManager = layoutManager
@@ -155,9 +155,12 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                     }
                     // Save state
 
-                    val recyclerViewState: Parcelable? = binding.entriesContainerRv.layoutManager?.onSaveInstanceState()
+                    val recyclerViewState: Parcelable? =
+                        binding.entriesContainerRv.layoutManager?.onSaveInstanceState()
                     adapter.setData(data)
-                    binding.entriesContainerRv.layoutManager?.onRestoreInstanceState(recyclerViewState);
+                    binding.entriesContainerRv.layoutManager?.onRestoreInstanceState(
+                        recyclerViewState
+                    );
 
                 } else {
                     binding.emptyStateContainer.visibility = View.VISIBLE
@@ -282,30 +285,26 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
 
     private fun scroll(date: AbstractDate) {
         val mDate = EntryDate(date.year, date.month, date.dayOfMonth)
-      
-      val position = adapter.positionOf(mDate, false)
+        val position = adapter.positionOf(mDate, false)
         if (position != -1)
-            layoutManager.scrollToPosition(position)
+            layoutManager.scrollToPositionWithOffset(position, 0)
     }
-
 
     fun scroll(date: EntryDate) {
         val position = adapter.positionOf(date, true)
 
-            val smoothScroller = object : LinearSmoothScroller(requireContext()) {
-                override fun getVerticalSnapPreference(): Int {
-                    return SNAP_TO_START
-                }
+        val smoothScroller = object : LinearSmoothScroller(requireContext()) {
+            override fun getVerticalSnapPreference(): Int {
+                return SNAP_TO_START
             }
-            lifecycleScope.launchWhenResumed {
-                delay(1000)
-                if (position != -1) {
-                    smoothScroller.targetPosition = position
-                    layoutManager.scrollToPosition(position)
-                    
-                   // layoutManager.startSmoothScroll(smoothScroller)
-                }
+        }
+        lifecycleScope.launchWhenResumed {
+            delay(1000)
+            if (position != -1) {
+                smoothScroller.targetPosition = position
+                layoutManager.scrollToPositionWithOffset(position,0)
             }
+        }
 
         binding.mainToolbar.goToMonth(date)
     }
