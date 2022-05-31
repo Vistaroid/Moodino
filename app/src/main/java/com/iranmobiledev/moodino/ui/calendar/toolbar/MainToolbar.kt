@@ -63,7 +63,7 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
         val newPos= applyOffset(position = -mainCalendar.getMonthsDistance(baseJdn, jdn))
         monthPositionGlobal= newPos
         val date = bind(monthPositionGlobal)
-        changeCurrentMonth?.changeCurrentMonth(date)
+        changeCurrentMonth?.changeCurrentMonth(date,false)
     }
 
     private fun ad() {
@@ -74,7 +74,7 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
         mainToolbarItemClickListener?.clickOnPreviousBtn()
         monthPositionGlobal--
         val date = bind(monthPositionGlobal)
-        changeCurrentMonth?.changeCurrentMonth(date)
+        changeCurrentMonth?.changeCurrentMonth(date, true)
     }
 
     private fun monthClick() {
@@ -85,7 +85,7 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
         mainToolbarItemClickListener?.clickOnNextMonthBtn()
         monthPositionGlobal++
         val date = bind(monthPositionGlobal)
-        changeCurrentMonth?.changeCurrentMonth(date)
+        changeCurrentMonth?.changeCurrentMonth(date, true)
     }
 
     private fun search() {
@@ -165,5 +165,5 @@ interface MainToolbarItemClickListener {
 }
 
 interface ChangeCurrentMonth {
-    fun changeCurrentMonth(date: AbstractDate)
+    fun changeCurrentMonth(date: AbstractDate,isClickOnToolbarItem: Boolean)
 }

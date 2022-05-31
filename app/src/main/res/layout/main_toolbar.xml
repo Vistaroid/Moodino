@@ -21,6 +21,7 @@
 
         <com.iranmobiledev.moodino.ui.calendar.toolbar.CircleImageButton
             android:id="@+id/adBtn"
+            android:visibility="gone"
             android:src="@drawable/ic_widgets"
             android:padding="5dp"
             android:layout_margin="5dp"
@@ -66,6 +67,7 @@
 
         <com.iranmobiledev.moodino.ui.calendar.toolbar.CircleImageButton
             android:id="@+id/searchBtn"
+            android:visibility="gone"
             android:src="@drawable/ic_search"
             android:padding="5dp"
             android:layout_margin="5dp"
