@@ -267,7 +267,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         dialog.show(parentFragmentManager, null)
     }
 
-    override fun changeCurrentMonth(date: AbstractDate) {
+    override fun changeCurrentMonth(date: AbstractDate, isClickOnToolbarItem: Boolean) {
 
         lifecycleScope.launch {
             if (!userScroll)
