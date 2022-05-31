@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.ui.more
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,9 +37,8 @@ class AboutFragment : BaseFragment() {
 
 
         binding.btnAboutContactUs.setOnClickListener {
-            val i = Intent(Intent.ACTION_SEND)
-            i.type = "message/rfc822"
-            i.putExtra(Intent.EXTRA_EMAIL, arrayOf("vistaroidd@gmail.com"))
+            val i = Intent(Intent.ACTION_SENDTO)
+            i.data = Uri.parse("mailto:" + "vistaroidd@gmail.com")
             try {
                 startActivity(Intent.createChooser(i, "Send mail..."))
             } catch (ex: ActivityNotFoundException) {
