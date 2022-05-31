@@ -98,11 +98,12 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             newEntryScroll = true
             if (update) viewModel.update(entry)
             else viewModel.addEntry(entry)
-            //delay(500)
             if (!update)
                 scroll(entry.date)
             delay(1500)
             newEntryScroll = false
+            delay(4000)
+            adapter.newEntry(null)
         }
     }
 
