@@ -158,7 +158,7 @@ class DayView(context: Context, attrs: AttributeSet? = null) : View(context, att
 
         textPaint.getTextBounds(text, 0 , text.length , textBounds)
         val yPos= (height + textBounds.height()) / 2f
-        canvas?.drawText(text, width/2f, yPos + 3.sp, textPaint)
+        canvas?.drawText(text, width/2f, yPos + 0.sp, textPaint)
     }
 
     private fun drawHeader(canvas: Canvas?, shared: SharedDayViewData){

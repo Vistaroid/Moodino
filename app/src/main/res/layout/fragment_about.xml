@@ -23,51 +23,45 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        android:textDirection="rtl"
+        android:layoutDirection="rtl"
+        android:layout_gravity="center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="30dp"
-            android:textDirection="rtl"
-            android:layoutDirection="rtl">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_team"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center_horizontal"/>
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/logo_team"
-                android:adjustViewBounds="true"
-                android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تیم توسعه :"
+            android:textAppearance="?textAppearanceBody1"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/gray_title"
+            android:layout_marginTop="20dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="تیم توسعه :"
-                android:textAppearance="?textAppearanceBody1"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/gray_title"
-                android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/tv_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="تیم توسعه :"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?textAppearanceBody1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textColor="?colorText"/>
 
-            <TextView
-                android:id="@+id/tv_about"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="تیم توسعه :"
-                android:layout_marginTop="5dp"
-                android:textAppearance="?textAppearanceBody1"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:textColor="?colorText"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
