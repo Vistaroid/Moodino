@@ -39,10 +39,10 @@ class ChildRecyclerView(
     private val imageLoader: ImageLoadingService by inject()
     private var newEntry: Entry? = null
 
-    fun updateData(newList: List<Entry>){
-        val diffUtil = ChildRvDiffUtil(entries, sortedByMinute)
+    fun updateData(newList: List<Entry>) {
+        val diffUtil = ChildRvDiffUtil(entries, newList)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
-        entries = sortedByMinute
+        entries = newList
         diffResults.dispatchUpdatesTo(this)
     }
 
@@ -62,13 +62,18 @@ class ChildRecyclerView(
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry, index: Int) {
-            if(entry == newEntry)
-            newEntry?.let {
-                val alphaAnimation = AlphaAnimation(0f,1f)
-                alphaAnimation.duration = 4000
-                itemView.animation = alphaAnimation
-                alphaAnimation.start()
-                newEntry = null
+            newEntry?.let { mNewEntry ->
+                if (mNewEntry.emojiValue == entry.emojiValue &&
+                    mNewEntry.date == entry.date &&
+                    mNewEntry.time == entry.time &&
+                    mNewEntry.photoPath == entry.photoPath &&
+                    mNewEntry.activities == entry.activities){
+                    val alphaAnimation = AlphaAnimation(0f, 1f)
+                    alphaAnimation.duration = 4000
+                    itemView.animation = alphaAnimation
+                    alphaAnimation.start()
+                    newEntry = null
+                }
             }
             val emoji = emojiFactory.getEmoji(entry.emojiValue)
             setTime(entry.time)
@@ -178,9 +183,10 @@ class ChildRecyclerView(
         }
     }
 
-    fun newEntry(entry: Entry){
+    fun newEntry(entry: Entry) {
         newEntry = entry
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
         return ViewHolder(view)

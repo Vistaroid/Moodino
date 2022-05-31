@@ -98,7 +98,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             newEntryScroll = true
             if (update) viewModel.update(entry)
             else viewModel.addEntry(entry)
-            delay(1000)
+            //delay(500)
             if (!update)
                 scroll(entry.date)
             delay(1500)
@@ -271,15 +271,16 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun changeCurrentMonth(date: AbstractDate, isClickOnToolbarItem: Boolean) {
-
-        lifecycleScope.launch {
-            if (!userScroll)
-                if (binding.entriesContainerRv.scrollState == RecyclerView.SCROLL_STATE_IDLE) {
-                    fromToolbarClick = true
-                    scroll(date)
-                    delay(500)
-                    fromToolbarClick = false
-                }
+        if(isClickOnToolbarItem){
+            lifecycleScope.launch {
+                if (!userScroll)
+                    if (binding.entriesContainerRv.scrollState == RecyclerView.SCROLL_STATE_IDLE) {
+                        fromToolbarClick = true
+                        scroll(date)
+                        delay(500)
+                        fromToolbarClick = false
+                    }
+            }
         }
     }
 

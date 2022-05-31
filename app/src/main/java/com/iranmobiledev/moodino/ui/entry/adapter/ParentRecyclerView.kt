@@ -268,11 +268,6 @@ class EntryContainerAdapter(
         newEntry = entry
     }
 
-    fun entryPositionOf(entry: Entry): Int {
-        val data = copyData.find { it.date == entry.date } ?: return -1
-        return copyData.indexOf(data)
-    }
-
     fun findDataWithPosition(position: Int): EntryDate {
         return copyData[position].date
     }
@@ -283,5 +278,6 @@ class EntryContainerAdapter(
             holder.bind(data)
         }
     }
+
 }
 
