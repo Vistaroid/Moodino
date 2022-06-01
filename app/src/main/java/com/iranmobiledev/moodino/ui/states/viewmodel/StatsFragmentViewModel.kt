@@ -82,44 +82,66 @@ class StatsFragmentViewModel(
                     }
 
                     launch {
+                        getLatestChain(dates)
+                    }
+
+                    launch {
                         getLastFiveDaysStatus(dates)
                     }
                 }
         }
     }
 
-    @SuppressLint("NewApi")
-    private fun getLongestChainFromDates(datesList: List<EntryDate>) {
-        val dates = datesList.distinct()
-        var chainLengthMax = 0
-        var chainLength = 1
+    private fun getLatestChain(datesList: List<EntryDate>){
+        val distinctList=  datesList.distinct()
         var latestChain = 0
+        val persianDate = PersianDate()
 
-        for(date in dates){
-            
-            if (date == dates.last()) {
-                chainLengthMax++
-                _latestChainLiveData.postValue(latestChain)
-                break
-            }
-            
-            var index = dates.indexOf(date)
-            var nextItemPersianDate = PersianDate().newDate(dates[index+1])
-            var nextDatePersianDate = PersianDate().newDate(date).addDay(1)
+        if (distinctList.isNotEmpty()){
 
-            var nextItem = EntryDate(nextItemPersianDate.shYear,nextItemPersianDate.shMonth,nextItemPersianDate.shDay)
-            var nextDate = EntryDate(nextDatePersianDate.shYear,nextDatePersianDate.shMonth,nextDatePersianDate.shDay)
+            latestChain=1
+            distinctList.forEach { entryDate ->
 
-            if (nextItem == nextDate){
-                chainLength++
-            }else {
-                if (chainLength >= chainLengthMax) chainLengthMax = chainLength
-                latestChain = chainLength
-                chainLength = 0
+                val currentDate = persianDate.newDate(EntryDate(entryDate.year,entryDate.month,entryDate.day))
+                val prevDatePersianDate = currentDate.addDay(-1)
+                val prevDate = EntryDate(prevDatePersianDate.shYear,prevDatePersianDate.shMonth,prevDatePersianDate.shDay)
+
+                if (distinctList.contains(prevDate)){
+                    latestChain++
+                }else {
+                    latestChain = 1
+                }
             }
         }
 
-        _longestChainLiveData.postValue(chainLengthMax)
+        _latestChainLiveData.postValue(latestChain)
+    }
+
+    private fun getLongestChainFromDates(datesList: List<EntryDate>) {
+
+        val distinctList=  datesList.distinct()
+        var longestChainMax = 0
+        var longestChain = 0
+        val persianDate = PersianDate()
+
+        if (distinctList.isNotEmpty()){
+            longestChain=1
+            distinctList.forEach { entryDate ->
+
+                val currentDate = persianDate.newDate(EntryDate(entryDate.year,entryDate.month,entryDate.day))
+                val prevDatePersianDate = currentDate.addDay(-1)
+                val prevDate = EntryDate(prevDatePersianDate.shYear,prevDatePersianDate.shMonth,prevDatePersianDate.shDay)
+
+                if (distinctList.contains(prevDate)){
+                    longestChain++
+                }else {
+                    if (longestChainMax < longestChain) longestChainMax = longestChain
+                    longestChain = 1
+                }
+            }
+        }
+
+        _longestChainLiveData.postValue(longestChainMax)
     }
 
     fun initLineChart() {
@@ -184,7 +206,6 @@ class StatsFragmentViewModel(
         return entry.emojiValue.toFloat()
     }
 
-    @SuppressLint("NewApi")
     private fun getFiveDaysAsWeekDays() {
         var days = arrayListOf<Int>()
         for (i in 0..4) {
@@ -217,8 +238,7 @@ class StatsFragmentViewModel(
         return dates
     }
 
-    @SuppressLint("NewApi")
-    fun getLastFiveDaysStatus(entryDates: List<EntryDate>) {
+    private fun getLastFiveDaysStatus(entryDates: List<EntryDate>) {
         val lastFiveDayStatus = mutableListOf<Boolean>()
 
         for (i in 0..4) {
@@ -231,9 +251,5 @@ class StatsFragmentViewModel(
         }
 
         _lastFiveDaysStatus.postValue(lastFiveDayStatus)
-    }
-
-    fun initPieChart(pieChart: PieChart) {
-
     }
 }
