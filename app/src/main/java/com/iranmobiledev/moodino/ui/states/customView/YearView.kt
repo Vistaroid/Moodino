@@ -6,6 +6,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.compose.ui.graphics.Color
 import androidx.core.content.res.ResourcesCompat
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.data.Entry
@@ -24,10 +25,8 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
     private var xSpace = resources.getDimension(R.dimen.xSpace)
     private var margin = resources.getDimension(R.dimen.margin)
     private val persianDate = PersianDate()
-    var a = 0
     private val grayColor = resources.getColor(R.color.gray_icon)
-
-    //    private lateinit var entries: List<Entry>
+    private var isFirstTimeDraw = false
     private val monthsLength = listOf<Int>(
         persianDate.getMonthLength(persianDate.shYear, 1),
         persianDate.getMonthLength(persianDate.shYear, 2),
@@ -42,7 +41,6 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
         persianDate.getMonthLength(persianDate.shYear, 11),
         persianDate.getMonthLength(persianDate.shYear, 12),
     )
-
     private val monthsName = listOf(
         persianDate.setShMonth(1).monthName().elementAt(0),
         persianDate.setShMonth(2).monthName().elementAt(0),
@@ -60,9 +58,12 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
 
     fun setData() {
         val radius = (width / context.resources.displayMetrics.density) / 12 - margin
-        drawMonthDaysNumberColumn(radius)
         drawMonths(radius, entries)
-        postInvalidate()
+        drawMonthDaysNumberColumn(radius)
+        if (!isFirstTimeDraw){
+            postInvalidate()
+            isFirstTimeDraw = true
+        }
     }
 
     private fun drawMonthDaysNumberColumn(radius: Float) {
@@ -105,19 +106,19 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
     }
 
     private fun drawMonths(radius: Float, entries: List<Entry>) {
-        val distinctList = entries.distinctBy { it.date }
         monthsLength.forEachIndexed { index, length ->
-            Log.d("balbla", "setEntries: ${a++}")
-            val monthEntries = distinctList.filter { it.date.month == index + 1 }
-            drawMonth(index + 1, length, monthEntries, radius)
+            drawMonth(index + 1, length, radius)
         }
     }
 
-    private fun drawMonth(month: Int, length: Int, monthEntries: List<Entry>, radius: Float) {
+    private fun drawMonth(month: Int, length: Int, radius: Float) {
         for (i in 1..length) {
             val index = if (i == 0) 1 else i
 
-            val color = getColor(month, i)
+            val entryList = entries.filter {it.date.year == PersianDate().shYear && it.date.month == month && it.date.day == i}
+
+            val color =
+                if (entryList.isNotEmpty()) getMoodAverageColor(entryList) else grayColor
 
             if (i == 1) {
                 drawText(
@@ -136,35 +137,21 @@ class YearView(context: Context, attr: AttributeSet? = null) : View(context, att
         }
     }
 
-    fun getColor(month: Int, day: Int): Int {
-        val date = EntryDate(persianDate.shYear, month, day)
-        val distinctEntries = entries.distinctBy { it.date}
-        for (entry in distinctEntries) {
-            val dayEntries = entries.filter { it.date == date }
-            when (getAverageMood(dayEntries)) {
-                1 -> {
-                    ColorArray.awful
-                }
-                2 -> {
-                    ColorArray.bad
-                }
-                3 -> {
-                    ColorArray.meh
-                }
-                4 -> {
-                    ColorArray.good
-                }
-                5 -> {
-                    ColorArray.rad
-                }
-            }
+    fun getMoodAverageColor(moodsValue:List<Entry>): Int {
+        val moods = arrayListOf<Int>()
+        moodsValue.forEach {
+            moods.add(it.emojiValue)
         }
-        return grayColor
+
+        return  getColor(moods.average().roundToInt())
     }
 
-    private fun getAverageMood(entries: List<Entry>): Int {
-        val sum: Double = entries.sumOf { it.emojiValue }.toDouble()
-        val average: Double = sum / entries.size
-        return average.roundToInt()
+    fun getColor(emojiValue: Int):Int = when(emojiValue) {
+        1 -> ColorArray.awful
+        2 -> ColorArray.bad
+        3 -> ColorArray.meh
+        4 -> ColorArray.good
+        5 -> ColorArray.rad
+        else -> {ColorArray.meh}
     }
 }
