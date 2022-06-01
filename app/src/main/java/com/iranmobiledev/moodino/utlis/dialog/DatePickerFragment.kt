@@ -40,7 +40,7 @@ fun getPersianDialog(
                     thisDate.shYear = it.persianYear
                     thisDate.shMonth = it.persianMonth
                     thisDate.shDay = it.persianDay
-                    if (!persianDate.isGreaterThan(thisDate)) {
+                    if (persianDate.isGreaterThan(thisDate)) {
                         Toast.makeText(context, context.getString(R.string.not_reached_today), Toast.LENGTH_LONG)
                             .show()
                         persianPickerDate.setDate(
