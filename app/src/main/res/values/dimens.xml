@@ -5,7 +5,7 @@
     <dimen name="xSpace">10dp</dimen>
     <dimen name="ySpace">6dp</dimen>
     <dimen name="circleSize">6dp</dimen>
-    <dimen name="textSize">10dp</dimen>
+    <dimen name="textSize">12sp</dimen>
     <dimen name="margin">3dp</dimen>
     <dimen name="margin1">2dp</dimen>
 </resources>
