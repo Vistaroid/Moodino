@@ -617,9 +617,8 @@
 
                     <com.iranmobiledev.moodino.ui.states.customView.YearView
                         android:id="@+id/yearView"
-                        android:layout_width="357dp"
+                        android:layout_width="match_parent"
                         android:layout_height="640dp"
-                        android:layout_marginLeft="32dp"
                         android:layoutDirection="ltr"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"

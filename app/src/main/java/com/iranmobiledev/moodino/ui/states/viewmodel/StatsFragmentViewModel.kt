@@ -1,19 +1,16 @@
 package com.iranmobiledev.moodino.ui.states.viewmodel
 
-import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.ui.states.customView.YearView
+import com.iranmobiledev.moodino.ui.states.customView.YearViewHelper
 import com.iranmobiledev.moodino.utlis.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -267,8 +264,9 @@ class StatsFragmentViewModel(
     fun initYearView(yearView: YearView){
         viewModelScope.launch(Dispatchers.Main) {
             entries.asFlow().collectLatest {
+                // most filter entries in one year
                 yearView.entries = it
-                yearView.invalidate()
+                yearView.postInvalidate()
             }
         }
     }
