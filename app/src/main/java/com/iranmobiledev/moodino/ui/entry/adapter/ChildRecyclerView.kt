@@ -9,6 +9,7 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RestrictTo
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
@@ -22,6 +23,7 @@ import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.ItemEntryBinding
 import com.iranmobiledev.moodino.callback.EntryEventLister
 import com.iranmobiledev.moodino.data.RecyclerViewData
+import com.iranmobiledev.moodino.ui.MainActivityViewModel
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -32,14 +34,15 @@ class ChildRecyclerView(
     private var entryEventLister: EntryEventLister,
     var entries: List<Entry>,
     private val context: Context,
-    private val language: Int
+    private val language: Int,
 ) : RecyclerView.Adapter<ChildRecyclerView.ViewHolder>(), KoinComponent {
 
     private val persianDate = PersianDate()
     private val imageLoader: ImageLoadingService by inject()
     private var newEntry: Entry? = null
+    private val mainViewModel: MainActivityViewModel by inject()
 
-    fun updateData(newList: List<Entry>){
+    fun updateData(newList: List<Entry>) {
         val diffUtil = ChildRvDiffUtil(entries, newList)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         entries = newList
@@ -62,13 +65,18 @@ class ChildRecyclerView(
 
         @SuppressLint("ResourceType", "SetTextI18n")
         fun bind(entry: Entry, index: Int) {
-            if(entry == newEntry)
-            newEntry?.let {
-                val alphaAnimation = AlphaAnimation(0f,1f)
-                alphaAnimation.duration = 4000
-                itemView.animation = alphaAnimation
-                alphaAnimation.start()
-                newEntry = null
+            newEntry?.let { mNewEntry ->
+                if (mNewEntry.emojiValue == entry.emojiValue &&
+                    mNewEntry.date == entry.date &&
+                    mNewEntry.time == entry.time &&
+                    mNewEntry.photoPath == entry.photoPath &&
+                    mNewEntry.activities == entry.activities){
+                    val alphaAnimation = AlphaAnimation(0f, 1f)
+                    alphaAnimation.duration = 4000
+                    itemView.animation = alphaAnimation
+                    alphaAnimation.start()
+                    newEntry = null
+                }
             }
             val emoji = emojiFactory.getEmoji(entry.emojiValue)
             setTime(entry.time)
@@ -178,9 +186,10 @@ class ChildRecyclerView(
         }
     }
 
-    fun newEntry(entry: Entry){
+    fun newEntry(entry: Entry) {
         newEntry = entry
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_entry, parent, false)
         return ViewHolder(view)

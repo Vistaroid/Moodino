@@ -21,6 +21,7 @@ import com.iranmobiledev.moodino.callback.AddEntryCardViewListener
 import com.iranmobiledev.moodino.callback.EntryEventLister
 import com.iranmobiledev.moodino.utlis.MyDiffUtil
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.onCompletion
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
@@ -86,11 +87,11 @@ class EntryContainerAdapter(
                         entryEventListener,
                         listOf(),
                         context,
-                        language
+                        language,
                     )
                 newEntry?.let { entry ->
                     if(data.entries[0].date == entry.date){
-                            adapter.newEntry(entry)
+                        adapter.newEntry(entry)
                     }
                 }
 
@@ -268,11 +269,6 @@ class EntryContainerAdapter(
         newEntry = entry
     }
 
-    fun entryPositionOf(entry: Entry): Int {
-        val data = copyData.find { it.date == entry.date } ?: return -1
-        return copyData.indexOf(data)
-    }
-
     fun findDataWithPosition(position: Int): EntryDate {
         return copyData[position].date
     }
@@ -283,5 +279,6 @@ class EntryContainerAdapter(
             holder.bind(data)
         }
     }
+
 }
 
