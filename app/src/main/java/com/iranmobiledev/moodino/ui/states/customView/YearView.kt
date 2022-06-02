@@ -13,6 +13,7 @@ import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.utlis.ColorArray
 import com.iranmobiledev.moodino.utlis.EmojiValue
+import kotlinx.coroutines.coroutineScope
 import saman.zamani.persiandate.PersianDate
 import kotlin.math.roundToInt
 

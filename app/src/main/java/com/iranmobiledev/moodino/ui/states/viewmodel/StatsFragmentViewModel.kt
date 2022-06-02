@@ -6,12 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
+import com.iranmobiledev.moodino.ui.states.customView.YearView
 import com.iranmobiledev.moodino.utlis.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -64,51 +66,55 @@ class StatsFragmentViewModel(
     }
 
     fun initDaysInRow() {
-
         viewModelScope.launch {
-                entries.asFlow().collectLatest {
+            entries.asFlow().collectLatest {
 
-                    //Adding week days name to daysInRow card
-                    launch {
-                        getFiveDaysAsWeekDays()
-                    }
-
-                    val dates = withContext(Dispatchers.IO) {
-                        getDatesFromEntries()
-                    }
-
-                    launch {
-                        getLongestChainFromDates(dates)
-                    }
-
-                    launch {
-                        getLatestChain(dates)
-                    }
-
-                    launch {
-                        getLastFiveDaysStatus(dates)
-                    }
+                //Adding week days name to daysInRow card
+                launch {
+                    getFiveDaysAsWeekDays()
                 }
+
+                val dates = withContext(Dispatchers.IO) {
+                    getDatesFromEntries()
+                }
+
+                launch {
+                    getLongestChainFromDates(dates)
+                }
+
+                launch {
+                    getLatestChain(dates)
+                }
+
+                launch {
+                    getLastFiveDaysStatus(dates)
+                }
+            }
         }
     }
 
-    private fun getLatestChain(datesList: List<EntryDate>){
-        val distinctList=  datesList.distinct()
+    private fun getLatestChain(datesList: List<EntryDate>) {
+        val distinctList = datesList.distinct()
         var latestChain = 0
         val persianDate = PersianDate()
 
-        if (distinctList.isNotEmpty()){
+        if (distinctList.isNotEmpty()) {
 
-            latestChain=1
+            latestChain = 1
             distinctList.forEach { entryDate ->
 
-                val currentDate = persianDate.newDate(EntryDate(entryDate.year,entryDate.month,entryDate.day))
+                val currentDate =
+                    persianDate.newDate(EntryDate(entryDate.year, entryDate.month, entryDate.day))
                 val prevDatePersianDate = currentDate.addDay(-1)
-                val prevDate = EntryDate(prevDatePersianDate.shYear,prevDatePersianDate.shMonth,prevDatePersianDate.shDay)
+                val prevDate = EntryDate(
+                    prevDatePersianDate.shYear,
+                    prevDatePersianDate.shMonth,
+                    prevDatePersianDate.shDay
+                )
 
-                if (distinctList.contains(prevDate)){
+                if (distinctList.contains(prevDate)) {
                     latestChain++
-                }else {
+                } else {
                     latestChain = 1
                 }
             }
@@ -119,22 +125,27 @@ class StatsFragmentViewModel(
 
     private fun getLongestChainFromDates(datesList: List<EntryDate>) {
 
-        val distinctList=  datesList.distinct()
+        val distinctList = datesList.distinct()
         var longestChainMax = 0
         var longestChain = 0
         val persianDate = PersianDate()
 
-        if (distinctList.isNotEmpty()){
-            longestChain=1
+        if (distinctList.isNotEmpty()) {
+            longestChain = 1
             distinctList.forEach { entryDate ->
 
-                val currentDate = persianDate.newDate(EntryDate(entryDate.year,entryDate.month,entryDate.day))
+                val currentDate =
+                    persianDate.newDate(EntryDate(entryDate.year, entryDate.month, entryDate.day))
                 val prevDatePersianDate = currentDate.addDay(-1)
-                val prevDate = EntryDate(prevDatePersianDate.shYear,prevDatePersianDate.shMonth,prevDatePersianDate.shDay)
+                val prevDate = EntryDate(
+                    prevDatePersianDate.shYear,
+                    prevDatePersianDate.shMonth,
+                    prevDatePersianDate.shDay
+                )
 
-                if (distinctList.contains(prevDate)){
+                if (distinctList.contains(prevDate)) {
                     longestChain++
-                }else {
+                } else {
                     if (longestChainMax < longestChain) longestChainMax = longestChain
                     longestChain = 1
                 }
@@ -234,7 +245,7 @@ class StatsFragmentViewModel(
                 dates.add(entry.date!!)
             }
         }
-        
+
         return dates
     }
 
@@ -251,5 +262,14 @@ class StatsFragmentViewModel(
         }
 
         _lastFiveDaysStatus.postValue(lastFiveDayStatus)
+    }
+
+    fun initYearView(yearView: YearView){
+        viewModelScope.launch(Dispatchers.Main) {
+            entries.asFlow().collectLatest {
+                yearView.entries = it
+                yearView.invalidate()
+            }
+        }
     }
 }
