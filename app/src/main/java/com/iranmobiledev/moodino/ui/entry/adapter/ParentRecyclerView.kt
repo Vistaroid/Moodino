@@ -85,7 +85,7 @@ class EntryContainerAdapter(
                 val adapter =
                     ChildRecyclerView(
                         entryEventListener,
-                        listOf(),
+                        data.entries,
                         context,
                         language,
                     )
@@ -94,8 +94,6 @@ class EntryContainerAdapter(
                         adapter.newEntry(entry)
                     }
                 }
-
-                adapter.updateData(data.entries)
                 it.entryRv.adapter = adapter
                 data.adapter = adapter
             }

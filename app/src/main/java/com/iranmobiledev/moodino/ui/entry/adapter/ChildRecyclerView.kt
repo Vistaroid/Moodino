@@ -40,13 +40,10 @@ class ChildRecyclerView(
     private val persianDate = PersianDate()
     private val imageLoader: ImageLoadingService by inject()
     private var newEntry: Entry? = null
-    private val mainViewModel: MainActivityViewModel by inject()
 
-    fun updateData(newList: List<Entry>) {
-        val diffUtil = ChildRvDiffUtil(entries, newList)
-        val diffResults = DiffUtil.calculateDiff(diffUtil)
-        entries = newList
-        diffResults.dispatchUpdatesTo(this)
+    init {
+        entries = entries.sortedByDescending { it.time.minutes.toInt() }
+        entries = entries.sortedByDescending { it.time.hour.toInt() }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
