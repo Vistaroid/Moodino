@@ -173,5 +173,6 @@
     <string name="daily_moods">daily moods</string>
     <string name="delete_reminder">Delete Reminder ?</string>
     <string name="contact_us">Contact us</string>
-    <string name="not_reached_today">You have not reached this date yet, replace today date</string>
+    <string name="not_reached_today">You have not reached this date yet, replaced today date</string>
+    <string name="not_reached_time">You have not reached this time yet, replaced current time</string>
 </resources>

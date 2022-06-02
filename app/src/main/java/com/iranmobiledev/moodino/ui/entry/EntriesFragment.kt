@@ -98,10 +98,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             newEntryScroll = true
             if (update) viewModel.update(entry)
             else viewModel.addEntry(entry)
-            if (!update){
-                delay(1000)
+            delay(1000)
+            if (!update)
                 scroll(entry.date)
-            }
             delay(1500)
             newEntryScroll = false
             delay(4000)
@@ -306,7 +305,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             delay(1000)
             if (position != -1) {
                 smoothScroller.targetPosition = position
-                layoutManager.scrollToPositionWithOffset(position,0)
+                layoutManager.scrollToPosition(position)
             }
         }
 

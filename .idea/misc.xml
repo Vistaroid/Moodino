@@ -187,6 +187,7 @@
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/dialog_view.xml" value="0.25" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/emoji_item.xml" value="0.2513586956521739" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/emoji_view.xml" value="0.21467391304347827" />
+        <entry key="..\:/project team/Moodino/app/src/main/res/layout/emoji_view_group.xml" value="0.27291666666666664" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empry_state_fragment.xml" value="0.2513586956521739" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state.xml" value="0.27291666666666664" />
         <entry key="..\:/project team/Moodino/app/src/main/res/layout/empty_state_fragment.xml" value="0.25" />
@@ -216,7 +217,6 @@
         <entry key="app/src/main/res/drawable/background_gradiant.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_ovel.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/background_pinlock.xml" value="0.124" />
-        <entry key="app/src/main/res/drawable/circle_bg.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/dialog_bg.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/emoji_rad.xml" value="0.1225" />
@@ -237,14 +237,8 @@
         <entry key="app/src/main/res/drawable/ic_widgets.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/note_bg.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/popup_bg.xml" value="0.1175" />
-        <entry key="app/src/main/res/drawable/primary_circle_shape.xml" value="0.1175" />
-        <entry key="app/src/main/res/drawable/rectangle.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/round_corner_rectangle.xml" value="0.1225" />
-        <entry key="app/src/main/res/drawable/round_left_corner_rectangle.xml" value="0.1175" />
-        <entry key="app/src/main/res/drawable/round_right_corner_rectangle.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/unselect_activity_bg.xml" value="0.1325" />
-        <entry key="app/src/main/res/drawable/view_bg_stroke.xml" value="0.1175" />
-        <entry key="app/src/main/res/drawable/view_circle_bg_stroke.xml" value="0.1175" />
         <entry key="app/src/main/res/layout/achievement_icon.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/activity_activities.xml" value="0.11930091185410334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2272766808970721" />

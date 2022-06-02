@@ -52,6 +52,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private val sharedPref: SharedPreferences by inject()
     private var activities = mutableListOf<Activity>()
     private val args: EntryDetailFragmentArgs by navArgs()
+    private val persianDate = PersianDate()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -105,7 +106,6 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     private fun setupDate() {
-        val persianDate = PersianDate()
         entry.date.let {
             persianDate.shDay = it.day
             persianDate.shMonth = it.month
@@ -144,7 +144,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             getPersianDialog(requireContext(), this, persianDate , nightMode()).show()
         }
         binding.time.setOnClickListener {
-            val dialog = TimePickerDialog(entry.time)
+            val dialog = TimePickerDialog(persianDate,entry.time)
             dialog.setListener(this)
             dialog.show(parentFragmentManager,null)
         }
