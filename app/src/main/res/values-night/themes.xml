@@ -37,4 +37,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.Moodino.circleColor">
+        <item name="circleColor">@style/circleDatk</item>
+    </style>
 </resources>

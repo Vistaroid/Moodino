@@ -68,4 +68,8 @@
         <item name="cornerSize">24dp</item>
     </style>
 
+    <style name="Theme.Moodino.circleColor">
+        <item name="circleColor">@style/circleLight</item>
+    </style>
+
 </resources>

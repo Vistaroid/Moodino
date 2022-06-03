@@ -12,6 +12,7 @@ import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.ui.states.customView.YearView
 import com.iranmobiledev.moodino.ui.states.customView.YearViewHelper
 import com.iranmobiledev.moodino.utlis.*
+import io.github.persiancalendar.calendar.AbstractDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -36,6 +37,7 @@ class StatsFragmentViewModel(
     private val _lastFiveDaysStatus: MutableLiveData<List<Boolean>> =
         MutableLiveData(listOf(false, false, false, false, false))
 
+    val selectedDateLiveData = MutableLiveData<AbstractDate>()
     val lineChartEntries: LiveData<List<Entry>>
         get() = _lineChartEntries
     val longestChainLiveData: LiveData<Int>
@@ -143,7 +145,7 @@ class StatsFragmentViewModel(
                 if (distinctList.contains(prevDate)) {
                     longestChain++
                 } else {
-                    if (longestChainMax < longestChain) longestChainMax = longestChain
+                    if (longestChain >= longestChainMax) longestChainMax = longestChain
                     longestChain = 1
                 }
             }
@@ -153,12 +155,11 @@ class StatsFragmentViewModel(
     }
 
     fun initLineChart() {
-        val persianDate = PersianDate()
         viewModelScope.launch {
             _entries.asFlow().collectLatest {
-                launch {
+                selectedDateLiveData.asFlow().collectLatest { date ->
                     var currentMonthEntries =
-                        it.filter { it.date.year == persianDate.shYear && it.date.month == persianDate.shMonth }
+                        it.filter { it.date.year == date.year && it.date.month == date.month }
                     getEntriesForLineChart(currentMonthEntries)
                 }
             }
@@ -261,7 +262,7 @@ class StatsFragmentViewModel(
         _lastFiveDaysStatus.postValue(lastFiveDayStatus)
     }
 
-    fun initYearView(yearView: YearView){
+    fun initYearView(yearView: YearView) {
         viewModelScope.launch(Dispatchers.Main) {
             entries.asFlow().collectLatest {
                 // most filter entries in one year
