@@ -1,8 +1,6 @@
 package com.iranmobiledev.moodino.ui.states
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -17,17 +15,13 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
-import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
-import com.iranmobiledev.moodino.databinding.MoodsCountViewBinding
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.language
 import com.iranmobiledev.moodino.ui.more.MoreViewModel
+import com.iranmobiledev.moodino.ui.states.customView.YearViewHelper
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import saman.zamani.persiandate.PersianDate
-import kotlin.math.roundToInt
 
 
 class StatsFragment : BaseFragment() {
@@ -75,9 +69,9 @@ class StatsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         model.getEntries()
         initRtl()
-        initDayInRowCard()
-        initLineChartCard()
-        initPieChartCard()
+       // initDayInRowCard()
+       // initLineChartCard()
+        //initPieChartCard()
         initYearInPixelCard()
     }
 
@@ -91,10 +85,9 @@ class StatsFragment : BaseFragment() {
 
     private fun initYearInPixelCard() {
         val yearView = binding.yearView
-        model.entries.observe(viewLifecycleOwner) {
-            yearView.entries = it
-        }
-        initMoodCountView()
+        yearView.yearViewHelper= YearViewHelper(requireContext())
+        model.initYearView(yearView)
+       // initMoodCountView()
     }
 
     private fun initMoodCountView() {

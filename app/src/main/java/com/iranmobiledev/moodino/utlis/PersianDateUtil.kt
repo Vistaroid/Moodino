@@ -101,9 +101,10 @@ fun PersianDate.tomorrow(): EntryDate {
 
 fun PersianDate.isGreaterThan(persianDate: PersianDate): Boolean{
     return when{
-        shYear > persianDate.shYear -> return true
-        shYear == persianDate.shYear && shMonth > persianDate.shMonth -> return true
-        shYear == persianDate.shYear && shMonth == persianDate.shMonth && shDay > persianDate.shDay -> return true
-        else -> return false
+        shYear > persianDate.shYear -> return false
+        shYear == persianDate.shYear && shMonth > persianDate.shMonth -> return false
+        shYear == persianDate.shYear && shMonth == persianDate.shMonth && shDay > persianDate.shDay -> return false
+        shYear == persianDate.shYear && shMonth == persianDate.shMonth && shDay == persianDate.shDay -> return false
+        else -> return true
     }
 }
