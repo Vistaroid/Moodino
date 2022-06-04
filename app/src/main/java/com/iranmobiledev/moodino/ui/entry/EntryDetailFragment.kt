@@ -48,6 +48,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private lateinit var mainViewModel: MainActivityViewModel
     private val imageLoader: ImageLoadingService by inject()
     private var entry = Entry()
+    private var fakeEntry = Entry()
     private var editMode = false
     private val sharedPref: SharedPreferences by inject()
     private var activities = mutableListOf<Activity>()
@@ -148,7 +149,9 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             dialog.setListener(this)
             dialog.show(parentFragmentManager,null)
         }
-        binding.backIv.setOnClickListener { requireActivity().onBackPressed() }
+        binding.backIv.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
         binding.deleteImage.setOnClickListener {
             val dialog = makeDialog(R.string.delete_photo, icon = R.drawable.ic_delete)
             dialog.setItemEventListener(object : DialogEventListener {
@@ -211,6 +214,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     private val saveOnClick = View.OnClickListener {
+        entry.emojiValue = fakeEntry.emojiValue
         entry.activities = activities
         binding.noteEt.text?.let {
             entry.note = it.toString()
@@ -221,7 +225,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     override fun onEmojiItemClicked(emojiValue: Int) {
-        entry.emojiValue = emojiValue
+        fakeEntry.emojiValue = emojiValue
     }
 
     override fun onActivityItemClicked(activity: Activity, selected: Boolean) {
