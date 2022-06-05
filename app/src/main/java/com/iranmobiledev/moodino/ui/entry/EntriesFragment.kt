@@ -60,11 +60,10 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharePref.edit().putBoolean(FIRST_ENTER, false).apply()
-        val language = sharePref.getInt(LANGUAGE, PERSIAN)
         adapter = EntryContainerAdapter(
             context,
             this,
-            this, mutableListOf(), language
+            this, mutableListOf()
         )
     }
 
