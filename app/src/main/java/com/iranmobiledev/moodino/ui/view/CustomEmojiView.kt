@@ -42,7 +42,7 @@ class CustomEmojiView(context: Context, attr: AttributeSet): AppCompatImageView(
         }
 
         background= ResourcesCompat.getDrawable(resources,R.drawable.circle_bg,context.theme)
-        backgroundTintList= resources.getColorStateList(if (nightMode) R.color.black else R.color.white, context.theme)
+        backgroundTintList= resources.getColorStateList(if (nightMode) R.color.transparent else R.color.white, context.theme)
         bgTintColor= backgroundTintList
         tintColor= imageTintList
     }
