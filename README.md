@@ -18,6 +18,9 @@ with moodino you can track your moods.
 
 %20 
 
+## Contributes
+![Alt](https://repobeats.axiom.co/api/embed/41c9e6c29a3bd1eedec137fa51de39ccf2ddb4c5.svg "Repobeats analytics image")
+
 ### want to join and contribute ?
 
 We will be happy if you want to cooperate with us in this project and share knowledge.
