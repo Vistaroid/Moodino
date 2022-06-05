@@ -218,6 +218,7 @@
         <entry key="app/src/main/res/drawable/background_gradiant.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_ovel.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/background_pinlock.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/circle_bg.xml" value="0.227" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/circle_shape_dard.xml" value="0.173" />
         <entry key="app/src/main/res/drawable/dialog_bg.xml" value="0.1225" />
