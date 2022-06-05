@@ -205,35 +205,9 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
             Log.d(TAG, "initDayInRowCard: $it")
             binding.daysInRowNumberTextView.text = it.toString()
         }
-        handleThemeChangeDaysInRow()
         setupWeekDays()
         setupDaysStatus()
     }
-
-    fun handleThemeChangeDaysInRow() {
-        val views = listOf(
-            binding.firstDayFrameLayout,
-            binding.secondDayFrameLayout,
-            binding.thirdDayFrameLayout,
-            binding.fourthDayFrameLayout,
-            binding.fifthDayFrameLayout
-        )
-
-        val nightMode =
-            when (context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
-                Configuration.UI_MODE_NIGHT_YES -> true
-                Configuration.UI_MODE_NIGHT_NO -> false
-                else -> false
-            }
-
-        views.forEach {
-            it.background =
-                if (nightMode) resources.getDrawable(R.drawable.circle_shape_dark) else resources.getDrawable(
-                    R.drawable.circle_shape
-                )
-        }
-    }
-
 
     private fun initLineChartCard() {
         model.initLineChart()
@@ -263,7 +237,7 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
                 if (currentStatus) {
                     view.background = resources.getDrawable(R.drawable.primary_circle_shape)
                     daysIcon[daysContainer.indexOf(view)].apply {
-                        setImageDrawable(resources.getDrawable(R.drawable.ic_checked))
+                        setImageDrawable(resources.getDrawable(R.drawable.ic_tick))
                     }
                 } else {
                     view.background = resources.getDrawable(R.drawable.circle_shape)
