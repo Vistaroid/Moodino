@@ -235,6 +235,8 @@
         <entry key="app/src/main/res/drawable/ic_lock_active.xml" value="0.1185" />
         <entry key="app/src/main/res/drawable/ic_more_outlined.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_popup.xml" value="0.1175" />
+        <entry key="app/src/main/res/drawable/ic_tick.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/ic_tick_with_out_bg.xml" value="0.156" />
         <entry key="app/src/main/res/drawable/ic_very_happy_outlined.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/ic_widgets.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/note_bg.xml" value="0.1225" />
