@@ -75,6 +75,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         binding = FragmentEntriesBinding.inflate(inflater, container, false)
         mainViewModel = ViewModelProvider(requireActivity())[MainActivityViewModel::class.java]
 
+
         val updateEntry = mainViewModel.updateEntry
         val addEntry = mainViewModel.newEntryAdded
         updateEntry?.let {
