@@ -11,6 +11,7 @@ import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.RecyclerViewData
 import com.iranmobiledev.moodino.repository.activity.ActivityRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -27,7 +28,7 @@ class EntryViewModel(
 
     fun fetchEntries() {
         viewModelScope.launch (Dispatchers.IO){
-            entryRepository.getAll().collect{
+             entryRepository.getAll().collectLatest{
                 entries.postValue(makeListFromEntries(it as MutableList<Entry>, mutableListOf()))
             }
         }
