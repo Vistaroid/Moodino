@@ -53,6 +53,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private var activities = mutableListOf<Activity>()
     private val args: EntryDetailFragmentArgs by navArgs()
     private val persianDate = PersianDate()
+    private var timeDialog = TimePickerDialog(PersianDate(), null)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,11 +61,11 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         savedInstanceState: Bundle?
     ): View {
         binding = EntryDetailFragmentBinding.inflate(inflater, container, false)
-        entry = EntryDetailFragmentArgs.fromBundle(requireArguments()).entry
+        entry = args.entry
         activities = entry.activities
         mainViewModel = ViewModelProvider(requireActivity())[MainActivityViewModel::class.java]
         mainViewModel.initialFromBackPressEntryDetailAddEntry = true
-        setupUi(EmojiFactory.create(requireContext()))
+        setupUi()
         setupUtil()
         setupObserver()
         setupClicks()
@@ -79,7 +80,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         }
     }
 
-    private fun setupUi(emojiFactory: EmojiInterface) {
+    private fun setupUi() {
         if (entry.note.isEmpty())
             binding.addPhotoTv.setText(R.string.tap_to_add_photo)
         else
@@ -144,9 +145,9 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             getPersianDialog(requireContext(), this, persianDate , nightMode()).show()
         }
         binding.time.setOnClickListener {
-            val dialog = TimePickerDialog(persianDate,entry.time)
-            dialog.setListener(this)
-            dialog.show(parentFragmentManager,null)
+            timeDialog = TimePickerDialog(persianDate,entry.time)
+            timeDialog.setListener(this)
+            timeDialog.show(parentFragmentManager,null)
         }
         binding.backIv.setOnClickListener { requireActivity().onBackPressed() }
         binding.deleteImage.setOnClickListener {
@@ -232,11 +233,23 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     override fun onDateSelected(persianPickerDate: PersianPickerDate) {
+        val persianDate = PersianDate()
         entry.date = EntryDate(
             persianPickerDate.persianYear,
             persianPickerDate.persianMonth,
             persianPickerDate.persianDay
         )
+        if(checkDateAndTimeState(dateDialogData = persianPickerDate, timeDialogData = timeDialog, persianDate = persianDate)) {
+            onTimePickerDataReceived(persianDate.hour,persianDate.minute)
+            entry.date = EntryDate(
+                persianDate.shYear,
+                persianDate.shMonth,
+                persianDate.shDay
+            )
+            entry.time = EntryTime(persianDate.hour.toString(),persianDate.minute.toString())
+        }
+        else
+            onTimePickerDataReceived(timeDialog.currentTime.hour.toInt(),timeDialog.currentTime.minutes.toInt())
         setupDate()
     }
 

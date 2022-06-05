@@ -3,6 +3,8 @@ package com.iranmobiledev.moodino.utlis
 import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.EntryTime
+import com.iranmobiledev.moodino.utlis.dialog.TimePickerDialog
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
@@ -107,4 +109,13 @@ fun PersianDate.isGreaterThan(persianDate: PersianDate): Boolean{
         shYear == persianDate.shYear && shMonth == persianDate.shMonth && shDay == persianDate.shDay -> return false
         else -> return true
     }
+}
+
+fun checkDateAndTimeState(dateDialogData: PersianPickerDate, timeDialogData: TimePickerDialog, persianDate: PersianDate): Boolean{
+    return dateDialogData.persianYear == persianDate.shYear &&
+        dateDialogData.persianMonth == persianDate.shMonth &&
+        dateDialogData.persianDay == persianDate.shDay &&
+        timeDialogData.currentTime.hour.toInt() > persianDate.hour ||
+        timeDialogData.currentTime.hour.toInt() == persianDate.hour &&
+        timeDialogData.currentTime.minutes.toInt() > persianDate.minute
 }

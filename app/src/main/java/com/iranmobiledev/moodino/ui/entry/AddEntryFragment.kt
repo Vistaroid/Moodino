@@ -112,13 +112,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
             persianPickerDate.persianMonth,
             persianPickerDate.persianDay
         )
-        if (persianPickerDate.persianYear == persianDate.shYear &&
-            persianPickerDate.persianMonth == persianDate.shMonth &&
-            persianPickerDate.persianDay == persianDate.shDay &&
-            timeDialog.currentTime.hour.toInt() > persianDate.hour ||
-            timeDialog.currentTime.hour.toInt() == persianDate.hour &&
-            timeDialog.currentTime.minutes.toInt() > persianDate.minute
-        ) {
+        if(checkDateAndTimeState(dateDialogData = persianPickerDate, timeDialogData = timeDialog, persianDate = persianDate)) {
             onTimePickerDataReceived(persianDate.hour,persianDate.minute)
             entry.date = EntryDate(
                 persianDate.shYear,
