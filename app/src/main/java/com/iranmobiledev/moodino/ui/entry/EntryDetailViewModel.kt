@@ -25,9 +25,6 @@ class EntryDetailViewModel(
         fetchActivities()
     }
 
-
-
-
     fun fetchActivities(){
         viewModelScope.launch(Dispatchers.IO) {
             activityRepository.getAll().collect{

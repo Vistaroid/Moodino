@@ -27,7 +27,8 @@ class ChildActivityAdapter(
         fun bind(activity: Activity) {
             val icon = context.resources.getIdentifier(activity.iconName,"drawable", context.packageName)
             imageLoader.load(context, icon, binding.activityIcon)
-            binding.activityTitle.text = activity.title
+            val title = context.resources.getIdentifier(activity.title,"string",context.packageName)
+            binding.activityTitle.text = itemView.context.getString(title)
 
             activitiesShouldSelect.find { it == activity }
                 .also { it?.let { mSelfView.clickedOn() } }

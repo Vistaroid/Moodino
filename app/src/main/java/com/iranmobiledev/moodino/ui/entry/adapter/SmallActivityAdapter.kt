@@ -25,10 +25,8 @@ class SmallActivityAdapter(private val activities: List<Activity>,private val em
 
         fun bind(activity: Activity, index: Int) {
             val icon = itemView.context.resources.getIdentifier(activity.iconName,"drawable", itemView.context.packageName)
-            binding.smallActivityTitle.text = activity.title
-            //imageLoader.load(itemView.context,activity.image,binding.icon)
-          //  binding.icon.setImageResource(activity.image)
-          //  binding.icon.setImageResource(activity.image)
+            val title = itemView.context.resources.getIdentifier(activity.title,"string",itemView.context.packageName)
+            binding.smallActivityTitle.text = itemView.context.getString(title)
             imageLoader.load(itemView.context,icon,binding.icon)
             ImageViewCompat.setImageTintList(binding.icon, ColorStateList.valueOf(getEmoji(itemView.context,emojiValue).color));
 
