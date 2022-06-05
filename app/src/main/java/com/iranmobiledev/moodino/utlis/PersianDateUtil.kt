@@ -7,22 +7,6 @@ import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
 
-/**
- * 1 : Persian
- * 2 : English
- * @return مثال : اردیبهشت 1400
- * doc : https://github.com/samanzamani/persianDate
- */
-fun persianDateFormat(
-    pattern: String = "Y F",
-    date: PersianDate = PersianDate()
-): String {
-    return PersianDateFormat.format(
-        date,
-        pattern,
-        PersianDateFormat.PersianDateNumberCharacter.FARSI
-    )
-}
 
 fun getTime(persianDate: PersianDate = PersianDate()): String {
     return PersianDateFormat.format(persianDate, "H:i")
@@ -51,7 +35,7 @@ fun getDate(date: EntryDate, pattern: String = "j F Y", language: Int = PERSIAN)
 
 fun grgDateString(persianDate: PersianDate, pattern: String="j F Y"): String{
     return if(pattern.contains('j') && pattern.contains('F') && pattern.contains("Y"))
-        "${persianDate.shYear} ${getFinglishMonthName(persianDate.shMonth)} ${persianDate.shDay}"
+        "${persianDate.shDay} ${getFinglishMonthName(persianDate.shMonth)} ${persianDate.shYear}"
     else "${persianDate.shYear} ${getFinglishMonthName(persianDate.shMonth)}"
 }
 
