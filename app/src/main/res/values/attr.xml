@@ -53,4 +53,6 @@
         <attr name="expanded" format="boolean"/>
         <attr name="title" format="string"/>
     </declare-styleable>
+
+    <attr name="circleColor" format="reference" />
 </resources>

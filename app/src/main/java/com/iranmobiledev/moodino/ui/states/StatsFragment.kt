@@ -1,7 +1,12 @@
 package com.iranmobiledev.moodino.ui.states
 
 import android.annotation.SuppressLint
+import android.content.pm.ApplicationInfo
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,15 +21,17 @@ import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
+import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.ui.states.customView.YearViewHelper
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
+import io.github.persiancalendar.calendar.AbstractDate
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class StatsFragment : BaseFragment() {
+class StatsFragment : BaseFragment(), ChangeCurrentMonth {
 
     val TAG = "fragmentStats"
 
@@ -69,9 +76,9 @@ class StatsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         model.getEntries()
         initRtl()
-       // initDayInRowCard()
-       // initLineChartCard()
-        //initPieChartCard()
+        initDayInRowCard()
+        initLineChartCard()
+        initPieChartCard()
         initYearInPixelCard()
     }
 
@@ -85,14 +92,14 @@ class StatsFragment : BaseFragment() {
 
     private fun initYearInPixelCard() {
         val yearView = binding.yearView
-        yearView.yearViewHelper= YearViewHelper(requireContext())
+        yearView.yearViewHelper = YearViewHelper(requireContext())
         model.initYearView(yearView)
-       // initMoodCountView()
+        initMoodCountView()
     }
 
     private fun initMoodCountView() {
-        model.entries.observe(viewLifecycleOwner){
-            binding.moodCountViewStats.setEntries(it,true)
+        model.entries.observe(viewLifecycleOwner) {
+            binding.moodCountViewStats.setEntries(it, true)
         }
     }
 
@@ -155,6 +162,7 @@ class StatsFragment : BaseFragment() {
                 setDrawEntryLabels(false)
                 legend.isEnabled = false
                 centerText = countSum.toString()
+                setHoleColor(Color.TRANSPARENT)
                 setCenterTextColor(Color.GRAY)
                 setCenterTextSize(24f)
                 notifyDataSetChanged()
@@ -197,9 +205,33 @@ class StatsFragment : BaseFragment() {
             Log.d(TAG, "initDayInRowCard: $it")
             binding.daysInRowNumberTextView.text = it.toString()
         }
-
+        handleThemeChangeDaysInRow()
         setupWeekDays()
         setupDaysStatus()
+    }
+
+    fun handleThemeChangeDaysInRow() {
+        val views = listOf(
+            binding.firstDayFrameLayout,
+            binding.secondDayFrameLayout,
+            binding.thirdDayFrameLayout,
+            binding.fourthDayFrameLayout,
+            binding.fifthDayFrameLayout
+        )
+
+        val nightMode =
+            when (context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+                Configuration.UI_MODE_NIGHT_YES -> true
+                Configuration.UI_MODE_NIGHT_NO -> false
+                else -> false
+            }
+
+        views.forEach {
+            it.background =
+                if (nightMode) resources.getDrawable(R.drawable.circle_shape_dark) else resources.getDrawable(
+                    R.drawable.circle_shape
+                )
+        }
     }
 
 
@@ -272,7 +304,7 @@ class StatsFragment : BaseFragment() {
 
             xAxis.apply {
                 position = XAxis.XAxisPosition.BOTTOM
-                gridColor = Color.WHITE
+                gridColor = Color.TRANSPARENT
                 textColor = Color.GRAY
                 valueFormatter = ChartValueFormatter()
                 granularity = 1f
@@ -281,12 +313,16 @@ class StatsFragment : BaseFragment() {
 
             axisLeft.apply {
                 setDrawLabels(false)
-                gridColor = Color.WHITE
+                gridColor = Color.TRANSPARENT
                 textColor = Color.WHITE
                 axisLineColor = Color.WHITE
                 granularity = 1f
                 setAxisMaxValue(5f)
             }
         }
+    }
+
+    override fun changeCurrentMonth(date: AbstractDate, isClickOnToolbarItem: Boolean) {
+        model.selectedDateLiveData.postValue(date)
     }
 }

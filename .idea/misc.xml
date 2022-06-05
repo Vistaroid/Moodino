@@ -214,10 +214,12 @@
         <entry key="..\:/project team/Moodino/persiandatepicker/src/main/res/layout/sl_persian_date_picker.xml" value="0.27291666666666664" />
         <entry key="app/src/main/res/drawable-v24/circle_ripple.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable-v24/note_bg_dark.xml" value="0.1325" />
+        <entry key="app/src/main/res/drawable/activity_bg.xml" value="0.173" />
         <entry key="app/src/main/res/drawable/background_gradiant.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_ovel.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/background_pinlock.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/circle_shape_dard.xml" value="0.173" />
         <entry key="app/src/main/res/drawable/dialog_bg.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/emoji_rad.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_alarm.xml" value="0.1175" />
@@ -291,5 +293,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="Moodino.app" />
+      </set>
+    </option>
   </component>
 </project>
