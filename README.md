@@ -8,18 +8,15 @@ with moodino you can track your moods.
 * xml
 * room
 * koin
-* courutine
+* coroutine
 * mpAndroidChart
-* self-developed solar calendar
+* self-developed calendar
 * custom view
 * retrofit
 
 ### Progress
 
 %20 
-
-## Contributes
-![Alt](https://repobeats.axiom.co/api/embed/41c9e6c29a3bd1eedec137fa51de39ccf2ddb4c5.svg "Repobeats analytics image")
 
 ### want to join and contribute ?
 
