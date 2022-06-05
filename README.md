@@ -8,9 +8,9 @@ with moodino you can track your moods.
 * xml
 * room
 * koin
-* courutine
+* coroutine
 * mpAndroidChart
-* self-developed solar calendar
+* self-developed calendar
 * custom view
 * retrofit
 

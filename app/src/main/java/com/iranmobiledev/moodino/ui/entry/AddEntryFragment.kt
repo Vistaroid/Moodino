@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.entry
 
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.TimePickerDialog
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
+import org.koin.android.ext.android.inject
 import saman.zamani.persiandate.PersianDate
 
 
@@ -31,6 +33,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     private lateinit var binding: AddEntryFragmentBinding
     private var persianDate: PersianDate = PersianDate()
     private val args: AddEntryFragmentArgs by navArgs()
+    private val sharedPref: SharedPreferences by inject()
     private lateinit var mainViewModel: MainActivityViewModel
     private var nightMode: Boolean = false
     private var timeDialog = TimePickerDialog(PersianDate(), null)

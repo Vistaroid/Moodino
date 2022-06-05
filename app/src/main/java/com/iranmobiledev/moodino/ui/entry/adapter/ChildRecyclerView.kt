@@ -38,7 +38,6 @@ class ChildRecyclerView(
 ) : RecyclerView.Adapter<ChildRecyclerView.ViewHolder>(), KoinComponent {
 
     private val persianDate = PersianDate()
-    private val imageLoader: ImageLoadingService by inject()
     private var newEntry: Entry? = null
 
     init {
@@ -148,15 +147,15 @@ class ChildRecyclerView(
 
         private fun yesterdayStringDate(): String {
             persianDate.shDay = persianDate.shDay - 1
-            return persianDateFormat(pattern = "j F Y", date = persianDate)
+            return getDate(pattern = "j F Y", date = persianDate, language = language)
         }
 
         private fun todayStringDate(): String {
-            return persianDateFormat(pattern = "j F Y")
+            return getDate(pattern = "j F Y", language = language)
         }
 
         private fun otherDayString(date: PersianDate, pattern: String = "j F Y"): String {
-            return persianDateFormat(pattern = pattern, date = date)
+            return getDate(pattern = pattern, date = date, language = language)
         }
     }
 

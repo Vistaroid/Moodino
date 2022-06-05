@@ -2,6 +2,7 @@ package com.iranmobiledev.moodino.ui.entry.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +20,15 @@ import com.iranmobiledev.moodino.databinding.BottomRvTextBinding
 import com.iranmobiledev.moodino.databinding.ItemEntryContainerBinding
 import com.iranmobiledev.moodino.callback.AddEntryCardViewListener
 import com.iranmobiledev.moodino.callback.EntryEventLister
+import com.iranmobiledev.moodino.utlis.LANGUAGE
 import com.iranmobiledev.moodino.utlis.MyDiffUtil
+import com.iranmobiledev.moodino.utlis.PERSIAN
+import com.iranmobiledev.moodino.utlis.getDate
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.onCompletion
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.java.KoinJavaComponent.inject
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
@@ -34,13 +41,14 @@ class EntryContainerAdapter(
     private val entryEventListener: EntryEventLister,
     private val addEntryCardEventLister: AddEntryCardViewListener,
     private var data: List<RecyclerViewData>,
-    private val language: Int
-) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>() {
+
+) : RecyclerView.Adapter<EntryContainerAdapter.ViewHolder>(), KoinComponent{
     var specifyDay = -1
     private val emptyStateVisibility = MutableLiveData<Boolean>()
     var copyData = mutableListOf<RecyclerViewData>()
     var hasTodayEntry = true
     private var newEntry: Entry? = null
+    private val sharedPref: SharedPreferences by inject()
 
     inner class ViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
         private var itemEntryContainerBinding: ItemEntryContainerBinding? = null
@@ -87,7 +95,7 @@ class EntryContainerAdapter(
                         entryEventListener,
                         data.entries,
                         context,
-                        language,
+                        sharedPref.getInt(LANGUAGE, PERSIAN),
                     )
                 newEntry?.let { entry ->
                     if(data.entries[0].date == entry.date){
@@ -106,11 +114,7 @@ class EntryContainerAdapter(
                 val persianDate = PersianDate()
                 persianDate.shMonth = data.entries[0].date.month
                 persianDate.shDay = data.entries[0].date.day
-                it.entriesDateTitle.text = PersianDateFormat.format(
-                    persianDate,
-                    "j F Y",
-                    PersianDateFormat.PersianDateNumberCharacter.FARSI
-                )
+                it.entriesDateTitle.text = getDate(persianDate, language = sharedPref.getInt(LANGUAGE, PERSIAN), pattern = "j F Y")
             }
         }
 

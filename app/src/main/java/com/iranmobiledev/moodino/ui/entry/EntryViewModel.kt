@@ -12,6 +12,7 @@ import com.iranmobiledev.moodino.data.RecyclerViewData
 import com.iranmobiledev.moodino.repository.activity.ActivityRepository
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EntryViewModel(
@@ -21,22 +22,26 @@ class EntryViewModel(
 
     private val entries = MutableLiveData<List<RecyclerViewData>>()
 
-//    init {
-//        fetchEntries()
-//    }
+    init {
+        fetchEntries()
+    }
 
     fun fetchEntries() {
-        viewModelScope.launch {
-            entryRepository.getAll().collectLatest{
-                entries.value = makeListFromEntries(it as MutableList<Entry>, mutableListOf())
+        viewModelScope.launch (Dispatchers.IO){
+             entryRepository.getAll().collectLatest{
+                entries.postValue(makeListFromEntries(it as MutableList<Entry>, mutableListOf()))
             }
         }
     }
     fun update(entry: Entry){
-        entryRepository.update(entry)
+        viewModelScope.launch (Dispatchers.IO){
+            entryRepository.update(entry)
+        }
     }
     fun addEntry(entry: Entry) {
-        entryRepository.add(entry)
+        viewModelScope.launch (Dispatchers.IO){
+            entryRepository.add(entry)
+        }
     }
     private fun makeListFromEntries(entries: MutableList<Entry>, sortedList : MutableList<RecyclerViewData>): List<RecyclerViewData> {
         if(entries.size == 0)

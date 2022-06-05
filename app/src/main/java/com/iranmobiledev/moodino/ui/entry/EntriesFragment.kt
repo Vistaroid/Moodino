@@ -60,11 +60,10 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharePref.edit().putBoolean(FIRST_ENTER, false).apply()
-        val language = sharePref.getInt(LANGUAGE, PERSIAN)
         adapter = EntryContainerAdapter(
             context,
             this,
-            this, mutableListOf(), language
+            this, mutableListOf()
         )
     }
 
@@ -76,7 +75,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         binding = FragmentEntriesBinding.inflate(inflater, container, false)
         mainViewModel = ViewModelProvider(requireActivity())[MainActivityViewModel::class.java]
 
-        getEntries()
 
         val updateEntry = mainViewModel.updateEntry
         val addEntry = mainViewModel.newEntryAdded
@@ -94,11 +92,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         setupObserver()
         return binding.root
     }
-
-    private fun getEntries() {
-        viewModel.fetchEntries()
-    }
-
     private fun setupNewEntryOrUpdate(entry: Entry, update: Boolean) {
         adapter.newEntry(entry)
         lifecycleScope.launch {
