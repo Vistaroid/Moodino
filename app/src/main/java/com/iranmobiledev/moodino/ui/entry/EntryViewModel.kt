@@ -20,11 +20,11 @@ class EntryViewModel(
 
     private val entries = MutableLiveData<List<RecyclerViewData>>()
 
-    init {
-        fetchEntries()
-    }
+//    init {
+//        fetchEntries()
+//    }
 
-    private fun fetchEntries() {
+    fun fetchEntries() {
         viewModelScope.launch {
             entryRepository.getAll().collect{
                 entries.value = makeListFromEntries(it as MutableList<Entry>, mutableListOf())
