@@ -1,8 +1,6 @@
 package com.iranmobiledev.moodino.utlis
 
-import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.data.EntryDate
-import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.utlis.dialog.TimePickerDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import saman.zamani.persiandate.PersianDate
@@ -35,24 +33,44 @@ fun getDate(
     pattern: String = "Y F",
     language: Int = PERSIAN
 ): String {
-    val type = when (language) {
-        PERSIAN -> PersianDateFormat.PersianDateNumberCharacter.FARSI
-        ENGLISH -> PersianDateFormat.PersianDateNumberCharacter.ENGLISH
-        else -> PersianDateFormat.PersianDateNumberCharacter.FARSI
-    }
-    return PersianDateFormat.format(
-        date,
-        pattern,
-        type
-    )
+    return if(language == PERSIAN)
+        PersianDateFormat.format(date, pattern)
+    else
+        grgDateString(date)
 }
 
-fun getDate(date: EntryDate, pattern: String = "j F Y"): String{
+
+
+fun getDate(date: EntryDate, pattern: String = "j F Y", language: Int = PERSIAN): String{
     val persianDate = PersianDate()
     persianDate.shDay = date.day
     persianDate.shMonth = date.month
     persianDate.shYear = date.year
-    return PersianDateFormat.format(persianDate,pattern)
+    return getDate(persianDate,pattern,language)
+}
+
+fun grgDateString(persianDate: PersianDate, pattern: String="j F Y"): String{
+    return if(pattern.contains('j') && pattern.contains('F') && pattern.contains("Y"))
+        "${persianDate.shYear} ${getFinglishMonthName(persianDate.shMonth)} ${persianDate.shDay}"
+    else "${persianDate.shYear} ${getFinglishMonthName(persianDate.shMonth)}"
+}
+
+fun getFinglishMonthName(month: Int): String{
+    return when(month){
+        1 -> "Farvardin"
+        2 -> "Ordibehesht"
+        3 -> "Khordad"
+        4 -> "Tir"
+        5 -> "Mordad"
+        6 -> "Shahrivar"
+        7 -> "Mehr"
+        8 -> "Aban"
+        9 -> "Azar"
+        10 -> "Dey"
+        11 -> "Bahman"
+        12 ->   "Esfand"
+        else -> ""
+    }
 }
 
 fun PersianDate.newDate(entryDate :EntryDate): PersianDate {
