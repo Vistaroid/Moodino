@@ -104,6 +104,7 @@
                                 <FrameLayout
                                     android:id="@+id/firstDayFrameLayout"
                                     android:layout_width="36dp"
+                                    android:background="@drawable/circle_shape"
                                     android:layout_height="36dp">
 
                                     <ImageView
@@ -239,6 +240,7 @@
                                 <FrameLayout
                                     android:id="@+id/fifthDayFrameLayout"
                                     android:layout_width="36dp"
+                                    android:background="@drawable/circle_shape"
                                     android:layout_height="36dp"
                                     >
 

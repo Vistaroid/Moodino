@@ -268,7 +268,7 @@
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_pin_lock.xml" value="0.11930091185410334" />
         <entry key="app/src/main/res/layout/fragment_reminder.xml" value="0.11930091185410334" />
-        <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_activity.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_activity_group_view.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/item_activity_small.xml" value="0.2033514492753623" />
