@@ -289,7 +289,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     override fun update(entry: Entry) {
         val action = EntriesFragmentDirections.actionEntriesFragmentToEntryDetailFragment(
             edit = true,
-            entry = entry
+            entry = entry.copy(activities = ArrayList(entry.activities), date = entry.date.copy(), time = entry.time.copy())
         )
         findNavController().navigate(action)
     }
