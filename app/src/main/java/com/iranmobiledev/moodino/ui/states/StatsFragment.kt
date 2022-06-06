@@ -40,7 +40,6 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStatsBinding.inflate(inflater, container, false)
-        binding.mainToolbar.initialize(this)
         daysContainer = arrayListOf(
             binding.fifthDayFrameLayout,
             binding.fourthDayFrameLayout,
@@ -69,10 +68,19 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.getEntries()
-        initDayInRowCard()
+        initRtl()
+        //initDayInRowCard()
         initLineChartCard()
         initPieChartCard()
         initYearInPixelCard()
+    }
+
+    private fun initRtl() {
+        val viewModel: MoreViewModel by inject()
+        val currentLanguage = if (viewModel.getLanguage() == 1) "persian" else "english"
+
+        if (currentLanguage == "persian") {
+        }
     }
 
     private fun initYearInPixelCard() {
@@ -187,6 +195,7 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
             binding.longestChainTextView.text = ": $it"
         }
         model.latestChainLiveData.observe(viewLifecycleOwner) {
+            Log.d(TAG, "initDayInRowCard: $it")
             binding.daysInRowNumberTextView.text = it.toString()
         }
         setupWeekDays()
@@ -288,7 +297,6 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
     }
 
     override fun changeCurrentMonth(date: AbstractDate, isClickOnToolbarItem: Boolean) {
-        Log.d(TAG, "changeCurrentMonth: im clicked babe")
         model.selectedDateLiveData.postValue(date)
     }
 }
