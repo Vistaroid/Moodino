@@ -40,7 +40,7 @@ import saman.zamani.persiandate.PersianDate
 //TODO for edit mode should implement date and time set
 
 class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCallback,
-    DatePickerDialogEventListener,TimePickerCallback,
+    DatePickerDialogEventListener, TimePickerCallback,
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
@@ -54,6 +54,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private val args: EntryDetailFragmentArgs by navArgs()
     private val persianDate = PersianDate()
     private var timeDialog = TimePickerDialog(PersianDate(), null)
+    private val language = sharedPref.getInt(LANGUAGE, PERSIAN)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -116,9 +117,9 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             persianDate.hour = Integer.parseInt(it.hour)
             persianDate.minute = Integer.parseInt(it.minutes)
         }
-        binding.timeTv.text = getTime(persianDate)
+        binding.timeTv.text = getTime(persianDate, language)
         binding.dateTv.text =
-            getDate(pattern = "j F Y", date = persianDate)
+            getDate(pattern = "j F Y", date = persianDate, language = language)
     }
 
     private fun setupUtil() {
@@ -142,12 +143,12 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
                 persianDate.shMonth = it.month
                 persianDate.shDay = it.day
             }
-            getPersianDialog(requireContext(), this, persianDate , nightMode()).show()
+            getPersianDialog(requireContext(), this, persianDate, nightMode()).show()
         }
         binding.time.setOnClickListener {
-            timeDialog = TimePickerDialog(persianDate,entry.time)
+            timeDialog = TimePickerDialog(persianDate, entry.time)
             timeDialog.setListener(this)
-            timeDialog.show(parentFragmentManager,null)
+            timeDialog.show(parentFragmentManager, null)
         }
         binding.backIv.setOnClickListener { requireActivity().onBackPressed() }
         binding.deleteImage.setOnClickListener {
@@ -173,7 +174,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     }
 
     private fun navigateToEntryFragment() {
-        findNavController().popBackStack(R.id.entriesFragment,false)
+        findNavController().popBackStack(R.id.entriesFragment, false)
     }
 
     private fun setupPhotoDialog(): PickSetup {
@@ -188,10 +189,14 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             cameraButtonText = getString(R.string.cameraTxt)
             width = 500
             height = 500
-            backgroundColor = requireContext().getColor( if (nightMode()) R.color.gray900 else R.color.white)
-            titleColor = requireContext().getColor( if (nightMode()) R.color.white else R.color.black)
-            cancelTextColor = requireContext().getColor( if (nightMode()) R.color.white else R.color.black)
-            buttonTextColor = requireContext().getColor( if (nightMode()) R.color.white else R.color.black)
+            backgroundColor =
+                requireContext().getColor(if (nightMode()) R.color.gray900 else R.color.white)
+            titleColor =
+                requireContext().getColor(if (nightMode()) R.color.white else R.color.black)
+            cancelTextColor =
+                requireContext().getColor(if (nightMode()) R.color.white else R.color.black)
+            buttonTextColor =
+                requireContext().getColor(if (nightMode()) R.color.white else R.color.black)
         }
     }
 
@@ -239,34 +244,45 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
             persianPickerDate.persianMonth,
             persianPickerDate.persianDay
         )
-        if(checkDateAndTimeState(dateDialogData = persianPickerDate, timeDialogData = timeDialog, persianDate = persianDate)) {
-            onTimePickerDataReceived(persianDate.hour,persianDate.minute)
+        if (checkDateAndTimeState(
+                dateDialogData = persianPickerDate,
+                timeDialogData = timeDialog,
+                persianDate = persianDate
+            )
+        ) {
+            onTimePickerDataReceived(persianDate.hour, persianDate.minute)
             entry.date = EntryDate(
                 persianDate.shYear,
                 persianDate.shMonth,
                 persianDate.shDay
             )
-            entry.time = EntryTime(persianDate.hour.toString(),persianDate.minute.toString())
-        }
-        else
-            onTimePickerDataReceived(timeDialog.currentTime.hour.toInt(),timeDialog.currentTime.minutes.toInt())
+            entry.time = EntryTime(persianDate.hour.toString(), persianDate.minute.toString())
+        } else
+            onTimePickerDataReceived(
+                timeDialog.currentTime.hour.toInt(),
+                timeDialog.currentTime.minutes.toInt()
+            )
         setupDate()
     }
 
     override fun onTimePickerDataReceived(hour: Int, minute: Int) {
-        val time = EntryTime("","")
-        if(hour < 10)
+        val time = EntryTime("", "")
+        if (hour < 10)
             time.hour = "0$hour"
         else
             time.hour = hour.toString()
-        if(minute < 10)
+        if (minute < 10)
             time.minutes = "0$minute"
         else
             time.minutes = minute.toString()
         entry.time = time
         setupTime(time)
     }
+
     private fun setupTime(time: EntryTime) {
-        binding.timeTv.text = "${time.hour}:${time.minutes}"
+        val persianDate = PersianDate()
+        persianDate.hour = Integer.parseInt(time.hour)
+        persianDate.minute = Integer.parseInt(time.minutes)
+        binding.timeTv.text = getTime(persianDate, language)
     }
 }
