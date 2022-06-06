@@ -49,6 +49,7 @@ class EntryContainerAdapter(
     var hasTodayEntry = true
     private var newEntry: Entry? = null
     private val sharedPref: SharedPreferences by inject()
+    private val language: Int = sharedPref.getInt(LANGUAGE, PERSIAN)
 
     inner class ViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
         private var itemEntryContainerBinding: ItemEntryContainerBinding? = null
@@ -112,9 +113,9 @@ class EntryContainerAdapter(
                 val result = setupLableColor(data)
                 drawLable(result)
                 val persianDate = PersianDate()
-                persianDate.shMonth = data.entries[0].date.month
-                persianDate.shDay = data.entries[0].date.day
-                it.entriesDateTitle.text = getDate(persianDate, language = sharedPref.getInt(LANGUAGE, PERSIAN), pattern = "j F Y")
+                persianDate.shMonth = data.date.month
+                persianDate.shDay = data.date.day
+                it.entriesDateTitle.text = getDate(persianDate, language =language, pattern = "j F Y")
             }
         }
 
