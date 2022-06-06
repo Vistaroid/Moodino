@@ -21,6 +21,7 @@ import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
 import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.ui.states.customView.YearViewHelper
@@ -47,6 +48,7 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStatsBinding.inflate(inflater, container, false)
+        binding.mainToolbar.initialize(this)
         daysContainer = arrayListOf(
             binding.fifthDayFrameLayout,
             binding.fourthDayFrameLayout,
@@ -75,19 +77,10 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.getEntries()
-        initRtl()
-        //initDayInRowCard()
+        initDayInRowCard()
         initLineChartCard()
         initPieChartCard()
         initYearInPixelCard()
-    }
-
-    private fun initRtl() {
-        val viewModel: MoreViewModel by inject()
-        val currentLanguage = if (viewModel.getLanguage() == 1) "persian" else "english"
-
-        if (currentLanguage == "persian") {
-        }
     }
 
     private fun initYearInPixelCard() {
@@ -202,7 +195,6 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
             binding.longestChainTextView.text = ": $it"
         }
         model.latestChainLiveData.observe(viewLifecycleOwner) {
-            Log.d(TAG, "initDayInRowCard: $it")
             binding.daysInRowNumberTextView.text = it.toString()
         }
         setupWeekDays()
@@ -212,6 +204,7 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
     private fun initLineChartCard() {
         model.initLineChart()
         model.lineChartEntries.observe(viewLifecycleOwner) {
+            Log.d(TAG, "initLineChartCard: $it")
             val dataSet = setupLineChart(it)
             customizeLineChart(dataSet)
             binding.moodsLineChart.apply {
@@ -297,6 +290,7 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
     }
 
     override fun changeCurrentMonth(date: AbstractDate, isClickOnToolbarItem: Boolean) {
+        Log.d(TAG, "changeCurrentMonth: ${date.monthName}")
         model.selectedDateLiveData.postValue(date)
     }
 }
