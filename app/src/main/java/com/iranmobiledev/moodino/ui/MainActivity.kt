@@ -59,7 +59,7 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
         super.onCreate(savedInstanceState)
 
         if (BuildConfig.DEBUG){
-            addFakeData(200)
+            addFakeData(30)
         }
 
         initGlobal(this)

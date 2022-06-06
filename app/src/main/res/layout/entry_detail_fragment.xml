@@ -35,8 +35,8 @@
 
                     <ImageView
                         android:id="@+id/saveIv"
-                        android:layout_width="@dimen/_20mdp"
-                        android:layout_height="@dimen/_20mdp"
+                        android:layout_width="@dimen/_17mdp"
+                        android:layout_height="@dimen/_17mdp"
                         app:srcCompat="@drawable/ic_tick"
                         app:tint="?colorPrimary"
                         android:layout_marginEnd="@dimen/_6mdp"/>
