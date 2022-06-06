@@ -201,7 +201,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                         }
                     }
                 }
-
             }
         })
     }
@@ -276,22 +275,14 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             layoutManager.scrollToPositionWithOffset(position, 0)
     }
 
-    fun scroll(date: EntryDate) {
+    private fun scroll(date: EntryDate) {
         val position = adapter.positionOf(date, true)
-
-        val smoothScroller = object : LinearSmoothScroller(requireContext()) {
-            override fun getVerticalSnapPreference(): Int {
-                return SNAP_TO_START
-            }
-        }
         lifecycleScope.launchWhenResumed {
             delay(1000)
             if (position != -1) {
-                smoothScroller.targetPosition = position
-                layoutManager.scrollToPosition(position)
+                layoutManager.scrollToPositionWithOffset(position,0)
             }
         }
-
         binding.mainToolbar.goToMonth(date)
     }
 
