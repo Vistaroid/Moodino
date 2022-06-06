@@ -174,4 +174,5 @@
     <string name="contact_us">ارتباط با ما</string>
     <string name="not_reached_today">هنوز به این تاریخ نرسیدی، تاریخ امروز جایگزین شد</string>
     <string name="not_reached_time">هنوز به این زمان نرسیدی، زمان فعلی جایگزین شد</string>
+    <string name="not_enough_entries">یادداشت بیشتری اضافه کنید</string>
 </resources>

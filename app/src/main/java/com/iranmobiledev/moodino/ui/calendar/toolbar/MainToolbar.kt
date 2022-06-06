@@ -66,6 +66,10 @@ class MainToolbar(context: Context, attr: AttributeSet) : LinearLayoutCompat(con
         changeCurrentMonth?.changeCurrentMonth(date,false)
     }
 
+    fun getCurrentMonth(): AbstractDate{
+        return bind(monthPositionGlobal)
+    }
+
     private fun ad() {
         mainToolbarItemClickListener?.clickOnAdBtn()
     }
