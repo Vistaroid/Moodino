@@ -92,6 +92,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         setupObserver()
         return binding.root
     }
+
     private fun setupNewEntryOrUpdate(entry: Entry, update: Boolean) {
         adapter.newEntry(entry)
         lifecycleScope.launch {
@@ -175,8 +176,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         super.onViewCreated(view, savedInstanceState)
         binding.emojisView.setEmojiClickListener(this)
         getEmojiFromNotification()
-        var scrollUpPosition = -1
-        var scrollDownPosition = -1
+        var scrollPosition = -1
         var state = -1
         binding.entriesContainerRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -189,44 +189,25 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
             }
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                lifecycleScope.launch {
-                    withContext(Dispatchers.IO) {
-                        if (dy > 0) {
-                            if (!fromToolbarClick)
-                                if (!newEntryScroll)
-                                    if (state == RecyclerView.SCROLL_STATE_DRAGGING || state == RecyclerView.SCROLL_STATE_SETTLING) {
-                                        val position = layoutManager.findFirstVisibleItemPosition()
-                                        if (position != -1) {
-                                            if (position != scrollUpPosition) {
-                                                val date = adapter.findDataWithPosition(position)
-                                                if (date.day in 1..31 && date.month in 1..12 && date.year != 1){
-                                                    binding.mainToolbar.goToMonth(date)
-                                                }
-                                                scrollUpPosition = position
-                                            }
-                                        }
-                                    }
-                        }
-                        if (dy < 0) {
-                            if (!fromToolbarClick)
-                                if (!newEntryScroll)
-                                    if (state == RecyclerView.SCROLL_STATE_DRAGGING || state == RecyclerView.SCROLL_STATE_SETTLING) {
-                                        val position = layoutManager.findFirstVisibleItemPosition()
-                                        if (position != -1) {
-                                            if (position != scrollDownPosition) {
-                                                val date = adapter.findDataWithPosition(position)
-                                                if (date.day in 1..31 && date.month in 1..12 && date.year != 1){
-                                                    binding.mainToolbar.goToMonth(date)
-                                                }
-                                                scrollDownPosition = position
-                                            }
-                                        }
-                                    }
+                if (!fromToolbarClick && !newEntryScroll && state == RecyclerView.SCROLL_STATE_DRAGGING || state == RecyclerView.SCROLL_STATE_SETTLING) {
+                    val position = layoutManager.findFirstVisibleItemPosition()
+                    if (position != -1) {
+                        if (position != scrollPosition) {
+                            val date = adapter.findDataWithPosition(position)
+                            if (date.day in 1..31 && date.month in 1..12 && date.year != 1) {
+                                binding.mainToolbar.goToMonth(date)
+                            }
+                            scrollPosition = position
                         }
                     }
                 }
+
             }
         })
+    }
+
+    private fun changeMonth() {
+
     }
 
     private fun getEmojiFromNotification() {
@@ -275,7 +256,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     }
 
     override fun changeCurrentMonth(date: AbstractDate, isClickOnToolbarItem: Boolean) {
-        if(isClickOnToolbarItem){
+        if (isClickOnToolbarItem) {
             lifecycleScope.launch {
                 if (!userScroll)
                     if (binding.entriesContainerRv.scrollState == RecyclerView.SCROLL_STATE_IDLE) {
