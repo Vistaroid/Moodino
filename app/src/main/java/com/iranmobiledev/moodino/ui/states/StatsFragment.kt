@@ -1,12 +1,7 @@
 package com.iranmobiledev.moodino.ui.states
 
 import android.annotation.SuppressLint
-import android.content.pm.ApplicationInfo
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,12 +17,10 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseFragment
 import com.iranmobiledev.moodino.databinding.FragmentStatsBinding
 import com.iranmobiledev.moodino.ui.calendar.toolbar.ChangeCurrentMonth
-import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.ui.states.customView.YearViewHelper
 import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
 import io.github.persiancalendar.calendar.AbstractDate
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -210,7 +203,14 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
     }
 
     private fun initLineChartCard() {
-        model.initLineChart()
+
+        var currentMonth = binding.mainToolbar.getCurrentMonth()
+        model.initLineChart(currentMonth)
+
+        model.notEnoughEntriesLiveData.observe(viewLifecycleOwner) {
+            binding.notEnoughEntriesLayout.visibility = if (it == true) View.VISIBLE else View.GONE
+        }
+
         model.lineChartEntries.observe(viewLifecycleOwner) {
             val dataSet = setupLineChart(it)
             customizeLineChart(dataSet)
