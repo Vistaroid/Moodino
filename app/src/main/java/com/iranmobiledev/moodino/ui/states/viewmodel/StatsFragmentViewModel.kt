@@ -1,6 +1,5 @@
 package com.iranmobiledev.moodino.ui.states.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
@@ -10,7 +9,6 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
-import com.iranmobiledev.moodino.ui.calendar.calendarpager.monthName
 import com.iranmobiledev.moodino.ui.states.customView.YearView
 import com.iranmobiledev.moodino.ui.states.customView.YearViewHelper
 import com.iranmobiledev.moodino.utlis.*
@@ -160,8 +158,8 @@ class StatsFragmentViewModel(
         viewModelScope.launch {
             _entries.asFlow().collectLatest {
                 selectedDateLiveData.asFlow().collectLatest { date ->
-                    var currentMonthEntries = it.filter { it.date.year == date.year && it.date.month == date.month }
-                    Log.d(TAG, "initLineChart: ${date.monthName}")
+                    var currentMonthEntries =
+                        it.filter { it.date.year == date.year && it.date.month == date.month }
                     getEntriesForLineChart(currentMonthEntries)
                 }
             }
