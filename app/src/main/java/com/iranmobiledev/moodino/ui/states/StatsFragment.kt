@@ -76,7 +76,7 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth {
         super.onViewCreated(view, savedInstanceState)
         model.getEntries()
         initRtl()
-        initDayInRowCard()
+        //initDayInRowCard()
         initLineChartCard()
         initPieChartCard()
         initYearInPixelCard()

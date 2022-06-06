@@ -15,6 +15,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.iranmobiledev.moodino.BuildConfig
 import com.iranmobiledev.moodino.NavGraphDirections
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseActivity
@@ -22,13 +23,17 @@ import com.iranmobiledev.moodino.data.EntryDate
 import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.databinding.ActivityMainBinding
 import com.iranmobiledev.moodino.callback.DatePickerDialogEventListener
+import com.iranmobiledev.moodino.data.Activity
+import com.iranmobiledev.moodino.data.Entry
 import com.iranmobiledev.moodino.ui.calendar.calendarpager.initGlobal
+import com.iranmobiledev.moodino.ui.entry.EntryViewModel
 import com.iranmobiledev.moodino.ui.more.MoreViewModel
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import org.greenrobot.eventbus.EventBus
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import saman.zamani.persiandate.PersianDate
 import java.util.*
 import kotlin.collections.ArrayList
@@ -37,7 +42,7 @@ import kotlin.collections.ArrayList
 class MainActivity : BaseActivity(), DatePickerDialogEventListener {
 
     private val TAG = "mainActivity"
-
+    private val entryViewModel: EntryViewModel by viewModel()
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var fabItems: ArrayList<LinearLayout>
@@ -52,6 +57,10 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (BuildConfig.DEBUG){
+            addFakeData(200)
+        }
 
         initGlobal(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -70,6 +79,20 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
         animationDuration = resources.getInteger(
             android.R.integer.config_shortAnimTime
         ).toLong()
+    }
+
+    private fun addFakeData(number: Int){
+        val fakeDataAdded= SharedPref.getBooleanPref(this, "FAKE_DATA_ADDED", false)
+        if (fakeDataAdded == false){
+            for (i in 1..number){
+                val entryDate= EntryDate(1401,(0 until 13).random(),(0 until 30).random())
+                val entryTime= EntryTime((0 until 24).random().toString(),(0 until 60).random().toString())
+                val emojiValue= (0 until 6).random()
+                val entry= Entry(activities = mutableListOf(), date = entryDate, time = entryTime, emojiValue = emojiValue)
+                entryViewModel.addEntry(entry)
+            }
+            SharedPref.setPref(this,"FAKE_DATA_ADDED",true)
+        }
     }
 
     private fun initRtl() {
