@@ -38,7 +38,7 @@ class StatsFragmentViewModel(
     private val _latestChainLiveData: MutableLiveData<Int> = MutableLiveData(0)
     private val _lastFiveDaysStatus: MutableLiveData<List<Boolean>> =
         MutableLiveData(listOf(false, false, false, false, false))
-
+    val notEnoughEntriesLiveData = MutableLiveData(false)
     val selectedDateLiveData = MutableLiveData<AbstractDate>()
     val lineChartEntries: LiveData<List<Entry>>
         get() = _lineChartEntries
@@ -156,13 +156,21 @@ class StatsFragmentViewModel(
         _longestChainLiveData.postValue(longestChainMax)
     }
 
-    fun initLineChart() {
+    fun initLineChart(currentMonth: AbstractDate) {
+
+        selectedDateLiveData.postValue(currentMonth)
+
         viewModelScope.launch {
             _entries.asFlow().collectLatest {
-                selectedDateLiveData.asFlow().collectLatest { date ->
-                    var currentMonthEntries = it.filter { it.date.year == date.year && it.date.month == date.month }
-                    Log.d(TAG, "initLineChart: ${date.monthName}")
-                    getEntriesForLineChart(currentMonthEntries)
+                selectedDateLiveData.asFlow().collect { date ->
+                    var currentMonthEntries =
+                        it.filter { it.date.year == date.year && it.date.month == date.month }
+                    if (currentMonthEntries.size > 2) {
+                        notEnoughEntriesLiveData.postValue(false)
+                        getEntriesForLineChart(currentMonthEntries)
+                    } else {
+                        notEnoughEntriesLiveData.postValue(true)
+                    }
                 }
             }
         }

@@ -451,6 +451,28 @@
                             android:layout_marginLeft="16dp"
                             android:background="#00FFFFFF" />
 
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/not_enough_entries_layout"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            style="@style/CardView"
+                            android:background="#D2FFFFFF"
+                            >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/not_enough_entries"
+                                android:textAlignment="center"
+                                android:fontFamily="@font/shabnam_bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
                     </FrameLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
