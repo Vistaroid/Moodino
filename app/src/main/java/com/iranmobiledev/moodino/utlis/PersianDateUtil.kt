@@ -17,7 +17,7 @@ fun getDate(
     pattern: String = "Y F",
     language: Int = PERSIAN
 ): String {
-    return if(language == PERSIAN)
+    return if(language == PERSIAN && date.shDay in 1..31 && date.shMonth in 1..12 && date.shYear != 0)
         PersianDateFormat.format(date, pattern)
     else
         grgDateString(date)

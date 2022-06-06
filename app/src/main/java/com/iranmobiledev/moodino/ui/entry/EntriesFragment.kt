@@ -199,8 +199,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                                         if (position != -1) {
                                             if (position != scrollUpPosition) {
                                                 val date = adapter.findDataWithPosition(position)
-                                                if (date.day <= 31)
+                                                if (date.day in 1..31 && date.month in 1..12 && date.year != 1){
                                                     binding.mainToolbar.goToMonth(date)
+                                                }
                                                 scrollUpPosition = position
                                             }
                                         }
@@ -214,8 +215,9 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
                                         if (position != -1) {
                                             if (position != scrollDownPosition) {
                                                 val date = adapter.findDataWithPosition(position)
-                                                if (date.day <= 31)
+                                                if (date.day in 1..31 && date.month in 1..12 && date.year != 1){
                                                     binding.mainToolbar.goToMonth(date)
+                                                }
                                                 scrollDownPosition = position
                                             }
                                         }
