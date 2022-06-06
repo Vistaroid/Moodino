@@ -90,7 +90,7 @@ class ChildRecyclerView(
             val persianDate = PersianDate()
             persianDate.hour = Integer.parseInt(entryTime.hour)
             persianDate.minute = Integer.parseInt(entryTime.minutes)
-            this.entryTime.text = getTime(persianDate)
+            this.entryTime.text = getTime(persianDate, language = language)
         }
 
         private fun setupSmallActivitiesRv(entry: Entry) {

@@ -47,7 +47,9 @@
             android:layout_marginStart="@dimen/_10mdp"
             android:layout_marginBottom="@dimen/_2mdp"
             app:layout_constraintStart_toEndOf="@+id/EntryIcon"
-            app:layout_constraintTop_toTopOf="@+id/EntryIcon" />
+            app:layout_constraintTop_toTopOf="@+id/EntryIcon"
+            android:fontFamily="@font/shabnam_medium_en_number"
+            android:textColor="@color/gray_title"/>
 
         <TextView
             android:id="@+id/entryTitle"
@@ -70,7 +72,9 @@
             android:textSize="@dimen/_11mdp"
             app:layout_constraintBottom_toBottomOf="@+id/entryTitle"
             app:layout_constraintStart_toEndOf="@+id/entryTitle"
-            app:layout_constraintTop_toTopOf="@+id/entryTitle" />
+            app:layout_constraintTop_toTopOf="@+id/entryTitle"
+            android:fontFamily="@font/shabnam_medium_en_number"
+            android:textColor="@color/gray_title"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/entryContentContainer"

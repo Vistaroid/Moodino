@@ -7,9 +7,12 @@ import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
 
-
-fun getTime(persianDate: PersianDate = PersianDate()): String {
-    return PersianDateFormat.format(persianDate, "H:i")
+fun getTime(persianDate: PersianDate = PersianDate(), language: Int = PERSIAN): String {
+    val type = when (language) {
+        PERSIAN -> PersianDateFormat.PersianDateNumberCharacter.FARSI
+        else -> PersianDateFormat.PersianDateNumberCharacter.ENGLISH
+    }
+    return PersianDateFormat.format(persianDate, "H:i", type)
 }
 
 fun getDate(
@@ -17,30 +20,34 @@ fun getDate(
     pattern: String = "Y F",
     language: Int = PERSIAN
 ): String {
-    return if(language == PERSIAN && date.shDay in 1..31 && date.shMonth in 1..12 && date.shYear != 0)
-        PersianDateFormat.format(date, pattern)
-    else
-        grgDateString(date)
+    val type = when(language){
+        PERSIAN -> PersianDateFormat.PersianDateNumberCharacter.FARSI
+        else -> PersianDateFormat.PersianDateNumberCharacter.ENGLISH
+    }
+    return if (language == PERSIAN && date.shDay in 1..31 && date.shMonth in 1..12 && date.shYear != 0)
+        PersianDateFormat.format(date, pattern,type)
+    else{
+        return "${date.shDay} ${getFinglishMonthName(date.shMonth)}, ${date.shYear} "
+    }
 }
 
 
-
-fun getDate(date: EntryDate, pattern: String = "j F Y", language: Int = PERSIAN): String{
+fun getDate(date: EntryDate, pattern: String = "j F Y", language: Int = PERSIAN): String {
     val persianDate = PersianDate()
     persianDate.shDay = date.day
     persianDate.shMonth = date.month
     persianDate.shYear = date.year
-    return getDate(persianDate,pattern,language)
+    return getDate(persianDate, pattern, language)
 }
 
-fun grgDateString(persianDate: PersianDate, pattern: String="j F Y"): String{
-    return if(pattern.contains('j') && pattern.contains('F') && pattern.contains("Y"))
-        "${persianDate.shDay} ${getFinglishMonthName(persianDate.shMonth)} ${persianDate.shYear}"
-    else "${persianDate.shYear} ${getFinglishMonthName(persianDate.shMonth)}"
-}
+//fun grgDateString(persianDate: PersianDate, pattern: String = "j F Y"): String {
+//    return if (pattern.contains('j') && pattern.contains('F') && pattern.contains("Y"))
+//        "${persianDate.shDay} ${getFinglishMonthName(persianDate.shMonth)} ${persianDate.shYear}"
+//    else "${persianDate.shYear} ${getFinglishMonthName(persianDate.shMonth)}"
+//}
 
-fun getFinglishMonthName(month: Int): String{
-    return when(month){
+fun getFinglishMonthName(month: Int): String {
+    return when (month) {
         1 -> "Farvardin"
         2 -> "Ordibehesht"
         3 -> "Khordad"
@@ -52,12 +59,12 @@ fun getFinglishMonthName(month: Int): String{
         9 -> "Azar"
         10 -> "Dey"
         11 -> "Bahman"
-        12 ->   "Esfand"
+        12 -> "Esfand"
         else -> ""
     }
 }
 
-fun PersianDate.newDate(entryDate :EntryDate): PersianDate {
+fun PersianDate.newDate(entryDate: EntryDate): PersianDate {
     val newDate = PersianDate().apply {
         shYear = entryDate.year
         shMonth = entryDate.month
@@ -103,8 +110,8 @@ fun PersianDate.tomorrow(): EntryDate {
     }
 }
 
-fun PersianDate.isGreaterThan(persianDate: PersianDate): Boolean{
-    return when{
+fun PersianDate.isGreaterThan(persianDate: PersianDate): Boolean {
+    return when {
         shYear > persianDate.shYear -> return false
         shYear == persianDate.shYear && shMonth > persianDate.shMonth -> return false
         shYear == persianDate.shYear && shMonth == persianDate.shMonth && shDay > persianDate.shDay -> return false
@@ -113,11 +120,15 @@ fun PersianDate.isGreaterThan(persianDate: PersianDate): Boolean{
     }
 }
 
-fun checkDateAndTimeState(dateDialogData: PersianPickerDate, timeDialogData: TimePickerDialog, persianDate: PersianDate): Boolean{
+fun checkDateAndTimeState(
+    dateDialogData: PersianPickerDate,
+    timeDialogData: TimePickerDialog,
+    persianDate: PersianDate
+): Boolean {
     return dateDialogData.persianYear == persianDate.shYear &&
-        dateDialogData.persianMonth == persianDate.shMonth &&
-        dateDialogData.persianDay == persianDate.shDay &&
-        timeDialogData.currentTime.hour.toInt() > persianDate.hour ||
-        timeDialogData.currentTime.hour.toInt() == persianDate.hour &&
-        timeDialogData.currentTime.minutes.toInt() > persianDate.minute
+            dateDialogData.persianMonth == persianDate.shMonth &&
+            dateDialogData.persianDay == persianDate.shDay &&
+            timeDialogData.currentTime.hour.toInt() > persianDate.hour ||
+            timeDialogData.currentTime.hour.toInt() == persianDate.hour &&
+            timeDialogData.currentTime.minutes.toInt() > persianDate.minute
 }

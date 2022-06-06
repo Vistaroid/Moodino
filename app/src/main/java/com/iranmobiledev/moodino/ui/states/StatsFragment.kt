@@ -23,9 +23,11 @@ import com.iranmobiledev.moodino.ui.states.viewmodel.StatsFragmentViewModel
 import com.iranmobiledev.moodino.utlis.*
 import io.github.persiancalendar.calendar.AbstractDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
-class StatsFragment : BaseFragment(), ChangeCurrentMonth {
+class StatsFragment : BaseFragment(), ChangeCurrentMonth, KoinComponent {
 
     val TAG = "fragmentStats"
 

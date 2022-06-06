@@ -18,6 +18,8 @@ import com.iranmobiledev.moodino.callback.EmojiClickListener
 import com.iranmobiledev.moodino.callback.TimePickerCallback
 import com.iranmobiledev.moodino.data.EntryTime
 import com.iranmobiledev.moodino.ui.MainActivityViewModel
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.Language
+import com.iranmobiledev.moodino.ui.calendar.calendarpager.language
 import com.iranmobiledev.moodino.utlis.*
 import com.iranmobiledev.moodino.utlis.dialog.TimePickerDialog
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
@@ -36,6 +38,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     private val sharedPref: SharedPreferences by inject()
     private lateinit var mainViewModel: MainActivityViewModel
     private var nightMode: Boolean = false
+    private val language = sharedPref.getInt(LANGUAGE, PERSIAN)
     private var timeDialog = TimePickerDialog(PersianDate(), null)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +50,8 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         setupUtil()
         setupClicks()
         setupUi()
-
+        setupDate(language)
+        setupTime(args.time)
         return binding.root
     }
 
@@ -59,8 +63,6 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.emojiViewAddEntry.setEmojiClickListener(this)
-
-
     }
 
     private fun setupUi() {
@@ -126,10 +128,10 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
         }
         else
             onTimePickerDataReceived(timeDialog.currentTime.hour.toInt(),timeDialog.currentTime.minutes.toInt())
-        setupDate()
+        setupDate(language)
     }
 
-    private fun setupDate() {
+    private fun setupDate(language: Int) {
         entry.date.let {
             persianDate.shDay = it.day
             persianDate.shMonth = it.month
@@ -140,7 +142,7 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
             persianDate.minute = Integer.parseInt(it.minutes)
         }
         binding.dateTv.text =
-            getDate(pattern = "j F Y", date = persianDate)
+            getDate(pattern = "j F Y", date = persianDate, language = language)
     }
 
     override fun onTimePickerDataReceived(hour: Int, minute: Int) {
@@ -158,8 +160,9 @@ class AddEntryFragment : BaseFragment(), EmojiClickListener, DatePickerDialogEve
     }
 
     private fun setupTime(time: EntryTime) {
-        val hour = time.hour
-        val minute = time.minutes
-        binding.timeTv.text = "$hour:$minute"
+        val persianDate = PersianDate()
+        persianDate.hour = Integer.parseInt(time.hour)
+        persianDate.minute = Integer.parseInt(time.minutes)
+        binding.timeTv.text = getTime(persianDate,language)
     }
 }
