@@ -22,7 +22,6 @@ class SmallActivityAdapter(private val activities: List<Activity>, private val e
 
     inner class ViewHolder(private val itemBinding: ItemActivitySmallBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-
         fun bind(activity: Activity, index: Int) {
             setupUi(activity)
             itemBinding.apply {
@@ -35,6 +34,7 @@ class SmallActivityAdapter(private val activities: List<Activity>, private val e
             }
         }
         private fun setupUi(activity: Activity) {
+
             itemBinding.apply {
                 val icon = itemBinding.root.context.resources.getIdentifier(
                     activity.iconName,
