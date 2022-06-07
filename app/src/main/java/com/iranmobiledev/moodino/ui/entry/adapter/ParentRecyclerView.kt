@@ -62,7 +62,6 @@ class EntryContainerAdapter(
                 itemBottomRvTextBinding = BottomRvTextBinding.bind(itemView)
         }
 
-        @SuppressLint("SetTextI18n")
         fun bind(mData: RecyclerViewData) {
             if (mData.viewType == ENTRY_DEFAULT) {
                 itemEntryContainerBinding?.let {

@@ -15,29 +15,51 @@ import com.iranmobiledev.moodino.utlis.getEmoji
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class SmallActivityAdapter(private val activities: List<Activity>,private val emojiValue: Int) : RecyclerView.Adapter<SmallActivityAdapter.ViewHolder>() , KoinComponent{
+class SmallActivityAdapter(private val activities: List<Activity>, private val emojiValue: Int) :
+    RecyclerView.Adapter<SmallActivityAdapter.ViewHolder>(), KoinComponent {
 
-    private val imageLoader : ImageLoadingService by inject()
+    private val imageLoader: ImageLoadingService by inject()
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
-        private val binding : ItemActivitySmallBinding = ItemActivitySmallBinding.bind(itemView)
+    inner class ViewHolder(private val itemBinding: ItemActivitySmallBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(activity: Activity, index: Int) {
-            val icon = itemView.context.resources.getIdentifier(activity.iconName,"drawable", itemView.context.packageName)
-            val title = itemView.context.resources.getIdentifier(activity.title,"string",itemView.context.packageName)
-            binding.smallActivityTitle.text = itemView.context.getString(title)
-            imageLoader.load(itemView.context,icon,binding.icon)
-            ImageViewCompat.setImageTintList(binding.icon, ColorStateList.valueOf(getEmoji(itemView.context,emojiValue).color));
-
-            if(index == activities.size-1)
-                binding.circle.visibility = View.GONE
+            setupUi(activity)
+            itemBinding.apply {
+                ImageViewCompat.setImageTintList(
+                    this.icon,
+                    ColorStateList.valueOf(getEmoji(itemView.context, emojiValue).color)
+                );
+                if (index == activities.size - 1)
+                    circle.visibility = View.GONE
+            }
+        }
+        private fun setupUi(activity: Activity) {
+            itemBinding.apply {
+                val icon = itemBinding.root.context.resources.getIdentifier(
+                    activity.iconName,
+                    "drawable",
+                    itemView.context.packageName
+                )
+                val title = itemBinding.root.context.resources.getIdentifier(
+                    activity.title,
+                    "string",
+                    itemView.context.packageName
+                )
+                smallActivityTitle.text = itemView.context.getString(title)
+                imageLoader.load(itemView.context, icon, this.icon)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_activity_small, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(
+            ItemActivitySmallBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
