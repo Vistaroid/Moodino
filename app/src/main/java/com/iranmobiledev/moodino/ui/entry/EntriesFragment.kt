@@ -93,6 +93,7 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         return binding.root
     }
 
+
     private fun setupNewEntryOrUpdate(entry: Entry, update: Boolean) {
         adapter.newEntry(entry)
         lifecycleScope.launch {
@@ -172,6 +173,15 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launchWhenResumed {
+            delay(500)
+            if(mainViewModel.newEntryAdded == null && mainViewModel.updateEntry == null)
+                scroll(binding.mainToolbar.getCurrentMonth())
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.emojisView.setEmojiClickListener(this)
@@ -179,8 +189,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         var scrollPosition = -1
         var state = -1
         binding.entriesContainerRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 state = newState
                 userScroll = state != RecyclerView.SCROLL_STATE_IDLE
