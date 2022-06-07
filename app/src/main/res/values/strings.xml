@@ -175,5 +175,5 @@
     <string name="contact_us">Contact us</string>
     <string name="not_reached_today">You have not reached this date yet, replaced today date</string>
     <string name="not_reached_time">You have not reached this time yet, replaced current time</string>
-    <string name="not_enough_entries">add more entries</string>
+    <string name="not_enough_entries">We need more data to draw this chart!</string>
 </resources>

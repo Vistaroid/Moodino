@@ -463,6 +463,7 @@
 
                             <TextView
                                 android:layout_width="match_parent"
+                                android:padding="24dp"
                                 android:layout_height="wrap_content"
                                 android:text="@string/not_enough_entries"
                                 android:textAlignment="center"
