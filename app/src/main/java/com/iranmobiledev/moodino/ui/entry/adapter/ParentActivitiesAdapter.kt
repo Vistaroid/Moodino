@@ -19,14 +19,9 @@ class ParentActivitiesAdapter(
 ) : RecyclerView.Adapter<ParentActivitiesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        //        private val binding = ItemActivityGroupViewBinding.bind(itemView)
         private val rv = itemView.findViewById<RecyclerView>(R.id.activityGroupRv)
         private val title = itemView.findViewById<TextView>(R.id.title)
-
         fun bind(data: ActivityAndCategory, category: Category) {
-//            binding.activityGroupRv.adapter = ChildActivityAdapter(activities, itemView.context)
-//            binding.title.text = category.title
             val adapter = ChildActivityAdapter(
                 data.activities as MutableList<Activity>,
                 itemView.context,
@@ -47,7 +42,5 @@ class ParentActivitiesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(activities[position], activities[position].category)
     }
-
-
     override fun getItemCount(): Int = activities.size
 }
