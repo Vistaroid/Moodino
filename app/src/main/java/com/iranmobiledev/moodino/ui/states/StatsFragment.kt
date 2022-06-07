@@ -43,6 +43,7 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth, KoinComponent {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStatsBinding.inflate(inflater, container, false)
+        binding.mainToolbar.initialize(this)
         daysContainer = arrayListOf(
             binding.fifthDayFrameLayout,
             binding.fourthDayFrameLayout,
@@ -71,19 +72,10 @@ class StatsFragment : BaseFragment(), ChangeCurrentMonth, KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.getEntries()
-        initRtl()
-        //initDayInRowCard()
+        initDayInRowCard()
         initLineChartCard()
         initPieChartCard()
         initYearInPixelCard()
-    }
-
-    private fun initRtl() {
-        val viewModel: MoreViewModel by inject()
-        val currentLanguage = if (viewModel.getLanguage() == 1) "persian" else "english"
-
-        if (currentLanguage == "persian") {
-        }
     }
 
     private fun initYearInPixelCard() {
