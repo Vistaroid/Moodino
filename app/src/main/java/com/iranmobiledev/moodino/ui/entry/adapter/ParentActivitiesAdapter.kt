@@ -34,7 +34,8 @@ class ParentActivitiesAdapter(
                 activitiesShouldSelect
             )
             rv.adapter = adapter
-            title.text = category.title
+            val titleText = itemView.context.resources.getIdentifier(category.title,"string",itemView.context.packageName)
+            title.text = itemView.context.getString(titleText)
         }
     }
 

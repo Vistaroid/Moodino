@@ -93,7 +93,7 @@ class App : Application() , KoinComponent{
         val dataBase = AppDatabase.getAppDatabase(this)
         val categoryDao = dataBase.getCategoryDao
         val activityDao = dataBase.getActivityDao
-        val categories = mutableListOf(Category(null,getString(R.string.daily)))
+        val categories = mutableListOf(Category(null,resources.getResourceEntryName(R.string.daily)))
 
         categories.forEach {
             val id = categoryDao.add(it)

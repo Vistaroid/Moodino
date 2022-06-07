@@ -275,7 +275,7 @@
         <entry key="app/src/main/res/layout/item_activity.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_activity_group_view.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/item_activity_small.xml" value="0.2033514492753623" />
-        <entry key="app/src/main/res/layout/item_entry.xml" value="0.2033514492753623" />
+        <entry key="app/src/main/res/layout/item_entry.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_entry_container.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/main_toolbar.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/mood_count_icon.xml" value="0.2033514492753623" />
