@@ -58,10 +58,6 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (BuildConfig.DEBUG){
-            addFakeData(30)
-        }
-
         initGlobal(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
