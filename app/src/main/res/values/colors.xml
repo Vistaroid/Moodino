@@ -9,6 +9,8 @@
     <color name="gray800">#424242</color>
     <color name="gray900">#212121</color>
     <color name="white">#FFFFFF</color>
+    <color name="whiteTransBg">#D2FFFFFF</color>
+    <color name="blackTransBg">#C3212121</color>
     <color name="background">#E9E9EA</color>
     <color name="gray">#CFCFCF</color>
     <color name="gray_dark_700">#494848</color>

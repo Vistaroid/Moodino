@@ -31,6 +31,7 @@
         <item name="colorIcon">@color/black</item>
         <item name="colorCard">@color/white</item>
         <item name="note_gb">@drawable/note_bg</item>
+        <item name="transparentBackground">@color/whiteTransBg</item>
 
         <item name="textAppearanceLargePopupMenu">@style/AppTheme.TextAppearance.Popup</item>
     </style>
@@ -53,7 +54,7 @@
     <attr name="colorIcon" format="reference"/>
     <attr name="colorCard" format="reference"/>
     <attr name="note_gb" format="reference"/>
-
+    <attr name="transparentBackground" format="reference"/>
 
     <style name="AppTheme.TextAppearance.Popup" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:fontFamily">@font/shabnam_medium</item>
@@ -71,5 +72,4 @@
     <style name="Theme.Moodino.circleColor">
         <item name="circleColor">@style/circleLight</item>
     </style>
-
 </resources>
