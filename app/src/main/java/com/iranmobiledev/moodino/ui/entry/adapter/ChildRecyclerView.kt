@@ -102,11 +102,11 @@ class ChildRecyclerView(
             else
                 setEntryDate(entry)
             if (entry.note.isNotEmpty())
-                itemBinding.entryDate.visibility = View.VISIBLE
+                itemBinding.entryNote.visibility = View.VISIBLE
             if (entry.photoPath.isNotEmpty())
                 itemBinding.imageContainer.visibility = View.VISIBLE
             if (entry.activities.isNotEmpty())
-                itemBinding.entryDate.visibility = View.VISIBLE
+                itemBinding.activityRv.visibility = View.VISIBLE
         }
 
         private fun setEntryDate(entry: Entry) {
