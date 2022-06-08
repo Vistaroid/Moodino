@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:minHeight="@dimen/_70mdp">
 
         <ImageView
             android:id="@+id/EntryIcon"
@@ -49,7 +50,8 @@
             app:layout_constraintStart_toEndOf="@+id/EntryIcon"
             app:layout_constraintTop_toTopOf="@+id/EntryIcon"
             android:fontFamily="@font/shabnam_medium_en_number"
-            android:textColor="@color/gray_title"/>
+            android:textColor="@color/gray_title"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/entryTitle"

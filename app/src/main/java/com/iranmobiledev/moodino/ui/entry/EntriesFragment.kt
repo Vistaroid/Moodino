@@ -213,10 +213,6 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
         })
     }
 
-    private fun changeMonth() {
-
-    }
-
     private fun getEmojiFromNotification() {
         val persianDate = PersianDate()
         if (EmojiNotification.emoji != null) {
@@ -337,9 +333,5 @@ class EntriesFragment : BaseFragment(), EntryEventLister, ChangeCurrentMonth,
     override fun onStop() {
         super.onStop()
         adapter.newEntry(null)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
