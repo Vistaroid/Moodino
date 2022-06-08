@@ -81,9 +81,9 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
         val fakeDataAdded= SharedPref.getBooleanPref(this, "FAKE_DATA_ADDED", false)
         if (fakeDataAdded == false){
             for (i in 1..number){
-                val entryDate= EntryDate(1401,(0 until 13).random(),(0 until 30).random())
+                val entryDate= EntryDate(1401,(1 until 13).random(),(1 until 30).random())
                 val entryTime= EntryTime((0 until 24).random().toString(),(0 until 60).random().toString())
-                val emojiValue= (0 until 6).random()
+                val emojiValue= (1 until 6).random()
                 val entry= Entry(activities = mutableListOf(), date = entryDate, time = entryTime, emojiValue = emojiValue)
                 entryViewModel.addEntry(entry)
             }
