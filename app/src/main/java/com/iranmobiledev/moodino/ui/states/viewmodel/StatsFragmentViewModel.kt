@@ -8,6 +8,7 @@ import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.isTomorrow
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.ui.states.customView.YearView
 import com.iranmobiledev.moodino.ui.states.customView.YearViewHelper
@@ -122,36 +123,24 @@ class StatsFragmentViewModel(
         _latestChainLiveData.postValue(latestChain)
     }
 
-    private fun getLongestChainFromDates(datesList: List<EntryDate>) {
-
-        val distinctList = datesList.distinct()
-        var longestChainMax = 0
-        var longestChain = 0
-        val persianDate = PersianDate()
-
-        if (distinctList.isNotEmpty()) {
-            longestChain = 1
-            distinctList.forEach { entryDate ->
-
-                val currentDate =
-                    persianDate.newDate(EntryDate(entryDate.year, entryDate.month, entryDate.day))
-                val prevDatePersianDate = currentDate.addDay(-1)
-                val prevDate = EntryDate(
-                    prevDatePersianDate.shYear,
-                    prevDatePersianDate.shMonth,
-                    prevDatePersianDate.shDay
-                )
-
-                if (distinctList.contains(prevDate)) {
-                    longestChain++
-                } else {
-                    if (longestChain >= longestChainMax) longestChainMax = longestChain
-                    longestChain = 1
-                }
+    private fun getLongestChainFromDates(datesList: List<EntryDate>){
+        var counter = 1
+        var previousChainCount = 0
+        datesList.forEachIndexed { index, entryDate ->
+            if(entryDate == datesList.last())
+                return@forEachIndexed
+            if(entryDate.isTomorrow(datesList[index+1])){
+                counter += 1
+                if(counter > previousChainCount)
+                    previousChainCount = counter
+            }
+            else{
+                if(counter > previousChainCount)
+                    previousChainCount = counter
+                counter = 1
             }
         }
-
-        _longestChainLiveData.postValue(longestChainMax)
+        _longestChainLiveData.value = previousChainCount
     }
 
     fun initLineChart(currentMonth: AbstractDate) {
