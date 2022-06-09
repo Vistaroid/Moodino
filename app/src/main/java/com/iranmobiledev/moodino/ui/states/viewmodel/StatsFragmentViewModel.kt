@@ -9,6 +9,7 @@ import com.github.mikephil.charting.data.*
 import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.base.BaseViewModel
 import com.iranmobiledev.moodino.data.EntryDate
+import com.iranmobiledev.moodino.data.isTomorrow
 import com.iranmobiledev.moodino.repository.entry.EntryRepository
 import com.iranmobiledev.moodino.ui.states.customView.YearView
 import com.iranmobiledev.moodino.ui.states.customView.YearViewHelper
@@ -121,9 +122,24 @@ class StatsFragmentViewModel(
         _latestChainLiveData.postValue(latestChain)
     }
 
-    private fun getLongestChainFromDates(datesList: List<EntryDate>) {
-
-
+    private fun getLongestChainFromDates(datesList: List<EntryDate>){
+        var counter = 1
+        var previousChainCount = 0
+        datesList.forEachIndexed { index, entryDate ->
+            if(entryDate == datesList.last())
+                return@forEachIndexed
+            if(entryDate.isTomorrow(datesList[index+1])){
+                counter += 1
+                if(counter > previousChainCount)
+                    previousChainCount = counter
+            }
+            else{
+                if(counter > previousChainCount)
+                    previousChainCount = counter
+                counter = 1
+            }
+        }
+        _longestChainLiveData.value = previousChainCount
     }
 
     fun initLineChart(currentMonth: AbstractDate) {

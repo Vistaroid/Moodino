@@ -5,8 +5,10 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.iranmobiledev.moodino.utlis.newDate
 import kotlinx.android.parcel.Parcelize
 import saman.zamani.persiandate.PersianDate
+import kotlin.math.exp
 
 
 //TODO warning some of this can be null while adding a entry ! byTayeb.
@@ -37,6 +39,16 @@ data class EntryDate(
     }
 }
 
+fun EntryDate.isTomorrow(expectedToBeTomorrow: EntryDate): Boolean{
+    val persianDate = PersianDate()
+    val date = persianDate.newDate(this)
+    val tomorrow = date.addDay(1)
+    val expected = persianDate.newDate(expectedToBeTomorrow)
+    val tomorrowEntryDate = EntryDate(tomorrow.shYear,tomorrow.shMonth,tomorrow.shDay)
+    val expectedEntryDate = EntryDate(expected.shYear,expected.shMonth,expected.shDay)
+    return tomorrowEntryDate == expectedEntryDate
+}
+
 @Parcelize
 data class EntryTime(
     var hour : String,
@@ -55,4 +67,3 @@ data class EntryTime(
         return "$hour:$minute"
     }
 }
-
