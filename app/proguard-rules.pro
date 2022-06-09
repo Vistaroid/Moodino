@@ -46,3 +46,4 @@
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
   *** rewind();
 }
+-keep class com.iranmobiledev.moodino.data.* {<fields>;}
