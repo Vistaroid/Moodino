@@ -288,6 +288,7 @@
         <entry key="app/src/main/res/layout/notification_expanded.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/notification_reminder.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/notification_view.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/photo_selector_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/popup_view.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/select_photo_dialog.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/view_more_item.xml" value="0.23758246702988461" />
