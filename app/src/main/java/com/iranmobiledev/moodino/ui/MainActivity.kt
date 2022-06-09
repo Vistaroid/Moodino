@@ -72,8 +72,6 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
         onFabClickListener()
         onFabItemsClickListener()
 
-        addFakeData(40)
-
         animationDuration = resources.getInteger(
             android.R.integer.config_shortAnimTime
         ).toLong()

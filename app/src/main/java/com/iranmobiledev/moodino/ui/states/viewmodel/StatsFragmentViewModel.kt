@@ -115,6 +115,8 @@ class StatsFragmentViewModel(
 
                 if (distinctList.contains(prevDate)) {
                     latestChain++
+                }else {
+                    latestChain = 1
                 }
             }
         }
