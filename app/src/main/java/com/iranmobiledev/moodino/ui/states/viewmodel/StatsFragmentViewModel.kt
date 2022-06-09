@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.states.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
@@ -113,8 +114,6 @@ class StatsFragmentViewModel(
 
                 if (distinctList.contains(prevDate)) {
                     latestChain++
-                } else {
-                    latestChain = 1
                 }
             }
         }
@@ -124,34 +123,7 @@ class StatsFragmentViewModel(
 
     private fun getLongestChainFromDates(datesList: List<EntryDate>) {
 
-        val distinctList = datesList.distinct()
-        var longestChainMax = 0
-        var longestChain = 0
-        val persianDate = PersianDate()
 
-        if (distinctList.isNotEmpty()) {
-            longestChain = 1
-            distinctList.forEach { entryDate ->
-
-                val currentDate =
-                    persianDate.newDate(EntryDate(entryDate.year, entryDate.month, entryDate.day))
-                val prevDatePersianDate = currentDate.addDay(-1)
-                val prevDate = EntryDate(
-                    prevDatePersianDate.shYear,
-                    prevDatePersianDate.shMonth,
-                    prevDatePersianDate.shDay
-                )
-
-                if (distinctList.contains(prevDate)) {
-                    longestChain++
-                } else {
-                    if (longestChain >= longestChainMax) longestChainMax = longestChain
-                    longestChain = 1
-                }
-            }
-        }
-
-        _longestChainLiveData.postValue(longestChainMax)
     }
 
     fun initLineChart(currentMonth: AbstractDate) {
