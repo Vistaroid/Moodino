@@ -1,5 +1,6 @@
 package com.iranmobiledev.moodino.ui.states.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
@@ -114,8 +115,6 @@ class StatsFragmentViewModel(
 
                 if (distinctList.contains(prevDate)) {
                     latestChain++
-                } else {
-                    latestChain = 1
                 }
             }
         }
