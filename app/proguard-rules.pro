@@ -46,7 +46,4 @@
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
   *** rewind();
 }
-
--keep class * extends androidx.fragment.app.Fragment{}
--keepnames class * extends android.os.Parcelable
--keepnames class * extends java.io.Serializable
+-keep class com.iranmobiledev.moodino.data.* {<fields>;}
