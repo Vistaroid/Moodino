@@ -11,7 +11,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.iranmobiledev.moodino"
+        applicationId "ir.vistaroid.halino"
         minSdk 21
         vectorDrawables.useSupportLibrary true
         targetSdk 31
