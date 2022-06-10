@@ -1,5 +1,8 @@
 package com.iranmobiledev.moodino.callback
 
+import android.graphics.Bitmap
+import android.net.Uri
+
 interface PhotoSelectorCallback {
-    fun onSelectorPhotoReceived(photoPath: String)
+    fun onSelectorPhotoReceived(path: Uri)
 }

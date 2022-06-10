@@ -1,6 +1,8 @@
 package com.iranmobiledev.moodino.ui.entry
 
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,10 +28,9 @@ import com.iranmobiledev.moodino.callback.EmojiClickListener
 import com.iranmobiledev.moodino.ui.MainActivityViewModel
 import com.iranmobiledev.moodino.ui.entry.adapter.ParentActivitiesAdapter
 import com.iranmobiledev.moodino.utlis.*
+import com.iranmobiledev.moodino.utlis.dialog.PhotoSelectorDialog
 import com.iranmobiledev.moodino.utlis.dialog.TimePickerDialog
 import com.iranmobiledev.moodino.utlis.dialog.getPersianDialog
-import com.vansuita.pickimage.bundle.PickSetup
-import com.vansuita.pickimage.dialog.PickImageDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
@@ -40,7 +41,7 @@ import saman.zamani.persiandate.PersianDate
 //TODO for edit mode should implement date and time set
 
 class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCallback,
-    DatePickerDialogEventListener, TimePickerCallback,
+    DatePickerDialogEventListener, TimePickerCallback, PhotoSelectorCallback,
     KoinComponent {
 
     private lateinit var binding: EntryDetailFragmentBinding
@@ -55,6 +56,7 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
     private val persianDate = PersianDate()
     private var timeDialog = TimePickerDialog(PersianDate(), null)
     private val language = sharedPref.getInt(LANGUAGE, PERSIAN)
+    private var photoSelectorDialog: PhotoSelectorDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -102,8 +104,10 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         binding.timeDate.visibility = View.VISIBLE
         binding.emojiViewEntryDetail.visibility = View.VISIBLE
         binding.noteEt.setText(entry.note)
-        if (entry.photoPath.isNotEmpty())
+        if (entry.photoPath.isNotEmpty()){
             binding.entryImageContainer.visibility = View.VISIBLE
+            binding.addPhotoTv.setText(R.string.change_photo)
+        }
         imageLoader.load(requireContext(), entry.photoPath, binding.entryImage)
     }
 
@@ -177,43 +181,10 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         findNavController().popBackStack(R.id.entriesFragment, false)
     }
 
-    private fun setupPhotoDialog(): PickSetup {
-        return PickSetup().apply {
-            cameraIcon = R.drawable.ic_camera
-            galleryIcon = R.drawable.ic_gallery
-            buttonOrientation = LinearLayout.HORIZONTAL
-            isSystemDialog = false
-            title = getString(R.string.choose)
-            cancelText = getString(R.string.cancel)
-            galleryButtonText = getString(R.string.galleyTxt)
-            cameraButtonText = getString(R.string.cameraTxt)
-            width = 500
-            height = 500
-            backgroundColor =
-                requireContext().getColor(if (nightMode()) R.color.gray900 else R.color.white)
-            titleColor =
-                requireContext().getColor(if (nightMode()) R.color.white else R.color.black)
-            cancelTextColor =
-                requireContext().getColor(if (nightMode()) R.color.white else R.color.black)
-            buttonTextColor =
-                requireContext().getColor(if (nightMode()) R.color.white else R.color.black)
-        }
-    }
-
     private fun createPhotoSelectorDialog() {
-        PickImageDialog.build(setupPhotoDialog()) {
-            if (it.error == null) {
-                binding.apply {
-                    entryImageContainer.visibility = View.VISIBLE
-                    addPhotoTv.setText(R.string.change_photo)
-                    nestedScrollView.post {
-                        nestedScrollView.fullScroll(View.FOCUS_DOWN)
-                    }
-                }
-                entry.photoPath = it.path
-                imageLoader.load(requireContext(), entry.photoPath, binding.entryImage)
-            }
-        }.show(parentFragmentManager)
+        val photoSelectorDialog = PhotoSelectorDialog(this, requireContext())
+        photoSelectorDialog.show(parentFragmentManager, null)
+        this.photoSelectorDialog = photoSelectorDialog
     }
 
     private val saveOnClick = View.OnClickListener {
@@ -284,5 +255,18 @@ class EntryDetailFragment : BaseFragment(), EmojiClickListener, ActivityItemCall
         persianDate.hour = Integer.parseInt(time.hour)
         persianDate.minute = Integer.parseInt(time.minutes)
         binding.timeTv.text = getTime(persianDate, language)
+    }
+
+    override fun onSelectorPhotoReceived(path: Uri) {
+        binding.apply {
+            entryImageContainer.visibility = View.VISIBLE
+            addPhotoTv.setText(R.string.change_photo)
+            nestedScrollView.post {
+                nestedScrollView.fullScroll(View.FOCUS_DOWN)
+            }
+            entry.photoPath = path.toString()
+            imageLoader.load(requireContext(), Uri.parse(entry.photoPath), binding.entryImage)
+        }
+        photoSelectorDialog?.dismiss()
     }
 }

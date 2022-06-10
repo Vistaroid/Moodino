@@ -15,11 +15,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginEnd="@dimen/_24mdp">
+            android:padding="@dimen/_24mdp"
+            android:background="@drawable/dialog_bg">
 
             <ImageView
-                android:layout_width="62dp"
-                android:layout_height="66dp"
+                android:layout_width="@dimen/_52mdp"
+                android:layout_height="@dimen/_52mdp"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/ic_camera" />
 
@@ -37,13 +38,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="@dimen/_24mdp">
+            android:layout_marginStart="@dimen/_12mdp"
+            android:padding="@dimen/_24mdp"
+            android:background="@drawable/dialog_bg">
 
             <ImageView
-                android:layout_width="@dimen/_50mdp"
-                android:layout_height="@dimen/_50mdp"
+                android:layout_width="@dimen/_52mdp"
+                android:layout_height="@dimen/_52mdp"
                 android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/ic_gallery" />
+                app:srcCompat="@drawable/ic_gallery"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
