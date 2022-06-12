@@ -36,21 +36,22 @@
 
             <RadioButton
                 android:id="@+id/rb_DchangeLanguage_persian"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="فارسی"
-                android:textSize="@dimen/_13font_mdp"/>
+                android:textSize="@dimen/_13font_mdp"
+                />
 
             <RadioButton
                 android:id="@+id/rb_DchangeLanguage_english"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="English"
                 android:textSize="@dimen/_13font_mdp"/>
 
             <RadioButton
                 android:id="@+id/rb_DchangeLanguage_defult"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/system_mode"
                 android:textSize="@dimen/_13font_mdp"/>
