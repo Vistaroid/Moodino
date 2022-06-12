@@ -218,9 +218,7 @@
         <entry key="app/src/main/res/drawable/background_gradiant.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_ovel.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/background_pinlock.xml" value="0.124" />
-        <entry key="app/src/main/res/drawable/card_stroke_bg.xml" value="0.2445" />
-        <entry key="app/src/main/res/drawable/chart_gradient.xml" value="0.2445" />
-        <entry key="app/src/main/res/drawable/circle_bg.xml" value="0.2445" />
+        <entry key="app/src/main/res/drawable/circle_bg.xml" value="0.227" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/circle_shape_dard.xml" value="0.173" />
         <entry key="app/src/main/res/drawable/dialog_bg.xml" value="0.1225" />
@@ -229,13 +227,10 @@
         <entry key="app/src/main/res/drawable/ic_arrow_left.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_baseline_backspace_24.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_calendar.xml" value="0.1225" />
-        <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.246" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/ic_cross.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_date.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/ic_email.xml" value="0.1175" />
-        <entry key="app/src/main/res/drawable/ic_emoji.xml" value="0.2445" />
-        <entry key="app/src/main/res/drawable/ic_gallery.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_img_dont_locke.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_img_locked.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_lock_active.xml" value="0.1185" />
@@ -255,12 +250,12 @@
         <entry key="app/src/main/res/layout/activity_pin_lock.xml" value="0.13611914915879084" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/add_entry_card_view.xml" value="0.22418478260869565" />
-        <entry key="app/src/main/res/layout/add_entry_fragment.xml" value="0.11930091185410334" />
+        <entry key="app/src/main/res/layout/add_entry_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/average_moods_dialog.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/average_moods_dialog_item.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/bottom_rv_text.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/days_in_a_row_card.xml" value="0.23774323394333102" />
-        <entry key="app/src/main/res/layout/dialog_change_language.xml" value="0.11930091185410334" />
+        <entry key="app/src/main/res/layout/dialog_change_language.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_change_mode.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_pin_lock.xml" value="0.21784420289855072" />
         <entry key="app/src/main/res/layout/dialog_view.xml" value="0.21784420289855072" />
@@ -276,11 +271,11 @@
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_pin_lock.xml" value="0.11930091185410334" />
         <entry key="app/src/main/res/layout/fragment_reminder.xml" value="0.11930091185410334" />
-        <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.21670854271356785" />
+        <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_activity.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_activity_group_view.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/item_activity_small.xml" value="0.2033514492753623" />
-        <entry key="app/src/main/res/layout/item_entry.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_entry.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/item_entry_container.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/main_toolbar.xml" value="0.2033514492753623" />
         <entry key="app/src/main/res/layout/mood_count_icon.xml" value="0.2033514492753623" />
@@ -289,12 +284,11 @@
         <entry key="app/src/main/res/layout/notification_expanded.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/notification_reminder.xml" value="0.23097826086956522" />
         <entry key="app/src/main/res/layout/notification_view.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/photo_selector_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/popup_view.xml" value="0.2033514492753623" />
-        <entry key="app/src/main/res/layout/select_photo_dialog.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/select_photo_dialog.xml" value="0.21784420289855072" />
+        <entry key="app/src/main/res/layout/time_picker_view.xml" value="0.2625" />
         <entry key="app/src/main/res/layout/view_more_item.xml" value="0.23758246702988461" />
         <entry key="app/src/main/res/layout/view_toolbar.xml" value="0.11930091185410334" />
-        <entry key="app/src/main/res/xml/provider_paths.xml" value="0.2625" />
       </map>
     </option>
   </component>
