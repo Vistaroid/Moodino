@@ -47,6 +47,13 @@
                 android:layout_height="wrap_content"
                 android:text="English"
                 android:textSize="@dimen/_13font_mdp"/>
+
+            <RadioButton
+                android:id="@+id/rb_DchangeLanguage_defult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/system_mode"
+                android:textSize="@dimen/_13font_mdp"/>
         </RadioGroup>
 
         <LinearLayout

@@ -7,7 +7,7 @@ import com.iranmobiledev.moodino.utlis.*
 class MoreViewModel(private val sharedPreferences: SharedPreferences) : BaseViewModel() {
 
 
-    fun getLanguage() : Int = sharedPreferences.getInt(LANGUAGE , PERSIAN)
+    fun getLanguage() : Int = sharedPreferences.getInt(LANGUAGE , SYSTEM_DEFAULT)
 
     fun setLanguage(language : Int) = sharedPreferences.edit().putInt(LANGUAGE , language).apply()
 

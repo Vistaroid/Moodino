@@ -11,6 +11,7 @@ import com.iranmobiledev.moodino.R
 import com.iranmobiledev.moodino.databinding.DialogChangeLanguageBinding
 import com.iranmobiledev.moodino.utlis.ENGLISH
 import com.iranmobiledev.moodino.utlis.PERSIAN
+import com.iranmobiledev.moodino.utlis.SYSTEM_DEFAULT
 
 class ChangeLanguageDialog(private var language : Int , private val listener: ChangeLanguageDialogListener) : DialogFragment() {
 
@@ -35,12 +36,14 @@ class ChangeLanguageDialog(private var language : Int , private val listener: Ch
         when(language){
             PERSIAN -> binding.rbDchangeLanguagePersian.isChecked = true
             ENGLISH -> binding.rbDchangeLanguageEnglish.isChecked = true
+            SYSTEM_DEFAULT -> binding.rbDchangeLanguageDefult.isChecked = true
         }
 
         binding.rgDchangeLanguage.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.rb_DchangeLanguage_persian -> language = PERSIAN
                 R.id.rb_DchangeLanguage_english -> language = ENGLISH
+                R.id.rb_DchangeLanguage_defult -> language = SYSTEM_DEFAULT
             }
         }
 

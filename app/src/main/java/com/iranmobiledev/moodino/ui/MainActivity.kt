@@ -229,12 +229,13 @@ class MainActivity : BaseActivity(), DatePickerDialogEventListener {
 
     override fun attachBaseContext(newBase: Context?) {
         val shared = newBase?.getSharedPreferences("sharedPref", MODE_PRIVATE)
-        val lan = when (shared?.getInt(LANGUAGE, PERSIAN)) {
+        val lan = when (shared?.getInt(LANGUAGE, SYSTEM_DEFAULT)) {
             ENGLISH -> "en"
             PERSIAN -> "fa"
+            SYSTEM_DEFAULT -> "def"
             else -> "en"
         }
-        super.attachBaseContext(MyContextWrapper.wrap(newBase, Locale(lan).toString()))
+        super.attachBaseContext(if (lan == "def") newBase else MyContextWrapper.wrap(newBase, Locale(lan).toString()))
     }
 
 
