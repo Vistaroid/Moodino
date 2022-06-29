@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "411729454784",
+    "project_id": "moodino-c4c9d",
+    "storage_bucket": "moodino-c4c9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411729454784:android:f4960a63fe0b3a9c56ef25",
+        "android_client_info": {
+          "package_name": "com.iranmobiledev.moodino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411729454784-mnd5f4kve9sh02v9cmq48ccphiuoqtjs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5atatyF7i_yxgAYPxHUdIpf2ibsNkBIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411729454784-mnd5f4kve9sh02v9cmq48ccphiuoqtjs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411729454784:android:25d47de65883760156ef25",
+        "android_client_info": {
+          "package_name": "ir.vistaroid.halino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411729454784-mnd5f4kve9sh02v9cmq48ccphiuoqtjs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5atatyF7i_yxgAYPxHUdIpf2ibsNkBIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411729454784-mnd5f4kve9sh02v9cmq48ccphiuoqtjs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
