@@ -51,6 +51,7 @@
         <receiver
             android:name=".service.AlarmReciver"
             android:exported="true" />
+
     </application>
 
 </manifest>
